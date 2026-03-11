@@ -12,7 +12,9 @@ const config: Config = {
       colors: {
         "primary": "#1325ec",
         "background-light": "#f6f6f8",
-        "background-dark": "#101222",
+        "background-dark": "#0f172a",
+        "card-dark": "#1c2633",
+        "input-bg": "#334155",
       },
       fontFamily: {
         "display": ["Inter", "sans-serif"]

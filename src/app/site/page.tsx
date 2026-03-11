@@ -4,10 +4,10 @@ export default function SiteHomePage() {
       <section className="relative h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden bg-white dark:bg-background-dark transition-colors duration-500">
         <div className="absolute inset-0 z-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img 
-            alt="Padrão dos Descobrimentos Lisbon" 
-            className="w-full h-full object-cover object-center opacity-100 dark:opacity-40 transition-opacity duration-500" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-TFcTf4OCzLqbUTZRU8-AolakQt01nc5lo2dUsBmuHqHEYphwJEwZH8cCK0_ZLoVajjlK7SnOzCvYVoLgfLVMSwGLdb71KsZFCflHcJIhx_uIN4TW2JNQ_IIOHQX1s9h6Sr0hkz43HgZSLAZ8gMQq43wtzVnIluR_6vX0ltjBFtfhK56WThBoXHmBW0GcK9x9CAWdsF_-KKaMZxMlPl7auI55LW11gYOCmKSOBAvmiyLtDPQI0s8utZ1STw01AXIDcfKWVYdTnUL5" 
+          <img
+            alt="Padrão dos Descobrimentos Lisbon"
+            className="w-full h-full object-cover object-center opacity-100 dark:opacity-40 transition-opacity duration-500"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-TFcTf4OCzLqbUTZRU8-AolakQt01nc5lo2dUsBmuHqHEYphwJEwZH8cCK0_ZLoVajjlK7SnOzCvYVoLgfLVMSwGLdb71KsZFCflHcJIhx_uIN4TW2JNQ_IIOHQX1s9h6Sr0hkz43HgZSLAZ8gMQq43wtzVnIluR_6vX0ltjBFtfhK56WThBoXHmBW0GcK9x9CAWdsF_-KKaMZxMlPl7auI55LW11gYOCmKSOBAvmiyLtDPQI0s8utZ1STw01AXIDcfKWVYdTnUL5"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/70 to-white dark:from-background-dark/80 dark:via-background-dark/50 dark:to-background-dark"></div>
         </div>
@@ -33,7 +33,7 @@ export default function SiteHomePage() {
           </div>
         </div>
       </section>
-      
+
       <section className="py-12 bg-white dark:bg-card-dark border-y border-slate-200 dark:border-slate-800 transition-colors">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-200 dark:divide-slate-800/50">
@@ -105,6 +105,8 @@ export default function SiteHomePage() {
           </div>
         </div>
       </section>
+
+
 
       <section className="py-20 relative overflow-hidden bg-primary">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1592345279419-95a10728904e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>

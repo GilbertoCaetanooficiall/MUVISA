@@ -107,58 +107,88 @@ export default function SiteSobrePage() {
         </div>
       </section>
 
-      <section className="py-20 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
+      <section className="py-20 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="text-primary font-bold tracking-wider text-sm uppercase mb-2 block font-display">Onde Estamos</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 font-display">Venha nos visitar em Lisboa</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 font-display">Venha nos visitar em Aveiro</h2>
               <p className="text-slate-600 dark:text-slate-400 mb-8 font-display">
-                Nosso escritório está estrategicamente localizado no coração de Lisboa, próximo às principais universidades e órgãos públicos.
+                Nosso escritório está estrategicamente localizado no coração da Universidade de Aveiro, próximo às principais faculdades e bibliotecas.
               </p>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined">location_on</span>
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                    <span className="material-symbols-outlined text-2xl">location_on</span>
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Endereço</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">Av. da Liberdade, 100, 2º Andar<br/>1250-144 Lisboa, Portugal</p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display leading-relaxed">
+                      Campus Universitário de Santiago<br />
+                      3810-193 Aveiro, Portugal
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined">schedule</span>
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                    <span className="material-symbols-outlined text-2xl">schedule</span>
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Horário de Atendimento</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">Segunda a Sexta: 09h às 18h<br/>Sábados: Apenas com agendamento</p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">Segunda a Sexta: 09h às 18h<br />Sábados: Apenas com agendamento</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined">mail</span>
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                    <span className="material-symbols-outlined text-2xl">mail</span>
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Contato</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">contato@muvisa.pt<br/>+351 21 000 0000</p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">contato@muvisa.pt<br />+351 21 000 0000</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="h-[400px] w-full bg-slate-200 dark:bg-card-dark rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-700 relative">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Mapa de Lisboa" className="w-full h-full object-cover opacity-30 grayscale dark:invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeb9fpceLRyY0pFUG9bGbgRRlBfi7smArKNaGbvpN1kcpvZVBclBopz9Re_9Wy-5H-_Mb2oATKBPz-GWwIm60_Rbh4GLzh2JqMy9MMnFCw7buTCteKFLtKgq6_GYyYdFYYp6PuFSVEyfOgXUimKYCtK9Z6e9Jw6-3GNlf-mqqnkfIbX5jqSuqv0kyyHYaRzkZflAtdMOoVLWEZvA4x8koeP8XPZG181ImU50eSmglRLEync91E_Q4sY4tLlTDUSfa75yzp1bM8OrJ4" />
-              <div className="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group cursor-pointer">
-                <div className="relative">
-                  <span className="material-symbols-outlined text-primary text-5xl drop-shadow-[0_0_10px_rgba(25,120,229,0.8)]">location_on</span>
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-4 h-2 bg-black/50 blur-sm rounded-[100%]"></div>
+
+            <div className="relative group">
+              {/* Outer Glow effect for the map container */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+
+              <div className="relative h-[450px] w-full bg-white p-2 rounded-[2.5rem] border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
+                <div className="w-full h-full rounded-[2rem] overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3034.425810452367!2d-8.6596956!3d40.6302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd23980fc2512f71%3A0x6335198894df62e8!2sUniversidade%20de%20Aveiro!5e0!3m2!1spt-PT!2spt!4v1710150000000!5m2!1spt-PT!2spt"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
-                <div className="mt-2 bg-white text-slate-900 px-3 py-1 rounded text-xs font-bold shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  MUVISA Headquarters
+
+                {/* Custom Blue Pin Overlay - Always visible over the real map */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] pointer-events-none">
+                  <div className="relative flex flex-col items-center">
+                    <div className="absolute -inset-4 bg-primary/30 rounded-full blur-xl animate-pulse"></div>
+                    <span className="material-symbols-outlined text-primary text-5xl filled drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]">location_on</span>
+                  </div>
                 </div>
+
+                {/* Glassy overlay border for premium feel */}
+                <div className="absolute inset-0 pointer-events-none rounded-[2.5rem] border-[12px] border-black/5 ring-1 ring-inset ring-slate-900/10"></div>
               </div>
+
+              {/* View on Google Maps floating button */}
+              <a
+                href="https://maps.app.goo.gl/wJmYVfN8c9vVf9X8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-10 right-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 shadow-xl flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white hover:scale-105 transition-transform"
+              >
+                <span>Ver no Maps</span>
+                <span className="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
             </div>
           </div>
         </div>

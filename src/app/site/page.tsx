@@ -23,7 +23,7 @@ export default function SiteHomePage() {
             Especialistas em Vistos de Estudo
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] mb-8 tracking-tight font-display">
-            O caminho mais seguro para seu <span className="text-primary">Domingos Vunge</span>
+            O caminho mais seguro para seu <span className="text-primary">intercâmbio em Portugal</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-200 mb-12 max-w-3xl mx-auto leading-relaxed font-display">
             Transforme seu sonho de estudar na Europa em realidade sem dores de cabeça. Cuidamos de toda a burocracia do seu visto para que você foque apenas no seu futuro.

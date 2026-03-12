@@ -1,4 +1,6 @@
 "use client";
+import { GraduationCap, Menu, X } from 'lucide-react';
+
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -10,9 +12,10 @@ export default function SiteHeader() {
 
   const navLinks = [
     { name: 'Home', href: '/site' },
+    { name: 'Estudar em Portugal', href: '/estudar-em-portugal' },
     { name: 'Serviços', href: '/site/servicos' },
     { name: 'Sobre nós', href: '/site/sobre' },
-    { name: 'Contacto', href: '/site/contato' },
+    { name: 'Contacto', href: '/site/contato' }
   ];
 
   const isActive = (path: string) => {
@@ -25,7 +28,7 @@ export default function SiteHeader() {
       <div className="flex items-center gap-4">
         <Link href="/site" className="flex items-center gap-4">
           <div className="flex items-center justify-center text-primary">
-            <span className="material-symbols-outlined text-3xl">school</span>
+            <GraduationCap className="text-3xl" />
           </div>
           <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] font-display">MUVISA</h2>
         </Link>
@@ -38,11 +41,10 @@ export default function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors font-display ${
-                isActive(link.href)
+              className={`text-sm font-medium transition-colors font-display ${isActive(link.href)
                   ? 'text-primary font-bold'
                   : 'text-slate-500 dark:text-slate-300 hover:text-primary'
-              }`}
+                }`}
             >
               {link.name}
             </Link>
@@ -56,11 +58,11 @@ export default function SiteHeader() {
       </div>
 
       {/* Mobile Menu Button */}
-      <button 
+      <button
         className="lg:hidden text-slate-900 dark:text-white p-2"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <span className="material-symbols-outlined">{isMenuOpen ? 'close' : 'menu'}</span>
+        {isMenuOpen ? <X /> : <Menu />}
       </button>
 
       {/* Mobile Menu Overlay */}
@@ -71,11 +73,10 @@ export default function SiteHeader() {
               key={link.href}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className={`text-base font-medium transition-colors font-display ${
-                isActive(link.href)
+              className={`text-base font-medium transition-colors font-display ${isActive(link.href)
                   ? 'text-primary font-bold'
                   : 'text-slate-500 dark:text-slate-300'
-              }`}
+                }`}
             >
               {link.name}
             </Link>

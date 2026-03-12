@@ -1,3 +1,4 @@
+import { Download, Eye, Trash2, FileText, Image as ImageIcon, LucideIcon } from 'lucide-react';
 type StatusBadge = "Aprovado" | "Em Revisão" | "Pendente";
 
 const statusStyles: Record<StatusBadge, string> = {
@@ -8,7 +9,7 @@ const statusStyles: Record<StatusBadge, string> = {
 
 interface Doc {
     name: string;
-    icon: string;
+    icon: LucideIcon;
     iconColor: string;
     status: StatusBadge;
     date: string;
@@ -16,10 +17,10 @@ interface Doc {
 }
 
 const documents: Doc[] = [
-    { name: "Cópia do Passaporte.pdf", icon: "picture_as_pdf", iconColor: "text-red-500", status: "Aprovado", date: "12 Out 2023" },
-    { name: "Foto 3x4.jpg", icon: "image", iconColor: "text-blue-500", status: "Em Revisão", date: "15 Out 2023" },
-    { name: "Extrato Bancário.pdf", icon: "picture_as_pdf", iconColor: "text-red-500", status: "Pendente", date: "Ontem", canDelete: true },
-    { name: "Diploma Traduzido.pdf", icon: "picture_as_pdf", iconColor: "text-red-500", status: "Aprovado", date: "10 Out 2023" },
+    { name: "Cópia do Passaporte.pdf", icon: FileText, iconColor: "text-red-500", status: "Aprovado", date: "12 Out 2023" },
+    { name: "Foto 3x4.jpg", icon: ImageIcon, iconColor: "text-blue-500", status: "Em Revisão", date: "15 Out 2023" },
+    { name: "Extrato Bancário.pdf", icon: FileText, iconColor: "text-red-500", status: "Pendente", date: "Ontem", canDelete: true },
+    { name: "Diploma Traduzido.pdf", icon: FileText, iconColor: "text-red-500", status: "Aprovado", date: "10 Out 2023" },
 ];
 
 export default function FilesTable() {
@@ -44,7 +45,7 @@ export default function FilesTable() {
                             <tr key={doc.name} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                                 <td className="px-6 py-4 font-medium text-slate-900 dark:text-white">
                                     <div className="flex items-center gap-3">
-                                        <span className={`material-symbols-outlined text-[20px] ${doc.iconColor}`}>{doc.icon}</span>
+                                        <doc.icon className={`w-5 h-5 ${doc.iconColor}`} />
                                         {doc.name}
                                     </div>
                                 </td>
@@ -57,14 +58,14 @@ export default function FilesTable() {
                                 <td className="px-6 py-4 text-right">
                                     <div className="flex items-center justify-end gap-2">
                                         <button className="p-1 hover:text-primary transition-colors">
-                                            <span className="material-symbols-outlined text-[18px]">visibility</span>
+                                            <Eye className="text-[18px]" />
                                         </button>
                                         <button className="p-1 hover:text-primary transition-colors">
-                                            <span className="material-symbols-outlined text-[18px]">download</span>
+                                            <Download className="text-[18px]" />
                                         </button>
                                         {doc.canDelete && (
                                             <button className="p-1 hover:text-red-600 transition-colors">
-                                                <span className="material-symbols-outlined text-[18px]">delete</span>
+                                                <Trash2 className="text-[18px]" />
                                             </button>
                                         )}
                                     </div>

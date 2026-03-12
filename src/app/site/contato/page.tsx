@@ -1,3 +1,4 @@
+import { ArrowRight, ClipboardList, Clock, ListChecks, Lock, Mail, Phone } from 'lucide-react';
 export default function SiteContatoPage() {
   return (
     <>
@@ -27,7 +28,7 @@ export default function SiteContatoPage() {
           <div className="grid gap-6">
             <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 group-hover:text-primary transition-colors">
-                <span className="material-symbols-outlined">assignment</span>
+                <ClipboardList />
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-lg">Profile Evaluation</h3>
@@ -36,7 +37,7 @@ export default function SiteContatoPage() {
             </div>
             <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 group-hover:text-primary transition-colors">
-                <span className="material-symbols-outlined">checklist</span>
+                <ListChecks />
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-lg">Personalized Checklist</h3>
@@ -45,7 +46,7 @@ export default function SiteContatoPage() {
             </div>
             <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 group-hover:text-primary transition-colors">
-                <span className="material-symbols-outlined">schedule</span>
+                <Clock />
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-lg">Visa Timeline</h3>
@@ -97,7 +98,7 @@ export default function SiteContatoPage() {
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Email Address</span>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-                      <span className="material-symbols-outlined text-[20px]">mail</span>
+                      <Mail className="text-[20px]" />
                     </div>
                     <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary pl-10 py-2.5 placeholder:text-slate-400" placeholder="jane@example.com" type="email" />
                   </div>
@@ -107,7 +108,7 @@ export default function SiteContatoPage() {
                   <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Phone Number</span>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-                      <span className="material-symbols-outlined text-[20px]">call</span>
+                      <Phone className="text-[20px]" />
                     </div>
                     <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary pl-10 py-2.5 placeholder:text-slate-400" placeholder="+1 (555) 000-0000" type="tel" />
                   </div>
@@ -150,10 +151,10 @@ export default function SiteContatoPage() {
               <div className="flex flex-col gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
                 <button className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold h-12 transition-all shadow-[0_0_15px_rgba(25,120,229,0.4)] hover:shadow-[0_0_20px_rgba(25,120,229,0.6)] active:scale-[0.99]" type="button">
                   Confirm Booking
-                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                  <ArrowRight className="text-lg" />
                 </button>
                 <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
-                  <span className="material-symbols-outlined text-sm text-green-500 dark:text-green-400">lock</span>
+                  <Lock className="text-sm text-green-500 dark:text-green-400" />
                   <span>Seus dados estão seguros. (Your data is safe)</span>
                 </div>
               </div>

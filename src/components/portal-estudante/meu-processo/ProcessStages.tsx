@@ -1,3 +1,4 @@
+import { Check, CheckCircle, Circle, Hourglass } from 'lucide-react';
 export default function ProcessStages() {
     return (
         <div className="lg:col-span-2 flex flex-col gap-6">
@@ -7,7 +8,7 @@ export default function ProcessStages() {
                 <div className="p-5 flex gap-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0">
-                            <span className="material-symbols-outlined text-sm">check</span>
+                            <Check className="text-sm" />
                         </div>
                         <div className="w-0.5 h-full bg-green-500/20"></div>
                     </div>
@@ -19,15 +20,15 @@ export default function ProcessStages() {
                         <p className="text-sm text-slate-500 mt-1">Formulário inicial e entrevista de perfil.</p>
                         <div className="mt-4 pl-4 border-l-2 border-slate-100 dark:border-slate-700 space-y-3">
                             <div className="flex items-center gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px]" />
                                 <span className="text-slate-600 dark:text-slate-300">Preenchimento do questionário</span>
                             </div>
                             <div className="flex items-center gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px]" />
                                 <span className="text-slate-600 dark:text-slate-300">Entrevista com consultor</span>
                             </div>
                             <div className="flex items-center gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px]" />
                                 <span className="text-slate-600 dark:text-slate-300">Definição da estratégia</span>
                             </div>
                         </div>
@@ -40,7 +41,7 @@ export default function ProcessStages() {
                 <div className="p-5 flex gap-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0">
-                            <span className="material-symbols-outlined text-sm">check</span>
+                            <Check className="text-sm" />
                         </div>
                         <div className="w-0.5 h-full bg-green-500/20"></div>
                     </div>
@@ -52,15 +53,15 @@ export default function ProcessStages() {
                         <p className="text-sm text-slate-500 mt-1">Reunião e validação de documentos.</p>
                         <div className="mt-4 pl-4 border-l-2 border-slate-100 dark:border-slate-700 space-y-3">
                             <div className="flex items-center gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px]" />
                                 <span className="text-slate-600 dark:text-slate-300">Upload de passaporte</span>
                             </div>
                             <div className="flex items-center gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px]" />
                                 <span className="text-slate-600 dark:text-slate-300">Tradução juramentada</span>
                             </div>
                             <div className="flex items-center gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px]" />
                                 <span className="text-slate-600 dark:text-slate-300">Comprovantes financeiros validados</span>
                             </div>
                         </div>
@@ -86,14 +87,14 @@ export default function ProcessStages() {
                         <p className="text-sm text-slate-500 mt-1">Submissão no portal do governo e processamento.</p>
                         <div className="mt-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 space-y-4">
                             <div className="flex items-start gap-3 text-sm">
-                                <span className="material-symbols-outlined text-green-500 text-[18px] mt-0.5">check_circle</span>
+                                <CheckCircle className="text-green-500 text-[18px] mt-0.5" />
                                 <div className="flex-1">
                                     <span className="text-slate-700 dark:text-slate-200 font-medium">Preenchimento dos formulários oficiais</span>
                                     <p className="text-xs text-slate-500">Realizado em 14/10/2023</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3 text-sm">
-                                <span className="material-symbols-outlined text-primary text-[18px] mt-0.5">hourglass_top</span>
+                                <Hourglass className="text-primary text-[18px] mt-0.5" />
                                 <div className="flex-1">
                                     <span className="text-slate-700 dark:text-slate-200 font-medium">Revisão final do consultor</span>
                                     <p className="text-xs text-slate-500">Em andamento - Previsão: 2 dias úteis</p>
@@ -103,14 +104,14 @@ export default function ProcessStages() {
                                 </div>
                             </div>
                             <div className="flex items-start gap-3 text-sm opacity-60">
-                                <span className="material-symbols-outlined text-slate-400 text-[18px] mt-0.5">radio_button_unchecked</span>
+                                <Circle className="text-slate-400 text-[18px] mt-0.5" />
                                 <div className="flex-1">
                                     <span className="text-slate-700 dark:text-slate-200">Pagamento da taxa consular</span>
                                     <p className="text-xs text-slate-500">Aguardando revisão</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3 text-sm opacity-60">
-                                <span className="material-symbols-outlined text-slate-400 text-[18px] mt-0.5">radio_button_unchecked</span>
+                                <Circle className="text-slate-400 text-[18px] mt-0.5" />
                                 <div className="flex-1">
                                     <span className="text-slate-700 dark:text-slate-200">Submissão final</span>
                                 </div>

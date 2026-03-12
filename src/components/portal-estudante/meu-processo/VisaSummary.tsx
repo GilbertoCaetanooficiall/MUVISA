@@ -1,3 +1,4 @@
+import { BadgeCheck } from 'lucide-react';
 export default function VisaSummary() {
     return (
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
@@ -5,7 +6,7 @@ export default function VisaSummary() {
             <div className="bg-primary/5 rounded-lg p-4 mb-4 border border-primary/10">
                 <div className="flex justify-between items-start mb-2">
                     <span className="text-xs font-semibold text-primary uppercase">Tipo de Visto</span>
-                    <span className="material-symbols-outlined text-primary text-[18px]">verified</span>
+                    <BadgeCheck className="text-primary text-[18px]" />
                 </div>
                 <h4 className="text-xl font-bold text-primary">Study Permit</h4>
                 <p className="text-xs text-primary/70 mt-1">Permissão de Estudos + Trabalho (20h)</p>

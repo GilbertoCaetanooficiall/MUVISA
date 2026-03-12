@@ -1,3 +1,4 @@
+import { GraduationCap, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/portal-estudante/ThemeToggle';
 
@@ -8,7 +9,7 @@ export default function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <Link href="/site" className="flex items-center gap-2 mb-4 text-primary">
-              <span className="material-symbols-outlined text-2xl">school</span>
+              <GraduationCap className="text-2xl" />
               <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight font-display">MUVISA</span>
             </Link>
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 font-display">
@@ -53,15 +54,15 @@ export default function SiteFooter() {
             <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Atendimento</h3>
             <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-400 font-display">
               <li className="flex items-start gap-2">
-                <span className="material-symbols-outlined text-base mt-0.5">location_on</span>
+                <MapPin className="text-base mt-0.5" />
                 <span>Av. da Liberdade, 100<br/>Lisboa, Portugal</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-base">mail</span>
+                <Mail className="text-base" />
                 <a className="hover:text-primary transition-colors" href="mailto:contato@muvisa.pt">contato@muvisa.pt</a>
               </li>
               <li className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-base">call</span>
+                <Phone className="text-base" />
                 <span>+351 21 000 0000</span>
               </li>
             </ul>

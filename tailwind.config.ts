@@ -17,19 +17,20 @@ const config: Config = {
         "input-bg": "#334155",
       },
       fontFamily: {
-        "display": ["Inter", "sans-serif"]
+        "display": ["Inter", "sans-serif"],
       },
       borderRadius: {
         "DEFAULT": "0.25rem",
         "lg": "0.5rem",
         "xl": "0.75rem",
-        "full": "9999px"
+        "full": "9999px",
       },
     },
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('@tailwindcss/container-queries')
+    require('@tailwindcss/container-queries'),
   ],
 };
 export default config;
+

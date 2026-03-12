@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react';
 export default function SupportHero() {
     return (
         <div className="bg-gradient-to-r from-primary to-blue-600 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
@@ -10,7 +11,7 @@ export default function SupportHero() {
                         placeholder="Digite sua dúvida ou problema..."
                         className="w-full bg-white/20 backdrop-blur-md border border-white/30 rounded-xl px-4 py-3.5 pl-12 text-white placeholder-white/70 focus:bg-white/30 focus:ring-0 focus:border-white/50 transition-all outline-none"
                     />
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/80">search</span>
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80" />
                 </div>
             </div>
         </div>

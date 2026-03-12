@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 export default function ProcessStepper() {
     return (
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
@@ -10,7 +11,7 @@ export default function ProcessStepper() {
                 <div className="flex flex-col md:flex-row justify-between relative z-10 gap-6 md:gap-0">
                     <div className="flex md:flex-col items-center gap-4 md:gap-2 group flex-1">
                         <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30 shrink-0">
-                            <span className="material-symbols-outlined text-xl">check</span>
+                            <Check className="text-xl" />
                         </div>
                         <div className="flex flex-col md:items-center">
                             <span className="text-sm font-bold text-slate-900 dark:text-white">Coleta de Dados</span>
@@ -20,7 +21,7 @@ export default function ProcessStepper() {
                     <div className="md:hidden absolute left-[19px] top-8 bottom-8 w-0.5 bg-slate-200 -z-10"></div>
                     <div className="flex md:flex-col items-center gap-4 md:gap-2 group flex-1">
                         <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/30 shrink-0">
-                            <span className="material-symbols-outlined text-xl">check</span>
+                            <Check className="text-xl" />
                         </div>
                         <div className="flex flex-col md:items-center">
                             <span className="text-sm font-bold text-slate-900 dark:text-white">Documentos</span>

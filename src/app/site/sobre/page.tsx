@@ -1,3 +1,4 @@
+import { CalendarDays, Clock, ExternalLink, Handshake, Mail, MapPin, Search, Star } from 'lucide-react';
 export default function SiteSobrePage() {
   return (
     <>
@@ -78,7 +79,7 @@ export default function SiteSobrePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-slate-50 dark:bg-card-dark border border-slate-200 dark:border-slate-700/50 p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 group">
               <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_0_15px_rgba(25,120,229,0.15)] group-hover:shadow-[0_0_25px_rgba(25,120,229,0.4)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-4xl">search</span>
+                <Search className="text-4xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Transparência</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -87,7 +88,7 @@ export default function SiteSobrePage() {
             </div>
             <div className="bg-slate-50 dark:bg-card-dark border border-slate-200 dark:border-slate-700/50 p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 group">
               <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_0_15px_rgba(25,120,229,0.15)] group-hover:shadow-[0_0_25px_rgba(25,120,229,0.4)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-4xl">handshake</span>
+                <Handshake className="text-4xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Compromisso</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -96,7 +97,7 @@ export default function SiteSobrePage() {
             </div>
             <div className="bg-slate-50 dark:bg-card-dark border border-slate-200 dark:border-slate-700/50 p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 group">
               <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_0_15px_rgba(25,120,229,0.15)] group-hover:shadow-[0_0_25px_rgba(25,120,229,0.4)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-4xl">hotel_class</span>
+                <Star className="text-4xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Excelência</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -119,7 +120,7 @@ export default function SiteSobrePage() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined text-2xl">location_on</span>
+                    <MapPin className="text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Endereço</h4>
@@ -131,7 +132,7 @@ export default function SiteSobrePage() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined text-2xl">schedule</span>
+                    <Clock className="text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Horário de Atendimento</h4>
@@ -140,7 +141,7 @@ export default function SiteSobrePage() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined text-2xl">mail</span>
+                    <Mail className="text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Contato</h4>
@@ -171,7 +172,7 @@ export default function SiteSobrePage() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] pointer-events-none">
                   <div className="relative flex flex-col items-center">
                     <div className="absolute -inset-4 bg-primary/30 rounded-full blur-xl animate-pulse"></div>
-                    <span className="material-symbols-outlined text-primary text-5xl filled drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]">location_on</span>
+                    <MapPin className="text-primary text-5xl  drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]" />
                   </div>
                 </div>
 
@@ -187,7 +188,7 @@ export default function SiteSobrePage() {
                 className="absolute bottom-10 right-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 shadow-xl flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white hover:scale-105 transition-transform"
               >
                 <span>Ver no Maps</span>
-                <span className="material-symbols-outlined text-sm">open_in_new</span>
+                <ExternalLink className="text-sm" />
               </a>
             </div>
           </div>
@@ -204,7 +205,7 @@ export default function SiteSobrePage() {
           </p>
           <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg text-lg hover:bg-blue-50 transition-colors shadow-xl font-display inline-flex items-center gap-2">
             Agendar Minha Consultoria
-            <span className="material-symbols-outlined">calendar_month</span>
+            <CalendarDays />
           </button>
         </div>
       </section>

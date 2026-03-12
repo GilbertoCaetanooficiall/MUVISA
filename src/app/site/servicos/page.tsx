@@ -1,3 +1,4 @@
+import { Badge, BadgeCheck, BaggageClaim, Building2, Check, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Send, Users, X } from 'lucide-react';
 export default function SiteServicosPage() {
   return (
     <>
@@ -24,80 +25,80 @@ export default function SiteServicosPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">badge</span>
+                <Badge className="text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Assessoria para Vistos</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Análise de perfil e orientação</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Revisão completa documental</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Agendamento consular</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">school</span>
+                <GraduationCap className="text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Assessoria Estudantil</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Escolha da universidade ideal</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Aplicação e matrícula</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Carta de motivação personalizada</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">luggage</span>
+                <BaggageClaim className="text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Planeamento de Viagem</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Roteiro personalizado</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Seguro viagem obrigatório</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Busca de alojamento</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
               <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">domain</span>
+                <Building2 className="text-2xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Assessoria Empresarial</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Viagens corporativas</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Vistos para investidores</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <CheckCircle className="text-primary text-base" />
                   <span>Missões empresariais</span>
                 </li>
               </ul>
@@ -157,11 +158,11 @@ export default function SiteServicosPage() {
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Básico</h3>
               <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">50.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
               <ul className="space-y-4 mb-8 flex-1 text-slate-600 dark:text-slate-300 text-sm font-display">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Checklist de documentos</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Revisão simples</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Agendamento</li>
-                <li className="flex items-center gap-3 opacity-50"><span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-sm">close</span> Carta de motivação</li>
-                <li className="flex items-center gap-3 opacity-50"><span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-sm">close</span> Suporte pós-chegada</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Checklist de documentos</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Revisão simples</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Agendamento</li>
+                <li className="flex items-center gap-3 opacity-50"><X className="text-slate-400 dark:text-slate-600 text-sm" /> Carta de motivação</li>
+                <li className="flex items-center gap-3 opacity-50"><X className="text-slate-400 dark:text-slate-600 text-sm" /> Suporte pós-chegada</li>
               </ul>
               <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
             </div>
@@ -171,11 +172,11 @@ export default function SiteServicosPage() {
               <h3 className="text-xl font-bold text-primary mb-2 font-display">Premium</h3>
               <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">150.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
               <ul className="space-y-4 mb-8 flex-1 text-slate-700 dark:text-slate-200 text-sm font-display">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Tudo do Intermédio</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Simulação de entrevista</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Busca de moradia</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Seguro viagem incluso (1 mês)</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Suporte 24h via WhatsApp</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Tudo do Intermédio</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Simulação de entrevista</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Busca de moradia</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Seguro viagem incluso (1 mês)</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Suporte 24h via WhatsApp</li>
               </ul>
               <button className="w-full py-3 rounded-lg bg-primary text-white font-bold hover:bg-blue-600 transition-colors shadow-lg font-display">Começar Agora</button>
             </div>
@@ -184,11 +185,11 @@ export default function SiteServicosPage() {
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Intermédio</h3>
               <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">90.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
               <ul className="space-y-4 mb-8 flex-1 text-slate-600 dark:text-slate-300 text-sm font-display">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Tudo do Básico</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Revisão aprofundada</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Carta de motivação</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Apoio na matrícula</li>
-                <li className="flex items-center gap-3 opacity-50"><span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-sm">close</span> Busca de moradia</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Tudo do Básico</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Revisão aprofundada</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Carta de motivação</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Apoio na matrícula</li>
+                <li className="flex items-center gap-3 opacity-50"><X className="text-slate-400 dark:text-slate-600 text-sm" /> Busca de moradia</li>
               </ul>
               <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
             </div>
@@ -262,7 +263,7 @@ export default function SiteServicosPage() {
             </div>
             <button className="w-full py-4 rounded-lg bg-primary text-white font-bold text-lg hover:bg-blue-600 transition-all shadow-lg font-display flex justify-center items-center gap-2" type="submit">
               Enviar Solicitação
-              <span className="material-symbols-outlined">send</span>
+              <Send />
             </button>
           </form>
         </div>
@@ -273,28 +274,28 @@ export default function SiteServicosPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">groups</span>
+                <Users className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Equipa Especializada</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Profissionais com vasta experiência</p>
             </div>
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">verified</span>
+                <BadgeCheck className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Alta Aprovação</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">98% de sucesso nos processos</p>
             </div>
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">support_agent</span>
+                <Headset className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Suporte Dedicado</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Atendimento humanizado</p>
             </div>
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">lock</span>
+                <Lock className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Segurança Total</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Dados protegidos e sigilo</p>
@@ -311,11 +312,11 @@ export default function SiteServicosPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="h-14 px-8 rounded-lg bg-white text-primary text-lg font-bold hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 font-display">
               Falar com Especialista
-              <span className="material-symbols-outlined">chat</span>
+              <MessageCircle />
             </button>
             <button className="h-14 px-8 rounded-lg bg-primary text-white border border-white/30 text-lg font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-3 font-display backdrop-blur-sm">
               Pedir Cotação
-              <span className="material-symbols-outlined">request_quote</span>
+              <FileSignature />
             </button>
           </div>
         </div>

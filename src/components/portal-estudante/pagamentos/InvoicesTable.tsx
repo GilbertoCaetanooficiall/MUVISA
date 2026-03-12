@@ -1,3 +1,4 @@
+import { Filter, Lock, Receipt } from 'lucide-react';
 type InvoiceStatus = "Pago" | "Pendente" | "A vencer";
 
 const statusStyles: Record<InvoiceStatus, string> = {
@@ -55,7 +56,7 @@ export default function InvoicesTable() {
             <div className="p-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Minhas Faturas</h3>
                 <button className="text-sm text-primary font-medium hover:underline flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[18px]">filter_list</span>
+                    <Filter className="text-[18px]" />
                     Filtrar
                 </button>
             </div>
@@ -89,7 +90,7 @@ export default function InvoicesTable() {
                                 <td className="px-6 py-4 text-right">
                                     {inv.action === "receipt" && (
                                         <button className="text-slate-500 hover:text-primary transition-colors flex items-center justify-end gap-1 ml-auto text-xs">
-                                            <span className="material-symbols-outlined text-[16px]">receipt</span>
+                                            <Receipt className="text-[16px]" />
                                             Recibo
                                         </button>
                                     )}
@@ -100,7 +101,7 @@ export default function InvoicesTable() {
                                     )}
                                     {inv.action === "locked" && (
                                         <button className="text-slate-400 cursor-not-allowed flex items-center justify-end gap-1 ml-auto text-xs" disabled>
-                                            <span className="material-symbols-outlined text-[16px]">lock</span>
+                                            <Lock className="text-[16px]" />
                                             Aguardando
                                         </button>
                                     )}

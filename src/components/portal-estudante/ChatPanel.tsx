@@ -1,4 +1,6 @@
 "use client";
+import { Paperclip, Send, X } from 'lucide-react';
+
 
 import {
     createContext,
@@ -135,7 +137,7 @@ function ChatPanel({ onClose }: { onClose: () => void }) {
                     onClick={onClose}
                     className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
-                    <span className="material-symbols-outlined text-[20px]">close</span>
+                    <X className="text-[20px]" />
                 </button>
             </div>
 
@@ -185,7 +187,7 @@ function ChatPanel({ onClose }: { onClose: () => void }) {
                         className="p-2 text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                         title="Anexar arquivo"
                     >
-                        <span className="material-symbols-outlined text-[20px]">attach_file</span>
+                        <Paperclip className="text-[20px]" />
                     </button>
                     <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center px-3 py-2 border border-transparent focus-within:border-primary/30 focus-within:bg-white dark:focus-within:bg-slate-900 transition-all">
                         <input
@@ -202,7 +204,7 @@ function ChatPanel({ onClose }: { onClose: () => void }) {
                         className="p-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
                         title="Enviar"
                     >
-                        <span className="material-symbols-outlined text-[20px]">send</span>
+                        <Send className="text-[20px]" />
                     </button>
                 </div>
             </div>

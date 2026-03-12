@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
     {
@@ -39,11 +40,9 @@ export default function FaqAccordion() {
                             className="flex items-center justify-between w-full text-left"
                         >
                             <span className="font-medium text-slate-900 dark:text-white text-sm">{faq.question}</span>
-                            <span
-                                className={`material-symbols-outlined text-slate-400 transition-transform duration-200 shrink-0 ml-4 ${openIndex === i ? "rotate-180" : ""}`}
-                            >
-                                expand_more
-                            </span>
+                            <ChevronDown
+                                className={`text-slate-400 w-5 h-5 transition-transform duration-200 shrink-0 ml-4 ${openIndex === i ? "rotate-180" : ""}`}
+                            />
                         </button>
                         {openIndex === i && (
                             <div className="mt-3 text-sm text-slate-600 dark:text-slate-400 pl-4 border-l-2 border-primary/20">

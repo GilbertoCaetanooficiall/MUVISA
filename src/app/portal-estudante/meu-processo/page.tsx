@@ -1,3 +1,4 @@
+import { Download, Eye } from 'lucide-react';
 import ProcessStages from "@/components/portal-estudante/meu-processo/ProcessStages";
 import DestinationDetails from "@/components/portal-estudante/meu-processo/DestinationDetails";
 import VisaSummary from "@/components/portal-estudante/meu-processo/VisaSummary";
@@ -17,11 +18,11 @@ export default function MeuProcessoPage() {
                 </div>
                 <div className="flex gap-3">
                     <button className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition flex items-center gap-2">
-                        <span className="material-symbols-outlined text-[18px]">download</span>
+                        <Download className="text-[18px]" />
                         Baixar Guia
                     </button>
                     <button className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2 shadow-lg shadow-primary/20">
-                        <span className="material-symbols-outlined text-[18px]">visibility</span>
+                        <Eye className="text-[18px]" />
                         Ver Protocolo
                     </button>
                 </div>

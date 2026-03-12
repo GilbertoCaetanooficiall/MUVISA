@@ -1,3 +1,4 @@
+import { Download } from 'lucide-react';
 const agencyDocs = [
     { title: "Letter of Acceptance (LOA)", icon: "description", date: "20 Out" },
     { title: "Cópia da Aplicação de Visto", icon: "verified_user", date: "15 Out" },
@@ -22,7 +23,7 @@ export default function AgencyDocuments() {
                             <p className="text-xs text-slate-500 mt-0.5">Disponibilizado: {doc.date}</p>
                         </div>
                         <button className="text-slate-400 hover:text-primary transition-colors">
-                            <span className="material-symbols-outlined text-[20px]">download</span>
+                            <Download className="text-[20px]" />
                         </button>
                     </div>
                 ))}

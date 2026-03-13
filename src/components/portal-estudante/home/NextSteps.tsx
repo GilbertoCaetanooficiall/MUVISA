@@ -16,7 +16,7 @@ export default function NextSteps() {
                     <div className="flex-1">
                         <h4 className="text-sm font-bold text-slate-900 dark:text-white">Assinar Formulário 123</h4>
                         <p className="text-xs text-slate-500 mt-1">O formulário de aplicação precisa da sua assinatura digital.</p>
-                        <button className="mt-3 text-xs font-bold text-primary hover:text-blue-700 flex items-center gap-1">
+                        <button className="mt-3 text-xs font-bold text-primary hover:text-primary-hover flex items-center gap-1">
                             Assinar Agora <ArrowRight className="text-[16px]" />
                         </button>
                     </div>

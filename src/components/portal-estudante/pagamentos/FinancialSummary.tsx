@@ -17,7 +17,7 @@ const stats: Stat[] = [
         sub: "Valor contratado",
         subColor: "text-slate-400",
         icon: Landmark,
-        iconBg: "bg-blue-50 dark:bg-blue-900/20 text-blue-600",
+        iconBg: "bg-primary/10 dark:bg-primary/20 text-primary",
     },
     {
         label: "Valor Pago",

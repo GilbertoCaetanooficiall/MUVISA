@@ -14,7 +14,7 @@ const categories: Category[] = [
         icon: FileText,
         label: "Documentação",
         sub: "Traduções e envios",
-        iconBg: "bg-blue-50 dark:bg-blue-900/20 text-blue-600 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30",
+        iconBg: "bg-primary/10 dark:bg-primary/20 text-primary group-hover:bg-primary/20 dark:group-hover:bg-primary/30",
     },
     {
         icon: CreditCard,

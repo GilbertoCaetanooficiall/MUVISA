@@ -1,7 +1,7 @@
 const categories = [
     { label: "Identificação Pessoal", color: "bg-green-500", value: "2/2" },
     { label: "Acadêmico", color: "bg-green-500", value: "3/3" },
-    { label: "Financeiro", color: "bg-blue-500", value: "1/3" },
+    { label: "Financeiro", color: "bg-primary", value: "1/3" },
     { label: "Vínculos", color: "bg-orange-400", value: "2/4" },
 ];
 

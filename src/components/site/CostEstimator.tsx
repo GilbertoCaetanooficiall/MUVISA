@@ -109,7 +109,7 @@ export function CostEstimator() {
 
                     <button
                         type="submit"
-                        className="w-full h-12 mt-2 rounded-lg bg-primary text-white font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-primary/20 font-display"
+                        className="w-full h-12 mt-2 rounded-lg bg-primary text-white font-bold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20 font-display"
                     >
                         Calcular custo
                     </button>

@@ -201,7 +201,7 @@ function ChatPanel({ onClose }: { onClose: () => void }) {
                     </div>
                     <button
                         onClick={sendMessage}
-                        className="p-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                        className="p-2 bg-primary text-white rounded-lg hover:bg-primary-hover transition-colors shadow-sm"
                         title="Enviar"
                     >
                         <Send className="text-[20px]" />

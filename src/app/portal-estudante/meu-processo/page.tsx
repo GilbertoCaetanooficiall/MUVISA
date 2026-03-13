@@ -21,7 +21,7 @@ export default function MeuProcessoPage() {
                         <Download className="text-[18px]" />
                         Baixar Guia
                     </button>
-                    <button className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2 shadow-lg shadow-primary/20">
+                    <button className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition flex items-center gap-2 shadow-lg shadow-primary/20">
                         <Eye className="text-[18px]" />
                         Ver Protocolo
                     </button>

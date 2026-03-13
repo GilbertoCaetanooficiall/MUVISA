@@ -13,7 +13,7 @@ export default function SiteFooter() {
               <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight font-display">MUVISA</span>
             </Link>
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 font-display">
-              Facilitamos a sua mobilidade internacional com transparência e segurança. Especialistas em vistos para Portugal.
+              Facilitamos a sua mobilidade acadêmica com transparência e segurança. Especialistas em vistos de estudo para Portugal.
             </p>
             <div className="flex gap-4">
               <a 
@@ -33,21 +33,21 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Vistos</h3>
+            <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Vistos de Estudo</h3>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400 font-display">
-              <li><Link className="hover:text-primary transition-colors" href="#">Visto D4 (Estudos)</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Visto D5 (Mobilidade)</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Procura de Trabalho</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Reagrupamento Familiar</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Ensino Superior (D4)</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Ensino Secundário (D4)</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Investigação & Ensino (D3)</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Estágios & Voluntariado</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Empresa</h3>
+            <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Suporte</h3>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400 font-display">
-              <li><Link className="hover:text-primary transition-colors" href="/site/sobre">Sobre Nós</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Carreiras</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="#">Blog</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/contato">Contato</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/sobre">Casos de Sucesso</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/sobre">FAQ do Estudante</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Alojamento</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Seguro Saúde (PB4)</Link></li>
             </ul>
           </div>
           <div>

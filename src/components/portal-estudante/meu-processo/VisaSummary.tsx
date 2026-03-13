@@ -18,7 +18,7 @@ export default function VisaSummary() {
                         <span className="text-sm font-bold text-slate-700 dark:text-slate-300">12 Semanas</span>
                     </div>
                     <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
-                        <div className="bg-blue-400 h-2 rounded-full" style={{ width: "45%" }}></div>
+                        <div className="bg-primary h-2 rounded-full" style={{ width: "45%" }}></div>
                     </div>
                     <p className="text-[10px] text-slate-400 mt-1 text-right">Atualizado hoje pelo IRCC</p>
                 </div>

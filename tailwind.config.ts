@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "primary": "#1325ec",
+        "primary": "oklch(0.623 0.214 259.815)",
+        "primary-hover": "oklch(0.55 0.214 259.815)",
         "background-light": "#f6f6f8",
         "background-dark": "#0f172a",
         "card-dark": "#1c2633",

@@ -4,7 +4,7 @@ const methods = [
         icon: CreditCard,
         iconColor: "text-slate-400",
         badge: "PRINCIPAL",
-        badgeStyle: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+        badgeStyle: "bg-primary/20 text-primary dark:bg-primary/30 dark:text-primary",
         title: null,
         subtitle: "Mastercard terminado em",
         info: "•••• 8834",

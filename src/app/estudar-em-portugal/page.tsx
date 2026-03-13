@@ -99,15 +99,15 @@ export default function EstudarEmPortugalPage() {
 
                     {/* SECTION 3 — CONSULTANT CTA */}
                     <section className="container mx-auto px-4 max-w-4xl py-24 text-center">
-                        <div className="bg-primary/5 dark:bg-primary/10 rounded-3xl p-10 md:p-14 border border-primary/20">
+                        <div className="bg-slate-100 dark:bg-slate-800/80 rounded-[2rem] p-10 md:p-14 border-2 border-primary/10 shadow-md transition-all duration-300">
                             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 font-display">
                                 Precisa de ajuda com a candidatura ou visto?
                             </h2>
-                            <p className="text-slate-600 dark:text-slate-300 text-lg mb-8 max-w-2xl mx-auto font-display">
-                                Nossa equipe de especialistas está pronta para cuidar de todo o processo para você.
+                            <p className="text-slate-600 dark:text-slate-400 text-lg mb-8 max-w-2xl mx-auto font-display">
+                                Nossa equipe de especialistas está pronta para cuidar de todo o processo para você, garantindo sua aprovação.
                             </p>
                             <Link href="/site/contato">
-                                <button className="h-14 px-8 rounded-xl bg-primary text-white text-lg font-bold hover:bg-blue-600 transform hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(19,37,236,0.25)] flex items-center justify-center gap-3 mx-auto font-display">
+                                <button className="h-14 px-8 rounded-xl bg-primary text-white text-lg font-bold hover:bg-primary-hover transform hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(25,120,229,0.25)] flex items-center justify-center gap-3 mx-auto font-display">
                                     Fale com um consultor
                                     <MessageCircle />
                                 </button>

@@ -16,7 +16,7 @@ const MAX_SIZE_MB = 10;
 
 function getFileIcon(type: string) {
     if (type === "application/pdf") return { icon: FileText, color: "text-red-500" };
-    if (type.startsWith("image/")) return { icon: ImageIcon, color: "text-blue-500" };
+    if (type.startsWith("image/")) return { icon: ImageIcon, color: "text-primary" };
     return { icon: File, color: "text-slate-500" };
 }
 

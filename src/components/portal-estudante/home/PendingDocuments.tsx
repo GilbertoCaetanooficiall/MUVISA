@@ -15,7 +15,7 @@ export default function PendingDocuments() {
                 {/* Doc Item 1 */}
                 <div className="flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                     <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center">
+                        <div className="h-10 w-10 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary rounded-lg flex items-center justify-center">
                             <FileText />
                         </div>
                         <div>
@@ -23,14 +23,14 @@ export default function PendingDocuments() {
                             <p className="text-xs text-slate-500">Página de identificação</p>
                         </div>
                     </div>
-                    <button className="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded hover:bg-blue-700 transition-colors flex items-center gap-1">
+                    <button className="px-3 py-1.5 text-xs font-bold bg-primary text-white rounded hover:bg-primary-hover transition-colors flex items-center gap-1">
                         <Upload className="text-[14px]" /> Enviar
                     </button>
                 </div>
                 {/* Doc Item 2 */}
                 <div className="flex items-center justify-between p-3 rounded-lg border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                     <div className="flex items-center gap-3">
-                        <div className="h-10 w-10 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center">
+                        <div className="h-10 w-10 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary rounded-lg flex items-center justify-center">
                             <Landmark />
                         </div>
                         <div>

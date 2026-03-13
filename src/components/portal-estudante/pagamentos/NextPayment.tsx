@@ -17,7 +17,7 @@ export default function NextPayment() {
                 <p className="text-slate-600 dark:text-slate-300 text-sm mb-1">Taxa Consular</p>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white">Kz 850.000,00</p>
             </div>
-            <button className="w-full py-3 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2 mb-6">
+            <button className="w-full py-3 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg shadow-lg shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2 mb-6">
                 <span>Efetuar Pagamento</span>
                 <ArrowRight className="text-[20px]" />
             </button>

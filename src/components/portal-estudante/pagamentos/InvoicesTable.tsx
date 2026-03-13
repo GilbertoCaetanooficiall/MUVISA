@@ -95,7 +95,7 @@ export default function InvoicesTable() {
                                         </button>
                                     )}
                                     {inv.action === "pay" && (
-                                        <button className="bg-primary text-white hover:bg-blue-700 px-3 py-1.5 rounded text-xs font-medium transition-colors inline-flex items-center gap-1">
+                                        <button className="bg-primary text-white hover:bg-primary-hover px-3 py-1.5 rounded text-xs font-medium transition-colors inline-flex items-center gap-1">
                                             Pagar Agora
                                         </button>
                                     )}

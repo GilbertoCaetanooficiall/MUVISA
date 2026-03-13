@@ -4,7 +4,7 @@ export default function ProcessStepper() {
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Status da Aplicação</h3>
-                <span className="bg-blue-50 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mt-2 md:mt-0">Em Andamento</span>
+                <span className="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mt-2 md:mt-0">Em Andamento</span>
             </div>
             <div className="relative">
                 <div className="absolute top-5 left-0 w-full h-1 bg-slate-100 dark:bg-slate-800 -z-0 rounded-full hidden md:block"></div>

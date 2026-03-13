@@ -1,3 +1,5 @@
+import { ArrowDown, Building, CalendarDays, FolderSync, MessageCircle, ShieldCheck, TrendingUp } from 'lucide-react';
+import Link from 'next/link';
 // Componente que representa a Página Inicial do Site Institucional.
 // No Next.js, por padrão, os componentes dentro da pasta 'app' são Server Components.
 export default function SiteHomePage() {
@@ -19,7 +21,7 @@ export default function SiteHomePage() {
 
         {/* CONTEÚDO CENTRAL: Título e Botões de Ação (CTA) */}
         <div className="container mx-auto px-4 relative z-10 text-center max-w-5xl mt-16">
-          <span className="inline-block py-1.5 px-6 rounded-full bg-primary/10 dark:bg-primary/20 backdrop-blur-sm border border-primary/20 dark:border-primary/30 text-primary dark:text-blue-300 text-xs font-bold uppercase tracking-widest mb-8 font-display">
+          <span className="inline-block py-1.5 px-6 rounded-full bg-primary/10 dark:bg-primary/20 backdrop-blur-sm border border-primary/20 dark:border-primary/30 text-primary dark:text-primary text-xs font-bold uppercase tracking-widest mb-8 font-display">
             Especialistas em Vistos de Estudo
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] mb-8 tracking-tight font-display">
@@ -31,14 +33,18 @@ export default function SiteHomePage() {
 
           {/* Botões interativos com efeitos de hover e sombras dinâmicas */}
           <div className="flex flex-col sm:flex-row gap-5 justify-center mt-4">
-            <button className="h-14 px-8 rounded-xl bg-primary text-white text-lg font-bold hover:bg-blue-600 transform hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(19,37,236,0.25)] flex items-center justify-center gap-3 font-display">
-              Falar com Especialista
-              <span className="material-symbols-outlined">chat</span>
-            </button>
-            <button className="h-14 px-8 rounded-xl bg-slate-100/50 dark:bg-white/10 backdrop-blur-md text-slate-900 dark:text-white border border-slate-200 dark:border-white/20 font-bold hover:bg-slate-100 dark:hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 font-display flex items-center justify-center gap-3 shadow-sm dark:shadow-none">
-              Conhecer Serviços
-              <span className="material-symbols-outlined">arrow_downward</span>
-            </button>
+            <Link href="/site/contato">
+              <button className="h-14 px-8 rounded-xl bg-primary text-white text-lg font-bold hover:bg-primary-hover transform hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(19,37,236,0.25)] flex items-center justify-center gap-3 font-display">
+                Falar com Especialista
+                <MessageCircle />
+              </button>
+            </Link>
+            <Link href="/site/servicos">
+              <button className="h-14 px-8 rounded-xl bg-slate-100/50 dark:bg-white/10 backdrop-blur-md text-slate-900 dark:text-white border border-slate-200 dark:border-white/20 font-bold hover:bg-slate-100 dark:hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 font-display flex items-center justify-center gap-3 shadow-sm dark:shadow-none">
+                Conhecer Serviços
+                <ArrowDown />
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -80,8 +86,8 @@ export default function SiteHomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Cada card usa 'group' para poder disparar animações nos filhos (como o ícone) no hover do card pai */}
             <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
-              <div className="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="material-symbols-outlined text-3xl">location_city</span>
+              <div className="w-14 h-14 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Building className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Especialistas em Portugal</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -91,7 +97,7 @@ export default function SiteHomePage() {
             {/* Repetição de cards similares para outros diferenciais... */}
             <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
               <div className="w-14 h-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="material-symbols-outlined text-3xl">timeline</span>
+                <TrendingUp className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Acompanhamento Ponta a Ponta</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -100,7 +106,7 @@ export default function SiteHomePage() {
             </div>
             <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
               <div className="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="material-symbols-outlined text-3xl">folder_managed</span>
+                <FolderSync className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Suporte com a Documentação</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -109,7 +115,7 @@ export default function SiteHomePage() {
             </div>
             <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
               <div className="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="material-symbols-outlined text-3xl">verified_user</span>
+                <ShieldCheck className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">98% de Taxa de Aprovação</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -127,13 +133,15 @@ export default function SiteHomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-display">Pronto para começar sua jornada?</h2>
-          <p className="text-blue-100 text-lg mb-10 font-display max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg mb-10 font-display max-w-2xl mx-auto">
             Não deixe a burocracia atrapalhar seus sonhos. Agende uma consultoria gratuita e descubra o melhor caminho para você.
           </p>
-          <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg text-lg hover:bg-blue-50 transition-colors shadow-xl font-display inline-flex items-center gap-2">
-            Agendar Minha Consultoria
-            <span className="material-symbols-outlined">calendar_month</span>
-          </button>
+          <Link href="/site/contato">
+            <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg text-lg hover:bg-slate-50 transition-colors shadow-xl font-display inline-flex items-center gap-2">
+              Agendar Minha Consultoria
+              <CalendarDays />
+            </button>
+          </Link>
         </div>
       </section>
     </>

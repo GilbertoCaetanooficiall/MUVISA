@@ -1,3 +1,4 @@
+import { BookOpen, CalendarDays, GraduationCap } from 'lucide-react';
 export default function DestinationDetails() {
     return (
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
@@ -20,7 +21,7 @@ export default function DestinationDetails() {
             <div className="space-y-4">
                 <div className="flex gap-3">
                     <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[18px]">school</span>
+                        <GraduationCap className="text-[18px]" />
                     </div>
                     <div>
                         <p className="text-xs text-slate-500 font-medium uppercase">Instituição</p>
@@ -29,7 +30,7 @@ export default function DestinationDetails() {
                 </div>
                 <div className="flex gap-3">
                     <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[18px]">calendar_month</span>
+                        <CalendarDays className="text-[18px]" />
                     </div>
                     <div>
                         <p className="text-xs text-slate-500 font-medium uppercase">Início das Aulas</p>
@@ -38,7 +39,7 @@ export default function DestinationDetails() {
                 </div>
                 <div className="flex gap-3">
                     <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-[18px]">menu_book</span>
+                        <BookOpen className="text-[18px]" />
                     </div>
                     <div>
                         <p className="text-xs text-slate-500 font-medium uppercase">Programa</p>

@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import { MessageCircle } from 'lucide-react';
+
 import { useChatPanel } from "@/components/portal-estudante/ChatPanel";
 
 export default function ConsultantContact() {
@@ -31,7 +33,7 @@ export default function ConsultantContact() {
                     onClick={open}
                     className="w-full py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 text-sm"
                 >
-                    <span className="material-symbols-outlined text-[18px]">chat</span>
+                    <MessageCircle className="text-[18px]" />
                     Abrir Chat
                 </button>
             </div>

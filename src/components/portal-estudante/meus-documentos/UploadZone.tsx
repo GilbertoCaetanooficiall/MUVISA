@@ -1,4 +1,6 @@
 "use client";
+import { AlertCircle, CheckCircle, X, FileText, Image as ImageIcon, File, DownloadCloud, UploadCloud } from 'lucide-react';
+
 
 import { useState, useRef, DragEvent, ChangeEvent } from "react";
 
@@ -13,9 +15,9 @@ const ALLOWED_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const MAX_SIZE_MB = 10;
 
 function getFileIcon(type: string) {
-    if (type === "application/pdf") return { icon: "picture_as_pdf", color: "text-red-500" };
-    if (type.startsWith("image/")) return { icon: "image", color: "text-blue-500" };
-    return { icon: "description", color: "text-slate-500" };
+    if (type === "application/pdf") return { icon: FileText, color: "text-red-500" };
+    if (type.startsWith("image/")) return { icon: ImageIcon, color: "text-primary" };
+    return { icon: File, color: "text-slate-500" };
 }
 
 function formatSize(bytes: number) {
@@ -116,9 +118,11 @@ export default function UploadZone() {
                     onChange={handleInputChange}
                 />
                 <div className={`p-4 rounded-full transition-colors ${isDragging ? "bg-primary/20" : "bg-primary/5 group-hover:bg-primary/10"}`}>
-                    <span className={`material-symbols-outlined text-4xl text-primary transition-transform duration-200 ${isDragging ? "scale-110" : ""}`}>
-                        {isDragging ? "file_download" : "cloud_upload"}
-                    </span>
+                    {isDragging ? (
+                        <DownloadCloud className={`text-4xl w-10 h-10 text-primary transition-transform duration-200 scale-110`} />
+                    ) : (
+                        <UploadCloud className={`text-4xl w-10 h-10 text-primary transition-transform duration-200`} />
+                    )}
                 </div>
                 <div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white">
@@ -137,10 +141,10 @@ export default function UploadZone() {
             {/* Error Message */}
             {error && (
                 <div className="flex items-center gap-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
-                    <span className="material-symbols-outlined text-[18px]">error</span>
+                    <AlertCircle className="text-[18px]" />
                     <span className="flex-1">{error}</span>
                     <button onClick={() => setError(null)} className="text-red-400 hover:text-red-600 transition-colors">
-                        <span className="material-symbols-outlined text-[16px]">close</span>
+                        <X className="text-[16px]" />
                     </button>
                 </div>
             )}
@@ -161,10 +165,10 @@ export default function UploadZone() {
                     </div>
                     <ul className="divide-y divide-slate-100 dark:divide-slate-800">
                         {uploads.map((u) => {
-                            const { icon, color } = getFileIcon(u.file.type);
+                            const { icon: Icon, color } = getFileIcon(u.file.type);
                             return (
                                 <li key={u.id} className="p-4 flex items-center gap-3">
-                                    <span className={`material-symbols-outlined text-[22px] shrink-0 ${color}`}>{icon}</span>
+                                    <Icon className={`text-[22px] w-6 h-6 shrink-0 ${color}`} />
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between mb-1">
                                             <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{u.file.name}</p>
@@ -179,7 +183,7 @@ export default function UploadZone() {
                                     </div>
                                     <div className="shrink-0 flex items-center gap-2 ml-2">
                                         {u.status === "done" ? (
-                                            <span className="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+                                            <CheckCircle className="text-green-500 text-[20px]" />
                                         ) : (
                                             <span className="text-xs text-primary font-medium w-8 text-right">{u.progress}%</span>
                                         )}
@@ -187,7 +191,7 @@ export default function UploadZone() {
                                             onClick={() => removeUpload(u.id)}
                                             className="text-slate-300 hover:text-red-500 transition-colors"
                                         >
-                                            <span className="material-symbols-outlined text-[18px]">close</span>
+                                            <X className="text-[18px]" />
                                         </button>
                                     </div>
                                 </li>

@@ -1,4 +1,6 @@
 "use client";
+import { HelpCircle, ChevronDown } from 'lucide-react';
+
 import { useState } from "react";
 
 const faqs = [
@@ -22,7 +24,7 @@ export default function FinancialHelpWidget() {
             <div className="absolute -right-6 -top-6 w-24 h-24 bg-primary/20 rounded-full blur-xl"></div>
             <div className="relative z-10">
                 <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mb-4">
-                    <span className="material-symbols-outlined text-white">help_outline</span>
+                    <HelpCircle className="text-white" />
                 </div>
                 <h3 className="font-bold text-lg mb-4">Dúvidas Financeiras?</h3>
                 <div className="space-y-3">
@@ -33,11 +35,9 @@ export default function FinancialHelpWidget() {
                                 className="flex items-center justify-between w-full text-sm font-medium text-white/90 hover:text-white"
                             >
                                 <span>{faq.question}</span>
-                                <span
-                                    className={`material-symbols-outlined text-[16px] transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`}
-                                >
-                                    expand_more
-                                </span>
+                                <ChevronDown
+                                    className={`w-4 h-4 transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`}
+                                />
                             </button>
                             {openIndex === i && (
                                 <p className="text-xs text-white/70 mt-2 pl-2 border-l-2 border-primary/50">

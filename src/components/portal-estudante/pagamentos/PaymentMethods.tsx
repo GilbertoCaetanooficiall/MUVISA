@@ -1,9 +1,10 @@
+import { Plus, CreditCard, QrCode, Barcode } from 'lucide-react';
 const methods = [
     {
-        icon: "credit_card",
+        icon: CreditCard,
         iconColor: "text-slate-400",
         badge: "PRINCIPAL",
-        badgeStyle: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+        badgeStyle: "bg-primary/20 text-primary dark:bg-primary/30 dark:text-primary",
         title: null,
         subtitle: "Mastercard terminado em",
         info: "•••• 8834",
@@ -11,7 +12,7 @@ const methods = [
         mono: true,
     },
     {
-        icon: "qr_code_2",
+        icon: QrCode,
         iconColor: "text-teal-500",
         badge: null,
         title: "Pix",
@@ -21,7 +22,7 @@ const methods = [
         mono: false,
     },
     {
-        icon: "barcode",
+        icon: Barcode,
         iconColor: "text-slate-400",
         badge: null,
         title: "Boleto Bancário",
@@ -36,7 +37,7 @@ export default function PaymentMethods() {
             <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Métodos de Pagamento</h3>
                 <button className="text-sm text-primary font-medium hover:underline flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[18px]">add</span>
+                    <Plus className="text-[18px]" />
                     Adicionar Novo
                 </button>
             </div>
@@ -47,7 +48,10 @@ export default function PaymentMethods() {
                         className="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between h-40 shadow-sm relative overflow-hidden group hover:border-primary/50 transition-colors cursor-pointer"
                     >
                         <div className="flex justify-between items-start z-10 relative">
-                            <span className={`material-symbols-outlined text-3xl ${m.iconColor}`}>{m.icon}</span>
+                            {(() => {
+                                const Icon = m.icon;
+                                return <Icon className={`w-8 h-8 ${m.iconColor}`} />;
+                            })()}
                             {m.badge && (
                                 <span className={`text-[10px] font-bold px-2 py-1 rounded ${m.badgeStyle}`}>{m.badge}</span>
                             )}

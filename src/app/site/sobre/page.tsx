@@ -1,3 +1,5 @@
+import { CalendarDays, Clock, ExternalLink, Handshake, Mail, MapPin, Search, Star } from 'lucide-react';
+import Link from 'next/link';
 export default function SiteSobrePage() {
   return (
     <>
@@ -7,7 +9,7 @@ export default function SiteSobrePage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/5 dark:bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-          <span className="inline-block py-1 px-4 rounded-full bg-primary/10 border border-primary/20 text-primary dark:text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 font-display">
+          <span className="inline-block py-1 px-4 rounded-full bg-primary/10 border border-primary/20 text-primary dark:text-primary text-xs font-bold uppercase tracking-widest mb-6 font-display">
             Quem Somos
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight mb-6 tracking-tight font-display">
@@ -67,7 +69,7 @@ export default function SiteSobrePage() {
 
       <section className="py-24 bg-white dark:bg-background-dark relative overflow-hidden transition-colors">
         <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 font-display">Nossos Valores</h2>
@@ -78,7 +80,7 @@ export default function SiteSobrePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-slate-50 dark:bg-card-dark border border-slate-200 dark:border-slate-700/50 p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 group">
               <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_0_15px_rgba(25,120,229,0.15)] group-hover:shadow-[0_0_25px_rgba(25,120,229,0.4)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-4xl">search</span>
+                <Search className="text-4xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Transparência</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -87,7 +89,7 @@ export default function SiteSobrePage() {
             </div>
             <div className="bg-slate-50 dark:bg-card-dark border border-slate-200 dark:border-slate-700/50 p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 group">
               <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_0_15px_rgba(25,120,229,0.15)] group-hover:shadow-[0_0_25px_rgba(25,120,229,0.4)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-4xl">handshake</span>
+                <Handshake className="text-4xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Compromisso</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -96,7 +98,7 @@ export default function SiteSobrePage() {
             </div>
             <div className="bg-slate-50 dark:bg-card-dark border border-slate-200 dark:border-slate-700/50 p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 group">
               <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 shadow-[0_0_15px_rgba(25,120,229,0.15)] group-hover:shadow-[0_0_25px_rgba(25,120,229,0.4)] transition-shadow duration-300">
-                <span className="material-symbols-outlined text-4xl">hotel_class</span>
+                <Star className="text-4xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Excelência</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-display">
@@ -119,7 +121,7 @@ export default function SiteSobrePage() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined text-2xl">location_on</span>
+                    <MapPin className="text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Endereço</h4>
@@ -131,7 +133,7 @@ export default function SiteSobrePage() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined text-2xl">schedule</span>
+                    <Clock className="text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Horário de Atendimento</h4>
@@ -140,7 +142,7 @@ export default function SiteSobrePage() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                    <span className="material-symbols-outlined text-2xl">mail</span>
+                    <Mail className="text-2xl" />
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Contato</h4>
@@ -152,7 +154,7 @@ export default function SiteSobrePage() {
 
             <div className="relative group">
               {/* Outer Glow effect for the map container */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 to-primary/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
 
               <div className="relative h-[450px] w-full bg-white p-2 rounded-[2.5rem] border border-slate-200 dark:border-slate-700 shadow-2xl overflow-hidden">
                 <div className="w-full h-full rounded-[2rem] overflow-hidden">
@@ -171,7 +173,7 @@ export default function SiteSobrePage() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] pointer-events-none">
                   <div className="relative flex flex-col items-center">
                     <div className="absolute -inset-4 bg-primary/30 rounded-full blur-xl animate-pulse"></div>
-                    <span className="material-symbols-outlined text-primary text-5xl filled drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]">location_on</span>
+                    <MapPin className="text-primary text-5xl  drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]" />
                   </div>
                 </div>
 
@@ -187,7 +189,7 @@ export default function SiteSobrePage() {
                 className="absolute bottom-10 right-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 shadow-xl flex items-center gap-2 text-xs font-bold text-slate-900 dark:text-white hover:scale-105 transition-transform"
               >
                 <span>Ver no Maps</span>
-                <span className="material-symbols-outlined text-sm">open_in_new</span>
+                <ExternalLink className="text-sm" />
               </a>
             </div>
           </div>
@@ -199,13 +201,15 @@ export default function SiteSobrePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-display">Faça parte da nossa história</h2>
-          <p className="text-blue-100 text-lg mb-10 font-display max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg mb-10 font-display max-w-2xl mx-auto">
             Já ajudamos mais de 500 estudantes a realizarem seus sonhos. O próximo pode ser você.
           </p>
-          <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg text-lg hover:bg-blue-50 transition-colors shadow-xl font-display inline-flex items-center gap-2">
-            Agendar Minha Consultoria
-            <span className="material-symbols-outlined">calendar_month</span>
-          </button>
+          <Link href="/site/contato">
+            <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg text-lg hover:bg-slate-50 transition-colors shadow-xl font-display inline-flex items-center gap-2">
+              Agendar Minha Consultoria
+              <CalendarDays />
+            </button>
+          </Link>
         </div>
       </section>
     </>

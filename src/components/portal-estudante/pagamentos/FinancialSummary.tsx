@@ -1,19 +1,31 @@
-const stats = [
+import { Landmark, CreditCard, Clock, TrendingUp, LucideIcon } from 'lucide-react';
+
+type Stat = {
+    label: string;
+    value: string;
+    sub: string;
+    subColor: string;
+    icon: LucideIcon;
+    iconBg: string;
+    subIcon?: LucideIcon;
+};
+
+const stats: Stat[] = [
     {
         label: "Total do Plano",
         value: "Kz 12.500.000,00",
         sub: "Valor contratado",
         subColor: "text-slate-400",
-        icon: "account_balance",
-        iconBg: "bg-blue-50 dark:bg-blue-900/20 text-blue-600",
+        icon: Landmark,
+        iconBg: "bg-primary/10 dark:bg-primary/20 text-primary",
     },
     {
         label: "Valor Pago",
         value: "Kz 4.500.000,00",
         sub: "36% quitado",
         subColor: "text-green-500",
-        subIcon: "trending_up",
-        icon: "payments",
+        subIcon: TrendingUp,
+        icon: CreditCard,
         iconBg: "bg-green-50 dark:bg-green-900/20 text-green-600",
     },
     {
@@ -21,7 +33,7 @@ const stats = [
         value: "Kz 8.000.000,00",
         sub: "Restante a pagar",
         subColor: "text-slate-400",
-        icon: "pending_actions",
+        icon: Clock,
         iconBg: "bg-orange-50 dark:bg-orange-900/20 text-orange-600",
     },
 ];
@@ -37,13 +49,13 @@ export default function FinancialSummary() {
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-slate-500 text-sm font-medium">{stat.label}</h3>
                         <div className={`p-2 rounded-lg ${stat.iconBg}`}>
-                            <span className="material-symbols-outlined">{stat.icon}</span>
+                            <stat.icon className="w-5 h-5" />
                         </div>
                     </div>
                     <p className="text-2xl font-bold text-slate-900 dark:text-white">{stat.value}</p>
                     <p className={`text-xs mt-1 flex items-center gap-1 ${stat.subColor}`}>
                         {stat.subIcon && (
-                            <span className="material-symbols-outlined text-[14px]">{stat.subIcon}</span>
+                            <stat.subIcon className="w-4 h-4" />
                         )}
                         {stat.sub}
                     </p>

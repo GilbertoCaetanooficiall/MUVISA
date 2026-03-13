@@ -1,20 +1,22 @@
+import { Badge, BadgeCheck, BaggageClaim, Building2, Check, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Send, Users, X } from 'lucide-react';
+import Link from 'next/link';
 export default function SiteServicosPage() {
   return (
     <>
       <section className="relative py-20 lg:py-32 flex items-center justify-center overflow-hidden bg-slate-900 dark:bg-background-dark transition-colors duration-300">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-slate-900/50 to-slate-900 dark:via-background-dark dark:to-background-dark"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-slate-900/50 to-slate-900 dark:via-background-dark dark:to-background-dark"></div>
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-          <span className="inline-block py-1 px-4 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6 font-display">
+          <span className="inline-block py-1 px-4 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 text-primary dark:text-primary text-xs font-bold uppercase tracking-widest mb-6 font-display">
             Soluções Integradas
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tight font-display drop-shadow-lg">
-            Nossas Assessorias Especializadas
+            Sua Carreira em Portugal Começa Aqui
           </h1>
           <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed font-display">
-            Oferecemos um acompanhamento completo e personalizado para garantir o sucesso da sua jornada internacional, seja para estudos, turismo ou negócios.
+            Oferecemos um acompanhamento de ponta a ponta focado exclusivamente em visto de estudante, garantindo que você se preocupe apenas com seus estudos.
           </p>
         </div>
       </section>
@@ -22,83 +24,90 @@ export default function SiteServicosPage() {
       <section className="py-16 bg-slate-50 dark:bg-background-dark border-y border-slate-200 dark:border-slate-800 transition-colors">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {/* Card 1: Planeamento Acadêmico */}
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">badge</span>
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <GraduationCap className="text-2xl" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Assessoria para Vistos</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Planeamento Acadêmico</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Análise de perfil e orientação</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Escolha da universidade e curso ideal</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Revisão completa documental</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Análise de requisitos de admissão</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Agendamento consular</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Aplicação e matrícula assistida</span>
                 </li>
               </ul>
             </div>
+
+            {/* Card 2: Gestão Documental */}
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">school</span>
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <FileSignature className="text-2xl" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Assessoria Estudantil</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Gestão Documental</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Escolha da universidade ideal</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Termo de responsabilidade e Extractos</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Aplicação e matrícula</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Análise minuciosa de extratos bancários</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Carta de motivação personalizada</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Revisão do dossiê acadêmico e financeiro</span>
                 </li>
               </ul>
             </div>
+
+            {/* Card 3: Aplicação de Visto */}
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">luggage</span>
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <BadgeCheck className="text-2xl" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Planeamento de Viagem</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Aplicação de Visto</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Roteiro personalizado</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Preenchimento de formulários consulares</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Seguro viagem obrigatório</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Preparação para entrevista</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Busca de alojamento</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Agendamento e acompanhamento legal</span>
                 </li>
               </ul>
             </div>
+
+            {/* Card 4: Apoio à Chegada */}
             <div className="bg-white dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary/50 hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-2xl">domain</span>
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <Building2 className="text-2xl" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Assessoria Empresarial</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4 font-display">Apoio à Chegada</h3>
               <ul className="space-y-3 text-slate-600 dark:text-slate-400 text-sm font-display">
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Viagens corporativas</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Busca de alojamento em Portugal</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Vistos para investidores</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Abertura de NIF e Conta Bancária</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">check_circle</span>
-                  <span>Missões empresariais</span>
+                  <CheckCircle className="text-primary text-base shrink-0" />
+                  <span>Orientação SEF/AIMA e integração</span>
                 </li>
               </ul>
             </div>
@@ -154,43 +163,49 @@ export default function SiteServicosPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Plano Básico */}
             <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 flex flex-col">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Básico</h3>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">50.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Essencial</h3>
+              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">400.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
               <ul className="space-y-4 mb-8 flex-1 text-slate-600 dark:text-slate-300 text-sm font-display">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Checklist de documentos</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Revisão simples</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Agendamento</li>
-                <li className="flex items-center gap-3 opacity-50"><span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-sm">close</span> Carta de motivação</li>
-                <li className="flex items-center gap-3 opacity-50"><span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-sm">close</span> Suporte pós-chegada</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Checklist de documentos</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Revisão de dossiê</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Agendamento consular</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Acesso ao Portal do Aluno</li>
+                <li className="flex items-center gap-3 opacity-50"><X className="text-slate-400 dark:text-slate-600 text-sm" /> Termo de Responsabilidade</li>
               </ul>
-              <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
+              <Link href="/site/contato" className="w-full">
+                <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
+              </Link>
             </div>
             {/* Plano Premium */}
             <div className="bg-gradient-to-b from-primary/10 to-white dark:from-primary/20 dark:to-card-dark rounded-2xl p-8 border border-primary relative flex flex-col transform md:-translate-y-4 shadow-2xl shadow-primary/10">
-              <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg font-display">POPULAR</div>
-              <h3 className="text-xl font-bold text-primary mb-2 font-display">Premium</h3>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">150.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
+              <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg font-display">RECOMENDADO</div>
+              <h3 className="text-xl font-bold text-primary mb-2 font-display">Diamond</h3>
+              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">1.000.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
               <ul className="space-y-4 mb-8 flex-1 text-slate-700 dark:text-slate-200 text-sm font-display">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Tudo do Intermédio</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Simulação de entrevista</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Busca de moradia</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Seguro viagem incluso (1 mês)</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-primary text-sm">check</span> Suporte 24h via WhatsApp</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Tudo do Acadêmico</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Abertura de NIF e Conta</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Busca de Moradia/Residência</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Orientação de Chegada & SEF</li>
+                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Suporte Premium 24h</li>
               </ul>
-              <button className="w-full py-3 rounded-lg bg-primary text-white font-bold hover:bg-blue-600 transition-colors shadow-lg font-display">Começar Agora</button>
+              <Link href="/site/contato" className="w-full">
+                <button className="w-full py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-hover transition-colors shadow-lg font-display">Começar Agora</button>
+              </Link>
             </div>
             {/* Plano Intermédio */}
             <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 flex flex-col">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Intermédio</h3>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">90.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Acadêmico</h3>
+              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">700.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
               <ul className="space-y-4 mb-8 flex-1 text-slate-600 dark:text-slate-300 text-sm font-display">
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Tudo do Básico</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Revisão aprofundada</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Carta de motivação</li>
-                <li className="flex items-center gap-3"><span className="material-symbols-outlined text-green-500 text-sm">check</span> Apoio na matrícula</li>
-                <li className="flex items-center gap-3 opacity-50"><span className="material-symbols-outlined text-slate-400 dark:text-slate-600 text-sm">close</span> Busca de moradia</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Tudo do Essencial</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Escolha de Universidade</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Apoio na Matrícula/Admissão</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Termo de Responsabilidade</li>
+                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Extracto Bancário</li>
               </ul>
-              <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
+              <Link href="/site/contato" className="w-full">
+                <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -198,103 +213,57 @@ export default function SiteServicosPage() {
 
       <section className="py-16 bg-background-dark">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-gradient-to-r from-blue-900/40 to-slate-900 rounded-2xl p-8 md:p-12 border border-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-primary/40 to-slate-900 rounded-2xl p-8 md:p-12 border border-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
             <div className="absolute inset-0 bg-primary/5 pattern-dots opacity-30"></div>
             <div className="relative z-10 flex-1">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-display">Consultoria Estratégica Completa</h3>
               <p className="text-slate-300 mb-6 font-display">Aproveite nossa oferta especial para uma análise de perfil completa com nossos especialistas seniores.</p>
               <div className="flex items-center gap-4">
-                <span className="text-3xl font-black text-primary font-display">150.000 Kz</span>
-                <span className="text-sm text-slate-400 line-through font-display">185.000 Kz</span>
-                <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-display">-19% OFF</span>
+                <span className="text-3xl font-black text-primary font-display">250.000 Kz</span>
+                <span className="text-sm text-slate-400 line-through font-display">400.000 Kz</span>
+                <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-display">-37% OFF</span>
               </div>
             </div>
             <div className="relative z-10">
-              <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-lg font-display whitespace-nowrap">
-                Garantir Desconto
-              </button>
+              <Link href="/site/contato">
+                <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-lg font-display whitespace-nowrap">
+                  Garantir Desconto
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 transition-colors">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 font-display">Solicite um Orçamento</h2>
-            <p className="text-slate-600 dark:text-slate-400 font-display">Preencha o formulário abaixo e entraremos em contato em até 24 horas.</p>
-          </div>
-          <form className="bg-slate-50 dark:bg-card-dark p-8 md:p-10 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">Nome Completo</label>
-                <input className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display" placeholder="Seu nome" type="text" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">Email</label>
-                <input className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display" placeholder="seu@email.com" type="email" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">WhatsApp</label>
-                <input className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display" placeholder="+244 9xx xxx xxx" type="tel" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">Tipo de Viagem</label>
-                <select className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display appearance-none">
-                  <option>Estudos</option>
-                  <option>Turismo</option>
-                  <option>Trabalho</option>
-                  <option>Negócios</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">Destino de Interesse</label>
-                <input className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display" placeholder="Ex: Lisboa, Porto..." type="text" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">Data Prevista</label>
-                <input className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display" type="date" />
-              </div>
-            </div>
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 font-display">Mensagem Adicional</label>
-              <textarea className="w-full bg-white dark:bg-background-dark border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none font-display" placeholder="Conte-nos mais sobre seus objetivos..." rows={4}></textarea>
-            </div>
-            <button className="w-full py-4 rounded-lg bg-primary text-white font-bold text-lg hover:bg-blue-600 transition-all shadow-lg font-display flex justify-center items-center gap-2" type="submit">
-              Enviar Solicitação
-              <span className="material-symbols-outlined">send</span>
-            </button>
-          </form>
-        </div>
-      </section>
+
 
       <section className="py-16 bg-white dark:bg-background-dark transition-colors">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">groups</span>
+                <Users className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Equipa Especializada</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Profissionais com vasta experiência</p>
             </div>
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">verified</span>
+                <BadgeCheck className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Alta Aprovação</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">98% de sucesso nos processos</p>
             </div>
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">support_agent</span>
+                <Headset className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Suporte Dedicado</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Atendimento humanizado</p>
             </div>
             <div className="p-4">
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <span className="material-symbols-outlined text-2xl">lock</span>
+                <Lock className="text-2xl" />
               </div>
               <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Segurança Total</h4>
               <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Dados protegidos e sigilo</p>
@@ -309,14 +278,18 @@ export default function SiteServicosPage() {
         <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 font-display">Comece seu futuro hoje mesmo</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="h-14 px-8 rounded-lg bg-white text-primary text-lg font-bold hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 font-display">
-              Falar com Especialista
-              <span className="material-symbols-outlined">chat</span>
-            </button>
-            <button className="h-14 px-8 rounded-lg bg-primary text-white border border-white/30 text-lg font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-3 font-display backdrop-blur-sm">
-              Pedir Cotação
-              <span className="material-symbols-outlined">request_quote</span>
-            </button>
+            <Link href="/site/contato">
+              <button className="h-14 px-8 rounded-lg bg-white text-primary text-lg font-bold hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 font-display">
+                Falar com Especialista
+                <MessageCircle />
+              </button>
+            </Link>
+            <Link href="/site/contato">
+              <button className="h-14 px-8 rounded-lg bg-primary text-white border border-white/30 text-lg font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-3 font-display backdrop-blur-sm">
+                Pedir Cotação
+                <FileSignature />
+              </button>
+            </Link>
           </div>
         </div>
       </section>

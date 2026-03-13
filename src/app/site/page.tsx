@@ -10,6 +10,7 @@ export default function SiteHomePage() {
       <section className="relative h-[600px] lg:h-[700px] flex items-center justify-center overflow-hidden bg-white dark:bg-background-dark transition-colors duration-500">
         <div className="absolute inset-0 z-0">
           {/* Imagem de fundo com otimização simples e efeito de opacidade no dark mode */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Padrão dos Descobrimentos Lisbon"
             className="w-full h-full object-cover object-center opacity-100 dark:opacity-40 transition-opacity duration-500"

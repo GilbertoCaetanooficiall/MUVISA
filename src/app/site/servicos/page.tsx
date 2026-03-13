@@ -1,4 +1,4 @@
-import { Badge, BadgeCheck, BaggageClaim, Building2, Check, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Send, Users, X } from 'lucide-react';
+import { BadgeCheck, Building2, Check, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Users, X } from 'lucide-react';
 import Link from 'next/link';
 export default function SiteServicosPage() {
   return (

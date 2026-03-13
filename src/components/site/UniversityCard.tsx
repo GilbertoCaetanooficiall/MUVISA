@@ -11,6 +11,7 @@ export function UniversityCard({ name, city, image, description }: UniversityCar
     return (
         <div className="group relative overflow-hidden rounded-2xl bg-white dark:bg-card-dark shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-slate-200 dark:border-slate-800 flex flex-col h-full">
             <div className="relative h-48 w-full overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={image}
                     alt={name}

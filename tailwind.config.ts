@@ -10,21 +10,55 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "primary": "oklch(0.623 0.214 259.815)",
-        "primary-hover": "oklch(0.55 0.214 259.815)",
-        "background-light": "#f6f6f8",
-        "background-dark": "#0f172a",
+        "primary": "#1358b2",
+        "primary-hover": "#0e469a",
+        "background-light": "#f6f7f8",
+        "background-dark": "#111821",
         "card-dark": "#1c2633",
         "input-bg": "#334155",
+        "portugal-green": "#046A38",
+        "portugal-red": "#DA291C",
+        "slate-custom": {
+          50: '#f0f4fa',
+          100: '#dde7f4',
+          200: '#c1d4ed',
+          300: '#99bce3',
+          400: '#6fa0d7',
+          500: '#5285cb',
+          600: '#3d6baa',
+          700: '#325688',
+          800: '#2d4970',
+          900: '#283e5c',
+          950: '#1b283d',
+        },
       },
       fontFamily: {
         "display": ["Inter", "sans-serif"],
       },
       borderRadius: {
-        "DEFAULT": "0.25rem",
-        "lg": "0.5rem",
-        "xl": "0.75rem",
+        "DEFAULT": "0.5rem",
+        "lg": "1rem",
+        "xl": "1.5rem",
         "full": "9999px",
+      },
+      keyframes: {
+        'zoom-slow': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.12)' },
+        },
+        'bounce-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'zoom-slow': 'zoom-slow 20s ease-in-out infinite',
+        'bounce-slow': 'bounce-slow 3s ease-in-out infinite',
+        'fade-in': 'fade-in 0.4s ease-out both',
       },
     },
   },

@@ -1,0 +1,393 @@
+'use client';
+
+import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+type Step = 1 | 2 | 3;
+
+interface StepConfig {
+  icon: string;
+  label: string;
+  title: string;
+}
+
+const STEPS: StepConfig[] = [
+  { icon: 'person', label: 'Dados Básicos', title: 'Comece sua jornada' },
+  { icon: 'flight_takeoff', label: 'Seu Destino', title: 'Seu destino em Portugal' },
+  { icon: 'lock', label: 'Segurança', title: 'Segurança da Conta' },
+];
+
+export default function CadastroPage() {
+  const router = useRouter();
+  const [step, setStep] = useState<Step>(1);
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Form data
+  const [formData, setFormData] = useState({
+    fullName: '', email: '', phone: '',
+    visaType: '', city: '', institution: '',
+    password: '', confirmPassword: '', terms: false,
+  });
+
+  const [passwordStrength, setPasswordStrength] = useState(0);
+
+  const computeStrength = (pwd: string) => {
+    let score = 0;
+    if (pwd.length >= 8) score++;
+    if (/[A-Z]/.test(pwd)) score++;
+    if (/[0-9]/.test(pwd)) score++;
+    if (/[^A-Za-z0-9]/.test(pwd)) score++;
+    return score;
+  };
+
+  const handlePasswordChange = (val: string) => {
+    setFormData(prev => ({ ...prev, password: val }));
+    setPasswordStrength(computeStrength(val));
+    if (step === 3) {
+        // Trigger re-render to update strength visual
+    }
+  };
+
+  const strengthLabel = ['', 'Fraca', 'Média', 'Boa', 'Forte'][passwordStrength] || '';
+  const strengthColor = ['', 'bg-red-500', 'bg-yellow-500', 'bg-blue-500', 'bg-green-500'][passwordStrength] || 'bg-white/10';
+
+  const goNext = () => setStep(s => Math.min(s + 1, 3) as Step);
+  const goBack = () => setStep(s => Math.max(s - 1, 1) as Step);
+
+  const handleFinish = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push('/boas-vindas');
+  };
+
+  return (
+    <div className="font-sans antialiased text-white animate-fade-in w-full max-w-4xl px-4 relative z-20 my-12">
+      <div className="w-full max-w-4xl bg-slate-950/60 backdrop-blur-2xl rounded-[24px] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/10">
+
+        {/* ── Sidebar / Steps ── */}
+        <div className="bg-black/40 w-full md:w-1/3 p-8 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-10">
+              <div className="bg-primary p-1.5 rounded-lg">
+                <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+                </svg>
+              </div>
+              <h2 className="text-xl font-bold tracking-tight text-white">MUVISA</h2>
+            </div>
+
+            <nav aria-label="Progress" className="space-y-6">
+              {STEPS.map((s, idx) => {
+                const num = (idx + 1) as Step;
+                const isCompleted = step > num;
+                const isCurrent = step === num;
+                const isLast = idx === STEPS.length - 1;
+
+                return (
+                  <div key={num} className="flex items-start">
+                    <div className="flex items-center h-6 relative">
+                      <span className={`relative z-10 w-8 h-8 flex items-center justify-center rounded-full ring-4 ring-white/5 ${isCompleted ? 'bg-green-500/90' : isCurrent ? 'bg-primary shadow-lg shadow-primary/30' : 'bg-black/40 border border-white/10'}`}>
+                        {isCompleted ? (
+                          <span className="material-symbols-outlined text-white text-sm">check</span>
+                        ) : isCurrent ? (
+                          <span className="material-symbols-outlined text-white text-sm">{s.icon}</span>
+                        ) : (
+                          <span className="text-xs font-semibold text-gray-400">{num}</span>
+                        )}
+                      </span>
+                      {!isLast && <div className={`absolute left-4 top-8 h-10 w-0.5 -ml-px ${isCompleted ? 'bg-primary' : 'bg-white/10'}`} />}
+                    </div>
+                    <div className="ml-4 flex flex-col">
+                      <span className={`text-sm font-semibold ${isCurrent ? 'text-primary' : isCompleted ? 'text-white' : 'text-gray-400'}`}>
+                        Passo {num}
+                      </span>
+                      <span className={`text-sm font-medium ${isCurrent || isCompleted ? 'text-white' : 'text-gray-500'}`}>
+                        {s.label}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </nav>
+          </div>
+
+          <div className="hidden md:block mt-12">
+            <div className="bg-primary/20 rounded-xl p-4 border border-primary/20 backdrop-blur-md">
+              <div className="flex items-start gap-3">
+                <span className="material-symbols-outlined text-primary mt-0.5">info</span>
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  {step === 1 && 'Precisamos destas informações para personalizar seu checklist de documentos para o visto.'}
+                  {step === 2 && 'A escolha da cidade influencia diretamente no custo de vida estimado para o visto.'}
+                  {step === 3 && 'Seus dados são criptografados e armazenados com segurança seguindo as normas da LGPD.'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Form Panel ── */}
+        <div className="w-full md:w-2/3 p-8 md:p-12 flex flex-col justify-center">
+          <div className="max-w-md mx-auto w-full">
+            <header className="mb-8">
+              <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">{STEPS[step - 1].title}</h1>
+              <p className="text-gray-400">
+                {step === 1 && 'Preencha seus dados para criar sua conta gratuita.'}
+                {step === 2 && 'Para onde você vai e qual o seu objetivo?'}
+                {step === 3 && 'Crie uma senha forte para proteger seus dados e documentos.'}
+              </p>
+            </header>
+
+            {/* ── STEP 1 ── */}
+            {step === 1 && (
+              <form className="space-y-6" onSubmit={e => { e.preventDefault(); goNext(); }}>
+                <div className="space-y-5 animate-fade-in">
+                  {[
+                    { id: 'fullName', label: 'Nome Completo', placeholder: 'Maria Silva', type: 'text', icon: 'badge', key: 'fullName' as const },
+                    { id: 'email', label: 'Email', placeholder: 'maria@exemplo.com', type: 'email', icon: 'mail', key: 'email' as const },
+                    { id: 'phone', label: 'Telefone / WhatsApp', placeholder: '(11) 99999-9999', type: 'tel', icon: 'smartphone', key: 'phone' as const },
+                  ].map(field => (
+                    <div key={field.id} className="space-y-2">
+                      <label className="block text-sm font-medium text-gray-300" htmlFor={field.id}>{field.label}</label>
+                      <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">{field.icon}</span>
+                        </div>
+                        <input
+                          className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+                          id={field.id} placeholder={field.placeholder} type={field.type} required
+                          value={formData[field.key]}
+                          onChange={e => setFormData(prev => ({ ...prev, [field.key]: e.target.value }))}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="pt-6 flex items-center justify-between gap-4">
+                  <span className="invisible px-4 py-2 text-sm">Voltar</span>
+                  <button className="group relative flex justify-center py-3.5 px-8 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02]" type="submit">
+                    Continuar
+                    <span className="material-symbols-outlined text-white/80 group-hover:text-white ml-2 text-lg">arrow_forward</span>
+                  </button>
+                </div>
+                <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                  <p className="text-sm text-gray-400">
+                    Já tem uma conta?{' '}
+                    <Link className="font-medium text-primary hover:text-primary-hover transition-colors" href="/login">Fazer login</Link>
+                  </p>
+                </div>
+              </form>
+            )}
+
+            {/* ── STEP 2 ── */}
+            {step === 2 && (
+              <form className="space-y-6" onSubmit={e => { e.preventDefault(); goNext(); }}>
+                <div className="space-y-5 animate-fade-in">
+                  {/* Tipo de Visto */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="visaType">Tipo de Visto</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">badge</span>
+                      </div>
+                      <select
+                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
+                        id="visaType" required value={formData.visaType}
+                        onChange={e => setFormData(prev => ({ ...prev, visaType: e.target.value }))}
+                      >
+                        <option value="" disabled>Selecione o tipo de visto</option>
+                        <option value="D4">Visto de Estudo D4 (Ensino Superior)</option>
+                        <option value="D5">Visto de Estudo D5 (Mobilidade)</option>
+                        <option value="D2">Visto D2 (Empreendedor)</option>
+                        <option value="D7">Visto D7 (Rendimentos Próprios)</option>
+                        <option value="DR">Visto de Procura de Trabalho</option>
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500">expand_more</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cidade */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="city">Cidade de Destino</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">location_on</span>
+                      </div>
+                      <select
+                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
+                        id="city" required value={formData.city}
+                        onChange={e => setFormData(prev => ({ ...prev, city: e.target.value }))}
+                      >
+                        <option value="" disabled>Selecione a cidade</option>
+                        {['Lisboa', 'Porto', 'Coimbra', 'Braga', 'Aveiro', 'Faro (Algarve)', 'Outra'].map(c => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500">expand_more</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Instituição */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="institution">Instituição de Ensino / Universidade</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">school</span>
+                      </div>
+                      <input
+                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+                        id="institution" placeholder="Ex: Universidade de Lisboa" type="text" required
+                        value={formData.institution}
+                        onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 flex items-center justify-between gap-4">
+                  <button className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors" type="button" onClick={goBack}>Voltar</button>
+                  <button className="group relative flex justify-center py-3.5 px-8 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02]" type="submit">
+                    Continuar
+                    <span className="material-symbols-outlined text-white/80 group-hover:text-white ml-2 text-lg">arrow_forward</span>
+                  </button>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                  <p className="text-sm text-gray-400">
+                    Não encontrou sua cidade?{' '}
+                    <Link className="font-medium text-primary hover:text-primary-hover transition-colors" href="/site/contato">Fale com um consultor</Link>
+                  </p>
+                </div>
+              </form>
+            )}
+
+            {/* ── STEP 3 ── */}
+            {step === 3 && (
+              <form className="space-y-6" onSubmit={handleFinish}>
+                <div className="space-y-5 animate-fade-in">
+                  {/* Password */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="password">Senha</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock</span>
+                      </div>
+                      <input
+                        className="appearance-none block w-full pl-10 pr-11 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+                        id="password" placeholder="••••••••" type={showPassword ? 'text' : 'password'} required
+                        value={formData.password}
+                        onChange={e => handlePasswordChange(e.target.value)}
+                      />
+                      <button className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-white focus:outline-none transition-colors" type="button" onClick={() => setShowPassword(!showPassword)}>
+                        <span className="material-symbols-outlined">{showPassword ? 'visibility_off' : 'visibility'}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Confirm Password */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="confirmPassword">Confirmar Senha</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock_clock</span>
+                      </div>
+                      <input
+                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+                        id="confirmPassword" placeholder="••••••••" type="password" required
+                        value={formData.confirmPassword}
+                        onChange={e => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Strength meter */}
+                  {formData.password && (
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
+                        <span>Força da senha</span>
+                        <span className="font-medium text-primary">{strengthLabel}</span>
+                      </div>
+                      <div className="flex gap-1 h-1.5 w-full">
+                        {[...Array(4)].map((_, i) => (
+                          <div key={i} className={`h-full w-1/4 rounded-full transition-colors ${i < passwordStrength ? strengthColor : 'bg-white/10'}`} />
+                        ))}
+                      </div>
+                      <ul className="space-y-1 mt-3">
+                        {[
+                          { ok: formData.password.length >= 8, label: 'Mínimo 8 caracteres' },
+                          { ok: /[A-Z]/.test(formData.password), label: 'Letra maiúscula' },
+                          { ok: /[0-9]/.test(formData.password), label: 'Número' },
+                        ].map(req => (
+                          <li key={req.label} className={`flex items-center gap-2 text-xs ${req.ok ? 'text-primary' : 'text-gray-500'}`}>
+                            <span className="material-symbols-outlined text-[14px]">{req.ok ? 'check_circle' : 'radio_button_unchecked'}</span>
+                            <span>{req.label}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {!formData.password && (
+                    <div className="text-xs text-gray-400 flex items-start gap-1.5 mt-2">
+                      <span className="material-symbols-outlined text-base mt-0.5">info</span>
+                      <span>Mínimo de 8 caracteres, deve conter letras maiúsculas, minúsculas e números.</span>
+                    </div>
+                  )}
+
+                  {/* Terms */}
+                  <div className="flex items-start pt-2">
+                    <div className="flex h-6 items-center">
+                      <input
+                        className="h-4 w-4 bg-black/40 border-white/20 rounded text-primary focus:ring-primary focus:ring-offset-background-dark"
+                        id="terms" type="checkbox" required
+                        checked={formData.terms}
+                        onChange={e => setFormData(prev => ({ ...prev, terms: e.target.checked }))}
+                      />
+                    </div>
+                    <div className="ml-3 text-sm leading-6">
+                      <label className="font-medium text-gray-300" htmlFor="terms">
+                        Eu li e aceito os{' '}
+                        <Link className="text-primary hover:text-primary-hover underline" href="/termos">Termos de Uso</Link>{' '}
+                        e{' '}
+                        <Link className="text-primary hover:text-primary-hover underline" href="/privacidade">Política de Privacidade</Link>.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 flex items-center justify-between gap-4">
+                  <button className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors" type="button" onClick={goBack}>Voltar</button>
+                  <button className="group relative flex justify-center py-3.5 px-8 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02]" type="submit">
+                    Finalizar
+                    <span className="material-symbols-outlined text-white/80 group-hover:text-white ml-2 text-lg">check_circle</span>
+                  </button>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                  <p className="text-sm text-gray-400">
+                    Precisa de ajuda com o cadastro?{' '}
+                    <Link className="font-medium text-primary hover:text-primary-hover transition-colors" href="/site/contato">Contate o suporte</Link>
+                  </p>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+      
+      {/* BEGIN: Footer Links */}
+      <div className="absolute lg:fixed bottom-6 w-full text-center z-20 pointer-events-none left-0">
+        <div className="text-xs text-gray-500 flex justify-center space-x-4 pointer-events-auto">
+          <span>© 2024 MUVISA</span>
+          <Link className="hover:text-white transition-colors" href="/privacidade">Privacidade</Link>
+          <Link className="hover:text-white transition-colors" href="/termos">Termos</Link>
+        </div>
+      </div>
+      {/* END: Footer Links */}
+
+    </div>
+  );
+}

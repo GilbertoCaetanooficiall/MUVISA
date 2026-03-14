@@ -12,7 +12,7 @@ export default function SiteHeader() {
 
   const navLinks = [
     { name: 'Home', href: '/site' },
-    { name: 'Estudar em Portugal', href: '/estudar-em-portugal' },
+    { name: 'Estudar em Portugal', href: '/site/estudar-em-portugal' },
     { name: 'Serviços', href: '/site/servicos' },
     { name: 'Sobre nós', href: '/site/sobre' },
     { name: 'Contacto', href: '/site/contato' }
@@ -50,6 +50,11 @@ export default function SiteHeader() {
             </Link>
           ))}
         </nav>
+        <Link href="/login">
+          <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 border border-primary text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary hover:text-white transition-colors font-display">
+            <span className="truncate">Portal do Estudante</span>
+          </button>
+        </Link>
         <Link href="/site/contato">
           <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-hover transition-colors font-display shadow-lg shadow-primary/20">
             <span className="truncate">Agendar Consultoria</span>
@@ -81,6 +86,11 @@ export default function SiteHeader() {
               {link.name}
             </Link>
           ))}
+          <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+            <button className="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 border border-primary text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary hover:text-white transition-colors font-display mt-2">
+              <span className="truncate">Portal do Estudante</span>
+            </button>
+          </Link>
           <Link href="/site/contato" onClick={() => setIsMenuOpen(false)}>
             <button className="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-hover transition-colors font-display mt-2 shadow-lg shadow-primary/20">
               <span className="truncate">Agendar Consultoria</span>

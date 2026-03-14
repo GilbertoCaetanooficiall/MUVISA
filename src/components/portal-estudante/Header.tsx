@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { Bell, LogOut, Menu } from 'lucide-react';
 
 
@@ -21,10 +22,14 @@ export default function Header() {
                     <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500 border border-white dark:border-slate-800"></span>
                 </div>
                 <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-                <button className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">
+                <Link
+                    href="/login"
+                    className="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-red-500 dark:hover:text-red-400 transition-colors group"
+                    title="Sair da conta"
+                >
                     <span>Sair</span>
-                    <LogOut className="text-[20px]" />
-                </button>
+                    <LogOut className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Link>
             </div>
         </header>
     );

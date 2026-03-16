@@ -10,7 +10,7 @@ const labelCls = 'text-sm font-semibold text-slate-700 dark:text-slate-300';
 // ─── Section wrapper ──────────────────────────────────────────────────────────
 function Section({
   icon: Icon, title, children,
-}: { icon: any; title: string; children: React.ReactNode }) {
+}: { icon: React.ElementType; title: string; children: React.ReactNode }) {
   return (
     <section className="bg-white dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-sm">
       <div className="p-6 border-b border-slate-200 dark:border-slate-700 flex items-center gap-2">

@@ -1,4 +1,4 @@
-import { Eye, CheckCircle2, XCircle, MoreVertical, Download, RefreshCw, ChevronLeft, ChevronRight, Contact, Landmark, FileText, GraduationCap, School, BookOpen } from 'lucide-react';
+import { Eye, CheckCircle2, XCircle, MoreVertical, Download, RefreshCw, ChevronLeft, ChevronRight, Contact, Landmark, FileText, GraduationCap, BookOpen } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -9,7 +9,7 @@ interface Document {
   studentName: string;
   initials: string;
   docType: string;
-  docIcon: any;
+  docIcon: React.ElementType;
   uploadDate: string;
   status: DocStatus;
   verifiedBy: string;

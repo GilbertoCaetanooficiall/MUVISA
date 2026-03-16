@@ -7,7 +7,7 @@ interface Metric {
   value: string;
   trend: string;
   trendClass: string;
-  trendIcon: any;
+  trendIcon: React.ElementType;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────

@@ -69,7 +69,7 @@ const statusStyle: Record<VisaStatus, string> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-const ActionBtn = ({ icon: Icon, title }: { icon: any; title: string }) => (
+const ActionBtn = ({ icon: Icon, title }: { icon: React.ElementType; title: string }) => (
   <button
     className="p-1 text-slate-400 hover:text-primary transition-colors"
     title={title}

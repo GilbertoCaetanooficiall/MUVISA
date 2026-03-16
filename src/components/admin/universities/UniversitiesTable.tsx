@@ -7,7 +7,7 @@ type AppStatus = 'Applications Open' | 'Closing Soon' | 'Applications Closed';
 interface University {
   id: string;
   name: string;
-  icon: any;
+  icon: React.ElementType;
   city: string;
   courses: number;
   status: AppStatus;

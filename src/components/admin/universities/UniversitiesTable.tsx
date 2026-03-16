@@ -33,10 +33,6 @@ const statusStyle: Record<AppStatus, string> = {
 
 // ─── Filter + Table card combined (matches Stitch structure) ──────────────────
 
-interface UniversitiesTableProps {
-  searchEl?: React.ReactNode;
-}
-
 const selectClass =
   'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg py-2 px-3 text-sm text-slate-700 dark:text-slate-200 focus:ring-1 focus:ring-primary focus:outline-none';
 

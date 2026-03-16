@@ -10,12 +10,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "primary": "#1358b2",
+        "primary": "#1656df",
         "primary-hover": "#0e469a",
-        "background-light": "#f6f7f8",
-        "background-dark": "#111821",
-        "card-dark": "#1c2633",
+        "background-light": "#f6f6f8",
+        "background-dark": "#111621",
+        "card-dark": "#1a2133",
         "input-bg": "#334155",
+        "neutral-slate": "#242f47",
+        "border-muted": "#334366",
+        "accent-success": "#0bda62",
+        "accent-warning": "#fa6538",
         "portugal-green": "#046A38",
         "portugal-red": "#DA291C",
         "slate-custom": {

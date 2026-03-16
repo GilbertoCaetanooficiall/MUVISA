@@ -1,4 +1,5 @@
 import ApplicationsFilters from './ApplicationsFilters';
+import { Eye, FileUp, MoreVertical } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -149,13 +150,13 @@ export default function ApplicationsTable() {
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-1">
                     <button className="p-2 text-slate-400 hover:text-primary transition-colors" title="View Application">
-                      <span className="material-symbols-outlined text-lg">visibility</span>
+                      <Eye size={18} />
                     </button>
                     <button className="p-2 text-slate-400 hover:text-emerald-500 transition-colors" title="Upload Documents">
-                      <span className="material-symbols-outlined text-lg">upload_file</span>
+                      <FileUp size={18} />
                     </button>
                     <button className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-100 transition-colors">
-                      <span className="material-symbols-outlined text-lg">more_vert</span>
+                      <MoreVertical size={18} />
                     </button>
                   </div>
                 </td>

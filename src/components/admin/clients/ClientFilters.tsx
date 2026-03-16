@@ -1,14 +1,14 @@
 'use client';
 
+import { Search } from 'lucide-react';
+
 export default function ClientFilters() {
   return (
     <div className="bg-slate-50 dark:bg-card-dark/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 mb-6 flex flex-wrap items-center gap-4">
       {/* Search */}
       <div className="flex-1 min-w-[200px]">
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">
-            search
-          </span>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
           <input
             type="text"
             placeholder="Search by name or email..."

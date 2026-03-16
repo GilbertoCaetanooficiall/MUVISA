@@ -17,6 +17,10 @@
     line-height: 1;
     display: inline-block;
     vertical-align: middle;
+    /* Prevents browser translation tools from translating icon ligature names */
+    speak: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
 

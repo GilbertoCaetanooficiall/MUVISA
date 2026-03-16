@@ -1,3 +1,5 @@
+import { Eye, CheckCircle2, XCircle, MoreVertical, Download, RefreshCw, ChevronLeft, ChevronRight, Contact, Landmark, FileText, GraduationCap, School, BookOpen } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type DocStatus = 'Pending Review' | 'Approved' | 'Rejected' | 'Missing';
@@ -7,7 +9,7 @@ interface Document {
   studentName: string;
   initials: string;
   docType: string;
-  docIcon: string;
+  docIcon: any;
   uploadDate: string;
   status: DocStatus;
   verifiedBy: string;
@@ -19,32 +21,32 @@ interface Document {
 const documents: Document[] = [
   {
     id: 'DOC-001', studentName: 'Sarah Jenkins',   initials: 'SJ',
-    docType: 'Passport Copy',       docIcon: 'contact_page',
+    docType: 'Passport Copy',       docIcon: Contact,
     uploadDate: 'Oct 24, 2023', status: 'Pending Review', verifiedBy: '--',        lastUpdate: '2 hours ago',
   },
   {
     id: 'DOC-002', studentName: 'Michael Chen',    initials: 'MC',
-    docType: 'Bank Statement',      docIcon: 'account_balance',
+    docType: 'Bank Statement',      docIcon: Landmark,
     uploadDate: 'Oct 22, 2023', status: 'Approved',       verifiedBy: 'Alex Rivera', lastUpdate: 'Yesterday',
   },
   {
     id: 'DOC-003', studentName: 'Marcus Thorne',   initials: 'MT',
-    docType: 'English Proficiency', docIcon: 'history_edu',
+    docType: 'English Proficiency', docIcon: FileText,
     uploadDate: 'Oct 21, 2023', status: 'Rejected',       verifiedBy: 'Sarah Smith', lastUpdate: 'Oct 22, 2023',
   },
   {
     id: 'DOC-004', studentName: 'Elena Rodriguez', initials: 'ER',
-    docType: 'Official Transcript', docIcon: 'school',
+    docType: 'Official Transcript', docIcon: GraduationCap,
     uploadDate: '--',           status: 'Missing',        verifiedBy: '--',         lastUpdate: 'Oct 20, 2023',
   },
   {
     id: 'DOC-005', studentName: 'Anna Smith',       initials: 'AS',
-    docType: 'Letter of Recommendation', docIcon: 'description',
+    docType: 'Letter of Recommendation', docIcon: FileText,
     uploadDate: 'Oct 19, 2023', status: 'Approved',       verifiedBy: 'Alex Rivera', lastUpdate: 'Oct 20, 2023',
   },
   {
     id: 'DOC-006', studentName: 'David Miller',     initials: 'DM',
-    docType: 'Transcripts',         docIcon: 'menu_book',
+    docType: 'Transcripts',         docIcon: BookOpen,
     uploadDate: 'Oct 18, 2023', status: 'Pending Review', verifiedBy: '--',         lastUpdate: '3 days ago',
   },
 ];
@@ -65,28 +67,28 @@ function RowActions({ status }: { status: DocStatus }) {
   if (status === 'Pending Review') {
     return (
       <>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><span className="material-symbols-outlined text-lg">visibility</span></button>
-        <button className={`${btnBase} hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-emerald-600`} title="Approve"><span className="material-symbols-outlined text-lg">check_circle</span></button>
-        <button className={`${btnBase} hover:bg-rose-100 dark:hover:bg-rose-900/30 text-rose-600`} title="Reject"><span className="material-symbols-outlined text-lg">cancel</span></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><Eye size={18} /></button>
+        <button className={`${btnBase} hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-emerald-600`} title="Approve"><CheckCircle2 size={18} /></button>
+        <button className={`${btnBase} hover:bg-rose-100 dark:hover:bg-rose-900/30 text-rose-600`} title="Reject"><XCircle size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
       </>
     );
   }
   if (status === 'Approved') {
     return (
       <>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><span className="material-symbols-outlined text-lg">visibility</span></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Download"><span className="material-symbols-outlined text-lg">download</span></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><Eye size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Download"><Download size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
       </>
     );
   }
   if (status === 'Rejected') {
     return (
       <>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><span className="material-symbols-outlined text-lg">visibility</span></button>
-        <button className={`${btnBase} hover:bg-primary/10 text-primary`} title="Request Resubmission"><span className="material-symbols-outlined text-lg">refresh</span></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><Eye size={18} /></button>
+        <button className={`${btnBase} hover:bg-primary/10 text-primary`} title="Request Resubmission"><RefreshCw size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
       </>
     );
   }
@@ -96,7 +98,7 @@ function RowActions({ status }: { status: DocStatus }) {
       <button className="inline-flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
         Request
       </button>
-      <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><span className="material-symbols-outlined text-lg">more_vert</span></button>
+      <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
     </>
   );
 }
@@ -140,7 +142,7 @@ export default function DocumentsTable() {
                 {/* Document Type */}
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-slate-400 text-lg">{doc.docIcon}</span>
+                    <doc.docIcon className="text-slate-400" size={18} />
                     <span className="text-sm text-slate-600 dark:text-slate-300">{doc.docType}</span>
                   </div>
                 </td>
@@ -189,7 +191,7 @@ export default function DocumentsTable() {
         </p>
         <div className="flex items-center gap-2">
           <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-500 hover:bg-white dark:hover:bg-slate-800 disabled:opacity-50" disabled>
-            <span className="material-symbols-outlined text-sm">chevron_left</span>
+            <ChevronLeft size={16} />
           </button>
           {[1, 2, 3].map((n) => (
             <button
@@ -204,7 +206,7 @@ export default function DocumentsTable() {
             </button>
           ))}
           <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-500 hover:bg-white dark:hover:bg-slate-800">
-            <span className="material-symbols-outlined text-sm">chevron_right</span>
+            <ChevronRight size={16} />
           </button>
         </div>
       </div>

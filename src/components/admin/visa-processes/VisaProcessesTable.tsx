@@ -1,3 +1,5 @@
+import { Eye, Pencil, RefreshCw, FileUp } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type VisaStatus = 'Approved' | 'In Review' | 'Pending' | 'Rejected';
@@ -67,12 +69,12 @@ const statusStyle: Record<VisaStatus, string> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-const ActionBtn = ({ icon, title }: { icon: string; title: string }) => (
+const ActionBtn = ({ icon: Icon, title }: { icon: any; title: string }) => (
   <button
     className="p-1 text-slate-400 hover:text-primary transition-colors"
     title={title}
   >
-    <span className="material-symbols-outlined text-lg">{icon}</span>
+    <Icon size={18} />
   </button>
 );
 
@@ -148,10 +150,10 @@ export default function VisaProcessesTable() {
                 {/* Actions */}
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-2">
-                    <ActionBtn icon="visibility"   title="View Process"      />
-                    <ActionBtn icon="edit"         title="Edit Process"      />
-                    <ActionBtn icon="sync"         title="Update Status"     />
-                    <ActionBtn icon="upload_file"  title="Upload Documents"  />
+                    <ActionBtn icon={Eye}   title="View Process"      />
+                    <ActionBtn icon={Pencil}         title="Edit Process"      />
+                    <ActionBtn icon={RefreshCw}         title="Update Status"     />
+                    <ActionBtn icon={FileUp}  title="Upload Documents"  />
                   </div>
                 </td>
               </tr>

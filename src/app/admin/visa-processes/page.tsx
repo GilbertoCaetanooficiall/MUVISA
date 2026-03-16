@@ -3,6 +3,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import VisaStats from '@/components/admin/visa-processes/VisaStats';
 import VisaFilters from '@/components/admin/visa-processes/VisaFilters';
 import VisaProcessesTable from '@/components/admin/visa-processes/VisaProcessesTable';
+import { Plus } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Visa Processes – MUVISA Admin',
@@ -21,7 +22,7 @@ function VisaProcessesContent() {
           </p>
         </div>
         <button className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors shadow-lg shadow-primary/20 self-start md:self-auto">
-          <span className="material-symbols-outlined text-lg">add</span>
+          <Plus size={18} />
           Add New Visa Process
         </button>
       </div>

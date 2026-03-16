@@ -1,3 +1,5 @@
+import { Search, Eye, Pencil, Key } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type StaffStatus = 'Active' | 'On Leave' | 'Inactive';
@@ -61,7 +63,7 @@ export default function StaffTable() {
       <div className="bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex flex-wrap gap-4 items-center">
         {/* Search */}
         <div className="relative flex-1 min-w-[240px]">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             className="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary"
             placeholder="Search staff by name or email"
@@ -152,16 +154,16 @@ export default function StaffTable() {
                   {/* Actions */}
                   <td className="px-6 py-4 whitespace-nowrap text-right space-x-1">
                     {[
-                      { icon: 'visibility', title: 'View Profile' },
-                      { icon: 'edit',       title: 'Edit Staff' },
-                      { icon: 'key',        title: 'Manage Access' },
-                    ].map(({ icon, title }) => (
+                      { icon: Eye, title: 'View Profile' },
+                      { icon: Pencil,       title: 'Edit Staff' },
+                      { icon: Key,        title: 'Manage Access' },
+                    ].map(({ icon: Icon, title }) => (
                       <button
-                        key={icon}
+                        key={title}
                         title={title}
                         className="p-2 text-slate-400 hover:text-primary transition-colors"
                       >
-                        <span className="material-symbols-outlined text-xl">{icon}</span>
+                        <Icon size={18} />
                       </button>
                     ))}
                   </td>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import AdminLayout from '@/components/admin/AdminLayout';
+import { Users, ClipboardList, ShieldCheck, FolderOpen, Landmark, FileText } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Dashboard – MUVISA Admin',
@@ -9,19 +10,19 @@ export const metadata: Metadata = {
 // ─── Stat Card ───────────────────────────────────────────────────────────────
 
 interface StatCardProps {
-  icon: string;
+  icon: any;
   label: string;
   value: string;
   trend: string;
   trendUp: boolean;
 }
 
-function StatCard({ icon, label, value, trend, trendUp }: StatCardProps) {
+function StatCard({ icon: Icon, label, value, trend, trendUp }: StatCardProps) {
   return (
     <div className="bg-white dark:bg-slate-900/40 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
       <div className="flex items-center justify-between mb-4">
-        <span className="p-2 bg-primary/10 rounded-lg text-primary material-symbols-outlined">
-          {icon}
+        <span className="p-2 bg-primary/10 rounded-lg text-primary">
+          <Icon size={20} />
         </span>
         <span
           className={`text-xs font-bold ${
@@ -74,16 +75,16 @@ function ClientRow({ initials, name, detail, status }: ClientRowProps) {
 // ─── Pending Document Row ─────────────────────────────────────────────────────
 
 interface DocumentRowProps {
-  icon: string;
+  icon: any;
   title: string;
   uploadedBy: string;
 }
 
-function DocumentRow({ icon, title, uploadedBy }: DocumentRowProps) {
+function DocumentRow({ icon: Icon, title, uploadedBy }: DocumentRowProps) {
   return (
     <div className="flex items-start gap-3">
       <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 flex-shrink-0">
-        <span className="material-symbols-outlined text-sm">{icon}</span>
+        <Icon size={16} />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold">{title}</p>
@@ -141,11 +142,11 @@ function DashboardContent() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-        <StatCard icon="groups"          label="Total Clients"   value="1,284" trend="+12%" trendUp />
-        <StatCard icon="pending_actions" label="In Progress"     value="156"   trend="+5%"  trendUp />
-        <StatCard icon="verified"        label="Approved Visas"  value="892"   trend="-2%"  trendUp={false} />
-        <StatCard icon="folder_open"     label="Pending Docs"    value="43"    trend="+8%"  trendUp />
-        <StatCard icon="account_balance" label="Universities"    value="120"   trend="+3%"  trendUp />
+        <StatCard icon={Users}           label="Total Clients"   value="1,284" trend="+12%" trendUp />
+        <StatCard icon={ClipboardList}   label="In Progress"     value="156"   trend="+5%"  trendUp />
+        <StatCard icon={ShieldCheck}     label="Approved Visas"  value="892"   trend="-2%"  trendUp={false} />
+        <StatCard icon={FolderOpen}      label="Pending Docs"    value="43"    trend="+8%"  trendUp />
+        <StatCard icon={Landmark}        label="Universities"    value="120"   trend="+3%"  trendUp />
       </div>
 
       {/* Charts Row */}
@@ -257,8 +258,8 @@ function DashboardContent() {
             </button>
           </div>
           <div className="p-4 space-y-4">
-            <DocumentRow icon="picture_as_pdf" title="FBI Background Check"       uploadedBy="John Doe"    />
-            <DocumentRow icon="description"    title="Bank Statements (3 months)" uploadedBy="Maria Garcia" />
+            <DocumentRow icon={FileText} title="FBI Background Check"       uploadedBy="John Doe"    />
+            <DocumentRow icon={FileText} title="Bank Statements (3 months)" uploadedBy="Maria Garcia" />
           </div>
         </div>
 

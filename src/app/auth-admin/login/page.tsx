@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { UserCheck, Mail, Lock, EyeOff, LogIn, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Login Admin – MUVISA',
@@ -49,7 +50,7 @@ export default function AdminLoginPage() {
             {/* Logo */}
             <div className="relative z-10 flex flex-col items-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#1358b2] shadow-lg mb-3">
-                <span className="material-symbols-outlined" style={{ fontSize: '32px' }}>shield_person</span>
+                <UserCheck size={32} />
               </div>
               <h1 className="text-2xl font-bold tracking-tight text-white">MUVISA</h1>
               <p className="text-white/70 text-xs mt-1 font-medium uppercase tracking-widest">Admin Portal</p>
@@ -76,9 +77,7 @@ export default function AdminLoginPage() {
                   E-mail Corporativo
                 </span>
                 <div className="relative flex items-center">
-                  <span className="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">
-                    mail
-                  </span>
+                  <Mail className="absolute left-4 text-slate-400 dark:text-slate-500" size={20} />
                   <input
                     className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#111821] py-3 pl-11 pr-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#1358b2] focus:bg-white dark:focus:bg-[#111821] focus:outline-none focus:ring-1 focus:ring-[#1358b2] transition"
                     placeholder="nome@muvisa.com"
@@ -94,9 +93,7 @@ export default function AdminLoginPage() {
                   Senha
                 </span>
                 <div className="relative flex items-center">
-                  <span className="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">
-                    lock
-                  </span>
+                  <Lock className="absolute left-4 text-slate-400 dark:text-slate-500" size={20} />
                   <input
                     className="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#111821] py-3 pl-11 pr-11 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#1358b2] focus:bg-white dark:focus:bg-[#111821] focus:outline-none focus:ring-1 focus:ring-[#1358b2] transition"
                     placeholder="••••••••"
@@ -107,7 +104,7 @@ export default function AdminLoginPage() {
                     type="button"
                     className="absolute right-4 flex items-center text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300 transition-colors"
                   >
-                    <span className="material-symbols-outlined text-[20px]">visibility_off</span>
+                    <EyeOff size={20} />
                   </button>
                 </div>
               </label>
@@ -134,7 +131,7 @@ export default function AdminLoginPage() {
                 type="submit"
                 className="mt-2 flex w-full items-center justify-center gap-2 rounded-lg bg-[#1358b2] py-3 text-sm font-bold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-[#1358b2] focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-colors"
               >
-                <span className="material-symbols-outlined text-[18px]">login</span>
+                <LogIn size={18} />
                 Entrar na Plataforma
               </button>
             </form>
@@ -156,7 +153,7 @@ export default function AdminLoginPage() {
                 href="/"
                 className="text-xs text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 flex items-center gap-1 transition-colors"
               >
-                <span className="material-symbols-outlined text-[14px]">arrow_back</span>
+                <ArrowLeft size={14} />
                 Voltar ao site
               </Link>
             </div>

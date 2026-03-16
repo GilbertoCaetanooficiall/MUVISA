@@ -1,3 +1,5 @@
+import { Phone, Info, MoreVertical, CheckCheck, PlusCircle, Paperclip, Smile, Send } from 'lucide-react';
+
 interface Message {
   id: string;
   text: string;
@@ -43,14 +45,15 @@ export default function MessageThread() {
         </div>
 
         <div className="flex gap-2">
-          {['call', 'info', 'more_vert'].map((icon) => (
-            <button
-              key={icon}
-              className="flex items-center justify-center size-10 rounded-lg bg-slate-100 dark:bg-neutral-slate text-slate-600 dark:text-white hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
-            >
-              <span className="material-symbols-outlined">{icon}</span>
-            </button>
-          ))}
+          <button className="flex items-center justify-center size-10 rounded-lg bg-slate-100 dark:bg-neutral-slate text-slate-600 dark:text-white hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+            <Phone size={20} />
+          </button>
+          <button className="flex items-center justify-center size-10 rounded-lg bg-slate-100 dark:bg-neutral-slate text-slate-600 dark:text-white hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+            <Info size={20} />
+          </button>
+          <button className="flex items-center justify-center size-10 rounded-lg bg-slate-100 dark:bg-neutral-slate text-slate-600 dark:text-white hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+            <MoreVertical size={20} />
+          </button>
         </div>
       </div>
 
@@ -80,7 +83,7 @@ export default function MessageThread() {
                 <div className="flex items-center gap-1">
                   <span className="text-[10px] text-slate-400">{msg.time}</span>
                   {msg.readReceipt && (
-                    <span className="material-symbols-outlined text-primary text-xs">done_all</span>
+                    <CheckCheck className="text-primary" size={12} />
                   )}
                 </div>
               </div>
@@ -105,11 +108,12 @@ export default function MessageThread() {
       {/* Input bar */}
       <div className="p-6 bg-white dark:bg-neutral-slate/10 border-t border-slate-200 dark:border-border-muted">
         <div className="flex items-center gap-3 bg-slate-100 dark:bg-neutral-slate rounded-xl p-2 px-4 shadow-sm">
-          {['add_circle', 'attach_file'].map((icon) => (
-            <button key={icon} className="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
-              <span className="material-symbols-outlined">{icon}</span>
-            </button>
-          ))}
+          <button className="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
+            <PlusCircle size={20} />
+          </button>
+          <button className="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
+            <Paperclip size={20} />
+          </button>
           <input
             className="flex-1 bg-transparent border-none text-slate-900 dark:text-white focus:ring-0 text-sm py-2 placeholder:text-slate-400"
             placeholder="Type your message..."
@@ -117,10 +121,10 @@ export default function MessageThread() {
           />
           <div className="flex gap-3">
             <button className="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
-              <span className="material-symbols-outlined">mood</span>
+              <Smile size={20} />
             </button>
             <button className="bg-primary hover:bg-primary/80 text-white p-2 rounded-lg flex items-center justify-center transition-colors shadow-md">
-              <span className="material-symbols-outlined">send</span>
+              <Send size={20} />
             </button>
           </div>
         </div>

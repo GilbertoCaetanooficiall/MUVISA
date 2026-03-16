@@ -1,5 +1,7 @@
+import { Users, ClipboardList, ShieldCheck, FolderOpen } from 'lucide-react';
+
 interface StatCardProps {
-  icon: string;
+  icon: any;
   label: string;
   value: string;
   trend: string;
@@ -18,12 +20,12 @@ const trendColorMap: Record<StatCardProps['trendColor'], string> = {
   orange:  'text-orange-700 dark:text-orange-400 bg-orange-500/10',
 };
 
-function StatCard({ icon, label, value, trend, iconColor, trendColor }: StatCardProps) {
+function StatCard({ icon: Icon, label, value, trend, iconColor, trendColor }: StatCardProps) {
   return (
     <div className="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 p-6 rounded-xl hover:border-primary/50 transition-all shadow-sm">
       <div className="flex justify-between items-start mb-4">
         <div className={`p-2 rounded-lg ${iconColorMap[iconColor]}`}>
-          <span className="material-symbols-outlined">{icon}</span>
+          <Icon size={20} />
         </div>
         <span className={`text-xs font-bold px-2 py-1 rounded ${trendColorMap[trendColor]}`}>
           {trend}
@@ -38,10 +40,10 @@ function StatCard({ icon, label, value, trend, iconColor, trendColor }: StatCard
 export default function ClientStats() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      <StatCard icon="person"          label="Total Clients"       value="1,284" trend="+12%" iconColor="primary" trendColor="emerald" />
-      <StatCard icon="pending_actions" label="Active Applications" value="456"   trend="+5%"  iconColor="primary" trendColor="emerald" />
-      <StatCard icon="verified"        label="Visa Approved"       value="892"   trend="+18%" iconColor="emerald" trendColor="emerald" />
-      <StatCard icon="folder_open"     label="Pending Documents"   value="124"   trend="-2%"  iconColor="orange"  trendColor="orange"  />
+      <StatCard icon={Users}           label="Total Clients"       value="1,284" trend="+12%" iconColor="primary" trendColor="emerald" />
+      <StatCard icon={ClipboardList}   label="Active Applications" value="456"   trend="+5%"  iconColor="primary" trendColor="emerald" />
+      <StatCard icon={ShieldCheck}     label="Visa Approved"       value="892"   trend="+18%" iconColor="emerald" trendColor="emerald" />
+      <StatCard icon={FolderOpen}      label="Pending Documents"   value="124"   trend="-2%"  iconColor="orange"  trendColor="orange"  />
     </div>
   );
 }

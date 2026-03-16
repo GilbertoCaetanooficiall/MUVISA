@@ -1,5 +1,7 @@
 'use client';
 
+import { TrendingUp, Info, AlertTriangle, Lightbulb, ArrowRight } from 'lucide-react';
+
 // ─── Bar heights for the area/column chart (10 months) ────────────────────────
 const barHeights = ['40%', '55%', '45%', '70%', '85%', '60%', '75%', '90%', '95%', '100%'];
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
@@ -22,19 +24,19 @@ const plans = [
 // ─── Key insights ──────────────────────────────────────────────────────────────
 const insights = [
   {
-    icon: 'trending_up', iconClass: 'text-emerald-500',
+    icon: TrendingUp, iconClass: 'text-emerald-500',
     title: 'High Growth Market', titleClass: 'text-emerald-500',
     bg: 'bg-emerald-500/10 border-emerald-500/20',
     body: 'Applications from Brazil have increased by <strong>30%</strong> this quarter, primarily targeting Engineering programs.',
   },
   {
-    icon: 'info', iconClass: 'text-primary',
+    icon: Info, iconClass: 'text-primary',
     title: 'Efficiency Boost', titleClass: 'text-primary',
     bg: 'bg-primary/10 border-primary/20',
     body: 'Average visa processing time has decreased by <strong>4 days</strong> after the new automated document verification system.',
   },
   {
-    icon: 'warning', iconClass: 'text-amber-500',
+    icon: AlertTriangle, iconClass: 'text-amber-500',
     title: 'Capacity Alert', titleClass: 'text-amber-500',
     bg: 'bg-amber-500/10 border-amber-500/20',
     body: 'University of Lisbon "Master in Management" reaches <strong>95% capacity</strong>. Suggest alternatives to new applicants.',
@@ -139,13 +141,13 @@ export default function ReportsCharts() {
         {/* Key Insights */}
         <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col">
           <div className="flex items-center gap-2 mb-6">
-            <span className="material-symbols-outlined text-primary">lightbulb</span>
+            <Lightbulb className="text-primary" size={20} />
             <h4 className="font-bold text-slate-900 dark:text-white">Key Insights</h4>
           </div>
           <div className="flex-1 space-y-4">
             {insights.map((ins) => (
               <div key={ins.title} className={`p-4 ${ins.bg} border rounded-lg flex gap-4`}>
-                <span className={`material-symbols-outlined ${ins.iconClass} mt-1 flex-shrink-0`}>{ins.icon}</span>
+                <ins.icon className={`${ins.iconClass} mt-1 flex-shrink-0`} size={20} />
                 <div>
                   <p className={`text-sm font-bold ${ins.titleClass}`}>{ins.title}</p>
                   <p
@@ -158,7 +160,7 @@ export default function ReportsCharts() {
           </div>
           <button className="mt-6 text-primary text-sm font-bold hover:underline flex items-center gap-1 self-start">
             View Full Business Audit
-            <span className="material-symbols-outlined text-base">arrow_forward</span>
+            <ArrowRight size={16} />
           </button>
         </div>
       </div>

@@ -3,17 +3,32 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { 
+  LayoutDashboard, 
+  Users, 
+  Globe, 
+  FileText, 
+  GraduationCap, 
+  ClipboardList, 
+  Package, 
+  Mail, 
+  UserCog, 
+  BarChart3,
+  Settings,
+  PlaneTakeoff
+} from 'lucide-react';
+
 const navItems = [
-  { href: '/admin/dashboard', icon: 'dashboard', label: 'Dashboard' },
-  { href: '/admin/clients', icon: 'group', label: 'Clients' },
-  { href: '/admin/visa-processes', icon: 'travel_explore', label: 'Visa Processes' },
-  { href: '/admin/documents', icon: 'description', label: 'Documents' },
-  { href: '/admin/universities', icon: 'school', label: 'Universities' },
-  { href: '/admin/applications', icon: 'assignment', label: 'Applications' },
-  { href: '/admin/plans', icon: 'inventory_2', label: 'Plans/Packages' },
-  { href: '/admin/messages', icon: 'mail', label: 'Messages' },
-  { href: '/admin/staff', icon: 'manage_accounts', label: 'Staff' },
-  { href: '/admin/reports', icon: 'bar_chart', label: 'Reports' },
+  { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+  { href: '/admin/clients', icon: Users, label: 'Clients' },
+  { href: '/admin/visa-processes', icon: Globe, label: 'Visa Processes' },
+  { href: '/admin/documents', icon: FileText, label: 'Documents' },
+  { href: '/admin/universities', icon: GraduationCap, label: 'Universities' },
+  { href: '/admin/applications', icon: ClipboardList, label: 'Applications' },
+  { href: '/admin/plans', icon: Package, label: 'Plans/Packages' },
+  { href: '/admin/messages', icon: Mail, label: 'Messages' },
+  { href: '/admin/staff', icon: UserCog, label: 'Staff' },
+  { href: '/admin/reports', icon: BarChart3, label: 'Reports' },
 ];
 
 export default function Sidebar() {
@@ -24,7 +39,7 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="p-6 flex items-center gap-3">
         <div className="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
-          <span className="material-symbols-outlined">flight_takeoff</span>
+          <PlaneTakeoff size={24} />
         </div>
         <div>
           <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -50,7 +65,7 @@ export default function Sidebar() {
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
-              <span className="material-symbols-outlined">{item.icon}</span>
+              <item.icon size={20} />
               <span className="text-sm font-medium">{item.label}</span>
             </Link>
           );
@@ -66,7 +81,7 @@ export default function Sidebar() {
                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
             }`}
           >
-            <span className="material-symbols-outlined">settings</span>
+            <Settings size={20} />
             <span className="text-sm font-medium">Settings</span>
           </Link>
         </div>

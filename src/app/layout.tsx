@@ -56,6 +56,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        {/* Prevents browser/Google Translate from translating icon names */}
+        <meta name="google" content="notranslate" />
         {/* Links externos de fontes e ícones - carregados em todo o app */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

@@ -1,3 +1,5 @@
+import { Search } from 'lucide-react';
+
 interface Conversation {
   id: string;
   name: string;
@@ -45,7 +47,7 @@ export default function MessagesList() {
       {/* Search */}
       <div className="p-4 border-b border-slate-200 dark:border-border-muted">
         <div className="flex items-center rounded-lg bg-slate-100 dark:bg-neutral-slate px-3 py-2 gap-2">
-          <span className="material-symbols-outlined text-slate-400 text-[18px]">search</span>
+          <Search className="text-slate-400" size={18} />
           <input
             className="bg-transparent border-none text-slate-900 dark:text-white text-sm focus:ring-0 w-full placeholder:text-slate-400 p-0"
             placeholder="Search conversations..."

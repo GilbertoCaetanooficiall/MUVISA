@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import AdminLayout from '@/components/admin/AdminLayout';
 import PlansStats from '@/components/admin/plans/PlansStats';
 import PlansGrid from '@/components/admin/plans/PlansGrid';
+import { PlusCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Plans & Packages – MUVISA Admin',
@@ -22,7 +23,7 @@ function PlansContent() {
           </p>
         </div>
         <button className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold transition-all shadow-lg shadow-primary/20">
-          <span className="material-symbols-outlined text-[20px]">add_circle</span>
+          <PlusCircle size={20} />
           <span>Create New Plan</span>
         </button>
       </div>

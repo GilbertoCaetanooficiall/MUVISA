@@ -3,6 +3,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import ClientStats from '@/components/admin/clients/ClientStats';
 import ClientFilters from '@/components/admin/clients/ClientFilters';
 import ClientsTable from '@/components/admin/clients/ClientsTable';
+import { FileDown, Plus } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Clients – MUVISA Admin',
@@ -22,11 +23,11 @@ function ClientsContent() {
         </div>
         <div className="flex items-center gap-3">
           <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-white font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
-            <span className="material-symbols-outlined text-lg">file_download</span>
+            <FileDown size={18} />
             Export
           </button>
           <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-            <span className="material-symbols-outlined text-lg">add</span>
+            <Plus size={18} />
             Add New Client
           </button>
         </div>

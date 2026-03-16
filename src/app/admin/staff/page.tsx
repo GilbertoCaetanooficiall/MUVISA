@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import AdminLayout from '@/components/admin/AdminLayout';
 import StaffStats from '@/components/admin/staff/StaffStats';
 import StaffTable from '@/components/admin/staff/StaffTable';
+import { UserPlus } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Staff – MUVISA Admin',
@@ -20,7 +21,7 @@ function StaffContent() {
           </p>
         </div>
         <button className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2 shadow-lg shadow-primary/20 self-start md:self-auto">
-          <span className="material-symbols-outlined text-xl">person_add</span>
+          <UserPlus size={20} />
           Add New Staff
         </button>
       </div>

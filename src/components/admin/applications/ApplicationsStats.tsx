@@ -1,37 +1,39 @@
+import { FileText, RefreshCw, CheckCircle2, XCircle, TrendingUp, TrendingDown } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface StatItem {
-  icon: string;
+  icon: any;
   iconClass: string;
   label: string;
   value: string;
   trend: string;
   trendClass: string;
-  trendIcon: string;
+  trendIcon: any;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const stats: StatItem[] = [
   {
-    icon: 'description',   iconClass: 'bg-primary/10 text-primary',
+    icon: FileText,   iconClass: 'bg-primary/10 text-primary',
     label: 'Total Applications', value: '1,284',
-    trend: '+12%', trendClass: 'text-emerald-500', trendIcon: 'trending_up',
+    trend: '+12%', trendClass: 'text-emerald-500', trendIcon: TrendingUp,
   },
   {
-    icon: 'sync',          iconClass: 'bg-blue-500/10 text-blue-500',
+    icon: RefreshCw,          iconClass: 'bg-blue-500/10 text-blue-500',
     label: 'In Progress',        value: '456',
-    trend: '+5%',  trendClass: 'text-emerald-500', trendIcon: 'trending_up',
+    trend: '+5%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp,
   },
   {
-    icon: 'check_circle',  iconClass: 'bg-emerald-500/10 text-emerald-500',
+    icon: CheckCircle2,  iconClass: 'bg-emerald-500/10 text-emerald-500',
     label: 'Accepted',           value: '612',
-    trend: '-2%',  trendClass: 'text-rose-500',    trendIcon: 'trending_down',
+    trend: '-2%',  trendClass: 'text-rose-500',    trendIcon: TrendingDown,
   },
   {
-    icon: 'cancel',        iconClass: 'bg-rose-500/10 text-rose-500',
+    icon: XCircle,        iconClass: 'bg-rose-500/10 text-rose-500',
     label: 'Rejected',           value: '216',
-    trend: '+8%',  trendClass: 'text-emerald-500', trendIcon: 'trending_up',
+    trend: '+8%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp,
   },
 ];
 
@@ -47,11 +49,11 @@ export default function ApplicationsStats() {
         >
           <div className="flex items-center justify-between mb-4">
             <div className={`p-2 rounded-lg ${s.iconClass}`}>
-              <span className="material-symbols-outlined">{s.icon}</span>
+              <s.icon size={20} />
             </div>
             <span className={`text-xs font-bold flex items-center gap-0.5 ${s.trendClass}`}>
               {s.trend}
-              <span className="material-symbols-outlined text-xs">{s.trendIcon}</span>
+              <s.trendIcon size={12} />
             </span>
           </div>
           <p className="text-slate-500 text-sm font-medium">{s.label}</p>

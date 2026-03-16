@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
+import { Search, Bell, Sun, Moon } from 'lucide-react';
 
 export default function Topbar() {
   const { theme, setTheme } = useTheme();
@@ -19,9 +20,7 @@ export default function Topbar() {
       {/* Search */}
       <div className="flex-1 max-w-xl">
         <div className="relative group">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors text-[20px]">
-            search
-          </span>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={20} />
           <input
             type="text"
             placeholder="Search clients, visas, documents..."
@@ -34,7 +33,7 @@ export default function Topbar() {
       <div className="flex items-center gap-4">
         {/* Notifications */}
         <button className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
-          <span className="material-symbols-outlined">notifications</span>
+          <Bell size={20} />
           <span className="absolute top-2 right-2 size-2 bg-accent-warning rounded-full border-2 border-white dark:border-background-dark" />
         </button>
 
@@ -44,9 +43,11 @@ export default function Topbar() {
           className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           aria-label="Toggle dark mode"
         >
-          <span className="material-symbols-outlined">
-            {mounted ? (theme === 'dark' ? 'light_mode' : 'dark_mode') : 'dark_mode'}
-          </span>
+          {mounted ? (
+            theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />
+          ) : (
+            <Moon size={20} />
+          )}
         </button>
 
         <div className="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2" />

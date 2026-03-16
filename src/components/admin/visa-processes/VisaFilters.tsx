@@ -1,5 +1,7 @@
 'use client';
 
+import { Search } from 'lucide-react';
+
 const selectClass =
   'bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-900 dark:text-slate-100 focus:ring-1 focus:ring-primary focus:outline-none min-w-[140px]';
 
@@ -8,9 +10,7 @@ export default function VisaFilters() {
     <div className="bg-white dark:bg-slate-900/40 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm mb-6 flex flex-wrap items-center gap-4">
       {/* Search */}
       <div className="relative flex-1 min-w-[240px]">
-        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">
-          search
-        </span>
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
         <input
           className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:outline-none"
           placeholder="Search by student name or ID..."

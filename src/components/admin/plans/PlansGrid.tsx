@@ -1,3 +1,5 @@
+import { CheckCircle2, XCircle, FileEdit, Trash2 } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type PlanStatus = 'Published' | 'Review Required' | 'Draft';
@@ -94,14 +96,14 @@ function FeatureRow({ text, included }: Feature) {
   if (included) {
     return (
       <div className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
-        <span className="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+        <CheckCircle2 className="text-green-500" size={18} />
         <span>{text}</span>
       </div>
     );
   }
   return (
     <div className="flex items-center gap-3 text-sm text-slate-400 dark:text-slate-500 opacity-50">
-      <span className="material-symbols-outlined text-slate-400 text-[18px]">cancel</span>
+      <XCircle className="text-slate-400" size={18} />
       <span className="line-through">{text}</span>
     </div>
   );
@@ -135,7 +137,7 @@ function PlanCard({ plan }: { plan: Plan }) {
         {/* Features or Draft placeholder */}
         {plan.isDraft ? (
           <div className="flex flex-col items-center justify-center py-10">
-            <span className="material-symbols-outlined text-slate-400 dark:text-slate-700 text-[48px] mb-2">edit_note</span>
+            <FileEdit className="text-slate-400 dark:text-slate-700 mb-2" size={48} />
             <p className="text-slate-500 text-sm italic">Configuring benefits...</p>
           </div>
         ) : (
@@ -157,7 +159,7 @@ function PlanCard({ plan }: { plan: Plan }) {
             Benefits
           </button>
           <button className="p-2 text-slate-400 hover:text-red-500 transition-colors">
-            <span className="material-symbols-outlined text-[20px]">delete</span>
+            <Trash2 size={20} />
           </button>
         </div>
       )}
@@ -168,7 +170,7 @@ function PlanCard({ plan }: { plan: Plan }) {
             Review Changes
           </button>
           <button className="p-2 text-slate-400 hover:text-red-500 transition-colors">
-            <span className="material-symbols-outlined text-[20px]">delete</span>
+            <Trash2 size={20} />
           </button>
         </div>
       )}
@@ -188,7 +190,7 @@ function PlanCard({ plan }: { plan: Plan }) {
 
 export default function PlansGrid() {
   return (
-    <div>
+    <div className="p-6">
       {/* Section header */}
       <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
         Active Service Plans

@@ -1,3 +1,5 @@
+import { Eye } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type VisaStatus  = 'Approved' | 'Pending' | 'In Review' | 'Rejected';
@@ -174,10 +176,10 @@ export default function ClientsTable() {
                 {/* Actions */}
                 <td className="px-6 py-4 text-right">
                   <button
-                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all"
+                    className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-400 hover:text-primary transition-all flex items-center justify-center"
                     title="View Profile"
                   >
-                    <span className="material-symbols-outlined">visibility</span>
+                    <Eye size={18} />
                   </button>
                 </td>
               </tr>

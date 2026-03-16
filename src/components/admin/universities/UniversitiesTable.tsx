@@ -1,3 +1,5 @@
+import { Search, MoreVertical, GraduationCap, Landmark, TowerControl, DraftingCompass } from 'lucide-react';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type AppStatus = 'Applications Open' | 'Closing Soon' | 'Applications Closed';
@@ -5,7 +7,7 @@ type AppStatus = 'Applications Open' | 'Closing Soon' | 'Applications Closed';
 interface University {
   id: string;
   name: string;
-  icon: string;
+  icon: any;
   city: string;
   courses: number;
   status: AppStatus;
@@ -16,11 +18,11 @@ interface University {
 // ─── Sample data ──────────────────────────────────────────────────────────────
 
 const universities: University[] = [
-  { id: 'U-001', name: 'University of Lisbon',    icon: 'school',           city: 'Lisbon',  courses: 156, status: 'Applications Open',   deadline: 'Aug 15, 2024', website: 'ulisboa.pt'  },
-  { id: 'U-002', name: 'University of Porto',     icon: 'account_balance',  city: 'Porto',   courses: 142, status: 'Closing Soon',         deadline: 'May 30, 2024', website: 'up.pt'       },
-  { id: 'U-003', name: 'University of Coimbra',   icon: 'temple_buddhist',  city: 'Coimbra', courses: 98,  status: 'Applications Closed',  deadline: 'Mar 15, 2024', website: 'uc.pt'       },
-  { id: 'U-004', name: 'Nova University Lisbon',  icon: 'school',           city: 'Lisbon',  courses: 115, status: 'Applications Open',    deadline: 'Jul 20, 2024', website: 'unl.pt'      },
-  { id: 'U-005', name: 'University of Minho',     icon: 'architecture',     city: 'Braga',   courses: 88,  status: 'Applications Open',    deadline: 'Aug 01, 2024', website: 'uminho.pt'   },
+  { id: 'U-001', name: 'University of Lisbon',    icon: GraduationCap,           city: 'Lisbon',  courses: 156, status: 'Applications Open',   deadline: 'Aug 15, 2024', website: 'ulisboa.pt'  },
+  { id: 'U-002', name: 'University of Porto',     icon: Landmark,  city: 'Porto',   courses: 142, status: 'Closing Soon',         deadline: 'May 30, 2024', website: 'up.pt'       },
+  { id: 'U-003', name: 'University of Coimbra',   icon: TowerControl,  city: 'Coimbra', courses: 98,  status: 'Applications Closed',  deadline: 'Mar 15, 2024', website: 'uc.pt'       },
+  { id: 'U-004', name: 'Nova University Lisbon',  icon: GraduationCap,           city: 'Lisbon',  courses: 115, status: 'Applications Open',    deadline: 'Jul 20, 2024', website: 'unl.pt'      },
+  { id: 'U-005', name: 'University of Minho',     icon: DraftingCompass,     city: 'Braga',   courses: 88,  status: 'Applications Open',    deadline: 'Aug 01, 2024', website: 'uminho.pt'   },
 ];
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
@@ -46,9 +48,7 @@ export default function UniversitiesTable() {
           {/* Search */}
           <div className="md:col-span-1">
             <label className="relative block">
-              <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">
-                search
-              </span>
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
               <input
                 className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg pl-10 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:outline-none"
                 placeholder="Search universities..."
@@ -106,7 +106,7 @@ export default function UniversitiesTable() {
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="size-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center flex-shrink-0">
-                      <span className="material-symbols-outlined text-slate-500 dark:text-slate-400">{u.icon}</span>
+                      <u.icon className="text-slate-500 dark:text-slate-400" size={20} />
                     </div>
                     <span className="font-semibold text-sm text-slate-900 dark:text-slate-100">{u.name}</span>
                   </div>
@@ -134,7 +134,7 @@ export default function UniversitiesTable() {
                 {/* Actions */}
                 <td className="px-6 py-4 text-right">
                   <button className="text-slate-400 hover:text-primary transition-colors">
-                    <span className="material-symbols-outlined">more_vert</span>
+                    <MoreVertical size={20} />
                   </button>
                 </td>
               </tr>

@@ -3,19 +3,38 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { 
+  User, 
+  PlaneTakeoff, 
+  Lock, 
+  Check, 
+  Info, 
+  IdCard, 
+  Mail, 
+  Smartphone, 
+  ArrowRight, 
+  ChevronDown, 
+  GraduationCap, 
+  Eye, 
+  EyeOff, 
+  CheckCircle, 
+  Circle,
+  MapPin,
+  LucideIcon
+} from 'lucide-react';
 
 type Step = 1 | 2 | 3;
 
 interface StepConfig {
-  icon: string;
+  icon: LucideIcon;
   label: string;
   title: string;
 }
 
 const STEPS: StepConfig[] = [
-  { icon: 'person', label: 'Dados Básicos', title: 'Comece sua jornada' },
-  { icon: 'flight_takeoff', label: 'Seu Destino', title: 'Seu destino em Portugal' },
-  { icon: 'lock', label: 'Segurança', title: 'Segurança da Conta' },
+  { icon: User, label: 'Dados Básicos', title: 'Comece sua jornada' },
+  { icon: PlaneTakeoff, label: 'Seu Destino', title: 'Seu destino em Portugal' },
+  { icon: Lock, label: 'Segurança', title: 'Segurança da Conta' },
 ];
 
 export default function CadastroPage() {
@@ -88,9 +107,9 @@ export default function CadastroPage() {
                     <div className="flex items-center h-6 relative">
                       <span className={`relative z-10 w-8 h-8 flex items-center justify-center rounded-full ring-4 ring-white/5 ${isCompleted ? 'bg-green-500/90' : isCurrent ? 'bg-primary shadow-lg shadow-primary/30' : 'bg-black/40 border border-white/10'}`}>
                         {isCompleted ? (
-                          <span className="material-symbols-outlined text-white text-sm">check</span>
+                          <Check className="w-4 h-4 text-white" />
                         ) : isCurrent ? (
-                          <span className="material-symbols-outlined text-white text-sm">{s.icon}</span>
+                          <s.icon className="w-4 h-4 text-white" />
                         ) : (
                           <span className="text-xs font-semibold text-gray-400">{num}</span>
                         )}
@@ -114,7 +133,7 @@ export default function CadastroPage() {
           <div className="hidden md:block mt-12">
             <div className="bg-primary/20 rounded-xl p-4 border border-primary/20 backdrop-blur-md">
               <div className="flex items-start gap-3">
-                <span className="material-symbols-outlined text-primary mt-0.5">info</span>
+                <Info className="text-primary w-5 h-5 mt-0.5" />
                 <p className="text-xs text-gray-300 leading-relaxed">
                   {step === 1 && 'Precisamos destas informações para personalizar seu checklist de documentos para o visto.'}
                   {step === 2 && 'A escolha da cidade influencia diretamente no custo de vida estimado para o visto.'}
@@ -142,15 +161,15 @@ export default function CadastroPage() {
               <form className="space-y-6" onSubmit={e => { e.preventDefault(); goNext(); }}>
                 <div className="space-y-5 animate-fade-in">
                   {[
-                    { id: 'fullName', label: 'Nome Completo', placeholder: 'Maria Silva', type: 'text', icon: 'badge', key: 'fullName' as const },
-                    { id: 'email', label: 'Email', placeholder: 'maria@exemplo.com', type: 'email', icon: 'mail', key: 'email' as const },
-                    { id: 'phone', label: 'Telefone / WhatsApp', placeholder: '(11) 99999-9999', type: 'tel', icon: 'smartphone', key: 'phone' as const },
+                    { id: 'fullName', label: 'Nome Completo', placeholder: 'Maria Silva', type: 'text', icon: User, key: 'fullName' as const },
+                    { id: 'email', label: 'Email', placeholder: 'maria@exemplo.com', type: 'email', icon: Mail, key: 'email' as const },
+                    { id: 'phone', label: 'Telefone / WhatsApp', placeholder: '(11) 99999-9999', type: 'tel', icon: Smartphone, key: 'phone' as const },
                   ].map(field => (
                     <div key={field.id} className="space-y-2">
                       <label className="block text-sm font-medium text-gray-300" htmlFor={field.id}>{field.label}</label>
                       <div className="relative group">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">{field.icon}</span>
+                          <field.icon className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                         </div>
                         <input
                           className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
@@ -166,7 +185,7 @@ export default function CadastroPage() {
                   <span className="invisible px-4 py-2 text-sm">Voltar</span>
                   <button className="group relative flex justify-center py-3.5 px-8 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02]" type="submit">
                     Continuar
-                    <span className="material-symbols-outlined text-white/80 group-hover:text-white ml-2 text-lg">arrow_forward</span>
+                    <ArrowRight className="text-white/80 group-hover:text-white ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </button>
                 </div>
                 <div className="mt-8 pt-6 border-t border-white/10 text-center">
@@ -187,7 +206,7 @@ export default function CadastroPage() {
                     <label className="block text-sm font-medium text-gray-300" htmlFor="visaType">Tipo de Visto</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">badge</span>
+                        <IdCard className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
                       <select
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
@@ -202,7 +221,7 @@ export default function CadastroPage() {
                         <option value="DR">Visto de Procura de Trabalho</option>
                       </select>
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500">expand_more</span>
+                        <ChevronDown className="text-gray-500 w-5 h-5" />
                       </div>
                     </div>
                   </div>
@@ -212,7 +231,7 @@ export default function CadastroPage() {
                     <label className="block text-sm font-medium text-gray-300" htmlFor="city">Cidade de Destino</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">location_on</span>
+                        <MapPin className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
                       <select
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
@@ -225,7 +244,7 @@ export default function CadastroPage() {
                         ))}
                       </select>
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500">expand_more</span>
+                        <ChevronDown className="text-gray-500 w-5 h-5" />
                       </div>
                     </div>
                   </div>
@@ -235,7 +254,7 @@ export default function CadastroPage() {
                     <label className="block text-sm font-medium text-gray-300" htmlFor="institution">Instituição de Ensino / Universidade</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">school</span>
+                        <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
                       <input
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
@@ -251,7 +270,7 @@ export default function CadastroPage() {
                   <button className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors" type="button" onClick={goBack}>Voltar</button>
                   <button className="group relative flex justify-center py-3.5 px-8 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02]" type="submit">
                     Continuar
-                    <span className="material-symbols-outlined text-white/80 group-hover:text-white ml-2 text-lg">arrow_forward</span>
+                    <ArrowRight className="text-white/80 group-hover:text-white ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </button>
                 </div>
 
@@ -273,7 +292,7 @@ export default function CadastroPage() {
                     <label className="block text-sm font-medium text-gray-300" htmlFor="password">Senha</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock</span>
+                        <Lock className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
                       <input
                         className="appearance-none block w-full pl-10 pr-11 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
@@ -282,7 +301,7 @@ export default function CadastroPage() {
                         onChange={e => handlePasswordChange(e.target.value)}
                       />
                       <button className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-white focus:outline-none transition-colors" type="button" onClick={() => setShowPassword(!showPassword)}>
-                        <span className="material-symbols-outlined">{showPassword ? 'visibility_off' : 'visibility'}</span>
+                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
                     </div>
                   </div>
@@ -292,7 +311,7 @@ export default function CadastroPage() {
                     <label className="block text-sm font-medium text-gray-300" htmlFor="confirmPassword">Confirmar Senha</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">lock_clock</span>
+                        <Lock className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
                       <input
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
@@ -322,7 +341,7 @@ export default function CadastroPage() {
                           { ok: /[0-9]/.test(formData.password), label: 'Número' },
                         ].map(req => (
                           <li key={req.label} className={`flex items-center gap-2 text-xs ${req.ok ? 'text-primary' : 'text-gray-500'}`}>
-                            <span className="material-symbols-outlined text-[14px]">{req.ok ? 'check_circle' : 'radio_button_unchecked'}</span>
+                            {req.ok ? <CheckCircle className="w-3.5 h-3.5" /> : <Circle className="w-3.5 h-3.5" />}
                             <span>{req.label}</span>
                           </li>
                         ))}
@@ -332,7 +351,7 @@ export default function CadastroPage() {
 
                   {!formData.password && (
                     <div className="text-xs text-gray-400 flex items-start gap-1.5 mt-2">
-                      <span className="material-symbols-outlined text-base mt-0.5">info</span>
+                       <Info className="w-4 h-4 mt-0.5 shrink-0" />
                       <span>Mínimo de 8 caracteres, deve conter letras maiúsculas, minúsculas e números.</span>
                     </div>
                   )}
@@ -362,7 +381,7 @@ export default function CadastroPage() {
                   <button className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors" type="button" onClick={goBack}>Voltar</button>
                   <button className="group relative flex justify-center py-3.5 px-8 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02]" type="submit">
                     Finalizar
-                    <span className="material-symbols-outlined text-white/80 group-hover:text-white ml-2 text-lg">check_circle</span>
+                    <CheckCircle className="text-white/80 group-hover:text-white ml-2 w-5 h-5" />
                   </button>
                 </div>
 

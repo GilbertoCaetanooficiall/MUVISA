@@ -6,16 +6,16 @@ export default function DestinationDetails() {
             <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-8 rounded shadow-sm overflow-hidden bg-slate-100 relative">
                     <div className="absolute inset-0 flex">
-                        <div className="w-1/4 bg-[#FF0000]"></div>
-                        <div className="w-1/2 bg-white flex items-center justify-center">
-                            <span className="text-[#FF0000] text-lg font-bold">🍁</span>
+                        <div className="w-2/5 bg-[#006600]"></div>
+                        <div className="w-3/5 bg-[#FF0000]"></div>
+                        <div className="absolute inset-0 flex items-center justify-center -ml-2">
+                            <span className="text-[10px]">🇵🇹</span>
                         </div>
-                        <div className="w-1/4 bg-[#FF0000]"></div>
                     </div>
                 </div>
                 <div>
-                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">Canadá</h4>
-                    <p className="text-xs text-slate-500">Toronto, ON</p>
+                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">Portugal</h4>
+                    <p className="text-xs text-slate-500">Lisboa</p>
                 </div>
             </div>
             <div className="space-y-4">
@@ -25,7 +25,7 @@ export default function DestinationDetails() {
                     </div>
                     <div>
                         <p className="text-xs text-slate-500 font-medium uppercase">Instituição</p>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white">Seneca College</p>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">Universidade de Lisboa</p>
                     </div>
                 </div>
                 <div className="flex gap-3">
@@ -34,7 +34,7 @@ export default function DestinationDetails() {
                     </div>
                     <div>
                         <p className="text-xs text-slate-500 font-medium uppercase">Início das Aulas</p>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white">08 de Janeiro, 2024</p>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">15 de Setembro, 2024</p>
                     </div>
                 </div>
                 <div className="flex gap-3">
@@ -43,7 +43,7 @@ export default function DestinationDetails() {
                     </div>
                     <div>
                         <p className="text-xs text-slate-500 font-medium uppercase">Programa</p>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white">Business Marketing</p>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">Gestão de Negócios Internacionais</p>
                     </div>
                 </div>
             </div>

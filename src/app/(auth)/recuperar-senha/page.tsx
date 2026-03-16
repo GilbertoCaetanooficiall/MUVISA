@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { Mail, Send, ArrowLeft, MailCheck, ShieldCheck, Building2 } from 'lucide-react';
 
 export default function RecuperarSenhaPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -42,7 +43,7 @@ export default function RecuperarSenhaPage() {
               <label className="block text-sm font-medium text-gray-200" htmlFor="email">Email</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="material-symbols-outlined text-gray-400 group-focus-within:text-primary transition-colors text-[20px]">mail</span>
+                  <Mail className="text-gray-400 group-focus-within:text-primary transition-colors w-5 h-5" />
                 </div>
                 <input
                   className="appearance-none block w-full pl-10 pr-3 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm shadow-inner"
@@ -58,12 +59,12 @@ export default function RecuperarSenhaPage() {
               type="submit"
             >
               Enviar link de recuperação
-              <span className="material-symbols-outlined text-lg opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all">send</span>
+              <Send className="w-5 h-5 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
             </button>
 
             <div className="text-center pt-4 border-t border-white/10">
               <Link className="text-sm font-medium text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group" href="/login">
-                <span className="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Voltar ao login
               </Link>
             </div>
@@ -73,7 +74,7 @@ export default function RecuperarSenhaPage() {
             <div className="relative mx-auto w-24 h-24">
               <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl animate-pulse" />
               <div className="relative z-10 w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center ring-4 ring-green-500/20 border border-green-500/30">
-                <span className="material-symbols-outlined text-green-400 text-5xl">mark_email_read</span>
+                <MailCheck className="text-green-400 w-12 h-12" />
               </div>
             </div>
             <p className="text-sm text-gray-300">
@@ -95,12 +96,12 @@ export default function RecuperarSenhaPage() {
       {/* Security badges */}
       <div className="mt-12 grid grid-cols-2 gap-8 md:gap-16 text-center max-w-xl w-full animate-fade-in px-4">
         {[
-          { icon: 'verified_user', title: 'Segurança Garantida', text: 'Seus dados são criptografados militarmente.' },
-          { icon: 'location_city', title: 'Especialistas em Portugal', text: 'Orientação especializada em processos de visto.' },
+          { icon: ShieldCheck, title: 'Segurança Garantida', text: 'Seus dados são criptografados militarmente.' },
+          { icon: Building2, title: 'Especialistas em Portugal', text: 'Orientação especializada em processos de visto.' },
         ].map(item => (
-          <div key={item.icon} className="flex flex-col items-center group cursor-default">
+          <div key={item.title} className="flex flex-col items-center group cursor-default">
             <div className="h-14 w-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-300 shadow-lg">
-              <span className="material-symbols-outlined text-white/80 group-hover:text-primary text-2xl transition-colors">{item.icon}</span>
+              <item.icon className="text-white/80 group-hover:text-primary w-6 h-6 transition-colors" />
             </div>
             <h3 className="text-sm font-semibold text-white drop-shadow-sm mb-1">{item.title}</h3>
             <p className="text-xs text-gray-400 max-w-[140px] leading-relaxed">{item.text}</p>
@@ -113,7 +114,7 @@ export default function RecuperarSenhaPage() {
         <span className="pointer-events-auto inline-flex gap-2 mt-1">
             <Link className="hover:text-white transition-colors" href="/privacidade">Privacidade</Link>
             <span>·</span>
-            <Link className="hover:text-white transition-colors" href="/termos">Termos</Link>
+            <Link className="hover:text-white transition-colors" href="/termos">Terms</Link>
         </span>
       </p>
     </div>

@@ -1,8 +1,8 @@
-import { Download } from 'lucide-react';
+import { Download, FileText, ShieldCheck, Map } from 'lucide-react';
 const agencyDocs = [
-    { title: "Letter of Acceptance (LOA)", icon: "description", date: "20 Out" },
-    { title: "Cópia da Aplicação de Visto", icon: "verified_user", date: "15 Out" },
-    { title: "Guia de Chegada", icon: "map", date: "01 Out" },
+    { title: "Letter of Acceptance (LOA)", icon: FileText, date: "20 Out" },
+    { title: "Cópia da Aplicação de Visto", icon: ShieldCheck, date: "15 Out" },
+    { title: "Guia de Chegada", icon: Map, date: "01 Out" },
 ];
 
 export default function AgencyDocuments() {
@@ -16,7 +16,7 @@ export default function AgencyDocuments() {
                         className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex items-start gap-4 hover:shadow-md transition-shadow cursor-pointer"
                     >
                         <div className="bg-indigo-50 dark:bg-indigo-900/20 p-2.5 rounded-lg text-indigo-600">
-                            <span className="material-symbols-outlined">{doc.icon}</span>
+                            <doc.icon className="w-6 h-6" />
                         </div>
                         <div className="flex-1 min-w-0">
                             <h4 className="text-sm font-semibold text-slate-900 dark:text-white truncate">{doc.title}</h4>

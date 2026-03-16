@@ -1,7 +1,7 @@
 import { FolderOpen, ClipboardList, CheckCircle2, XCircle } from 'lucide-react';
 
 interface StatCardProps {
-  icon: any;
+  icon: React.ElementType;
   iconClass: string;
   label: string;
   value: string;

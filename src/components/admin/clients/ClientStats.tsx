@@ -1,7 +1,7 @@
 import { Users, ClipboardList, ShieldCheck, FolderOpen } from 'lucide-react';
 
 interface StatCardProps {
-  icon: any;
+  icon: React.ElementType;
   label: string;
   value: string;
   trend: string;

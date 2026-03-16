@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 // ─── Stat Card ───────────────────────────────────────────────────────────────
 
 interface StatCardProps {
-  icon: any;
+  icon: React.ElementType;
   label: string;
   value: string;
   trend: string;
@@ -75,7 +75,7 @@ function ClientRow({ initials, name, detail, status }: ClientRowProps) {
 // ─── Pending Document Row ─────────────────────────────────────────────────────
 
 interface DocumentRowProps {
-  icon: any;
+  icon: React.ElementType;
   title: string;
   uploadedBy: string;
 }

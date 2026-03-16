@@ -3,13 +3,13 @@ import { FileText, RefreshCw, CheckCircle2, XCircle, TrendingUp, TrendingDown } 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface StatItem {
-  icon: any;
+  icon: React.ElementType;
   iconClass: string;
   label: string;
   value: string;
   trend: string;
   trendClass: string;
-  trendIcon: any;
+  trendIcon: React.ElementType;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────

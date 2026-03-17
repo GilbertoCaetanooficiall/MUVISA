@@ -1,10 +1,8 @@
-
 import type { Metadata } from 'next';
 import AdminLayout from '@/components/admin/AdminLayout';
-import ClientStats from '@/components/admin/clients/ClientStats';
 import ClientFilters from '@/components/admin/clients/ClientFilters';
 import ClientsTable from '@/components/admin/clients/ClientsTable';
-import { FileDown, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { supabaseAdmin } from '@/lib/db';
 
 export const metadata: Metadata = {
@@ -52,6 +50,7 @@ export default async function AdminClientsPage() {
         <ClientFilters />
 
         {/* Table */}
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <ClientsTable processos={processos as any} />
       </div>
     </AdminLayout>

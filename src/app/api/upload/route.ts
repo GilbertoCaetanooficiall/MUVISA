@@ -84,38 +84,82 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar que o documento pertence ao utilizador
-    const { data: documento, error: errDoc } = await supabaseAdmin
-      .from('documento')
-      .select('id, processo_id')
-      .eq('id', documentoId)
-      .single();
+    let actualDocumentoId = documentoId;
+    let actualProcessoId = formData.get('processo_id') as string | null;
 
-    if (errDoc || !documento) {
-      return NextResponse.json({ error: 'Documento não encontrado.' }, { status: 404 });
-    }
+    if (documentoId === 'novo') {
+      if (!actualProcessoId) {
+        return NextResponse.json({ error: 'processo_id obrigatório para novos documentos.' }, { status: 400 });
+      }
+      // Verificar ownership do processo
+      const { data: processo } = await supabaseAdmin
+        .from('processo')
+        .select('id, estudante_id')
+        .eq('id', actualProcessoId)
+        .single();
+        
+      const { data: estudante } = await supabaseAdmin
+        .from('estudante')
+        .select('utilizador_id')
+        .eq('id', processo?.estudante_id)
+        .single();
 
-    // Verificar ownership do processo
-    const { data: processo } = await supabaseAdmin
-      .from('processo')
-      .select('id, estudante_id')
-      .eq('id', documento.processo_id)
-      .single();
+      if (estudante?.utilizador_id !== session.user.id) {
+        return NextResponse.json({ error: 'Acesso negado ao processo.' }, { status: 403 });
+      }
 
-    const { data: estudante } = await supabaseAdmin
-      .from('estudante')
-      .select('utilizador_id')
-      .eq('id', processo?.estudante_id)
-      .single();
+      // Criar o documento
+      const { data: novoDoc, error: errCriar } = await supabaseAdmin
+        .from('documento')
+        .insert({
+          processo_id: actualProcessoId,
+          nome: parsed.data.nome,
+          estado: 'enviado',
+          enviado_em: new Date().toISOString()
+        })
+        .select('id')
+        .single();
 
-    if (estudante?.utilizador_id !== session.user.id) {
-      return NextResponse.json({ error: 'Acesso negado.' }, { status: 403 });
+      if (errCriar || !novoDoc) {
+        return NextResponse.json({ error: 'Erro ao criar registo de documento.' }, { status: 500 });
+      }
+      actualDocumentoId = novoDoc.id;
+    } else {
+      // Verificar que o documento existe e pertence ao utilizador
+      const { data: documento, error: errDoc } = await supabaseAdmin
+        .from('documento')
+        .select('id, processo_id')
+        .eq('id', documentoId)
+        .single();
+
+      if (errDoc || !documento) {
+        return NextResponse.json({ error: 'Documento não encontrado.' }, { status: 404 });
+      }
+      
+      actualProcessoId = documento.processo_id;
+
+      // Verificar ownership do processo
+      const { data: processo } = await supabaseAdmin
+        .from('processo')
+        .select('id, estudante_id')
+        .eq('id', actualProcessoId)
+        .single();
+
+      const { data: estudante } = await supabaseAdmin
+        .from('estudante')
+        .select('utilizador_id')
+        .eq('id', processo?.estudante_id)
+        .single();
+
+      if (estudante?.utilizador_id !== session.user.id) {
+        return NextResponse.json({ error: 'Acesso negado ao documento.' }, { status: 403 });
+      }
     }
 
     // Nome de ficheiro gerado pelo servidor
     const ext = getFileExtension(parsed.data.tipo);
     const timestamp = Date.now();
-    const storagePath = `${session.user.id}/${documentoId}/${timestamp}.${ext}`;
+    const storagePath = `${session.user.id}/${actualDocumentoId}/${timestamp}.${ext}`;
 
     // Upload para Supabase Storage
     const { error: uploadError } = await supabaseAdmin.storage
@@ -143,7 +187,7 @@ export async function POST(request: NextRequest) {
         estado: 'enviado',
         enviado_em: new Date().toISOString(),
       })
-      .eq('id', documentoId);
+      .eq('id', actualDocumentoId);
 
     await registarAuditoria({
       utilizadorId: session.user.id,

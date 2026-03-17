@@ -26,28 +26,53 @@ function formatSize(bytes: number) {
         : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-export default function UploadZone() {
+export default function UploadZone({ processoId }: { processoId?: string }) {
     const [isDragging, setIsDragging] = useState(false);
     const [uploads, setUploads] = useState<UploadedFile[]>([]);
     const [error, setError] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    function simulateUpload(id: string) {
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.floor(Math.random() * 20) + 10;
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
+    async function realUpload(id: string, file: File) {
+        if (!processoId) {
+            setError('Nenhum processo activo encontrado.');
+            setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, status: "error" } : u)));
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('nome', file.name);
+        formData.append('documento_id', 'novo');
+        formData.append('processo_id', processoId);
+
+        try {
+            // Fake progress
+            const interval = setInterval(() => {
                 setUploads((prev) =>
-                    prev.map((u) => (u.id === id ? { ...u, progress: 100, status: "done" } : u))
+                    prev.map((u) => (u.id === id && u.progress < 90 ? { ...u, progress: u.progress + 15 } : u))
                 );
-            } else {
-                setUploads((prev) =>
-                    prev.map((u) => (u.id === id ? { ...u, progress } : u))
-                );
+            }, 200);
+
+            const res = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            clearInterval(interval);
+            
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || 'Erro no upload');
             }
-        }, 300);
+
+            setUploads((prev) =>
+                prev.map((u) => (u.id === id ? { ...u, progress: 100, status: "done" } : u))
+            );
+            // Opcional: recarregar a página ou refrescar a lista de ficheiros
+        } catch (err: any) {
+            setError(err.message || 'Erro a enviar ficheiro');
+            setUploads((prev) => prev.map((u) => (u.id === id ? { ...u, status: "error" } : u)));
+        }
     }
 
     function processFiles(files: FileList | null) {
@@ -64,9 +89,9 @@ export default function UploadZone() {
                 return;
             }
             const id = `${file.name}-${Date.now()}`;
-            const newUpload: UploadedFile = { id, file, progress: 0, status: "uploading" };
+            const newUpload: UploadedFile = { id, file, progress: 10, status: "uploading" };
             setUploads((prev) => [...prev, newUpload]);
-            simulateUpload(id);
+            realUpload(id, file);
         });
     }
 

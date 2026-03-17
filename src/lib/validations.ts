@@ -104,7 +104,7 @@ export const uploadSchema = z.object({
     z.literal('image/png'),
     z.literal('image/webp'),
   ], { message: 'Tipo não permitido. Use PDF, JPEG, PNG ou WebP.' }),
-  documento_id: z.string().uuid('ID do documento inválido'),
+  documento_id: z.string().min(1, 'ID do documento ou "novo" obrigatório'),
 });
 
 export type LoginInput = z.infer<typeof loginSchema>;

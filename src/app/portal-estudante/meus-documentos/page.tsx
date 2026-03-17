@@ -1,3 +1,8 @@
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth';
+import { getProcessoByEstudante } from '@/app/actions/processo.actions';
+import { getDocumentosByProcesso } from '@/app/actions/documento.actions';
+
 import UploadZone from "@/components/portal-estudante/meus-documentos/UploadZone";
 import FilesTable from "@/components/portal-estudante/meus-documentos/FilesTable";
 import AgencyDocuments from "@/components/portal-estudante/meus-documentos/AgencyDocuments";
@@ -5,7 +10,13 @@ import DocumentChecklist from "@/components/portal-estudante/meus-documentos/Doc
 import HelpWidget from "@/components/portal-estudante/meus-documentos/HelpWidget";
 import Footer from "@/components/portal-estudante/Footer";
 
-export default function MeusDocumentosPage() {
+export default async function MeusDocumentosPage() {
+    const session = await auth();
+    if (!session?.user?.id) return redirect('/login');
+
+    const processo = await getProcessoByEstudante(session.user.id);
+    const documentos = processo ? await getDocumentosByProcesso(processo.id) : [];
+
     return (
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
             {/* Left Column - Main Content */}
@@ -19,8 +30,8 @@ export default function MeusDocumentosPage() {
                     </p>
                 </div>
 
-                <UploadZone />
-                <FilesTable />
+                <UploadZone processoId={processo?.id} />
+                <FilesTable documentos={documentos as any} />
                 <AgencyDocuments />
 
                 <Footer />
@@ -28,7 +39,7 @@ export default function MeusDocumentosPage() {
 
             {/* Right Column - Sidebar Widgets */}
             <div className="w-full lg:w-80 flex flex-col gap-6">
-                <DocumentChecklist />
+                <DocumentChecklist documentos={documentos as any} />
                 <HelpWidget />
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { GraduationCap, Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/portal-estudante/ThemeToggle';

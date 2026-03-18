@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface ApplicationFormModalProps {
   isOpen: boolean;
@@ -37,7 +38,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -66,10 +67,12 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
         <header className="bg-white px-8 pt-10 pb-6 text-center">
           <div className="mb-4 inline-block">
             {/* MUVISA Logo Placeholder */}
-            <img 
+            <Image 
               alt="MUVISA Logo" 
-              className="h-10 mx-auto" 
+              className="h-10 mx-auto w-auto" 
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsHaZ3XdIPu2mQqwEFD5LCfKrJOlrkRc_ZooMk4O9DnRndvAQ4MtqSe8IOEwMS52rUcLqbpzkKCoRba4lhUu1MZQkOs210g2sNhMNQANvmRg4GbAvy4spqaiYLH5KxU6bdEVn_P9MTIEf2J5u0A4oOT9NefDbAbpfUrupc335vSRDqA24MWuF2lB-FwAtsEzece618OmtCSnavFpuCIX_IxsLujvKixFAsCSjs9yj33wQL3hZFh8NbFTGaplXMFjPZNPRaBxYsB8rn" 
+              width={150}
+              height={40}
             />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Crie sua Conta de Estudante</h1>
@@ -213,7 +216,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
             </button>
           </div>
           <p className="text-center text-xs text-gray-400 mt-4">
-            Ao clicar em "Criar conta", você concorda com nossos Termos de Serviço e Política de Privacidade.
+            Ao clicar em &quot;Criar conta&quot;, você concorda com nossos Termos de Serviço e Política de Privacidade.
           </p>
         </form>
         {/* END: Registration Form */}

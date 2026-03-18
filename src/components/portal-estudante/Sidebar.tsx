@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { PlaneTakeoff, Settings, Home, Briefcase, FolderOpen, CreditCard, Headset } from 'lucide-react';
+import { Settings, Home, Briefcase, FolderOpen, CreditCard, Headset } from 'lucide-react';
 
 import Link from "next/link";
 import Image from "next/image";

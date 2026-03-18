@@ -15,8 +15,7 @@ import {
   Mail, 
   UserCog, 
   BarChart3,
-  Settings,
-  PlaneTakeoff
+  Settings
 } from 'lucide-react';
 
 const navItems = [

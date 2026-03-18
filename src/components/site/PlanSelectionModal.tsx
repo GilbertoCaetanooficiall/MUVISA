@@ -114,19 +114,19 @@ export default function PlanSelectionModal({ plan, onClose }: PlanSelectionModal
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-md transition-opacity duration-300"
       aria-modal="true"
       role="dialog"
       aria-label="Selecionar Plano"
+      onClick={onClose}
     >
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
+
 
       {/* Modal Panel */}
-      <div className="relative z-10 w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+      <div 
+        className="relative z-10 w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transform transition-all duration-300 scale-100 opacity-100 animate-[fade-in_0.3s_ease-out]"
+        onClick={(e) => e.stopPropagation()}
+      >
 
         {/* Close Button */}
         <button

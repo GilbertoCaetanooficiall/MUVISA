@@ -1,5 +1,4 @@
-import { CalendarDays, Clock, ExternalLink, Handshake, Mail, MapPin, Search, Star } from 'lucide-react';
-import Link from 'next/link';
+import { Clock, ExternalLink, Handshake, Mail, MapPin, Search, Star } from 'lucide-react';
 export default function SiteSobrePage() {
   return (
     <>

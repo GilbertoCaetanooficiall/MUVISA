@@ -1,5 +1,4 @@
-import { BadgeCheck, Building2, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Users } from 'lucide-react';
-import Link from 'next/link';
+import { BadgeCheck, Building2, CheckCircle, FileSignature, GraduationCap } from 'lucide-react';
 import PlansSection from '@/components/site/PlansSection';
 export default function SiteServicosPage() {
   return (

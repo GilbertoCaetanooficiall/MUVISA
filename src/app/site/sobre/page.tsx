@@ -67,6 +67,7 @@ export default function SiteSobrePage() {
         </div>
       </section>
 
+
       <section className="py-24 bg-white dark:bg-background-dark relative overflow-hidden transition-colors">
         <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
@@ -196,20 +197,60 @@ export default function SiteSobrePage() {
         </div>
       </section>
 
-      <section className="py-20 relative overflow-hidden bg-primary">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1592345279419-95a10728904e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>
-        <div className="container mx-auto px-4 relative z-10 text-center max-w-4xl">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-display">Faça parte da nossa história</h2>
-          <p className="text-white/80 text-lg mb-10 font-display max-w-2xl mx-auto">
-            Já ajudamos mais de 500 estudantes a realizarem seus sonhos. O próximo pode ser você.
-          </p>
-          <Link href="/site/contato">
-            <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg text-lg hover:bg-slate-50 transition-colors shadow-xl font-display inline-flex items-center gap-2">
-              Agendar Minha Consultoria
-              <CalendarDays />
-            </button>
-          </Link>
+      {/* SEÇÃO NOSSO TIME */}
+      <section className="py-24 bg-white dark:bg-background-dark relative overflow-hidden transition-colors border-t border-slate-200 dark:border-slate-800">
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-16 font-display tracking-tight">Nosso Time</h2>
+          
+          <div className="flex flex-wrap justify-center gap-10 md:gap-16">
+            {/* Gilberto Caetano */}
+            <div className="flex flex-col items-center group w-64">
+              <div className="w-44 h-44 rounded-full border-4 border-blue-500 p-1 mb-5 shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-transform duration-500 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/team/gilberto-caetano.jpg" alt="Gilberto Caetano" className="w-full h-full object-cover rounded-full" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 font-display">Gilberto Caetano</h3>
+              <span className="py-1.5 px-5 bg-blue-100 dark:bg-blue-900/40 text-blue-900 dark:text-blue-300 text-sm font-bold rounded-full">
+                Director Geral
+              </span>
+            </div>
+
+            {/* Edmar Dumbo */}
+            <div className="flex flex-col items-center group w-64">
+              <div className="w-44 h-44 rounded-full border-4 border-emerald-500 p-1 mb-5 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-transform duration-500 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/team/edmar-dumbo.jpg" alt="Edmar Dumbo" className="w-full h-full object-cover rounded-full" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 font-display">Edmar Dumbo</h3>
+              <span className="py-1.5 px-5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-900 dark:text-emerald-300 text-sm font-bold rounded-full">
+                Comercial & Marketing
+              </span>
+            </div>
+
+            {/* Eurio */}
+            <div className="flex flex-col items-center group w-64">
+              <div className="w-44 h-44 rounded-full border-4 border-teal-500 p-1 mb-5 shadow-[0_0_20px_rgba(20,184,166,0.3)] transition-transform duration-500 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.5)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/team/eurio.jpg" alt="Eurio Fernandes" className="w-full h-full object-cover rounded-full object-top" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 font-display">Eurio Fernandes</h3>
+              <span className="py-1.5 px-5 bg-teal-100 dark:bg-teal-900/40 text-teal-900 dark:text-teal-300 text-sm font-bold rounded-full">
+                Intercâmbio
+              </span>
+            </div>
+
+            {/* Ronaldo Joaquim */}
+            <div className="flex flex-col items-center group w-64">
+              <div className="w-44 h-44 rounded-full border-4 border-amber-500 p-1 mb-5 shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-transform duration-500 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/team/ronaldo-joaquim.jpg" alt="Ronaldo Joaquim" className="w-full h-full object-cover rounded-full object-top" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3 font-display">Ronaldo Joaquim</h3>
+              <span className="py-1.5 px-5 bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-300 text-sm font-bold rounded-full whitespace-nowrap">
+                Suporte & Experiência do Cliente
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     </>

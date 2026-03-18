@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/portal-estudante/ThemeToggle';
@@ -35,15 +35,6 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Vistos de Estudo</h3>
-            <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400 font-display">
-              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Ensino Superior (D4)</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Ensino Secundário (D4)</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Investigação & Ensino (D3)</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Estágios & Voluntariado</Link></li>
-            </ul>
-          </div>
-          <div>
             <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Suporte</h3>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400 font-display">
               <li><Link className="hover:text-primary transition-colors" href="/site/casos-de-sucesso">Casos de Sucesso</Link></li>
@@ -68,6 +59,27 @@ export default function SiteFooter() {
                 <span>+351 21 000 0000</span>
               </li>
             </ul>
+          </div>
+          <div>
+            <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Newsletter</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 font-display mb-4">
+              Receba atualizações sobre prazos e bolsas.
+            </p>
+            <form className="relative flex items-center">
+              <input 
+                type="email" 
+                placeholder="Seu email" 
+                className="w-full bg-slate-50 dark:bg-[#1C1F26] border border-slate-200 dark:border-slate-800 rounded-lg py-3 pl-4 pr-12 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary transition-all placeholder:text-slate-500"
+                required
+              />
+              <button 
+                type="submit" 
+                className="absolute right-1 top-1 bottom-1 bg-[#2563EB] text-white rounded-md w-10 flex items-center justify-center hover:bg-blue-700 transition-colors"
+                aria-label="Inscrever"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </form>
           </div>
         </div>
         <div className="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">

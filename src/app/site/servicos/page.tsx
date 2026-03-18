@@ -165,88 +165,13 @@ export default function SiteServicosPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-background-dark">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-gradient-to-r from-primary/40 to-slate-900 rounded-2xl p-8 md:p-12 border border-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-            <div className="absolute inset-0 bg-primary/5 pattern-dots opacity-30"></div>
-            <div className="relative z-10 flex-1">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-display">Consultoria Estratégica Completa</h3>
-              <p className="text-slate-300 mb-6 font-display">Aproveite nossa oferta especial para uma análise de perfil completa com nossos especialistas seniores.</p>
-              <div className="flex items-center gap-4">
-                <span className="text-3xl font-black text-primary font-display">250.000 Kz</span>
-                <span className="text-sm text-slate-400 line-through font-display">400.000 Kz</span>
-                <span className="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded font-display">-37% OFF</span>
-              </div>
-            </div>
-            <div className="relative z-10">
-              <Link href="/site/contato">
-                <button className="px-8 py-4 bg-white text-primary font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-lg font-display whitespace-nowrap">
-                  Garantir Desconto
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
 
 
-      <section className="py-16 bg-white dark:bg-background-dark transition-colors">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-4">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <Users className="text-2xl" />
-              </div>
-              <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Equipa Especializada</h4>
-              <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Profissionais com vasta experiência</p>
-            </div>
-            <div className="p-4">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <BadgeCheck className="text-2xl" />
-              </div>
-              <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Alta Aprovação</h4>
-              <p className="text-slate-500 dark:text-slate-500 text-sm font-display">98% de sucesso nos processos</p>
-            </div>
-            <div className="p-4">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <Headset className="text-2xl" />
-              </div>
-              <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Suporte Dedicado</h4>
-              <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Atendimento humanizado</p>
-            </div>
-            <div className="p-4">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
-                <Lock className="text-2xl" />
-              </div>
-              <h4 className="text-slate-900 dark:text-white font-bold mb-1 font-display">Segurança Total</h4>
-              <p className="text-slate-500 dark:text-slate-500 text-sm font-display">Dados protegidos e sigilo</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="py-24 relative overflow-hidden bg-primary">
-        <div className="absolute inset-0 bg-background-dark/20 mix-blend-multiply"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center opacity-10"></div>
-        <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 font-display">Comece seu futuro hoje mesmo</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/site/contato">
-              <button className="h-14 px-8 rounded-lg bg-white text-primary text-lg font-bold hover:bg-slate-100 transition-all shadow-xl flex items-center justify-center gap-3 font-display">
-                Falar com Especialista
-                <MessageCircle />
-              </button>
-            </Link>
-            <Link href="/site/contato">
-              <button className="h-14 px-8 rounded-lg bg-primary text-white border border-white/30 text-lg font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-3 font-display backdrop-blur-sm">
-                Pedir Cotação
-                <FileSignature />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
+
+
+
     </>
   );
 }

@@ -50,31 +50,6 @@ export default function SiteHomePage() {
         </div>
       </section>
 
-      {/* SEÇÃO DE NÚMEROS: Prova social e estatísticas da empresa */}
-      <section className="py-12 bg-white dark:bg-card-dark border-y border-slate-200 dark:border-slate-800 transition-colors">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-200 dark:divide-slate-800/50">
-            <div className="p-4">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2 font-display">+500</div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium font-display">Vistos Aprovados</div>
-            </div>
-            {/* Outros itens de estatística... */}
-            <div className="p-4">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2 font-display">98%</div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium font-display">Taxa de Aprovação</div>
-            </div>
-            <div className="p-4">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2 font-display">50+</div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium font-display">Universidades Parceiras</div>
-            </div>
-            <div className="p-4">
-              <div className="text-4xl md:text-5xl font-black text-primary mb-2 font-display">24h</div>
-              <div className="text-slate-600 dark:text-slate-400 font-medium font-display">Suporte Dedicado</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* SEÇÃO DE DIFERENCIAIS: Cards que explicam o porquê da empresa */}
       <section className="py-20 bg-background-light dark:bg-background-dark">
         <div className="container mx-auto px-4 max-w-7xl">

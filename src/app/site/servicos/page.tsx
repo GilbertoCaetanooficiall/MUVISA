@@ -1,5 +1,6 @@
-import { BadgeCheck, Building2, Check, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Users, X } from 'lucide-react';
+import { BadgeCheck, Building2, CheckCircle, FileSignature, GraduationCap, Headset, Lock, MessageCircle, Users } from 'lucide-react';
 import Link from 'next/link';
+import PlansSection from '@/components/site/PlansSection';
 export default function SiteServicosPage() {
   return (
     <>
@@ -160,54 +161,7 @@ export default function SiteServicosPage() {
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4 font-display">Planos de Assessoria</h2>
             <p className="text-slate-600 dark:text-slate-400 font-display">Escolha o nível de suporte ideal para a sua necessidade.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Plano Básico */}
-            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 flex flex-col">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Essencial</h3>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">400.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
-              <ul className="space-y-4 mb-8 flex-1 text-slate-600 dark:text-slate-300 text-sm font-display">
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Checklist de documentos</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Revisão de dossiê</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Agendamento consular</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Acesso ao Portal do Aluno</li>
-                <li className="flex items-center gap-3 opacity-50"><X className="text-slate-400 dark:text-slate-600 text-sm" /> Termo de Responsabilidade</li>
-              </ul>
-              <Link href="/site/contato" className="w-full">
-                <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
-              </Link>
-            </div>
-            {/* Plano Premium */}
-            <div className="bg-gradient-to-b from-primary/10 to-white dark:from-primary/20 dark:to-card-dark rounded-2xl p-8 border border-primary relative flex flex-col transform md:-translate-y-4 shadow-2xl shadow-primary/10">
-              <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg font-display">RECOMENDADO</div>
-              <h3 className="text-xl font-bold text-primary mb-2 font-display">Diamond</h3>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">1.000.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
-              <ul className="space-y-4 mb-8 flex-1 text-slate-700 dark:text-slate-200 text-sm font-display">
-                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Tudo do Acadêmico</li>
-                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Abertura de NIF e Conta</li>
-                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Busca de Moradia/Residência</li>
-                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Orientação de Chegada & SEF</li>
-                <li className="flex items-center gap-3"><Check className="text-primary text-sm" /> Suporte Premium 24h</li>
-              </ul>
-              <Link href="/site/contato" className="w-full">
-                <button className="w-full py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary-hover transition-colors shadow-lg font-display">Começar Agora</button>
-              </Link>
-            </div>
-            {/* Plano Intermédio */}
-            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 flex flex-col">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 font-display">Acadêmico</h3>
-              <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 font-display">700.000 <span className="text-lg font-normal text-slate-500 dark:text-slate-400">Kz</span></div>
-              <ul className="space-y-4 mb-8 flex-1 text-slate-600 dark:text-slate-300 text-sm font-display">
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Tudo do Essencial</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Escolha de Universidade</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Apoio na Matrícula/Admissão</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Termo de Responsabilidade</li>
-                <li className="flex items-center gap-3"><Check className="text-green-500 text-sm" /> Extracto Bancário</li>
-              </ul>
-              <Link href="/site/contato" className="w-full">
-                <button className="w-full py-3 rounded-lg border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-display">Selecionar</button>
-              </Link>
-            </div>
-          </div>
+          <PlansSection />
         </div>
       </section>
 

@@ -1,7 +1,7 @@
-import { UniversityCard } from '@/components/site/UniversityCard';
 import { CostEstimator } from '@/components/site/CostEstimator';
 import { MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import { UniversitiesSection } from '@/components/site/UniversitiesSection';
 
 export const metadata = {
     title: 'Estudar em Portugal | MUVISA',
@@ -53,28 +53,7 @@ export default function EstudarEmPortugalPage() {
             <div className="py-12 lg:py-20">
 
                 {/* SECTION 1 — UNIVERSITIES GRID */}
-                <section className="container mx-auto px-4 max-w-7xl mb-24">
-                    <div className="text-center mb-12">
-                        <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-[1.1] mb-6 tracking-tight font-display">
-                            Universidades em <span className="text-primary">Portugal</span>
-                        </h1>
-                        <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-display">
-                            As melhores instituições de ensino superior aguardam por você.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {UNIVERSITIES.map((uni, idx) => (
-                            <UniversityCard
-                                key={idx}
-                                name={uni.name}
-                                city={uni.city}
-                                image={uni.image}
-                                description={uni.description}
-                            />
-                        ))}
-                    </div>
-                </section>
+                <UniversitiesSection universities={UNIVERSITIES} />
 
                 {/* SECTION 2 — COST SIMULATOR */}
                 <section className="bg-slate-50 dark:bg-background-dark py-20 border-y border-slate-200 dark:border-slate-800 transition-colors">

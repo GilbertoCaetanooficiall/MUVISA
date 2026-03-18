@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { UserCheck, Mail, Lock, EyeOff, LogIn, ArrowLeft } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, Lock, EyeOff, LogIn, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Login Admin – MUVISA',
@@ -49,11 +50,10 @@ export default function AdminLoginPage() {
             />
             {/* Logo */}
             <div className="relative z-10 flex flex-col items-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#1358b2] shadow-lg mb-3">
-                <UserCheck size={32} />
-              </div>
-              <h1 className="text-2xl font-bold tracking-tight text-white">MUVISA</h1>
-              <p className="text-white/70 text-xs mt-1 font-medium uppercase tracking-widest">Admin Portal</p>
+              <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={35} className="h-[40px] w-auto object-contain drop-shadow-lg block md:hidden mb-2" priority />
+              <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[50px] w-auto object-contain drop-shadow-lg hidden md:block dark:hidden mb-2" priority />
+              <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[50px] w-auto object-contain drop-shadow-lg hidden dark:md:block mb-2" priority />
+              <p className="text-white text-[11px] font-bold uppercase tracking-widest drop-shadow-md">Admin Portal</p>
             </div>
           </div>
 

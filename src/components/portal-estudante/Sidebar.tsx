@@ -3,6 +3,7 @@
 import { PlaneTakeoff, Settings, Home, Briefcase, FolderOpen, CreditCard, Headset } from 'lucide-react';
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useMobileMenu } from "@/components/portal-estudante/MobileMenuContext";
 
@@ -27,14 +28,11 @@ export default function Sidebar() {
                 />
             )}
             <aside className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex flex-col z-50 transform transition-transform duration-300 ease-in-out md:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                <div className="p-6 flex items-center gap-3">
-                    <div className="bg-primary/10 p-2 rounded-lg">
-                        <PlaneTakeoff className="text-primary text-3xl" />
-                    </div>
-                    <div className="flex flex-col">
-                        <h1 className="text-slate-900 dark:text-white text-base font-bold leading-tight">MUVISA</h1>
-                        <p className="text-slate-500 dark:text-slate-400 text-xs font-medium">Student Portal</p>
-                    </div>
+                <div className="p-6 flex flex-col items-start gap-2 border-b border-transparent dark:border-slate-800">
+                    <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={30} className="h-[35px] w-auto object-contain block md:hidden" priority />
+                    <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" priority />
+                    <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" priority />
+                    <p className="text-slate-500 dark:text-slate-400 text-[11px] font-bold uppercase tracking-wider ml-1">Student Portal</p>
                 </div>
                 <nav className="flex-1 px-4 py-4 flex flex-col gap-2 overflow-y-auto">
                     {navLinks.map((link) => {

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
@@ -86,13 +87,10 @@ export default function CadastroPage() {
         {/* ── Sidebar / Steps ── */}
         <div className="bg-black/40 w-full md:w-1/3 p-8 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between">
           <div>
-            <div className="flex items-center gap-2 mb-10">
-              <div className="bg-primary p-1.5 rounded-lg">
-                <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                </svg>
-              </div>
-              <h2 className="text-xl font-bold tracking-tight text-white">MUVISA</h2>
+            <div className="flex flex-col items-start mb-10 border-b border-transparent dark:border-white/10">
+              <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={35} className="h-[35px] w-auto object-contain block md:hidden" priority />
+              <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" priority />
+              <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" priority />
             </div>
 
             <nav aria-label="Progress" className="space-y-6">

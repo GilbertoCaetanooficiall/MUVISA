@@ -1,5 +1,6 @@
 import { GraduationCap, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ThemeToggle } from '@/components/portal-estudante/ThemeToggle';
 
 export default function SiteFooter() {
@@ -8,9 +9,10 @@ export default function SiteFooter() {
       <div className="container mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
-            <Link href="/site" className="flex items-center gap-2 mb-4 text-primary">
-              <GraduationCap className="text-2xl" />
-              <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight font-display">MUVISA</span>
+            <Link href="/site" className="flex items-center mb-6">
+              <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={30} className="h-[35px] w-auto object-contain block md:hidden" />
+              <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" />
+              <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" />
             </Link>
             <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 font-display">
               Facilitamos a sua mobilidade acadêmica com transparência e segurança. Especialistas em vistos de estudo para Portugal.
@@ -44,9 +46,9 @@ export default function SiteFooter() {
           <div>
             <h3 className="font-bold text-slate-900 dark:text-white mb-4 font-display">Suporte</h3>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400 font-display">
-              <li><Link className="hover:text-primary transition-colors" href="/site/sobre">Casos de Sucesso</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/sobre">FAQ do Estudante</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Alojamento</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/casos-de-sucesso">Casos de Sucesso</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/faq-do-estudante">FAQ do Estudante</Link></li>
+              <li><Link className="hover:text-primary transition-colors" href="/site/alojamento">Alojamento</Link></li>
               <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Seguro Saúde (PB4)</Link></li>
             </ul>
           </div>

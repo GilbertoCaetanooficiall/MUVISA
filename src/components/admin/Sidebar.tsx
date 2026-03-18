@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import { 
@@ -37,18 +38,13 @@ export default function Sidebar() {
   return (
     <aside className="w-64 flex-shrink-0 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
       {/* Logo */}
-      <div className="p-6 flex items-center gap-3">
-        <div className="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
-          <PlaneTakeoff size={24} />
-        </div>
-        <div>
-          <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-            MUVISA
-          </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider">
-            Admin Portal
-          </p>
-        </div>
+      <div className="p-6 flex flex-col items-start gap-2 border-b border-transparent dark:border-slate-800">
+        <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={30} className="h-[35px] w-auto object-contain block md:hidden" priority />
+        <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" priority />
+        <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" priority />
+        <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider ml-1">
+          Admin Portal
+        </p>
       </div>
 
       {/* Navigation */}

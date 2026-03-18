@@ -1,0 +1,55 @@
+<svg viewBox="0 0 500 110" width="500" height="110" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gArc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+    <linearGradient id="gBook" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="gPerson" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="gText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0369a1"/>
+      <stop offset="40%" stop-color="#0ea5e9"/>
+      <stop offset="60%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0369a1" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <ellipse cx="55" cy="88" rx="34" ry="4" fill="#0369a1" opacity="0.15"/>
+    <path d="M22 58 C28 46 40 40 55 38 L55 82 C40 80 27 78 20 84 Z" fill="url(#gBook)"/>
+    <path d="M24 60 C29 50 40 44 53 42 L53 78 C40 76 28 74 22 80 Z" fill="#38bdf8" opacity="0.3"/>
+    <line x1="29" y1="54" x2="50" y2="50" stroke="#fff" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="28" y1="60" x2="49" y2="56" stroke="#fff" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="27" y1="66" x2="49" y2="63" stroke="#fff" stroke-width="1" stroke-opacity="0.3"/>
+    <line x1="27" y1="72" x2="49" y2="70" stroke="#fff" stroke-width="1" stroke-opacity="0.2"/>
+    <path d="M88 58 C82 46 70 40 55 38 L55 82 C70 80 83 78 90 84 Z" fill="url(#gBook)" opacity="0.85"/>
+    <path d="M86 60 C81 50 70 44 57 42 L57 78 C70 76 82 74 88 80 Z" fill="#38bdf8" opacity="0.2"/>
+    <line x1="81" y1="54" x2="60" y2="50" stroke="#fff" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="82" y1="60" x2="61" y2="56" stroke="#fff" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="83" y1="66" x2="61" y2="63" stroke="#fff" stroke-width="1" stroke-opacity="0.3"/>
+    <line x1="83" y1="72" x2="61" y2="70" stroke="#fff" stroke-width="1" stroke-opacity="0.2"/>
+    <path d="M20 84 C37 92 73 92 90 84 L90 87 C73 95 37 95 20 87 Z" fill="#0369a1"/>
+    <rect x="54" y="38" width="2" height="44" fill="#0369a1" rx="1"/>
+    <path d="M10 72 C12 40 32 12 55 10 C78 12 98 40 100 72" fill="none" stroke="url(#gArc)" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+    <path d="M16 70 C18 42 34 18 55 16 C76 18 92 42 94 70" fill="none" stroke="#86efac" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+    <circle cx="55" cy="30" r="8.5" fill="url(#gPerson)"/>
+    <circle cx="55" cy="30" r="6" fill="#0ea5e9"/>
+    <path d="M42 52 C46 40 50 36 55 34 C60 36 64 40 68 52" fill="none" stroke="url(#gPerson)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M42 52 C38 44 35 38 33 32" fill="none" stroke="url(#gPerson)" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M68 52 C72 44 75 38 77 32" fill="none" stroke="url(#gPerson)" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="33" cy="31" r="3.5" fill="#22c55e"/>
+    <circle cx="77" cy="31" r="3.5" fill="#22c55e"/>
+  </g>
+
+  <text x="118" y="76" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="58" fill="url(#gText)" letter-spacing="2">MUVISA</text>
+  <text x="120" y="95" font-family="Arial, sans-serif" font-weight="400" font-size="11" fill="#64748b" letter-spacing="3">ASSESSORIA ACADÉMICA</text>
+</svg>

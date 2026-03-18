@@ -1,8 +1,7 @@
 "use client";
 import { GraduationCap, Menu, X } from 'lucide-react';
-
-
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -26,11 +25,10 @@ export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-3 lg:px-10 transition-colors duration-300">
       <div className="flex items-center gap-4">
-        <Link href="/site" className="flex items-center gap-4">
-          <div className="flex items-center justify-center text-primary">
-            <GraduationCap className="text-3xl" />
-          </div>
-          <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] font-display">MUVISA</h2>
+        <Link href="/site" className="flex items-center">
+          <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={30} className="h-[35px] w-auto object-contain block md:hidden" priority />
+          <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" priority />
+          <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" priority />
         </Link>
       </div>
 

@@ -5,9 +5,10 @@ interface UniversityCardProps {
     city: string;
     image: string;
     description: string;
+    onSelect?: () => void;
 }
 
-export function UniversityCard({ name, city, image, description }: UniversityCardProps) {
+export function UniversityCard({ name, city, image, description, onSelect }: UniversityCardProps) {
     return (
         <div className="group relative overflow-hidden rounded-2xl bg-white dark:bg-card-dark shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-slate-200 dark:border-slate-800 flex flex-col h-full">
             <div className="relative h-48 w-full overflow-hidden">
@@ -36,7 +37,10 @@ export function UniversityCard({ name, city, image, description }: UniversityCar
                     {description}
                 </p>
 
-                <button className="w-full h-11 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors font-display">
+                <button 
+                    className="w-full h-11 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors font-display"
+                    onClick={onSelect}
+                >
                     Selecionar
                 </button>
             </div>

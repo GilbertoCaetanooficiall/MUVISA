@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { CheckCircle, PlaneTakeoff, MapPin, User, Upload, Headset, Compass, ArrowRight } from 'lucide-react';
 
 export default function BoasVindasPage() {
@@ -11,14 +12,11 @@ export default function BoasVindasPage() {
 
       <div className="w-full max-w-3xl bg-slate-950/60 backdrop-blur-2xl rounded-[24px] shadow-2xl border border-white/10 overflow-hidden flex flex-col relative z-10 animate-fade-in">
         {/* Header logo */}
-        <div className="px-8 pt-8 pb-0 flex justify-center md:justify-start w-full">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary p-1.5 rounded-lg shadow-lg shadow-primary/30">
-              <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight text-white drop-shadow-sm">MUVISA</h2>
+        <div className="px-8 pt-8 pb-0 flex justify-center md:justify-start w-full border-b border-transparent dark:border-white/10">
+          <div className="flex items-center">
+            <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={35} className="h-[35px] w-auto object-contain block md:hidden" priority />
+            <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" priority />
+            <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" priority />
           </div>
         </div>
 

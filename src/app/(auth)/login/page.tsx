@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function LoginPage() {
@@ -12,13 +13,9 @@ export default function LoginPage() {
       {/* BEGIN: Brand & Social Proof Column */}
       <section className="hidden lg:flex flex-col space-y-8 text-left" data-purpose="branding-info">
         <div className="flex items-center space-y-2 flex-col items-start">
-          <div className="flex items-center space-x-3 mb-4">
-            <div className="bg-primary p-2 rounded-lg">
-              <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-              </svg>
-            </div>
-            <span className="text-3xl font-bold tracking-tight">MUVISA</span>
+          <div className="flex items-center mb-6">
+            <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain block dark:hidden" priority />
+            <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:block" priority />
           </div>
           <h1 className="text-5xl font-extrabold leading-tight">
             Especialistas em Vistos <span className="text-primary">D4</span> e <span className="text-blue-400">D7</span> para Portugal
@@ -61,14 +58,7 @@ export default function LoginPage() {
         <div className="bg-slate-950/60 backdrop-blur-2xl border border-white/10 w-full max-w-md p-8 sm:p-10 rounded-[24px] shadow-2xl">
           {/* Mobile Logo (Visible only on small screens) */}
           <div className="lg:hidden flex justify-center mb-8">
-            <div className="flex items-center space-x-2">
-              <div className="bg-primary p-1.5 rounded-lg">
-                <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                </svg>
-              </div>
-              <span className="text-xl font-bold tracking-tight">MUVISA</span>
-            </div>
+            <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={35} className="h-[40px] w-auto object-contain" priority />
           </div>
           
           <div className="text-center lg:text-left mb-8">

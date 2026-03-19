@@ -124,7 +124,7 @@ export default function PlanSelectionModal({ plan, onClose }: PlanSelectionModal
 
       {/* Modal Panel */}
       <div 
-        className="relative z-10 w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transform transition-all duration-300 scale-100 opacity-100 animate-[fade-in_0.3s_ease-out]"
+        className="relative z-10 w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden animate-fade-in duration-300"
         onClick={(e) => e.stopPropagation()}
       >
 

@@ -64,12 +64,12 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
     >
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
 
       {/* Modal Panel */}
-      <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 animate-in fade-in slide-in-from-bottom-4 duration-300 custom-scrollbar">
+      <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 animate-fade-in duration-300 custom-scrollbar">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -187,7 +187,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
 
               {/* Dynamic Cost Display */}
               {selectedCity && costData[selectedCity] && (
-                <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex items-start gap-3 animate-in fade-in zoom-in-95 duration-300">
+                <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-4 rounded-xl flex items-start gap-3 animate-fade-in duration-300">
                   <Info className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <span className="text-[11px] uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">Estimativa de Custos</span>
@@ -267,7 +267,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
 
         {/* ── STEP 2: Success ── */}
         {step === 2 && (
-          <div className="p-10 text-center animate-in zoom-in-95 duration-300">
+          <div className="p-10 text-center animate-fade-in duration-300">
             {/* Green check icon */}
             <div className="flex justify-center mb-6">
               <div className="w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">

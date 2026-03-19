@@ -14,7 +14,7 @@ export default function DocumentsFilters() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             className="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:outline-none"
-            placeholder="Search documents..."
+            placeholder="Pesquisar documentos..."
             type="text"
           />
         </div>
@@ -22,28 +22,28 @@ export default function DocumentsFilters() {
 
       {/* Document Type */}
       <select className={`${selectClass} min-w-[160px]`}>
-        <option value="">Document Type</option>
-        <option>Passport</option>
-        <option>Bank Statement</option>
-        <option>Transcripts</option>
-        <option>English Test</option>
-        <option>Letter of Recommendation</option>
+        <option value="">Tipo de Documento</option>
+        <option>Passaporte</option>
+        <option>Extrato Bancário</option>
+        <option>Certificados Académicos</option>
+        <option>Teste de Inglês</option>
+        <option>Carta de Recomendação</option>
       </select>
 
       {/* Status */}
       <select className={`${selectClass} min-w-[160px]`}>
-        <option value="">Status</option>
-        <option>Pending Review</option>
-        <option>Approved</option>
-        <option>Rejected</option>
-        <option>Missing</option>
+        <option value="">Estado</option>
+        <option>Pendente de Revisão</option>
+        <option>Aprovado</option>
+        <option>Rejeitado</option>
+        <option>Em Falta</option>
       </select>
 
       {/* Filter by Student */}
       <select className={`${selectClass} min-w-[160px]`}>
-        <option value="">Filter by Student</option>
-        <option>Recent Uploads</option>
-        <option>Needs Urgent Action</option>
+        <option value="">Filtrar por Estudante</option>
+        <option>Carregamentos Recentes</option>
+        <option>Ação Urgente Necessária</option>
       </select>
 
       {/* Filter icon button */}

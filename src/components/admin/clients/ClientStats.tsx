@@ -40,10 +40,10 @@ function StatCard({ icon: Icon, label, value, trend, iconColor, trendColor }: St
 export default function ClientStats() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      <StatCard icon={Users}           label="Total Clients"       value="1,284" trend="+12%" iconColor="primary" trendColor="emerald" />
-      <StatCard icon={ClipboardList}   label="Active Applications" value="456"   trend="+5%"  iconColor="primary" trendColor="emerald" />
-      <StatCard icon={ShieldCheck}     label="Visa Approved"       value="892"   trend="+18%" iconColor="emerald" trendColor="emerald" />
-      <StatCard icon={FolderOpen}      label="Pending Documents"   value="124"   trend="-2%"  iconColor="orange"  trendColor="orange"  />
+      <StatCard icon={Users}           label="Total de Clientes"       value="1.284" trend="+12%" iconColor="primary" trendColor="emerald" />
+      <StatCard icon={ClipboardList}   label="Candidaturas Ativas" value="456"   trend="+5%"  iconColor="primary" trendColor="emerald" />
+      <StatCard icon={ShieldCheck}     label="Vistos Aprovados"       value="892"   trend="+18%" iconColor="emerald" trendColor="emerald" />
+      <StatCard icon={FolderOpen}      label="Documentos Pendentes"   value="124"   trend="-2%"  iconColor="orange"  trendColor="orange"  />
     </div>
   );
 }

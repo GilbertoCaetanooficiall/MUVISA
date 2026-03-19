@@ -2,7 +2,7 @@ import { Search, Eye, Pencil, Key } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type StaffStatus = 'Active' | 'On Leave' | 'Inactive';
+type StaffStatus = 'Ativo' | 'De Licença' | 'Inativo';
 
 interface StaffMember {
   id: string;
@@ -21,32 +21,32 @@ interface StaffMember {
 const staff: StaffMember[] = [
   {
     id: 'S-001', name: 'Alexandra Rivera', initials: 'AR', avatarClass: 'bg-blue-600',
-    email: 'a.rivera@muvisa.com', role: 'Senior Registrar', department: 'Admissions',
-    status: 'Active', lastLogin: '2 hours ago',
+    email: 'a.rivera@muvisa.com', role: 'Registadora Sénior', department: 'Admissões',
+    status: 'Ativo', lastLogin: 'há 2 horas',
   },
   {
     id: 'S-002', name: 'Marcus Chen',  initials: 'MC', avatarClass: 'bg-purple-600',
-    email: 'm.chen@muvisa.com', role: 'Visa Consultant', department: 'Visa',
-    status: 'On Leave', lastLogin: '3 days ago',
+    email: 'm.chen@muvisa.com', role: 'Consultor de Vistos', department: 'Vistos',
+    status: 'De Licença', lastLogin: 'há 3 dias',
   },
   {
     id: 'S-003', name: 'Sarah Jenkins', initials: 'SJ', avatarClass: 'bg-emerald-600',
-    email: 's.jenkins@muvisa.com', role: 'Admin', department: 'Management',
-    status: 'Active', lastLogin: '10 mins ago',
+    email: 's.jenkins@muvisa.com', role: 'Administrador', department: 'Gestão',
+    status: 'Ativo', lastLogin: 'há 10 minutos',
   },
   {
     id: 'S-004', name: 'David Miller',  initials: 'DM', avatarClass: 'bg-orange-600',
-    email: 'd.miller@muvisa.com', role: 'Support', department: 'Management',
-    status: 'Inactive', lastLogin: '1 month ago',
+    email: 'd.miller@muvisa.com', role: 'Suporte', department: 'Gestão',
+    status: 'Inativo', lastLogin: 'há 1 mês',
   },
 ];
 
 // ─── Status badge styles ───────────────────────────────────────────────────────
 
 const statusStyle: Record<StaffStatus, string> = {
-  'Active':   'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20',
-  'On Leave': 'bg-primary/10 text-primary border border-primary/20',
-  'Inactive': 'bg-slate-500/10 text-slate-500 border border-slate-500/20',
+  'Ativo':   'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20',
+  'De Licença': 'bg-primary/10 text-primary border border-primary/20',
+  'Inativo': 'bg-slate-500/10 text-slate-500 border border-slate-500/20',
 };
 
 // ─── Filter/select shared class ───────────────────────────────────────────────
@@ -66,7 +66,7 @@ export default function StaffTable() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
             className="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary"
-            placeholder="Search staff by name or email"
+            placeholder="Pesquisar funcionário por nome ou email"
             type="text"
           />
         </div>
@@ -74,29 +74,29 @@ export default function StaffTable() {
         {/* Dropdowns + Clear */}
         <div className="flex flex-wrap gap-2 items-center">
           <select className={selectCls}>
-            <option value="">All Roles</option>
-            <option value="registrar">Senior Registrar</option>
-            <option value="consultant">Visa Consultant</option>
-            <option value="admin">Admin</option>
-            <option value="support">Support</option>
+            <option value="">Todos os Cargos</option>
+            <option value="registrar">Registadora Sénior</option>
+            <option value="consultant">Consultor de Vistos</option>
+            <option value="admin">Administrador</option>
+            <option value="support">Suporte</option>
           </select>
 
           <select className={selectCls}>
-            <option value="">All Departments</option>
-            <option value="admissions">Admissions</option>
-            <option value="visa">Visa</option>
-            <option value="management">Management</option>
+            <option value="">Todos os Departamentos</option>
+            <option value="admissions">Admissões</option>
+            <option value="visa">Vistos</option>
+            <option value="management">Gestão</option>
           </select>
 
           <select className={selectCls}>
-            <option value="">All Status</option>
-            <option value="active">Active</option>
-            <option value="leave">On Leave</option>
-            <option value="inactive">Inactive</option>
+            <option value="">Todos os Estados</option>
+            <option value="active">Ativo</option>
+            <option value="leave">De Licença</option>
+            <option value="inactive">Inativo</option>
           </select>
 
           <button className="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
-            Clear Filters
+            Limpar Filtros
           </button>
         </div>
       </div>
@@ -107,12 +107,12 @@ export default function StaffTable() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-                {['Staff Member', 'Email', 'Role', 'Department', 'Status', 'Last Login', ''].map((col) => (
+                {['Membro do Staff', 'Email', 'Cargo', 'Departamento', 'Estado', 'Último Acesso', ''].map((col) => (
                   <th
                     key={col}
                     className={`px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider ${col === '' ? 'text-right' : ''}`}
                   >
-                    {col || 'Actions'}
+                    {col || 'Ações'}
                   </th>
                 ))}
               </tr>
@@ -154,9 +154,9 @@ export default function StaffTable() {
                   {/* Actions */}
                   <td className="px-6 py-4 whitespace-nowrap text-right space-x-1">
                     {[
-                      { icon: Eye, title: 'View Profile' },
-                      { icon: Pencil,       title: 'Edit Staff' },
-                      { icon: Key,        title: 'Manage Access' },
+                      { icon: Eye, title: 'Ver Perfil' },
+                      { icon: Pencil,       title: 'Editar Funcionário' },
+                      { icon: Key,        title: 'Gerir Acesso' },
                     ].map(({ icon: Icon, title }) => (
                       <button
                         key={title}
@@ -176,14 +176,14 @@ export default function StaffTable() {
         {/* Pagination */}
         <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
           <p className="text-xs text-slate-500 font-medium tracking-wide uppercase">
-            Showing 1 to {staff.length} of 124 entries
+            A mostrar 1 a {staff.length} de 124 entradas
           </p>
           <div className="flex gap-2">
             <button
               disabled
               className="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-400 disabled:opacity-50"
             >
-              Previous
+              Anterior
             </button>
             {[1, 2].map((n) => (
               <button
@@ -198,7 +198,7 @@ export default function StaffTable() {
               </button>
             ))}
             <button className="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-              Next
+              Seguinte
             </button>
           </div>
         </div>

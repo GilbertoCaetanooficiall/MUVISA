@@ -19,16 +19,16 @@ import {
 } from 'lucide-react';
 
 const navItems = [
-  { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { href: '/admin/clients', icon: Users, label: 'Clients' },
-  { href: '/admin/visa-processes', icon: Globe, label: 'Visa Processes' },
-  { href: '/admin/documents', icon: FileText, label: 'Documents' },
-  { href: '/admin/universities', icon: GraduationCap, label: 'Universities' },
-  { href: '/admin/applications', icon: ClipboardList, label: 'Applications' },
-  { href: '/admin/plans', icon: Package, label: 'Plans/Packages' },
-  { href: '/admin/messages', icon: Mail, label: 'Messages' },
-  { href: '/admin/staff', icon: UserCog, label: 'Staff' },
-  { href: '/admin/reports', icon: BarChart3, label: 'Reports' },
+  { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Painel Central' },
+  { href: '/admin/clients', icon: Users, label: 'Clientes' },
+  { href: '/admin/visa-processes', icon: Globe, label: 'Processos de Visto' },
+  { href: '/admin/documents', icon: FileText, label: 'Documentos' },
+  { href: '/admin/universities', icon: GraduationCap, label: 'Universidades' },
+  { href: '/admin/applications', icon: ClipboardList, label: 'Candidaturas' },
+  { href: '/admin/plans', icon: Package, label: 'Planos/Pacotes' },
+  { href: '/admin/messages', icon: Mail, label: 'Mensagens' },
+  { href: '/admin/staff', icon: UserCog, label: 'Funcionários' },
+  { href: '/admin/reports', icon: BarChart3, label: 'Relatórios' },
 ];
 
 export default function Sidebar() {
@@ -42,7 +42,7 @@ export default function Sidebar() {
         <Image src="/logo-light.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden md:block dark:hidden" priority />
         <Image src="/logo-dark.svg" alt="MUVISA Logo" width={200} height={45} className="h-[45px] w-auto object-contain hidden dark:md:block" priority />
         <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider ml-1">
-          Admin Portal
+          Portal do Administrador
         </p>
       </div>
 
@@ -77,7 +77,7 @@ export default function Sidebar() {
             }`}
           >
             <Settings size={20} />
-            <span className="text-sm font-medium">Settings</span>
+            <span className="text-sm font-medium">Definições</span>
           </Link>
         </div>
       </nav>
@@ -90,7 +90,7 @@ export default function Sidebar() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold truncate">Ricardo Silva</p>
-            <p className="text-xs text-slate-500 truncate">Senior Admin</p>
+            <p className="text-xs text-slate-500 truncate">Administrador Sénior</p>
           </div>
         </div>
       </div>

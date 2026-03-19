@@ -40,7 +40,6 @@ export default function SiteFooter() {
               <li><Link className="hover:text-primary transition-colors" href="/site/casos-de-sucesso">Casos de Sucesso</Link></li>
               <li><Link className="hover:text-primary transition-colors" href="/site/faq-do-estudante">FAQ do Estudante</Link></li>
               <li><Link className="hover:text-primary transition-colors" href="/site/alojamento">Alojamento</Link></li>
-              <li><Link className="hover:text-primary transition-colors" href="/site/servicos">Seguro Saúde (PB4)</Link></li>
             </ul>
           </div>
           <div>
@@ -56,7 +55,7 @@ export default function SiteFooter() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="text-base" />
-                <span>+351 21 000 0000</span>
+                <span>+244 942 279 906</span>
               </li>
             </ul>
           </div>

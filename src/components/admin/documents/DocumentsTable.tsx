@@ -2,7 +2,7 @@ import { Eye, CheckCircle2, XCircle, MoreVertical, Download, RefreshCw, ChevronL
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type DocStatus = 'Pending Review' | 'Approved' | 'Rejected' | 'Missing';
+type DocStatus = 'Pendente de Revisão' | 'Aprovado' | 'Rejeitado' | 'Em Falta';
 
 interface Document {
   id: string;
@@ -21,84 +21,84 @@ interface Document {
 const documents: Document[] = [
   {
     id: 'DOC-001', studentName: 'Sarah Jenkins',   initials: 'SJ',
-    docType: 'Passport Copy',       docIcon: Contact,
-    uploadDate: 'Oct 24, 2023', status: 'Pending Review', verifiedBy: '--',        lastUpdate: '2 hours ago',
+    docType: 'Cópia do Passaporte',       docIcon: Contact,
+    uploadDate: '24 Out, 2023', status: 'Pendente de Revisão', verifiedBy: '--',        lastUpdate: 'há 2 horas',
   },
   {
     id: 'DOC-002', studentName: 'Michael Chen',    initials: 'MC',
-    docType: 'Bank Statement',      docIcon: Landmark,
-    uploadDate: 'Oct 22, 2023', status: 'Approved',       verifiedBy: 'Alex Rivera', lastUpdate: 'Yesterday',
+    docType: 'Extrato Bancário',      docIcon: Landmark,
+    uploadDate: '22 Out, 2023', status: 'Aprovado',       verifiedBy: 'Alex Rivera', lastUpdate: 'Ontem',
   },
   {
     id: 'DOC-003', studentName: 'Marcus Thorne',   initials: 'MT',
-    docType: 'English Proficiency', docIcon: FileText,
-    uploadDate: 'Oct 21, 2023', status: 'Rejected',       verifiedBy: 'Sarah Smith', lastUpdate: 'Oct 22, 2023',
+    docType: 'Proficiência em Inglês', docIcon: FileText,
+    uploadDate: '21 Out, 2023', status: 'Rejeitado',       verifiedBy: 'Sarah Smith', lastUpdate: '22 Out, 2023',
   },
   {
     id: 'DOC-004', studentName: 'Elena Rodriguez', initials: 'ER',
-    docType: 'Official Transcript', docIcon: GraduationCap,
-    uploadDate: '--',           status: 'Missing',        verifiedBy: '--',         lastUpdate: 'Oct 20, 2023',
+    docType: 'Certificado Oficial', docIcon: GraduationCap,
+    uploadDate: '--',           status: 'Em Falta',        verifiedBy: '--',         lastUpdate: '20 Out, 2023',
   },
   {
     id: 'DOC-005', studentName: 'Anna Smith',       initials: 'AS',
-    docType: 'Letter of Recommendation', docIcon: FileText,
-    uploadDate: 'Oct 19, 2023', status: 'Approved',       verifiedBy: 'Alex Rivera', lastUpdate: 'Oct 20, 2023',
+    docType: 'Carta de Recomendação', docIcon: FileText,
+    uploadDate: '19 Out, 2023', status: 'Aprovado',       verifiedBy: 'Alex Rivera', lastUpdate: '20 Out, 2023',
   },
   {
     id: 'DOC-006', studentName: 'David Miller',     initials: 'DM',
-    docType: 'Transcripts',         docIcon: BookOpen,
-    uploadDate: 'Oct 18, 2023', status: 'Pending Review', verifiedBy: '--',         lastUpdate: '3 days ago',
+    docType: 'Certificados Académicos',         docIcon: BookOpen,
+    uploadDate: '18 Out, 2023', status: 'Pendente de Revisão', verifiedBy: '--',         lastUpdate: 'há 3 dias',
   },
 ];
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
 const statusStyle: Record<DocStatus, string> = {
-  'Pending Review': 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400',
-  'Approved':       'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-400',
-  'Rejected':       'bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-400',
-  'Missing':        'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700',
+  'Pendente de Revisão': 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400',
+  'Aprovado':       'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-400',
+  'Rejeitado':       'bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-400',
+  'Em Falta':        'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700',
 };
 
 // ─── Action buttons per status ────────────────────────────────────────────────
 
 function RowActions({ status }: { status: DocStatus }) {
   const btnBase = 'p-1.5 rounded-lg transition-colors';
-  if (status === 'Pending Review') {
+  if (status === 'Pendente de Revisão') {
     return (
       <>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><Eye size={18} /></button>
-        <button className={`${btnBase} hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-emerald-600`} title="Approve"><CheckCircle2 size={18} /></button>
-        <button className={`${btnBase} hover:bg-rose-100 dark:hover:bg-rose-900/30 text-rose-600`} title="Reject"><XCircle size={18} /></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Ver Documento"><Eye size={18} /></button>
+        <button className={`${btnBase} hover:bg-emerald-100 dark:hover:bg-emerald-900/30 text-emerald-600`} title="Aprovar"><CheckCircle2 size={18} /></button>
+        <button className={`${btnBase} hover:bg-rose-100 dark:hover:bg-rose-900/30 text-rose-600`} title="Rejeitar"><XCircle size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="Mais"><MoreVertical size={18} /></button>
       </>
     );
   }
-  if (status === 'Approved') {
+  if (status === 'Aprovado') {
     return (
       <>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><Eye size={18} /></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Download"><Download size={18} /></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Ver Documento"><Eye size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Descarregar"><Download size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="Mais"><MoreVertical size={18} /></button>
       </>
     );
   }
-  if (status === 'Rejected') {
+  if (status === 'Rejeitado') {
     return (
       <>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="View Document"><Eye size={18} /></button>
-        <button className={`${btnBase} hover:bg-primary/10 text-primary`} title="Request Resubmission"><RefreshCw size={18} /></button>
-        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500`} title="Ver Documento"><Eye size={18} /></button>
+        <button className={`${btnBase} hover:bg-primary/10 text-primary`} title="Solicitar Reenvio"><RefreshCw size={18} /></button>
+        <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="Mais"><MoreVertical size={18} /></button>
       </>
     );
   }
-  // Missing
+  // Em Falta
   return (
     <>
       <button className="inline-flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 text-primary text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
-        Request
+        Solicitar
       </button>
-      <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="More"><MoreVertical size={18} /></button>
+      <button className={`${btnBase} hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400`} title="Mais"><MoreVertical size={18} /></button>
     </>
   );
 }
@@ -112,7 +112,7 @@ export default function DocumentsTable() {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-              {['Student', 'Document Type', 'Upload Date', 'Status', 'Verified By', 'Last Update', ''].map((col) => (
+              {['Estudante', 'Tipo de Documento', 'Data de Carregamento', 'Estado', 'Verificado por', 'Última Atualização', ''].map((col) => (
                 <th
                   key={col}
                   className={`px-6 py-4 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider ${col === '' ? 'text-right' : ''}`}
@@ -184,10 +184,10 @@ export default function DocumentsTable() {
       {/* Pagination */}
       <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Showing{' '}
-          <span className="font-medium text-slate-900 dark:text-white">1</span> to{' '}
-          <span className="font-medium text-slate-900 dark:text-white">{documents.length}</span> of{' '}
-          <span className="font-medium text-slate-900 dark:text-white">156</span> results
+          A mostrar{' '}
+          <span className="font-medium text-slate-900 dark:text-white">1</span> a{' '}
+          <span className="font-medium text-slate-900 dark:text-white">{documents.length}</span> de{' '}
+          <span className="font-medium text-slate-900 dark:text-white">156</span> resultados
         </p>
         <div className="flex items-center gap-2">
           <button className="p-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-500 hover:bg-white dark:hover:bg-slate-800 disabled:opacity-50" disabled>

@@ -1,11 +1,17 @@
-import { Download, Eye } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { Eye } from 'lucide-react';
 import ProcessStages from "@/components/portal-estudante/meu-processo/ProcessStages";
 import DestinationDetails from "@/components/portal-estudante/meu-processo/DestinationDetails";
 import VisaSummary from "@/components/portal-estudante/meu-processo/VisaSummary";
 import ChatCTA from "@/components/portal-estudante/meu-processo/ChatCTA";
 import Footer from "@/components/portal-estudante/Footer";
+import ProtocoloModal from "@/components/portal-estudante/meu-processo/ProtocoloModal";
 
 export default function MeuProcessoPage() {
+    const [showProtocolo, setShowProtocolo] = useState(false);
+
     return (
         <div className="max-w-6xl mx-auto flex flex-col gap-6">
             {/* Page Header */}
@@ -17,11 +23,10 @@ export default function MeuProcessoPage() {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button className="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition flex items-center gap-2">
-                        <Download className="text-[18px]" />
-                        Baixar Guia
-                    </button>
-                    <button className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition flex items-center gap-2 shadow-lg shadow-primary/20">
+                    <button
+                        onClick={() => setShowProtocolo(true)}
+                        className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition flex items-center gap-2 shadow-lg shadow-primary/20"
+                    >
                         <Eye className="text-[18px]" />
                         Ver Protocolo
                     </button>
@@ -39,6 +44,12 @@ export default function MeuProcessoPage() {
             </div>
 
             <Footer />
+
+            {/* Protocolo Modal */}
+            <ProtocoloModal
+                isOpen={showProtocolo}
+                onClose={() => setShowProtocolo(false)}
+            />
         </div>
     );
 }

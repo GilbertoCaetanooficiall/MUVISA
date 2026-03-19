@@ -24,10 +24,10 @@ function StatCard({ icon: Icon, iconClass, label, value }: StatCardProps) {
 export default function VisaStats() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      <StatCard icon={FileText}      iconClass="bg-primary/10 text-primary"                                label="Total Visa Applications" value="842" />
-      <StatCard icon={ClipboardList} iconClass="bg-blue-500/10 text-blue-500"                           label="In Review"               value="156" />
-      <StatCard icon={ShieldCheck}   iconClass="bg-accent-success/10 text-accent-success"                 label="Approved Visas"          value="642" />
-      <StatCard icon={XCircle}       iconClass="bg-accent-warning/10 text-accent-warning"                 label="Rejected Visas"          value="44"  />
+      <StatCard icon={FileText}      iconClass="bg-primary/10 text-primary"                                label="Total de Pedidos de Visto" value="842" />
+      <StatCard icon={ClipboardList} iconClass="bg-blue-500/10 text-blue-500"                           label="Em Revisão"               value="156" />
+      <StatCard icon={ShieldCheck}   iconClass="bg-accent-success/10 text-accent-success"                 label="Vistos Aprovados"          value="642" />
+      <StatCard icon={XCircle}       iconClass="bg-accent-warning/10 text-accent-warning"                 label="Vistos Rejeitados"          value="44"  />
     </div>
   );
 }

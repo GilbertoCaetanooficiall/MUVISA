@@ -4,42 +4,42 @@ import { TrendingUp, Info, AlertTriangle, Lightbulb, ArrowRight } from 'lucide-r
 
 // ─── Bar heights for the area/column chart (10 months) ────────────────────────
 const barHeights = ['40%', '55%', '45%', '70%', '85%', '60%', '75%', '90%', '95%', '100%'];
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out'];
 
 // ─── Universities bar data ─────────────────────────────────────────────────────
 const universities = [
-  { name: 'University of Lisbon',    apps: '842 Applications', width: '85%',  opacity: 'bg-primary' },
-  { name: 'University of Porto',     apps: '612 Applications', width: '65%',  opacity: 'bg-primary/70' },
-  { name: 'University of Coimbra',   apps: '456 Applications', width: '45%',  opacity: 'bg-primary/50' },
-  { name: 'Nova University Lisbon',  apps: '310 Applications', width: '30%',  opacity: 'bg-primary/30' },
+  { name: 'Universidade de Lisboa',    apps: '842 Candidaturas', width: '85%',  opacity: 'bg-primary' },
+  { name: 'Universidade do Porto',     apps: '612 Candidaturas', width: '65%',  opacity: 'bg-primary/70' },
+  { name: 'Universidade de Coimbra',   apps: '456 Candidaturas', width: '45%',  opacity: 'bg-primary/50' },
+  { name: 'Universidade Nova de Lisboa',  apps: '310 Candidaturas', width: '30%',  opacity: 'bg-primary/30' },
 ];
 
 // ─── Donut legend ──────────────────────────────────────────────────────────────
 const plans = [
   { label: 'Premium',  pct: '45%', dot: 'bg-primary' },
   { label: 'Standard', pct: '35%', dot: 'bg-emerald-500' },
-  { label: 'Basic',    pct: '20%', dot: 'bg-slate-300 dark:bg-slate-700' },
+  { label: 'Básico',    pct: '20%', dot: 'bg-slate-300 dark:bg-slate-700' },
 ];
 
 // ─── Key insights ──────────────────────────────────────────────────────────────
 const insights = [
   {
     icon: TrendingUp, iconClass: 'text-emerald-500',
-    title: 'High Growth Market', titleClass: 'text-emerald-500',
+    title: 'Mercado de Alto Crescimento', titleClass: 'text-emerald-500',
     bg: 'bg-emerald-500/10 border-emerald-500/20',
-    body: 'Applications from Brazil have increased by <strong>30%</strong> this quarter, primarily targeting Engineering programs.',
+    body: 'As candidaturas do Brasil aumentaram <strong>30%</strong> neste trimestre, principalmente para programas de Engenharia.',
   },
   {
     icon: Info, iconClass: 'text-primary',
-    title: 'Efficiency Boost', titleClass: 'text-primary',
+    title: 'Aumento de Eficiência', titleClass: 'text-primary',
     bg: 'bg-primary/10 border-primary/20',
-    body: 'Average visa processing time has decreased by <strong>4 days</strong> after the new automated document verification system.',
+    body: 'O tempo médio de processamento de vistos diminuiu <strong>4 dias</strong> após o novo sistema automático de verificação.',
   },
   {
     icon: AlertTriangle, iconClass: 'text-amber-500',
-    title: 'Capacity Alert', titleClass: 'text-amber-500',
+    title: 'Alerta de Capacidade', titleClass: 'text-amber-500',
     bg: 'bg-amber-500/10 border-amber-500/20',
-    body: 'University of Lisbon "Master in Management" reaches <strong>95% capacity</strong>. Suggest alternatives to new applicants.',
+    body: 'O "Mestrado em Gestão" da Universidade de Lisboa atingiu <strong>95% da capacidade</strong>. Sugira alternativas.',
   },
 ];
 
@@ -53,10 +53,10 @@ export default function ReportsCharts() {
         {/* Area / column chart */}
         <div className="lg:col-span-2 bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between mb-6">
-            <h4 className="font-bold text-slate-900 dark:text-white">Students Sent to Portugal</h4>
+            <h4 className="font-bold text-slate-900 dark:text-white">Estudantes Enviados para Portugal</h4>
             <select className="bg-slate-100 dark:bg-background-dark border-none rounded-lg text-xs font-bold py-1 px-2 focus:ring-1 focus:ring-primary text-slate-700 dark:text-slate-300">
-              <option>Last 12 Months</option>
-              <option>Year to Date</option>
+              <option>Últimos 12 Meses</option>
+              <option>Ano Inteiro</option>
             </select>
           </div>
 
@@ -93,14 +93,14 @@ export default function ReportsCharts() {
 
         {/* Donut chart */}
         <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-          <h4 className="font-bold text-slate-900 dark:text-white mb-6">Service Plans</h4>
+          <h4 className="font-bold text-slate-900 dark:text-white mb-6">Planos de Serviço</h4>
           <div className="relative flex items-center justify-center py-4">
             <div className="size-48 rounded-full border-[18px] border-slate-100 dark:border-background-dark relative flex items-center justify-center">
               <div className="absolute inset-[-18px] rounded-full border-[18px] border-primary border-r-transparent border-b-transparent rotate-45" />
               <div className="absolute inset-[-18px] rounded-full border-[18px] border-emerald-500 border-l-transparent border-t-transparent border-b-transparent -rotate-12" />
               <div className="flex flex-col items-center">
                 <span className="text-3xl font-black text-slate-900 dark:text-white">100%</span>
-                <span className="text-[10px] uppercase text-slate-500 tracking-widest font-bold">Total Share</span>
+                <span className="text-[10px] uppercase text-slate-500 tracking-widest font-bold">Quota Total</span>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@ export default function ReportsCharts() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Universities horizontal bars */}
         <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800">
-          <h4 className="font-bold text-slate-900 dark:text-white mb-6">Most Popular Universities</h4>
+          <h4 className="font-bold text-slate-900 dark:text-white mb-6">Universidades Mais Populares</h4>
           <div className="space-y-5">
             {universities.map((u) => (
               <div key={u.name} className="space-y-2">
@@ -142,7 +142,7 @@ export default function ReportsCharts() {
         <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col">
           <div className="flex items-center gap-2 mb-6">
             <Lightbulb className="text-primary" size={20} />
-            <h4 className="font-bold text-slate-900 dark:text-white">Key Insights</h4>
+            <h4 className="font-bold text-slate-900 dark:text-white">Principais Insights</h4>
           </div>
           <div className="flex-1 space-y-4">
             {insights.map((ins) => (
@@ -159,7 +159,7 @@ export default function ReportsCharts() {
             ))}
           </div>
           <button className="mt-6 text-primary text-sm font-bold hover:underline flex items-center gap-1 self-start">
-            View Full Business Audit
+            Ver Auditoria Completa
             <ArrowRight size={16} />
           </button>
         </div>

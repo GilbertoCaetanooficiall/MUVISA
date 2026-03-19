@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "flag-icons/css/flag-icons.min.css";
+
 // Importação de componentes - o '@' é um atalho (alias) para a pasta 'src'
 import { ThemeProvider } from "@/components/portal-estudante/ThemeProvider";
 

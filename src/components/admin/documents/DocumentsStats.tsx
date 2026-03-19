@@ -32,33 +32,33 @@ export default function DocumentsStats() {
       <StatCard
         icon={FolderOpen}
         iconClass="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-        label="Total Documents"
-        value="1,248"
+        label="Total de Documentos"
+        value="1.248"
         badge="+12%"
         badgeClass="text-green-600 bg-green-100 dark:bg-green-900/30"
       />
       <StatCard
         icon={ClipboardList}
         iconClass="bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400"
-        label="Pending Review"
+        label="Pendentes de Revisão"
         value="84"
-        badge="Active"
+        badge="Ativo"
         badgeClass="text-amber-600 bg-amber-100 dark:bg-amber-900/30"
       />
       <StatCard
         icon={CheckCircle2}
         iconClass="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400"
-        label="Approved Documents"
-        value="1,056"
+        label="Documentos Aprovados"
+        value="1.056"
         badge="92%"
         badgeClass="text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30"
       />
       <StatCard
         icon={XCircle}
         iconClass="bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400"
-        label="Rejected Documents"
+        label="Documentos Rejeitados"
         value="108"
-        badge="High"
+        badge="Alta"
         badgeClass="text-rose-600 bg-rose-100 dark:bg-rose-900/30"
       />
     </div>

@@ -14,7 +14,7 @@ export default function ApplicationsFilters() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
           <input
             className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-2 focus:ring-primary focus:outline-none"
-            placeholder="Search by student or ID..."
+            placeholder="Pesquisar por estudante ou ID..."
             type="text"
           />
         </div>
@@ -22,30 +22,30 @@ export default function ApplicationsFilters() {
         {/* Filter controls */}
         <div className="flex flex-wrap items-center gap-3">
           <select className={selectClass}>
-            <option>All Universities</option>
-            <option>Oxford University</option>
-            <option>Stanford University</option>
+            <option>Todas as Universidades</option>
+            <option>Universidade de Oxford</option>
+            <option>Universidade de Stanford</option>
             <option>MIT</option>
-            <option>University of Toronto</option>
+            <option>Universidade de Toronto</option>
             <option>UCLA</option>
           </select>
 
           <select className={selectClass}>
-            <option>All Courses</option>
-            <option>Computer Science</option>
-            <option>Business Admin</option>
-            <option>Engineering</option>
-            <option>Visual Arts</option>
-            <option>International Relations</option>
+            <option>Todos os Cursos</option>
+            <option>Ciência da Computação</option>
+            <option>Gestão de Empresas</option>
+            <option>Engenharia</option>
+            <option>Artes Visuais</option>
+            <option>Relações Internacionais</option>
           </select>
 
           <select className={selectClass}>
-            <option>All Statuses</option>
-            <option>Accepted</option>
-            <option>Under Review</option>
-            <option>Submitted</option>
-            <option>Docs Pending</option>
-            <option>Draft</option>
+            <option>Todos os Estados</option>
+            <option>Aceite</option>
+            <option>Em Revisão</option>
+            <option>Submetido</option>
+            <option>Docs Pendentes</option>
+            <option>Rascunho</option>
           </select>
 
           <button className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors border border-slate-200 dark:border-slate-700 flex items-center justify-center">

@@ -2,7 +2,7 @@ import { Search, MoreVertical, GraduationCap, Landmark, TowerControl, DraftingCo
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type AppStatus = 'Applications Open' | 'Closing Soon' | 'Applications Closed';
+type AppStatus = 'Candidaturas Abertas' | 'A terminar' | 'Candidaturas Fechadas';
 
 interface University {
   id: string;
@@ -18,19 +18,19 @@ interface University {
 // ─── Sample data ──────────────────────────────────────────────────────────────
 
 const universities: University[] = [
-  { id: 'U-001', name: 'University of Lisbon',    icon: GraduationCap,           city: 'Lisbon',  courses: 156, status: 'Applications Open',   deadline: 'Aug 15, 2024', website: 'ulisboa.pt'  },
-  { id: 'U-002', name: 'University of Porto',     icon: Landmark,  city: 'Porto',   courses: 142, status: 'Closing Soon',         deadline: 'May 30, 2024', website: 'up.pt'       },
-  { id: 'U-003', name: 'University of Coimbra',   icon: TowerControl,  city: 'Coimbra', courses: 98,  status: 'Applications Closed',  deadline: 'Mar 15, 2024', website: 'uc.pt'       },
-  { id: 'U-004', name: 'Nova University Lisbon',  icon: GraduationCap,           city: 'Lisbon',  courses: 115, status: 'Applications Open',    deadline: 'Jul 20, 2024', website: 'unl.pt'      },
-  { id: 'U-005', name: 'University of Minho',     icon: DraftingCompass,     city: 'Braga',   courses: 88,  status: 'Applications Open',    deadline: 'Aug 01, 2024', website: 'uminho.pt'   },
+  { id: 'U-001', name: 'Universidade de Lisboa',    icon: GraduationCap,           city: 'Lisboa',  courses: 156, status: 'Candidaturas Abertas',   deadline: '15 Ago, 2024', website: 'ulisboa.pt'  },
+  { id: 'U-002', name: 'Universidade do Porto',     icon: Landmark,  city: 'Porto',   courses: 142, status: 'A terminar',         deadline: '30 Mai, 2024', website: 'up.pt'       },
+  { id: 'U-003', name: 'Universidade de Coimbra',   icon: TowerControl,  city: 'Coimbra', courses: 98,  status: 'Candidaturas Fechadas',  deadline: '15 Mar, 2024', website: 'uc.pt'       },
+  { id: 'U-004', name: 'Universidade Nova de Lisboa',  icon: GraduationCap,           city: 'Lisboa',  courses: 115, status: 'Candidaturas Abertas',    deadline: '20 Jul, 2024', website: 'unl.pt'      },
+  { id: 'U-005', name: 'Universidade do Minho',     icon: DraftingCompass,     city: 'Braga',   courses: 88,  status: 'Candidaturas Abertas',    deadline: '01 Ago, 2024', website: 'uminho.pt'   },
 ];
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
 const statusStyle: Record<AppStatus, string> = {
-  'Applications Open':   'bg-green-500/10 text-green-600 dark:text-green-500 border-green-500/20',
-  'Closing Soon':        'bg-amber-500/10 text-amber-600 dark:text-amber-500 border-amber-500/20',
-  'Applications Closed': 'bg-slate-500/10 text-slate-500 border-slate-500/20',
+  'Candidaturas Abertas':   'bg-green-500/10 text-green-600 dark:text-green-500 border-green-500/20',
+  'A terminar':        'bg-amber-500/10 text-amber-600 dark:text-amber-500 border-amber-500/20',
+  'Candidaturas Fechadas': 'bg-slate-500/10 text-slate-500 border-slate-500/20',
 };
 
 // ─── Filter + Table card combined (matches Stitch structure) ──────────────────
@@ -51,7 +51,7 @@ export default function UniversitiesTable() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
               <input
                 className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg pl-10 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:outline-none"
-                placeholder="Search universities..."
+                placeholder="Pesquisar universidades..."
                 type="text"
               />
             </label>
@@ -59,8 +59,8 @@ export default function UniversitiesTable() {
 
           {/* City */}
           <select className={selectClass}>
-            <option>Filter by city</option>
-            <option>Lisbon</option>
+            <option>Filtrar por cidade</option>
+            <option>Lisboa</option>
             <option>Porto</option>
             <option>Coimbra</option>
             <option>Braga</option>
@@ -68,19 +68,19 @@ export default function UniversitiesTable() {
 
           {/* Application status */}
           <select className={selectClass}>
-            <option>Application status</option>
-            <option>Open</option>
-            <option>Closing Soon</option>
-            <option>Closed</option>
+            <option>Estado da candidatura</option>
+            <option>Abertas</option>
+            <option>A terminar</option>
+            <option>Fechadas</option>
           </select>
 
           {/* Course availability */}
           <select className={selectClass}>
-            <option>Course availability</option>
-            <option>Engineering</option>
-            <option>Medicine</option>
-            <option>Arts</option>
-            <option>Business</option>
+            <option>Disponibilidade de cursos</option>
+            <option>Engenharia</option>
+            <option>Medicina</option>
+            <option>Artes</option>
+            <option>Gestão</option>
           </select>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function UniversitiesTable() {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50 dark:bg-slate-900/60 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-              {['University', 'City', 'Available Courses', 'Status', 'Deadline', 'Website', ''].map((col) => (
+              {['Universidade', 'Cidade', 'Cursos Disponíveis', 'Estado', 'Prazo', 'Website', ''].map((col) => (
                 <th key={col} className={`px-6 py-4 ${col === '' ? 'text-right' : ''}`}>
                   {col}
                 </th>
@@ -146,17 +146,17 @@ export default function UniversitiesTable() {
       {/* Pagination */}
       <div className="p-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Showing 1 to {universities.length} of 120 results
+          A mostrar 1 a {universities.length} de 120 resultados
         </p>
         <div className="flex gap-2">
           <button
             disabled
             className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-400 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Previous
+            Anterior
           </button>
           <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-            Next
+            Seguinte
           </button>
         </div>
       </div>

@@ -4,15 +4,7 @@ export default function DestinationDetails() {
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
             <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Detalhes do Destino</h3>
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-8 rounded shadow-sm overflow-hidden bg-slate-100 relative">
-                    <div className="absolute inset-0 flex">
-                        <div className="w-2/5 bg-[#006600]"></div>
-                        <div className="w-3/5 bg-[#FF0000]"></div>
-                        <div className="absolute inset-0 flex items-center justify-center -ml-2">
-                            <span className="text-[10px]">🇵🇹</span>
-                        </div>
-                    </div>
-                </div>
+                <span className="fi fi-pt text-4xl shadow-sm rounded-sm"></span>
                 <div>
                     <h4 className="text-lg font-bold text-slate-900 dark:text-white">Portugal</h4>
                     <p className="text-xs text-slate-500">Lisboa</p>

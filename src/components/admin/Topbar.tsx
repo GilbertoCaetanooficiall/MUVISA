@@ -23,7 +23,7 @@ export default function Topbar() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={20} />
           <input
             type="text"
-            placeholder="Search clients, visas, documents..."
+            placeholder="Pesquisar clientes, vistos, documentos..."
             className="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary transition-all text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
           />
         </div>
@@ -41,7 +41,7 @@ export default function Topbar() {
         <button
           onClick={toggleTheme}
           className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-          aria-label="Toggle dark mode"
+          aria-label="Alternar modo escuro"
         >
           {mounted ? (
             theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />
@@ -54,9 +54,9 @@ export default function Topbar() {
 
         {/* User avatar */}
         <button className="flex items-center gap-2 p-1 pl-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-          <span className="text-sm font-medium hidden sm:block">Admin Portal</span>
+          <span className="text-sm font-medium hidden sm:block">Portal Admin</span>
           <div className="size-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
-            AP
+            PA
           </div>
         </button>
       </div>

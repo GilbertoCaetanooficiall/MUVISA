@@ -11,27 +11,27 @@ interface MetricCard {
 
 const metrics: MetricCard[] = [
   {
-    label: 'Total Plans',
+    label: 'Total de Planos',
     value: '14',
-    badge: 'All Categories',
+    badge: 'Toda as Categorias',
     badgeClass: 'bg-primary/10 text-primary',
   },
   {
-    label: 'Active Subscriptions',
-    value: '1,240',
-    badge: '+12% vs last mo',
+    label: 'Subscrições Ativas',
+    value: '1.240',
+    badge: '+12% vs mês ant.',
     badgeClass: 'bg-green-500/10 text-green-500',
   },
   {
-    label: 'Avg. Plan Price',
-    value: '$199.00',
-    badge: 'Monthly',
+    label: 'Preço Médio do Plano',
+    value: '150.000 Kz',
+    badge: 'Mensal',
     badgeClass: 'bg-blue-500/10 text-blue-500',
   },
   {
-    label: 'Draft Plans',
+    label: 'Planos em Rascunho',
     value: '3',
-    badge: 'In progress',
+    badge: 'Em progresso',
     badgeClass: 'bg-amber-500/10 text-amber-500',
   },
 ];

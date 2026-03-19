@@ -13,10 +13,10 @@ interface Metric {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const metrics: Metric[] = [
-  { label: 'Total Revenue',          value: '$428,500', trend: '+12.5%', trendClass: 'text-emerald-500', trendIcon: TrendingUp },
-  { label: 'New Students (Monthly)', value: '124',      trend: '+8.2%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp },
-  { label: 'Visa Approval Rate (%)', value: '92%',      trend: '+1.5%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp },
-  { label: 'Active Applications',    value: '1,840',    trend: '-2.1%',  trendClass: 'text-rose-500',    trendIcon: TrendingDown },
+  { label: 'Receita Total',          value: '350.000.000 Kz', trend: '+12.5%', trendClass: 'text-emerald-500', trendIcon: TrendingUp },
+  { label: 'Novos Estudantes (Mensal)', value: '124',      trend: '+8.2%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp },
+  { label: 'Taxa de Aprovação de Visto (%)', value: '92%',      trend: '+1.5%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp },
+  { label: 'Candidaturas Ativas',    value: '1.840',    trend: '-2.1%',  trendClass: 'text-rose-500',    trendIcon: TrendingDown },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────

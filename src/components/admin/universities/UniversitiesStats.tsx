@@ -16,10 +16,10 @@ function StatCard({ label, value, valueClass = 'text-slate-900 dark:text-slate-1
 export default function UniversitiesStats() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <StatCard label="Total Universities"  value="120" />
-      <StatCard label="Active Universities" value="112" />
-      <StatCard label="Open Applications"  value="45"  />
-      <StatCard label="Upcoming Deadlines" value="8"   valueClass="text-primary" />
+      <StatCard label="Total de Universidades"  value="120" />
+      <StatCard label="Universidades Ativas" value="112" />
+      <StatCard label="Candidaturas Abertas"  value="45"  />
+      <StatCard label="Prazos Próximos" value="8"   valueClass="text-primary" />
     </div>
   );
 }

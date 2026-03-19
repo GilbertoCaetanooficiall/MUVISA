@@ -9,10 +9,10 @@ interface StatCard {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const stats: StatCard[] = [
-  { label: 'Total Employees', value: '124' },
-  { label: 'Active Now',      value: '42',  accentClass: 'border-l-4 border-l-green-500' },
-  { label: 'Admin Roles',     value: '12',  accentClass: 'border-l-4 border-l-primary' },
-  { label: 'New Requests',    value: '8',   accentClass: 'border-l-4 border-l-yellow-500' },
+  { label: 'Total de Funcionários', value: '124' },
+  { label: 'Ativos Agora',      value: '42',  accentClass: 'border-l-4 border-l-green-500' },
+  { label: 'Cargos Admin',     value: '12',  accentClass: 'border-l-4 border-l-primary' },
+  { label: 'Novos Pedidos',    value: '8',   accentClass: 'border-l-4 border-l-yellow-500' },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────

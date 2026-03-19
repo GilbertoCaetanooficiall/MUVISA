@@ -2,7 +2,7 @@ import { CheckCircle2, XCircle, FileEdit, Trash2 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type PlanStatus = 'Published' | 'Review Required' | 'Draft';
+type PlanStatus = 'Publicado' | 'Revisão Necessária' | 'Rascunho';
 
 interface Feature {
   text: string;
@@ -24,48 +24,48 @@ interface Plan {
 const plans: Plan[] = [
   {
     id: 'PLAN-001',
-    name: 'Premium Support',
-    price: '$299',
-    priceLabel: 'per month',
-    status: 'Published',
+    name: 'Suporte Premium',
+    price: '250.000 Kz',
+    priceLabel: 'por mês',
+    status: 'Publicado',
     features: [
-      { text: 'Priority university application assistance', included: true },
-      { text: 'Full visa documentation support', included: true },
-      { text: 'Unlimited document review rounds', included: true },
-      { text: '24/7 dedicated advisor access', included: true },
+      { text: 'Assistência prioritária na candidatura universitária', included: true },
+      { text: 'Apoio total na documentação de visto', included: true },
+      { text: 'Rondas ilimitadas de revisão de documentos', included: true },
+      { text: 'Acesso a conselheiro dedicado 24/7', included: true },
     ],
   },
   {
     id: 'PLAN-002',
-    name: 'Standard Visa Plan',
-    price: '$149',
-    priceLabel: 'per month',
-    status: 'Published',
+    name: 'Plano de Visto Standard',
+    price: '120.000 Kz',
+    priceLabel: 'por mês',
+    status: 'Publicado',
     features: [
-      { text: 'Visa application workflow guidance', included: true },
-      { text: 'Digital document checklist', included: true },
-      { text: 'Bi-weekly progress check-ins', included: true },
-      { text: 'University placement support', included: false },
+      { text: 'Orientação no fluxo de pedido de visto', included: true },
+      { text: 'Lista de verificação de documentos digitais', included: true },
+      { text: 'Verificações de progresso quinzenais', included: true },
+      { text: 'Apoio na colocação universitária', included: false },
     ],
   },
   {
     id: 'PLAN-003',
-    name: 'Starter Pathway',
-    price: '$89',
-    priceLabel: 'per month',
-    status: 'Review Required',
+    name: 'Caminho Inicial',
+    price: '65.000 Kz',
+    priceLabel: 'por mês',
+    status: 'Revisão Necessária',
     features: [
-      { text: 'Self-service document portal', included: true },
-      { text: 'Automated notification alerts', included: true },
-      { text: 'Community forum access', included: true },
+      { text: 'Portal de documentos self-service', included: true },
+      { text: 'Alertas de notificação automáticos', included: true },
+      { text: 'Acesso ao fórum da comunidade', included: true },
     ],
   },
   {
     id: 'PLAN-004',
-    name: 'Graduate Fast-Track',
-    price: '$499',
-    priceLabel: 'proposed',
-    status: 'Draft',
+    name: 'Via Rápida Graduados',
+    price: '400.000 Kz',
+    priceLabel: 'proposto',
+    status: 'Rascunho',
     isDraft: true,
     features: [],
   },
@@ -74,19 +74,19 @@ const plans: Plan[] = [
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
 const statusBadge: Record<PlanStatus, string> = {
-  'Published':        'bg-green-500/10 text-green-500',
-  'Review Required':  'bg-amber-500/10 text-amber-500',
-  'Draft':            'bg-slate-500/10 text-slate-500',
+  'Publicado':        'bg-green-500/10 text-green-500',
+  'Revisão Necessária':  'bg-amber-500/10 text-amber-500',
+  'Rascunho':            'bg-slate-500/10 text-slate-500',
 };
 
 // ─── Card wrapper styles ───────────────────────────────────────────────────────
 
 const cardClass: Record<PlanStatus, string> = {
-  'Published':
+  'Publicado':
     'bg-white dark:bg-slate-800/40 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col shadow-sm',
-  'Review Required':
+  'Revisão Necessária':
     'bg-white dark:bg-slate-800/40 rounded-xl border border-primary/20 dark:border-slate-800 overflow-hidden flex flex-col shadow-sm',
-  'Draft':
+  'Rascunho':
     'bg-white dark:bg-slate-800/20 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 overflow-hidden flex flex-col shadow-sm opacity-80 hover:opacity-100 transition-opacity group',
 };
 
@@ -138,7 +138,7 @@ function PlanCard({ plan }: { plan: Plan }) {
         {plan.isDraft ? (
           <div className="flex flex-col items-center justify-center py-10">
             <FileEdit className="text-slate-400 dark:text-slate-700 mb-2" size={48} />
-            <p className="text-slate-500 text-sm italic">Configuring benefits...</p>
+            <p className="text-slate-500 text-sm italic">Configurando benefícios...</p>
           </div>
         ) : (
           <div className="space-y-3 mb-8">
@@ -150,13 +150,13 @@ function PlanCard({ plan }: { plan: Plan }) {
       </div>
 
       {/* Card footer / actions */}
-      {plan.status === 'Published' && (
+      {plan.status === 'Publicado' && (
         <div className={`p-4 ${footerBg} flex gap-2`}>
           <button className="flex-1 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded transition-colors">
-            Edit
+            Editar
           </button>
           <button className="flex-1 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded transition-colors">
-            Benefits
+            Benefícios
           </button>
           <button className="p-2 text-slate-400 hover:text-red-500 transition-colors">
             <Trash2 size={20} />
@@ -164,10 +164,10 @@ function PlanCard({ plan }: { plan: Plan }) {
         </div>
       )}
 
-      {plan.status === 'Review Required' && (
+      {plan.status === 'Revisão Necessária' && (
         <div className={`p-4 ${footerBg} flex gap-2`}>
           <button className="flex-1 py-2 text-xs font-bold text-white bg-primary hover:bg-primary/90 rounded transition-colors">
-            Review Changes
+            Rever Alterações
           </button>
           <button className="p-2 text-slate-400 hover:text-red-500 transition-colors">
             <Trash2 size={20} />
@@ -175,10 +175,10 @@ function PlanCard({ plan }: { plan: Plan }) {
         </div>
       )}
 
-      {plan.status === 'Draft' && (
+      {plan.status === 'Rascunho' && (
         <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex gap-2">
           <button className="w-full py-2 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
-            Continue Editing
+            Continuar a Editar
           </button>
         </div>
       )}
@@ -193,9 +193,9 @@ export default function PlansGrid() {
     <div className="p-6">
       {/* Section header */}
       <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
-        Active Service Plans
+        Planos de Serviço Ativos
         <span className="bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs px-2 py-0.5 rounded-full">
-          8 Published
+          8 Publicados
         </span>
       </h2>
 

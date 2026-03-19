@@ -17,22 +17,22 @@ interface StatItem {
 const stats: StatItem[] = [
   {
     icon: FileText,   iconClass: 'bg-primary/10 text-primary',
-    label: 'Total Applications', value: '1,284',
+    label: 'Total de Candidaturas', value: '1.284',
     trend: '+12%', trendClass: 'text-emerald-500', trendIcon: TrendingUp,
   },
   {
     icon: RefreshCw,          iconClass: 'bg-blue-500/10 text-blue-500',
-    label: 'In Progress',        value: '456',
+    label: 'Em Processamento',        value: '456',
     trend: '+5%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp,
   },
   {
     icon: CheckCircle2,  iconClass: 'bg-emerald-500/10 text-emerald-500',
-    label: 'Accepted',           value: '612',
+    label: 'Aceites',           value: '612',
     trend: '-2%',  trendClass: 'text-rose-500',    trendIcon: TrendingDown,
   },
   {
     icon: XCircle,        iconClass: 'bg-rose-500/10 text-rose-500',
-    label: 'Rejected',           value: '216',
+    label: 'Rejeitadas',           value: '216',
     trend: '+8%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp,
   },
 ];

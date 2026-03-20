@@ -105,7 +105,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
     }, 800);
   };
 
-  const handleSelectPlan = (planSlug: string) => {
+  const handleSelectPlan = () => {
     setStep(3);
   };
 
@@ -385,7 +385,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                   </ul>
 
                   <button
-                    onClick={() => handleSelectPlan(plan.slug)}
+                    onClick={() => handleSelectPlan()}
                     className={`w-full py-3 rounded-xl font-black tracking-wide transition-all ${
                       plan.featured
                         ? 'bg-primary text-white hover:bg-primary-hover shadow-[0_10px_20px_rgba(14,86,224,0.3)] active:scale-95'

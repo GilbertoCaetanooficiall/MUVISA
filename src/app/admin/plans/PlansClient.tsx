@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import PlansStats from '@/components/admin/plans/PlansStats';
 import PlansGrid from '@/components/admin/plans/PlansGrid';
-import { X, Plus, Trash2, CheckCircle2, Ticket, LayoutGrid, Tag, Percent, Calendar } from 'lucide-react';
+import { X, Plus, Trash2, CheckCircle2, Ticket, LayoutGrid, Tag, Calendar } from 'lucide-react';
 
 export type PlanStatus = 'Publicado' | 'Revisão Necessária' | 'Rascunho';
 

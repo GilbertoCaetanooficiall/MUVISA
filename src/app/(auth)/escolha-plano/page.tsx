@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import { Check } from 'lucide-react';
 
 const assessmentPlans = [
@@ -48,8 +47,6 @@ const assessmentPlans = [
 ];
 
 export default function EscolhaPlanoPage() {
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-
   return (
     <div className="font-sans antialiased text-white animate-fade-in w-full max-w-6xl mx-auto px-4 py-12 relative z-20">
       <div className="text-center mb-12">
@@ -109,7 +106,6 @@ export default function EscolhaPlanoPage() {
 
             <Link
               href="/boas-vindas"
-              onClick={() => setSelectedPlan(plan.slug)}
               className={`block w-full py-4 rounded-2xl font-black text-center transition-all duration-300 tracking-wider uppercase text-sm ${
                 plan.featured
                   ? 'bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95'

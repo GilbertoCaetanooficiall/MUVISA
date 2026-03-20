@@ -19,7 +19,7 @@ interface ConsultorCardProps {
 export default function ConsultorCard({
   nome = 'Ronaldo Joaquim',
   role = 'Especialista em Vistos de Estudo',
-  avatarUrl = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop',
+  avatarUrl = '/team/ronaldo-joaquim.jpg',
   isOnline = true,
   processos = '240+',
   aprovacao = '98%',

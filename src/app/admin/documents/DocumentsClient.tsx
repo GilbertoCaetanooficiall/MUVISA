@@ -114,7 +114,7 @@ export default function DocumentsClient() {
       {/* Page header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Documentos</h1>
+          <h1 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">Documentos</h1>
           <p className="text-slate-500 dark:text-slate-400 mt-1">
             Gira e reveja todos os documentos dos estudantes necessários para candidaturas universitárias e processos de visto.
           </p>

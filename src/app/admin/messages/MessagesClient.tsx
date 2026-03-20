@@ -147,7 +147,7 @@ export default function MessagesClient() {
     <div className="flex flex-col h-[calc(100vh-64px)] -m-8">
       {/* Page header */}
       <div className="px-8 py-6 border-b border-slate-200 dark:border-border-muted flex-shrink-0 bg-white dark:bg-background-dark shadow-sm">
-        <h1 className="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-tight">
+        <h1 className="font-serif text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-tight">
           Mensagens e Tickets
         </h1>
         <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">

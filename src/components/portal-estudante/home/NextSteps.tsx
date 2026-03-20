@@ -1,5 +1,10 @@
-import { ArrowRight, Circle, Lightbulb, Lock } from 'lucide-react';
+'use client';
+import { useState } from 'react';
+import { ArrowRight, Circle, Lightbulb, Lock, CheckCircle } from 'lucide-react';
+
 export default function NextSteps() {
+    const [signed, setSigned] = useState(false);
+
     return (
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col h-full">
             <div className="flex items-center gap-3 mb-6">
@@ -9,18 +14,32 @@ export default function NextSteps() {
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Próximos Passos</h3>
             </div>
             <div className="flex flex-col gap-4 flex-1">
-                <div className="flex gap-4 items-start p-4 rounded-lg bg-background-light dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                {/* Passo 1 */}
+                <div className={`flex gap-4 items-start p-4 rounded-lg border transition-all ${signed ? 'bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800' : 'bg-background-light dark:bg-slate-800/50 border-slate-100 dark:border-slate-700'}`}>
                     <div className="mt-0.5">
-                        <Circle className="text-primary" />
+                        {signed
+                            ? <CheckCircle className="text-green-500" />
+                            : <Circle className="text-primary" />
+                        }
                     </div>
                     <div className="flex-1">
                         <h4 className="text-sm font-bold text-slate-900 dark:text-white">Assinar Formulário 123</h4>
-                        <p className="text-xs text-slate-500 mt-1">O formulário de aplicação precisa da sua assinatura digital.</p>
-                        <button className="mt-3 text-xs font-bold text-primary hover:text-primary-hover flex items-center gap-1">
-                            Assinar Agora <ArrowRight className="text-[16px]" />
-                        </button>
+                        {signed ? (
+                            <p className="text-xs text-green-600 dark:text-green-400 mt-1 font-medium">✓ Assinado com sucesso!</p>
+                        ) : (
+                            <>
+                                <p className="text-xs text-slate-500 mt-1">O formulário de aplicação precisa da sua assinatura digital.</p>
+                                <button
+                                    onClick={() => setSigned(true)}
+                                    className="mt-3 text-xs font-bold text-primary hover:text-primary-hover flex items-center gap-1 transition-colors"
+                                >
+                                    Assinar Agora <ArrowRight className="text-[16px]" />
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
+                {/* Passo 2 - bloqueado */}
                 <div className="flex gap-4 items-start p-4 rounded-lg bg-background-light dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 opacity-60">
                     <div className="mt-0.5">
                         <Lock className="text-slate-400" />

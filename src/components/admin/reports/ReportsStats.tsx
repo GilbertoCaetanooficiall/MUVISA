@@ -43,7 +43,7 @@ export default function ReportsStats({ data }: { data: Record<string, { value: s
         >
           <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{m.label}</p>
           <div className="mt-2 flex items-end justify-between">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{m.value}</h3>
+            <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">{m.value}</h3>
             <span className={`text-xs font-bold flex items-center gap-0.5 ${m.trendClass}`}>
               <m.trendIcon size={12} />
               {m.trend}

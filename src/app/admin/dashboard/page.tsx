@@ -31,7 +31,7 @@ function StatCard({ icon: Icon, label, value, trend, trendUp }: StatCardProps) {
         </span>
       </div>
       <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{label}</p>
-      <p className="text-2xl font-bold mt-1">{value}</p>
+      <p className="font-serif text-2xl font-bold mt-1">{value}</p>
     </div>
   );
 }
@@ -180,7 +180,7 @@ function DashboardContent() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+        <h1 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">
           Visão Geral do Painel
         </h1>
         <p className="text-slate-500 dark:text-slate-400">

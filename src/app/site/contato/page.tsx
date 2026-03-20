@@ -1,5 +1,85 @@
-import { ArrowRight, ClipboardList, Clock, ListChecks, Lock, Mail, Phone } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { ArrowRight, ClipboardList, Clock, ListChecks, Lock, Mail, Phone, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
+
+type FormData = {
+  nome: string;
+  email: string;
+  whatsapp: string;
+  tipoVisto: string;
+  nivelEnsino: string;
+  cidadeUniversidade: string;
+  data: string;
+  horario: string;
+};
+
+type FormErrors = Partial<Record<keyof FormData, string>>;
+
+const initialForm: FormData = {
+  nome: '',
+  email: '',
+  whatsapp: '',
+  tipoVisto: '',
+  nivelEnsino: '',
+  cidadeUniversidade: '',
+  data: '',
+  horario: 'Manhã (09:00 - 12:00)',
+};
+
+function validate(form: FormData): FormErrors {
+  const errors: FormErrors = {};
+  if (!form.nome.trim()) errors.nome = 'Nome é obrigatório.';
+  if (!form.email.trim()) {
+    errors.email = 'E-mail é obrigatório.';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    errors.email = 'Introduza um e-mail válido.';
+  }
+  if (!form.whatsapp.trim()) errors.whatsapp = 'WhatsApp é obrigatório.';
+  if (!form.tipoVisto) errors.tipoVisto = 'Selecione o tipo de visto.';
+  if (!form.nivelEnsino) errors.nivelEnsino = 'Selecione o nível de ensino.';
+  if (!form.cidadeUniversidade.trim()) errors.cidadeUniversidade = 'Indique a cidade ou universidade.';
+  if (!form.data) errors.data = 'Selecione uma data.';
+  return errors;
+}
+
 export default function SiteContatoPage() {
+  const [form, setForm] = useState<FormData>(initialForm);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+    // Clear error on change
+    if (errors[name as keyof FormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const validationErrors = validate(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setLoading(true);
+    // Simular envio (2s)
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 2000);
+  };
+
+  const inputClass = (field: keyof FormData) =>
+    `w-full rounded-lg border ${errors[field] ? 'border-red-400 dark:border-red-500 focus:ring-red-300' : 'border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-primary'} bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm py-2.5 px-3 placeholder:text-slate-400 focus:outline-none focus:ring-1 transition-colors`;
+
+  const selectClass = (field: keyof FormData) =>
+    `w-full rounded-lg border ${errors[field] ? 'border-red-400 dark:border-red-500' : 'border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-primary'} bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm py-2.5 px-3 focus:outline-none focus:ring-1 transition-colors`;
+
   return (
     <>
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
@@ -8,6 +88,7 @@ export default function SiteContatoPage() {
       </div>
       
       <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8 lg:gap-16 items-start mx-auto py-10 px-4 sm:px-6">
+        {/* ── Coluna Esquerda ── */}
         <div className="flex-1 flex flex-col justify-center space-y-8 lg:sticky lg:top-24">
           <div className="space-y-4">
             <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 px-3 py-1 text-xs font-semibold text-primary dark:text-primary">
@@ -26,33 +107,21 @@ export default function SiteContatoPage() {
           </div>
 
           <div className="grid gap-6">
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary group-hover:text-primary transition-colors">
-                <ClipboardList />
+            {[
+              { icon: ClipboardList, title: 'Avaliação de Perfil', desc: 'Analisamos o seu histórico, notas e interesses para encontrar a universidade ideal para si.' },
+              { icon: ListChecks, title: 'Checklist Personalizada', desc: 'Receba uma lista personalizada de todos os documentos necessários para a sua candidatura.' },
+              { icon: Clock, title: 'Cronograma de Visto', desc: 'Obtenha um roteiro claro com prazos para o seu processo de pedido de visto.' },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary group-hover:scale-110 transition-transform">
+                  <Icon />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 dark:text-white text-lg">{title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">{desc}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-lg">Avaliação de Perfil</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Analisamos o seu histórico, notas e interesses para encontrar a universidade ideal para si.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary group-hover:text-primary transition-colors">
-                <ListChecks />
-              </div>
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-lg">Checklist Personalizada</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Receba uma lista personalizada de todos os documentos necessários para a sua candidatura.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary group-hover:text-primary transition-colors">
-                <Clock />
-              </div>
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-lg">Cronograma de Visto</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Obtenha um roteiro claro com prazos para o seu processo de pedido de visto.</p>
-              </div>
-            </div>
+            ))}
           </div>
 
           <div className="hidden lg:flex items-center gap-4 pt-4">
@@ -68,6 +137,7 @@ export default function SiteContatoPage() {
           </div>
         </div>
 
+        {/* ── Coluna Direita (Formulário) ── */}
         <div className="flex-1 max-w-xl w-full mx-auto">
           <div className="bg-white dark:bg-card-dark rounded-2xl shadow-xl dark:shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden relative">
             <div className="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
@@ -81,90 +151,128 @@ export default function SiteContatoPage() {
               </div>
             </div>
 
-            <form className="p-6 lg:p-8 flex flex-col gap-6">
-              <div className="space-y-5">
-                <label className="block">
-                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Nome Completo</span>
-                  <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3 placeholder:text-slate-400" placeholder="Seu nome" type="text" />
-                </label>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <label className="block">
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Endereço de E-mail</span>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-                        <Mail className="text-[20px]" />
-                      </div>
-                      <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary pl-10 py-2.5 placeholder:text-slate-400" placeholder="exemplo@email.com" type="email" />
-                    </div>
-                  </label>
-
-                  <label className="block">
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">WhatsApp</span>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-                        <Phone className="text-[20px]" />
-                      </div>
-                      <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary pl-10 py-2.5 placeholder:text-slate-400" placeholder="+244 9xx xxx xxx" type="tel" />
-                    </div>
-                  </label>
+            {/* ── Estado de SUCESSO ── */}
+            {submitted ? (
+              <div className="p-8 lg:p-12 flex flex-col items-center text-center gap-4 animate-fade-in">
+                <div className="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center mb-2">
+                  <CheckCircle className="text-emerald-600 dark:text-emerald-400 w-10 h-10" />
                 </div>
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Agendamento Confirmado!</h3>
+                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
+                  Recebemos o seu pedido com sucesso, <strong className="text-slate-800 dark:text-white">{form.nome.split(' ')[0]}</strong>! Um dos nossos consultores irá contactá-lo brevemente pelo e-mail <strong className="text-primary">{form.email}</strong>.
+                </p>
+                <button
+                  onClick={() => { setSubmitted(false); setForm(initialForm); }}
+                  className="mt-4 px-6 py-2 text-sm font-semibold text-primary border border-primary/30 rounded-lg hover:bg-primary/5 transition-colors"
+                >
+                  Submeter novo pedido
+                </button>
+              </div>
+            ) : (
+              /* ── Formulário ── */
+              <form className="p-6 lg:p-8 flex flex-col gap-6" onSubmit={handleSubmit} noValidate>
+                <div className="space-y-5">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <label className="block">
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Tipo de Visto</span>
-                    <select defaultValue="" className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3">
-                      <option disabled value="">Selecione o visto</option>
-                      <option value="d4">Visto de Estudante (D4)</option>
-                      <option value="d3">Investigação/Ensino (D3)</option>
-                      <option value="d4-sec">Ensino Secundário</option>
-                      <option value="d4-trainee">Estágio/Voluntariado</option>
-                    </select>
-                  </label>
+                  {/* Nome */}
+                  <div>
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Nome Completo</label>
+                    <input name="nome" value={form.nome} onChange={handleChange} className={inputClass('nome')} placeholder="Seu nome" type="text" />
+                    {errors.nome && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.nome}</p>}
+                  </div>
 
-                  <label className="block">
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Nível de Ensino</span>
-                    <select defaultValue="" className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3">
-                      <option disabled value="">Selecione o nível</option>
-                      <option value="licenciatura">Licenciatura</option>
-                      <option value="mestrado">Mestrado</option>
-                      <option value="doutoramento">Doutoramento</option>
-                      <option value="ctesp">CTeSP</option>
-                    </select>
-                  </label>
-                </div>
-
-                <label className="block">
-                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Cidade ou Universidade de Interesse</span>
-                  <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3 placeholder:text-slate-400" placeholder="Ex: Porto, Coimbra, Aveiro..." type="text" />
-                </label>
-
-                <div className="pt-2">
-                  <label className="block mb-3">
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 block">Data e Hora Sugerida</span>
-                  </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3" type="date" />
-                    <select className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm focus:border-primary focus:ring-primary py-2.5 px-3">
-                      <option>Manhã (09:00 - 12:00)</option>
-                      <option>Tarde (14:00 - 18:00)</option>
-                      <option>Noite (19:00 - 21:00)</option>
-                    </select>
+                    {/* Email */}
+                    <div>
+                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Endereço de E-mail</label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400"><Mail size={18} /></div>
+                        <input name="email" value={form.email} onChange={handleChange} className={`${inputClass('email')} pl-10`} placeholder="exemplo@email.com" type="email" />
+                      </div>
+                      {errors.email && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.email}</p>}
+                    </div>
+
+                    {/* WhatsApp */}
+                    <div>
+                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">WhatsApp</label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400"><Phone size={18} /></div>
+                        <input name="whatsapp" value={form.whatsapp} onChange={handleChange} className={`${inputClass('whatsapp')} pl-10`} placeholder="+244 9xx xxx xxx" type="tel" />
+                      </div>
+                      {errors.whatsapp && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.whatsapp}</p>}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Tipo de Visto */}
+                    <div>
+                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Tipo de Visto</label>
+                      <select name="tipoVisto" value={form.tipoVisto} onChange={handleChange} className={selectClass('tipoVisto')}>
+                        <option value="" disabled>Selecione o visto</option>
+                        <option value="d4">Visto de Estudante (D4)</option>
+                        <option value="d3">Investigação/Ensino (D3)</option>
+                        <option value="d4-sec">Ensino Secundário</option>
+                        <option value="d4-trainee">Estágio/Voluntariado</option>
+                      </select>
+                      {errors.tipoVisto && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.tipoVisto}</p>}
+                    </div>
+
+                    {/* Nível de Ensino */}
+                    <div>
+                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Nível de Ensino</label>
+                      <select name="nivelEnsino" value={form.nivelEnsino} onChange={handleChange} className={selectClass('nivelEnsino')}>
+                        <option value="" disabled>Selecione o nível</option>
+                        <option value="licenciatura">Licenciatura</option>
+                        <option value="mestrado">Mestrado</option>
+                        <option value="doutoramento">Doutoramento</option>
+                        <option value="ctesp">CTeSP</option>
+                      </select>
+                      {errors.nivelEnsino && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.nivelEnsino}</p>}
+                    </div>
+                  </div>
+
+                  {/* Cidade / Universidade */}
+                  <div>
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Cidade ou Universidade de Interesse</label>
+                    <input name="cidadeUniversidade" value={form.cidadeUniversidade} onChange={handleChange} className={inputClass('cidadeUniversidade')} placeholder="Ex: Porto, Coimbra, Aveiro..." type="text" />
+                    {errors.cidadeUniversidade && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.cidadeUniversidade}</p>}
+                  </div>
+
+                  {/* Data e Hora */}
+                  <div className="pt-1">
+                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 block mb-3">Data e Hora Sugerida</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <input name="data" value={form.data} onChange={handleChange} className={inputClass('data')} type="date" min={new Date().toISOString().split('T')[0]} />
+                        {errors.data && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.data}</p>}
+                      </div>
+                      <select name="horario" value={form.horario} onChange={handleChange} className={selectClass('horario')}>
+                        <option>Manhã (09:00 - 12:00)</option>
+                        <option>Tarde (14:00 - 18:00)</option>
+                        <option>Noite (19:00 - 21:00)</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex flex-col gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
-                <button className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-hover text-white font-bold h-12 transition-all shadow-[0_0_15px_rgba(25,120,229,0.4)] hover:shadow-[0_0_20px_rgba(25,120,229,0.6)] active:scale-[0.99]" type="button">
-                  Confirmar Agendamento
-                  <ArrowRight className="text-lg" />
-                </button>
-                <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
-                  <Lock className="text-sm text-green-500 dark:text-green-400" />
-                  <span>Seus dados estão seguros.</span>
+                <div className="flex flex-col gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-hover disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold h-12 transition-all shadow-[0_0_15px_rgba(25,120,229,0.4)] hover:shadow-[0_0_20px_rgba(25,120,229,0.6)] active:scale-[0.99]"
+                  >
+                    {loading ? (
+                      <><Loader2 className="animate-spin" size={20} /> A enviar...</>
+                    ) : (
+                      <>Confirmar Agendamento <ArrowRight size={18} /></>
+                    )}
+                  </button>
+                  <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
+                    <Lock className="text-green-500 dark:text-green-400" size={14} />
+                    <span>Os seus dados estão seguros e não serão partilhados.</span>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            )}
           </div>
 
           <div className="lg:hidden flex items-center justify-center gap-3 mt-8">

@@ -94,7 +94,7 @@ export default function PlansClient() {
       {/* Page header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+          <h1 className="font-serif text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             Planos e Pacotes
           </h1>
           <p className="text-slate-500 dark:text-slate-400 mt-1">

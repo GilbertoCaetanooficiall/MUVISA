@@ -24,7 +24,7 @@ function StatCard({ icon: Icon, iconClass, label, value, badge, badgeClass }: St
         )}
       </div>
       <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{label}</p>
-      <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{value}</p>
+      <p className="font-serif text-2xl font-bold text-slate-900 dark:text-white mt-1">{value}</p>
     </div>
   );
 }

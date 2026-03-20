@@ -1,5 +1,6 @@
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';
+import PageTransition from '@/components/site/PageTransition';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -18,7 +19,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
         {/* Scrollable page content */}
         <div className="flex-1 overflow-y-auto p-8">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </div>
       </main>
     </div>

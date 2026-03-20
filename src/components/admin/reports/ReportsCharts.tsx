@@ -105,7 +105,7 @@ export default function ReportsCharts({ data, timeframe, setTimeframe }: { data:
               <div className="absolute inset-[-18px] rounded-full border-[18px] border-primary border-r-transparent border-b-transparent rotate-45 transition-all duration-500" />
               <div className="absolute inset-[-18px] rounded-full border-[18px] border-emerald-500 border-l-transparent border-t-transparent border-b-transparent -rotate-12 transition-all duration-500" />
               <div className="flex flex-col items-center">
-                <span className="text-3xl font-black text-slate-900 dark:text-white">100%</span>
+                <span className="font-serif text-3xl font-black text-slate-900 dark:text-white">100%</span>
                 <span className="text-[10px] uppercase text-slate-500 tracking-widest font-bold">Quota Total</span>
               </div>
             </div>

@@ -33,7 +33,7 @@ export default function StaffStats({ staff }: { staff: StaffMember[] }) {
           className={`bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 p-6 rounded-xl space-y-2 ${s.accentClass ?? ''}`}
         >
           <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{s.label}</p>
-          <p className="text-3xl font-bold text-slate-900 dark:text-white">{s.value}</p>
+          <p className="font-serif text-3xl font-bold text-slate-900 dark:text-white">{s.value}</p>
         </div>
       ))}
     </div>

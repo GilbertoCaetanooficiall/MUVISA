@@ -15,8 +15,10 @@ import {
   Mail, 
   UserCog, 
   BarChart3,
-  Settings
+  Settings,
+  LogOut
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const navItems = [
   { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Painel Central' },
@@ -33,6 +35,11 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    router.push('/auth-admin/login');
+  };
 
   return (
     <aside className="w-64 flex-shrink-0 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
@@ -83,15 +90,22 @@ export default function Sidebar() {
       </nav>
 
       {/* Admin Profile Footer */}
-      <div className="p-4 border-t border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-3 px-2 py-3 rounded-xl bg-slate-50 dark:bg-slate-900/50">
-          <div className="size-10 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+      <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/10">
+        <div className="flex items-center gap-3 px-2 py-3 rounded-xl bg-white dark:bg-slate-900/50 shadow-sm border border-slate-100 dark:border-slate-800">
+          <div className="size-10 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold flex-shrink-0 shadow-lg shadow-primary/20">
             RS
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold truncate">Ricardo Silva</p>
-            <p className="text-xs text-slate-500 truncate">Administrador Sénior</p>
+            <p className="text-sm font-black truncate">Ricardo Silva</p>
+            <p className="text-[10px] text-slate-500 truncate uppercase tracking-widest font-bold">Diretor Geral</p>
           </div>
+          <button 
+            onClick={handleLogout}
+            className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-all"
+            title="Sair"
+          >
+            <LogOut size={18} />
+          </button>
         </div>
       </div>
     </aside>

@@ -4,7 +4,7 @@ import ProcessStepper from "@/components/portal-estudante/home/ProcessStepper";
 import NextSteps from "@/components/portal-estudante/home/NextSteps";
 import PendingDocuments from "@/components/portal-estudante/home/PendingDocuments";
 import Timeline from "@/components/portal-estudante/home/Timeline";
-import ConsultantWidget from "@/components/portal-estudante/home/ConsultantWidget";
+import ConsultorCard from "@/components/portal-estudante/home/ConsultorCard";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       {/* Bottom Section: Timeline & Consultant */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Timeline />
-        <ConsultantWidget />
+        <ConsultorCard />
       </div>
 
       <Footer />

@@ -2,6 +2,7 @@ import Sidebar from "@/components/portal-estudante/Sidebar";
 import Header from "@/components/portal-estudante/Header";
 import { ChatPanelProvider } from "@/components/portal-estudante/ChatPanel";
 import { MobileMenuProvider } from "@/components/portal-estudante/MobileMenuContext";
+import PageTransition from "@/components/site/PageTransition";
 
 export default function PortalLayout({
   children,
@@ -16,7 +17,9 @@ export default function PortalLayout({
           <main className="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark transition-colors duration-300">
             <Header />
             <div className="flex-1 overflow-y-auto p-6 md:p-8">
-              {children}
+              <PageTransition>
+                {children}
+              </PageTransition>
             </div>
           </main>
         </ChatPanelProvider>

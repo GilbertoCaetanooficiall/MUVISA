@@ -37,6 +37,8 @@ const config: Config = {
         },
       },
       fontFamily: {
+        sans: ['var(--font-sans)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
         "display": ["Inter", "sans-serif"],
       },
       borderRadius: {

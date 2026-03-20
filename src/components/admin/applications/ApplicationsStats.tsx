@@ -21,7 +21,7 @@ export default function ApplicationsStats({ applications }: { applications: Appl
           </span>
         </div>
         <p className="text-slate-500 text-sm font-medium">Total de Candidaturas</p>
-        <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">{total}</h3>
+        <h3 className="font-serif text-2xl font-bold mt-1 text-slate-900 dark:text-white">{total}</h3>
       </div>
       
       <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -35,7 +35,7 @@ export default function ApplicationsStats({ applications }: { applications: Appl
           </span>
         </div>
         <p className="text-slate-500 text-sm font-medium">Em Processamento</p>
-        <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">{emProcessamento}</h3>
+        <h3 className="font-serif text-2xl font-bold mt-1 text-slate-900 dark:text-white">{emProcessamento}</h3>
       </div>
       
       <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -49,7 +49,7 @@ export default function ApplicationsStats({ applications }: { applications: Appl
           </span>
         </div>
         <p className="text-slate-500 text-sm font-medium">Aceites</p>
-        <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">{aceites}</h3>
+        <h3 className="font-serif text-2xl font-bold mt-1 text-slate-900 dark:text-white">{aceites}</h3>
       </div>
       
       <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -63,7 +63,7 @@ export default function ApplicationsStats({ applications }: { applications: Appl
           </span>
         </div>
         <p className="text-slate-500 text-sm font-medium">Rejeitadas</p>
-        <h3 className="text-2xl font-bold mt-1 text-slate-900 dark:text-white">{rejeitadas || 216 /* mock fallback */}</h3>
+        <h3 className="font-serif text-2xl font-bold mt-1 text-slate-900 dark:text-white">{rejeitadas || 216 /* mock fallback */}</h3>
       </div>
     </div>
   );

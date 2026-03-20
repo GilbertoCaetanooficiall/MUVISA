@@ -32,7 +32,7 @@ function StatCard({ icon: Icon, label, value, trend, iconColor, trendColor }: St
         </span>
       </div>
       <p className="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">{label}</p>
-      <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{value}</h3>
+      <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white tracking-tight">{value}</h3>
     </div>
   );
 }

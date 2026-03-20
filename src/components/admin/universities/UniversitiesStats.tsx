@@ -10,7 +10,7 @@ function StatCard({ label, value, valueClass = 'text-slate-900 dark:text-slate-1
   return (
     <div className="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 p-6 rounded-xl shadow-sm">
       <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{label}</p>
-      <p className={`text-3xl font-bold mt-2 ${valueClass}`}>{value}</p>
+      <p className={`font-serif text-3xl font-bold mt-2 ${valueClass}`}>{value}</p>
     </div>
   );
 }

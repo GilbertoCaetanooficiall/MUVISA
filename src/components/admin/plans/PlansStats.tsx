@@ -64,7 +64,7 @@ export default function PlansStats({ plans }: { plans: Plan[] }) {
         >
           <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{m.label}</p>
           <div className="flex items-end justify-between mt-2">
-            <h3 className="text-3xl font-bold text-slate-900 dark:text-white leading-none">{m.value}</h3>
+            <h3 className="font-serif text-3xl font-bold text-slate-900 dark:text-white leading-none">{m.value}</h3>
             <span className={`text-xs font-semibold px-2 py-1 rounded-full ${m.badgeClass}`}>
               {m.badge}
             </span>

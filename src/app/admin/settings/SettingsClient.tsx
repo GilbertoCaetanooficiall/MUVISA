@@ -10,11 +10,11 @@ import {
 
 export default function SettingsClient() {
   const [profile, setProfile] = useState({
-    firstName: 'Alex',
-    lastName: 'Rivera',
-    email: 'alex.rivera@muvisa.com',
-    phone: '+1 (555) 0123-4567',
-    role: 'Administrador do Sistema'
+    firstName: 'Ricardo',
+    lastName: 'Silva',
+    email: 'admin@muvisa.com',
+    phone: '+244 923 000 000',
+    role: 'Administrador Master'
   });
 
   const [security, setSecurity] = useState({
@@ -80,20 +80,16 @@ export default function SettingsClient() {
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Page header */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Definições</h1>
+        <h1 className="font-serif text-3xl font-black text-slate-900 dark:text-white tracking-tight">Definições</h1>
         <p className="text-slate-500 dark:text-slate-400">
           Gira as tuas preferências de conta e configurações do sistema.
         </p>
       </div>
 
       {/* Sections */}
-      <ProfileSettings profile={profile} onChange={handleProfileChange} />
-      
       <SecuritySettings security={security} onChange={handleSecurityChange} />
       
       <NotificationSettings notifications={notifications} onChange={handleNotificationChange} />
-      
-      <AppPreferences preferences={preferences} onChange={handlePreferenceChange} />
 
       {/* Bottom actions */}
       <div className="flex items-center justify-end gap-4 pb-12 pt-4">

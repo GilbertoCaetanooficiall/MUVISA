@@ -87,7 +87,7 @@ function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (i
             </h4>
           </div>
           <div className="text-right flex-shrink-0">
-            <p className={`text-2xl font-bold ${plan.isDraft ? 'text-slate-400 dark:text-slate-600' : 'text-primary'}`}>{plan.price}</p>
+            <p className={`font-serif text-2xl font-bold ${plan.isDraft ? 'text-slate-400 dark:text-slate-600' : 'text-primary'}`}>{plan.price}</p>
             <p className="text-[10px] text-slate-500">{plan.priceLabel}</p>
           </div>
         </div>

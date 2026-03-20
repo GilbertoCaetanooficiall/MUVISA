@@ -107,7 +107,7 @@ function ClientsContent() {
       {/* Page header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Clientes</h1>
+          <h1 className="font-serif text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Clientes</h1>
           <p className="text-slate-500 dark:text-slate-400 mt-1">
             Gira todos os clientes estudantes e os seus processos de visto.
           </p>

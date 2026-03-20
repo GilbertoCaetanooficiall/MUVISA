@@ -11,7 +11,6 @@ import {
   Mail, 
   Calendar,
   X,
-  Save,
   Check
 } from 'lucide-react';
 import { ProfileSettings } from '@/components/admin/settings/SettingsSections';

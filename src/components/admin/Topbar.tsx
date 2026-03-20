@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useTheme } from 'next-themes';
-import { Search, Bell, Sun, Moon, LogOut, User, Settings, CheckCircle2 } from 'lucide-react';
+import { Search, Bell, Sun, Moon, LogOut, User, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import Link from 'next/link';

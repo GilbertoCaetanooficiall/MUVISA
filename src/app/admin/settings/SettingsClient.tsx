@@ -2,21 +2,11 @@
 
 import { useState, useCallback } from 'react';
 import {
-  ProfileSettings,
   SecuritySettings,
   NotificationSettings,
-  AppPreferences,
 } from '@/components/admin/settings/SettingsSections';
 
 export default function SettingsClient() {
-  const [profile, setProfile] = useState({
-    firstName: 'Ricardo',
-    lastName: 'Silva',
-    email: 'admin@muvisa.com',
-    phone: '+244 923 000 000',
-    role: 'Administrador Master'
-  });
-
   const [security, setSecurity] = useState({
     currentPassword: '',
     newPassword: '',
@@ -31,27 +21,9 @@ export default function SettingsClient() {
     messageAlerts: true
   });
 
-  const [preferences, setPreferences] = useState({
-    language: 'pt',
-    theme: 'dark'
-  });
-
   // Handlers
-  const handleProfileChange = useCallback((key: string, value: string) => setProfile(p => ({ ...p, [key]: value })), []);
   const handleSecurityChange = useCallback((key: string, value: string | boolean) => setSecurity(s => ({ ...s, [key]: value })), []);
   const handleNotificationChange = useCallback((key: string, value: boolean) => setNotifications(n => ({ ...n, [key]: value })), []);
-  const handlePreferenceChange = useCallback((key: string, value: string) => {
-    setPreferences(p => ({ ...p, [key]: value }));
-    
-    // Auto toggle document dark mode class
-    if (key === 'theme') {
-      if (value === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    }
-  }, []);
 
   const handleSave = () => {
     // Basic validation example
@@ -61,10 +33,8 @@ export default function SettingsClient() {
     }
 
     // In a real app we would POST this to an API
-    console.log('Saved Profile:', profile);
     console.log('Saved Security:', security);
     console.log('Saved Notifications:', notifications);
-    console.log('Saved Preferences:', preferences);
 
     alert('Alterações guardadas com sucesso no sistema!');
   };

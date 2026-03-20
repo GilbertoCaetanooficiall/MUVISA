@@ -9,7 +9,6 @@ import type { Application, AppStatus } from '@/app/admin/applications/Applicatio
 
 interface ApplicationsTableProps {
   applications: Application[];
-  totalApplicationsOriginal: number; // for "de 1.284 resultados"
   searchQuery: string;
   setSearchQuery: (val: string) => void;
   universityFilter: string;
@@ -40,7 +39,7 @@ export default function ApplicationsTable(props: ApplicationsTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const { applications, totalApplicationsOriginal } = props;
+  const { applications } = props;
   const totalPages = Math.ceil(applications.length / itemsPerPage) || 1;
   const currentDocs = applications.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 

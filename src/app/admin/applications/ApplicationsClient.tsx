@@ -150,7 +150,6 @@ export default function ApplicationsClient() {
       {/* Filters + Table */}
       <ApplicationsTable 
         applications={filteredApplications}
-        totalApplicationsOriginal={applications.length}
         searchQuery={searchQuery} setSearchQuery={setSearchQuery}
         universityFilter={universityFilter} setUniversityFilter={setUniversityFilter}
         courseFilter={courseFilter} setCourseFilter={setCourseFilter}

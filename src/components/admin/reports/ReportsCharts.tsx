@@ -27,7 +27,7 @@ const insights = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ReportsCharts({ data, timeframe, setTimeframe }: { data: any, timeframe: Timeframe, setTimeframe: (t: Timeframe) => void }) {
+export default function ReportsCharts({ data, timeframe, setTimeframe }: { data: Record<string, any>, timeframe: Timeframe, setTimeframe: (t: Timeframe) => void }) {
   const barHeights = data.chart.barHeights;
   const months = data.chart.months;
   const plans = data.plans;
@@ -110,7 +110,7 @@ export default function ReportsCharts({ data, timeframe, setTimeframe }: { data:
             </div>
           </div>
           <div className="mt-6 space-y-3">
-            {plans.map((p: any) => (
+            {plans.map((p: { label: string; pct: string }) => (
               <div key={p.label} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className={`size-3 rounded-full ${getDotColors(p.label)}`} />
@@ -129,7 +129,7 @@ export default function ReportsCharts({ data, timeframe, setTimeframe }: { data:
         <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800">
           <h4 className="font-bold text-slate-900 dark:text-white mb-6">Universidades Mais Populares</h4>
           <div className="space-y-5">
-            {universities.map((u: any, i: number) => (
+            {universities.map((u: { name: string; apps: string; width: string }, i: number) => (
               <div key={u.name} className="space-y-2">
                 <div className="flex justify-between text-xs font-bold uppercase tracking-tight text-slate-700 dark:text-slate-300">
                   <span>{u.name}</span>

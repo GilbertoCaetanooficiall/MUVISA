@@ -38,7 +38,7 @@ export default function SettingsClient() {
 
   // Handlers
   const handleProfileChange = useCallback((key: string, value: string) => setProfile(p => ({ ...p, [key]: value })), []);
-  const handleSecurityChange = useCallback((key: string, value: any) => setSecurity(s => ({ ...s, [key]: value })), []);
+  const handleSecurityChange = useCallback((key: string, value: string | boolean) => setSecurity(s => ({ ...s, [key]: value as any })), []);
   const handleNotificationChange = useCallback((key: string, value: boolean) => setNotifications(n => ({ ...n, [key]: value })), []);
   const handlePreferenceChange = useCallback((key: string, value: string) => {
     setPreferences(p => ({ ...p, [key]: value }));

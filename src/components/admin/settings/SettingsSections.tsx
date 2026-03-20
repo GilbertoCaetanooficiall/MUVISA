@@ -38,7 +38,7 @@ export function Toggle({ checked = false, onChange }: { checked?: boolean; onCha
 }
 
 // ─── Profile section ──────────────────────────────────────────────────────────
-export function ProfileSettings({ profile, onChange }: { profile: any; onChange: (key: string, value: string) => void }) {
+export function ProfileSettings({ profile, onChange }: { profile: Record<string, string>; onChange: (key: string, value: string) => void }) {
   return (
     <Section icon={User} title="Informações do Perfil">
       {/* Avatar */}
@@ -94,7 +94,7 @@ export function ProfileSettings({ profile, onChange }: { profile: any; onChange:
 }
 
 // ─── Security section ──────────────────────────────────────────────────────────
-export function SecuritySettings({ security, onChange }: { security: any; onChange: (key: string, value: any) => void }) {
+export function SecuritySettings({ security, onChange }: { security: Record<string, string | boolean>; onChange: (key: string, value: string | boolean) => void }) {
   return (
     <Section icon={Shield} title="Segurança e Palavra-passe">
       <div className="space-y-8">
@@ -109,7 +109,7 @@ export function SecuritySettings({ security, onChange }: { security: any; onChan
               <input 
                 className={inputCls} 
                 type={type} 
-                value={security[key] || ''}
+                value={(security[key] as string) || ''}
                 onChange={(e) => onChange(key, e.target.value)}
                 placeholder={placeholder} 
               />
@@ -123,7 +123,7 @@ export function SecuritySettings({ security, onChange }: { security: any; onChan
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Autenticação de Dois Fatores (2FA)</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">Adicione uma camada extra de segurança à sua conta.</p>
           </div>
-          <Toggle checked={security.twoFactor} onChange={(v) => onChange('twoFactor', v)} />
+          <Toggle checked={security.twoFactor as boolean} onChange={(v) => onChange('twoFactor', v)} />
         </div>
       </div>
     </Section>
@@ -131,7 +131,7 @@ export function SecuritySettings({ security, onChange }: { security: any; onChan
 }
 
 // ─── Notifications section ────────────────────────────────────────────────────
-export function NotificationSettings({ notifications, onChange }: { notifications: any; onChange: (key: string, value: boolean) => void }) {
+export function NotificationSettings({ notifications, onChange }: { notifications: Record<string, boolean>; onChange: (key: string, value: boolean) => void }) {
   const notifList = [
     { key: 'emailNotifications', icon: Mail,           iconBg: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',     title: 'Notificações por Email',  desc: 'Receba atualizações sobre a atividade via email.' },
     { key: 'pushNotifications',  icon: Smartphone,      iconBg: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400', title: 'Notificações Push',    desc: 'Alertas instantâneos no seu navegador ou dispositivo móvel.' },
@@ -153,7 +153,7 @@ export function NotificationSettings({ notifications, onChange }: { notification
                 <p className="text-xs text-slate-500 dark:text-slate-400">{n.desc}</p>
               </div>
             </div>
-            <Toggle checked={notifications[n.key]} onChange={(v) => onChange(n.key, v)} />
+            <Toggle checked={notifications[n.key] as boolean} onChange={(v) => onChange(n.key, v)} />
           </div>
         ))}
       </div>
@@ -162,7 +162,7 @@ export function NotificationSettings({ notifications, onChange }: { notification
 }
 
 // ─── App Preferences section ──────────────────────────────────────────────────
-export function AppPreferences({ preferences, onChange }: { preferences: any; onChange: (key: string, value: string) => void }) {
+export function AppPreferences({ preferences, onChange }: { preferences: Record<string, string>; onChange: (key: string, value: string) => void }) {
   return (
     <Section icon={Layout} title="Preferências da App">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

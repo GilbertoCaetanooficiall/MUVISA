@@ -1,23 +1,30 @@
+import type { StaffMember } from '@/app/admin/staff/StaffClient';
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface StatCard {
   label: string;
-  value: string;
+  value: string | number;
   accentClass?: string; // optional left-border accent colour
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const stats: StatCard[] = [
-  { label: 'Total de Funcionários', value: '124' },
-  { label: 'Ativos Agora',      value: '42',  accentClass: 'border-l-4 border-l-green-500' },
-  { label: 'Cargos Admin',     value: '12',  accentClass: 'border-l-4 border-l-primary' },
-  { label: 'Novos Pedidos',    value: '8',   accentClass: 'border-l-4 border-l-yellow-500' },
-];
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function StaffStats() {
+export default function StaffStats({ staff }: { staff: StaffMember[] }) {
+  const total = staff.length;
+  const ativos = staff.filter(s => s.status === 'Ativo').length;
+  const adminRoles = staff.filter(s => s.role.includes('Administrador')).length;
+  
+  // Fake "novos pedidos" number
+  const novosPedidos = Math.floor(Math.random() * 5) + 2; 
+
+  const stats: StatCard[] = [
+    { label: 'Total de Funcionários', value: total },
+    { label: 'Ativos Agora',      value: ativos,  accentClass: 'border-l-4 border-l-green-500' },
+    { label: 'Cargos Admin',     value: adminRoles,  accentClass: 'border-l-4 border-l-primary' },
+    { label: 'Novos Pedidos',    value: novosPedidos,   accentClass: 'border-l-4 border-l-yellow-500' },
+  ];
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {stats.map((s) => (

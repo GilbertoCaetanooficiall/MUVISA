@@ -1,65 +1,28 @@
+'use client';
+
+import { useState } from 'react';
 import ApplicationsFilters from './ApplicationsFilters';
 import { Eye, FileUp, MoreVertical } from 'lucide-react';
+import type { Application, AppStatus } from '@/app/admin/applications/ApplicationsClient';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+// ─── Component Props ──────────────────────────────────────────────────────────
 
-type AppStatus = 'Aceite' | 'Em Revisão' | 'Submetido' | 'Docs Pendentes' | 'Rascunho';
-
-interface Application {
-  id: string;
-  appId: string;
-  studentName: string;
-  initials: string;
-  university: string;
-  course: string;
-  intake: string;
-  deadline: string;
-  deadlineClass: string;
-  status: AppStatus;
-  staffInitials: string;
-  staffName: string;
-  staffAvatarClass: string;
+interface ApplicationsTableProps {
+  applications: Application[];
+  totalApplicationsOriginal: number; // for "de 1.284 resultados"
+  searchQuery: string;
+  setSearchQuery: (val: string) => void;
+  universityFilter: string;
+  setUniversityFilter: (val: string) => void;
+  courseFilter: string;
+  setCourseFilter: (val: string) => void;
+  statusFilter: string;
+  setStatusFilter: (val: string) => void;
+  onToggleStatus: (id: string, newStatus: AppStatus) => void;
+  onDelete: (id: string) => void;
+  onView: (id: string) => void;
+  onUploadDocs: (id: string) => void;
 }
-
-// ─── Sample data ──────────────────────────────────────────────────────────────
-
-const applications: Application[] = [
-  {
-    id: 'A-001', appId: 'APP-2024-001', studentName: 'Sarah Jenkins',   initials: 'SJ',
-    university: 'Universidade de Oxford',       course: 'MSc Ciência da Computação',
-    intake: 'Outono 2024',   deadline: '15 Mar, 2024', deadlineClass: 'text-rose-500',
-    status: 'Aceite',
-    staffInitials: 'MK', staffName: 'Michael King',   staffAvatarClass: 'bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400',
-  },
-  {
-    id: 'A-002', appId: 'APP-2024-042', studentName: 'David Miller',    initials: 'DM',
-    university: 'Universidade de Stanford',     course: 'MBA Gestão de Empresas',
-    intake: 'Outono 2024',   deadline: '30 Abr, 2024', deadlineClass: 'text-slate-700 dark:text-slate-300',
-    status: 'Em Revisão',
-    staffInitials: 'LW', staffName: 'Lisa Wong',      staffAvatarClass: 'bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400',
-  },
-  {
-    id: 'A-003', appId: 'APP-2024-089', studentName: 'James Wilson',    initials: 'JW',
-    university: 'MIT',                    course: 'BSc Engenharia Robótica',
-    intake: 'Primavera 2025', deadline: '12 Maio, 2024', deadlineClass: 'text-slate-700 dark:text-slate-300',
-    status: 'Submetido',
-    staffInitials: 'TC', staffName: 'Tom Chen',       staffAvatarClass: 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400',
-  },
-  {
-    id: 'A-004', appId: 'APP-2024-112', studentName: 'Elena Rodriguez', initials: 'ER',
-    university: 'Universidade de Toronto',  course: 'MA Relações Internacionais',
-    intake: 'Outono 2024',   deadline: '05 Abr, 2024', deadlineClass: 'text-slate-700 dark:text-slate-300',
-    status: 'Docs Pendentes',
-    staffInitials: 'MK', staffName: 'Michael King',   staffAvatarClass: 'bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400',
-  },
-  {
-    id: 'A-005', appId: 'APP-2024-205', studentName: 'Liam Wilson',     initials: 'LW',
-    university: 'UCLA',                   course: 'BFA Artes Visuais',
-    intake: 'Outono 2024',   deadline: '10 Jun, 2024', deadlineClass: 'text-slate-700 dark:text-slate-300',
-    status: 'Rascunho',
-    staffInitials: 'Un', staffName: 'Não Atribuído',     staffAvatarClass: 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400',
-  },
-];
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
@@ -73,20 +36,48 @@ const statusStyle: Record<AppStatus, string> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ApplicationsTable() {
+export default function ApplicationsTable(props: ApplicationsTableProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const { applications, totalApplicationsOriginal } = props;
+  const totalPages = Math.ceil(applications.length / itemsPerPage) || 1;
+  const currentDocs = applications.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(p => p + 1);
+  };
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(p => p - 1);
+  };
+
+  const handleActionMore = (id: string) => {
+    const action = prompt('O que deseja fazer? Digite "editar" ou "eliminar":');
+    if (action?.toLowerCase() === 'eliminar') {
+      props.onDelete(id);
+    } else if (action?.toLowerCase() === 'editar') {
+      alert(`Abrir formulário de edição da candidatura ${id}`);
+    }
+  };
+
   return (
     <div className="bg-white dark:bg-card-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
       {/* Inline filters */}
-      <ApplicationsFilters />
+      <ApplicationsFilters 
+        searchQuery={props.searchQuery} setSearchQuery={(v) => { props.setSearchQuery(v); setCurrentPage(1); }}
+        universityFilter={props.universityFilter} setUniversityFilter={(v) => { props.setUniversityFilter(v); setCurrentPage(1); }}
+        courseFilter={props.courseFilter} setCourseFilter={(v) => { props.setCourseFilter(v); setCurrentPage(1); }}
+        statusFilter={props.statusFilter} setStatusFilter={(v) => { props.setStatusFilter(v); setCurrentPage(1); }}
+      />
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto min-h-[400px]">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50 dark:bg-slate-800/30 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-              {['Nome do Estudante', 'Universidade e Curso', 'Ingresso', 'Prazo', 'Estado', 'Funcionário Atribuído', ''].map(
+              {['Nome do Estudante', 'Universidade e Curso', 'Ingresso', 'Prazo', 'Estado', 'Funcionário Atribuído', 'Ações'].map(
                 (col) => (
-                  <th key={col} className={`px-6 py-4 ${col === '' ? 'text-right' : ''}`}>
+                  <th key={col} className={`px-6 py-4 ${col === 'Ações' ? 'text-right' : ''}`}>
                     {col}
                   </th>
                 )
@@ -95,7 +86,13 @@ export default function ApplicationsTable() {
           </thead>
 
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-            {applications.map((a) => (
+            {currentDocs.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                  Nenhuma candidatura encontrada com os filtros selecionados.
+                </td>
+              </tr>
+            ) : currentDocs.map((a) => (
               <tr key={a.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
 
                 {/* Student */}
@@ -106,7 +103,7 @@ export default function ApplicationsTable() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-900 dark:text-white">{a.studentName}</p>
-                      <p className="text-xs text-slate-500">{a.appId}</p>
+                      <p className="text-xs text-slate-500 cursor-pointer hover:text-primary transition-colors" onClick={() => props.onView(a.id)}>{a.appId}</p>
                     </div>
                   </div>
                 </td>
@@ -129,7 +126,17 @@ export default function ApplicationsTable() {
 
                 {/* Status */}
                 <td className="px-6 py-4">
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusStyle[a.status]}`}>
+                  <span 
+                    onClick={() => {
+                        // Quick toggle status for mock capabilities
+                        const cycle: Record<AppStatus, AppStatus> = {
+                          'Rascunho': 'Docs Pendentes', 'Docs Pendentes': 'Submetido', 'Submetido': 'Em Revisão', 'Em Revisão': 'Aceite', 'Aceite': 'Rascunho'
+                        };
+                        props.onToggleStatus(a.id, cycle[a.status]);
+                    }}
+                    className={`cursor-pointer inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusStyle[a.status]} hover:opacity-80 transition-opacity`}
+                    title="Clique para avançar o estado"
+                  >
                     {a.status}
                   </span>
                 </td>
@@ -149,13 +156,13 @@ export default function ApplicationsTable() {
                 {/* Actions */}
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-1">
-                    <button className="p-2 text-slate-400 hover:text-primary transition-colors" title="Ver Candidatura">
+                    <button onClick={() => props.onView(a.id)} className="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="Ver Candidatura">
                       <Eye size={18} />
                     </button>
-                    <button className="p-2 text-slate-400 hover:text-emerald-500 transition-colors" title="Submeter Documentos">
+                    <button onClick={() => props.onUploadDocs(a.id)} className="p-2 text-slate-400 hover:text-emerald-500 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="Submeter Documentos">
                       <FileUp size={18} />
                     </button>
-                    <button className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-100 transition-colors">
+                    <button onClick={() => handleActionMore(a.id)} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-100 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="Mais opções (Editar / Eliminar)">
                       <MoreVertical size={18} />
                     </button>
                   </div>
@@ -168,16 +175,21 @@ export default function ApplicationsTable() {
 
       {/* Pagination */}
       <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
-        <p className="text-sm text-slate-500">A mostrar 1 a {applications.length} de 1.284 resultados</p>
+        <p className="text-sm text-slate-500">A mostrar <span className="font-medium">{applications.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}</span> a <span className="font-medium">{Math.min(currentPage * itemsPerPage, applications.length)}</span> de <span className="font-medium">{applications.length}</span> resultados filtrados (Total Global: 1284)</p>
         <div className="flex items-center gap-2">
-          <button className="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500">
+          <button 
+            disabled={currentPage === 1}
+            onClick={handlePrevPage}
+            className="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Anterior
           </button>
-          {[1, 2, 3].map((n) => (
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
             <button
               key={n}
-              className={`px-3 py-1 text-sm rounded-lg font-medium transition-colors ${
-                n === 1
+              onClick={() => setCurrentPage(n)}
+              className={`w-8 h-8 flex items-center justify-center text-sm rounded-lg font-medium transition-colors ${
+                n === currentPage
                   ? 'bg-primary text-white'
                   : 'border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300'
               }`}
@@ -185,7 +197,11 @@ export default function ApplicationsTable() {
               {n}
             </button>
           ))}
-          <button className="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500">
+          <button 
+            disabled={currentPage === totalPages}
+            onClick={handleNextPage}
+            className="px-3 py-1 text-sm border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Seguinte
           </button>
         </div>

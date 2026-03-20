@@ -1,31 +1,14 @@
-import { Search, MoreVertical, GraduationCap, Landmark, TowerControl, DraftingCompass } from 'lucide-react';
+'use client';
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+import { useState, useMemo } from 'react';
+import { Search, Edit, Trash2, PowerOff, Filter } from 'lucide-react';
+import type { University, AppStatus } from '@/app/admin/universities/UniversitiesClient';
 
-type AppStatus = 'Candidaturas Abertas' | 'A terminar' | 'Candidaturas Fechadas';
-
-interface University {
-  id: string;
-  name: string;
-  icon: React.ElementType;
-  city: string;
-  courses: number;
-  status: AppStatus;
-  deadline: string;
-  website: string;
+interface UniversitiesTableProps {
+  universities: University[];
+  onDelete: (id: string) => void;
+  onStatusChange: (id: string, status: AppStatus) => void;
 }
-
-// ─── Sample data ──────────────────────────────────────────────────────────────
-
-const universities: University[] = [
-  { id: 'U-001', name: 'Universidade de Lisboa',    icon: GraduationCap,           city: 'Lisboa',  courses: 156, status: 'Candidaturas Abertas',   deadline: '15 Ago, 2024', website: 'ulisboa.pt'  },
-  { id: 'U-002', name: 'Universidade do Porto',     icon: Landmark,  city: 'Porto',   courses: 142, status: 'A terminar',         deadline: '30 Mai, 2024', website: 'up.pt'       },
-  { id: 'U-003', name: 'Universidade de Coimbra',   icon: TowerControl,  city: 'Coimbra', courses: 98,  status: 'Candidaturas Fechadas',  deadline: '15 Mar, 2024', website: 'uc.pt'       },
-  { id: 'U-004', name: 'Universidade Nova de Lisboa',  icon: GraduationCap,           city: 'Lisboa',  courses: 115, status: 'Candidaturas Abertas',    deadline: '20 Jul, 2024', website: 'unl.pt'      },
-  { id: 'U-005', name: 'Universidade do Minho',     icon: DraftingCompass,     city: 'Braga',   courses: 88,  status: 'Candidaturas Abertas',    deadline: '01 Ago, 2024', website: 'uminho.pt'   },
-];
-
-// ─── Status badge ─────────────────────────────────────────────────────────────
 
 const statusStyle: Record<AppStatus, string> = {
   'Candidaturas Abertas':   'bg-green-500/10 text-green-600 dark:text-green-500 border-green-500/20',
@@ -33,65 +16,117 @@ const statusStyle: Record<AppStatus, string> = {
   'Candidaturas Fechadas': 'bg-slate-500/10 text-slate-500 border-slate-500/20',
 };
 
-// ─── Filter + Table card combined (matches Stitch structure) ──────────────────
-
 const selectClass =
   'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg py-2 px-3 text-sm text-slate-700 dark:text-slate-200 focus:ring-1 focus:ring-primary focus:outline-none';
 
-export default function UniversitiesTable() {
+export default function UniversitiesTable({ universities, onDelete, onStatusChange }: UniversitiesTableProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [cityFilter, setCityFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [courseFilter, setCourseFilter] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const filteredUniversities = useMemo(() => {
+    return universities.filter(u => {
+      const matchSearch = u.name.toLowerCase().includes(searchQuery.toLowerCase()) || u.website.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchCity = cityFilter ? u.city === cityFilter : true;
+      let matchStatus = true;
+      if (statusFilter === 'Abertas') matchStatus = u.status === 'Candidaturas Abertas';
+      else if (statusFilter === 'A terminar') matchStatus = u.status === 'A terminar';
+      else if (statusFilter === 'Fechadas') matchStatus = u.status === 'Candidaturas Fechadas';
+
+      // courseFilter mock implementation
+      const matchCourse = courseFilter ? true : true; // In a real app, 'u' would have a 'courseTypes' array
+
+      return matchSearch && matchCity && matchStatus && matchCourse;
+    });
+  }, [universities, searchQuery, cityFilter, statusFilter, courseFilter]);
+
+  const totalPages = Math.ceil(filteredUniversities.length / itemsPerPage) || 1;
+  const currentDocs = filteredUniversities.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(p => p + 1);
+  };
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(p => p - 1);
+  };
+
+  const handleToggleStatus = (u: University) => {
+    const nextStatus: Record<AppStatus, AppStatus> = {
+      'Candidaturas Abertas': 'A terminar',
+      'A terminar': 'Candidaturas Fechadas',
+      'Candidaturas Fechadas': 'Candidaturas Abertas'
+    };
+    onStatusChange(u.id, nextStatus[u.status]);
+  };
+
+  // Get unique cities for filter
+  const uniqueCities = Array.from(new Set(universities.map(u => u.city)));
+
   return (
     <div className="bg-white dark:bg-card-dark border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
 
       {/* Filters Section */}
       <div className="p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           {/* Search */}
           <div className="md:col-span-1">
             <label className="relative block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
               <input
                 className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg pl-10 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:outline-none"
-                placeholder="Pesquisar universidades..."
+                placeholder="Pesquisar..."
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </label>
           </div>
 
           {/* City */}
-          <select className={selectClass}>
-            <option>Filtrar por cidade</option>
-            <option>Lisboa</option>
-            <option>Porto</option>
-            <option>Coimbra</option>
-            <option>Braga</option>
+          <select className={selectClass} value={cityFilter} onChange={(e) => setCityFilter(e.target.value)}>
+            <option value="">Filtrar por cidade</option>
+            {uniqueCities.map(city => <option key={city} value={city}>{city}</option>)}
           </select>
 
           {/* Application status */}
-          <select className={selectClass}>
-            <option>Estado da candidatura</option>
-            <option>Abertas</option>
-            <option>A terminar</option>
-            <option>Fechadas</option>
+          <select className={selectClass} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+            <option value="">Estado da candidatura</option>
+            <option value="Abertas">Abertas</option>
+            <option value="A terminar">A terminar</option>
+            <option value="Fechadas">Fechadas</option>
           </select>
 
           {/* Course availability */}
-          <select className={selectClass}>
-            <option>Disponibilidade de cursos</option>
-            <option>Engenharia</option>
-            <option>Medicina</option>
-            <option>Artes</option>
-            <option>Gestão</option>
+          <select className={selectClass} value={courseFilter} onChange={(e) => setCourseFilter(e.target.value)}>
+            <option value="">Disponibilidade de cursos</option>
+            <option value="Engenharia">Engenharia</option>
+            <option value="Medicina">Medicina</option>
+            <option value="Artes">Artes</option>
+            <option value="Gestão">Gestão</option>
           </select>
+
+          <button 
+            type="button" 
+            title="Limpar Filtros"
+            onClick={() => { setSearchQuery(''); setCityFilter(''); setStatusFilter(''); setCourseFilter(''); setCurrentPage(1); }}
+            className="flex items-center justify-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 py-2 px-3 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm"
+          >
+            <Filter size={18} />
+            <span className="md:hidden lg:inline">Limpar</span>
+          </button>
         </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto min-h-[400px]">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-50 dark:bg-slate-900/60 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-              {['Universidade', 'Cidade', 'Cursos Disponíveis', 'Estado', 'Prazo', 'Website', ''].map((col) => (
-                <th key={col} className={`px-6 py-4 ${col === '' ? 'text-right' : ''}`}>
+            <tr className="bg-slate-50 dark:bg-slate-900/60 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800">
+              {['Universidade', 'Cidade', 'Cursos Disponíveis', 'Estado', 'Prazo', 'Website', 'Ações'].map((col) => (
+                <th key={col} className={`px-6 py-4 ${col === 'Ações' ? 'text-right' : ''}`}>
                   {col}
                 </th>
               ))}
@@ -99,7 +134,13 @@ export default function UniversitiesTable() {
           </thead>
 
           <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-            {universities.map((u) => (
+            {currentDocs.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="px-6 py-8 text-center text-slate-500 dark:text-slate-400">
+                  Nenhuma universidade encontrada.
+                </td>
+              </tr>
+            ) : currentDocs.map((u) => (
               <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
 
                 {/* University name + icon */}
@@ -112,30 +153,34 @@ export default function UniversitiesTable() {
                   </div>
                 </td>
 
-                {/* City */}
                 <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{u.city}</td>
+                <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium">{u.courses}</td>
 
-                {/* Available Courses */}
-                <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{u.courses}</td>
-
-                {/* Status */}
                 <td className="px-6 py-4">
-                  <span className={`px-2 py-1 text-[10px] font-bold uppercase tracking-tight rounded-full border ${statusStyle[u.status]}`}>
+                  <span className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-tight rounded-full border ${statusStyle[u.status]}`}>
                     {u.status}
                   </span>
                 </td>
 
-                {/* Deadline */}
                 <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">{u.deadline}</td>
 
-                {/* Website */}
-                <td className="px-6 py-4 text-sm text-primary hover:underline cursor-pointer">{u.website}</td>
+                <td className="px-6 py-4 text-sm text-primary hover:underline cursor-pointer">
+                  <a href={`https://${u.website}`} target="_blank" rel="noopener noreferrer">{u.website}</a>
+                </td>
 
                 {/* Actions */}
                 <td className="px-6 py-4 text-right">
-                  <button className="text-slate-400 hover:text-primary transition-colors">
-                    <MoreVertical size={20} />
-                  </button>
+                  <div className="flex justify-end gap-2 items-center">
+                    <button onClick={() => alert(`A abrir edição para: ${u.name}`)} className="p-1.5 text-slate-400 hover:text-blue-500 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Editar">
+                      <Edit size={18} />
+                    </button>
+                    <button onClick={() => handleToggleStatus(u)} className="p-1.5 text-slate-400 hover:text-amber-500 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Alternar Estado de Candidatura">
+                      <PowerOff size={18} />
+                    </button>
+                    <button onClick={() => onDelete(u.id)} className="p-1.5 text-slate-400 hover:text-red-500 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Eliminar">
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -146,16 +191,21 @@ export default function UniversitiesTable() {
       {/* Pagination */}
       <div className="p-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          A mostrar 1 a {universities.length} de 120 resultados
+          A mostrar <span className="font-semibold">{filteredUniversities.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}</span> a <span className="font-semibold">{Math.min(currentPage * itemsPerPage, filteredUniversities.length)}</span> de <span className="font-semibold">{filteredUniversities.length}</span> resultados
         </p>
         <div className="flex gap-2">
           <button
-            disabled
-            className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Anterior
           </button>
-          <button className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+          <button 
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             Seguinte
           </button>
         </div>

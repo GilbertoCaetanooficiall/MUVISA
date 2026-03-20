@@ -1,27 +1,9 @@
 'use client';
 
 import { TrendingUp, Info, AlertTriangle, Lightbulb, ArrowRight } from 'lucide-react';
+import type { Timeframe } from '@/app/admin/reports/ReportsClient';
 
-// ─── Bar heights for the area/column chart (10 months) ────────────────────────
-const barHeights = ['40%', '55%', '45%', '70%', '85%', '60%', '75%', '90%', '95%', '100%'];
-const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out'];
-
-// ─── Universities bar data ─────────────────────────────────────────────────────
-const universities = [
-  { name: 'Universidade de Lisboa',    apps: '842 Candidaturas', width: '85%',  opacity: 'bg-primary' },
-  { name: 'Universidade do Porto',     apps: '612 Candidaturas', width: '65%',  opacity: 'bg-primary/70' },
-  { name: 'Universidade de Coimbra',   apps: '456 Candidaturas', width: '45%',  opacity: 'bg-primary/50' },
-  { name: 'Universidade Nova de Lisboa',  apps: '310 Candidaturas', width: '30%',  opacity: 'bg-primary/30' },
-];
-
-// ─── Donut legend ──────────────────────────────────────────────────────────────
-const plans = [
-  { label: 'Premium',  pct: '45%', dot: 'bg-primary' },
-  { label: 'Standard', pct: '35%', dot: 'bg-emerald-500' },
-  { label: 'Básico',    pct: '20%', dot: 'bg-slate-300 dark:bg-slate-700' },
-];
-
-// ─── Key insights ──────────────────────────────────────────────────────────────
+// ─── Key insights (static mock logic depending on timeframe could be added, but keeping static for simplicity) ──────────────────────────────────────────────────────────────
 const insights = [
   {
     icon: TrendingUp, iconClass: 'text-emerald-500',
@@ -45,7 +27,26 @@ const insights = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ReportsCharts() {
+export default function ReportsCharts({ data, timeframe, setTimeframe }: { data: any, timeframe: Timeframe, setTimeframe: (t: Timeframe) => void }) {
+  const barHeights = data.chart.barHeights;
+  const months = data.chart.months;
+  const plans = data.plans;
+  const universities = data.universities;
+
+  // Add dots mapping for donuts
+  const getDotColors = (pctLabel: string) => {
+    if (pctLabel === 'Premium') return 'bg-primary';
+    if (pctLabel === 'Standard') return 'bg-emerald-500';
+    return 'bg-slate-300 dark:bg-slate-700';
+  };
+
+  const getBarColor = (index: number) => {
+    if (index === 0) return 'bg-primary';
+    if (index === 1) return 'bg-primary/70';
+    if (index === 2) return 'bg-primary/50';
+    return 'bg-primary/30';
+  };
+
   return (
     <div className="space-y-6">
       {/* ── Row 1: Area chart (col-span-2) + Donut ── */}
@@ -54,9 +55,13 @@ export default function ReportsCharts() {
         <div className="lg:col-span-2 bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between mb-6">
             <h4 className="font-bold text-slate-900 dark:text-white">Estudantes Enviados para Portugal</h4>
-            <select className="bg-slate-100 dark:bg-background-dark border-none rounded-lg text-xs font-bold py-1 px-2 focus:ring-1 focus:ring-primary text-slate-700 dark:text-slate-300">
-              <option>Últimos 12 Meses</option>
-              <option>Ano Inteiro</option>
+            <select 
+              value={timeframe} 
+              onChange={(e) => setTimeframe(e.target.value as Timeframe)}
+              className="bg-slate-100 dark:bg-background-dark border-none rounded-lg text-xs font-bold py-1 px-2 focus:ring-1 focus:ring-primary text-slate-700 dark:text-slate-300"
+            >
+              <option value="12M">Últimos 12 Meses</option>
+              <option value="YTD">Ano Inteiro (YTD)</option>
             </select>
           </div>
 
@@ -69,17 +74,17 @@ export default function ReportsCharts() {
               ))}
             </div>
             {/* Bars */}
-            {barHeights.map((h, i) => (
+            {barHeights.map((h: string, i: number) => (
               <div
                 key={i}
                 style={{ height: h }}
                 className={`flex-1 rounded-t-sm relative group transition-all ${
-                  i >= 7 ? 'bg-primary/40' : 'bg-primary/20'
-                } ${i === 9 ? 'border-t-2 border-primary' : ''}`}
+                  i >= barHeights.length - 3 ? 'bg-primary/40' : 'bg-primary/20'
+                } ${i === barHeights.length - 1 ? 'border-t-2 border-primary' : ''}`}
               >
                 <div
                   className={`absolute -top-1 left-1/2 -translate-x-1/2 rounded-full bg-primary transition-all group-hover:scale-125 ${
-                    i === 9 ? 'w-3 h-3 ring-4 ring-primary/20' : 'w-2 h-2 ring-2 ring-white dark:ring-background-dark'
+                    i === barHeights.length - 1 ? 'w-3 h-3 ring-4 ring-primary/20' : 'w-2 h-2 ring-2 ring-white dark:ring-background-dark'
                   }`}
                 />
               </div>
@@ -87,7 +92,7 @@ export default function ReportsCharts() {
           </div>
           {/* X axis labels */}
           <div className="flex justify-between mt-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-            {months.map((m) => <span key={m}>{m}</span>)}
+            {months.map((m: string) => <span key={m}>{m}</span>)}
           </div>
         </div>
 
@@ -96,8 +101,8 @@ export default function ReportsCharts() {
           <h4 className="font-bold text-slate-900 dark:text-white mb-6">Planos de Serviço</h4>
           <div className="relative flex items-center justify-center py-4">
             <div className="size-48 rounded-full border-[18px] border-slate-100 dark:border-background-dark relative flex items-center justify-center">
-              <div className="absolute inset-[-18px] rounded-full border-[18px] border-primary border-r-transparent border-b-transparent rotate-45" />
-              <div className="absolute inset-[-18px] rounded-full border-[18px] border-emerald-500 border-l-transparent border-t-transparent border-b-transparent -rotate-12" />
+              <div className="absolute inset-[-18px] rounded-full border-[18px] border-primary border-r-transparent border-b-transparent rotate-45 transition-all duration-500" />
+              <div className="absolute inset-[-18px] rounded-full border-[18px] border-emerald-500 border-l-transparent border-t-transparent border-b-transparent -rotate-12 transition-all duration-500" />
               <div className="flex flex-col items-center">
                 <span className="text-3xl font-black text-slate-900 dark:text-white">100%</span>
                 <span className="text-[10px] uppercase text-slate-500 tracking-widest font-bold">Quota Total</span>
@@ -105,10 +110,10 @@ export default function ReportsCharts() {
             </div>
           </div>
           <div className="mt-6 space-y-3">
-            {plans.map((p) => (
+            {plans.map((p: any) => (
               <div key={p.label} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className={`size-3 rounded-full ${p.dot}`} />
+                  <span className={`size-3 rounded-full ${getDotColors(p.label)}`} />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">{p.label}</span>
                 </div>
                 <span className="text-sm font-bold text-slate-900 dark:text-white">{p.pct}</span>
@@ -124,14 +129,14 @@ export default function ReportsCharts() {
         <div className="bg-white dark:bg-card-dark p-6 rounded-xl border border-slate-200 dark:border-slate-800">
           <h4 className="font-bold text-slate-900 dark:text-white mb-6">Universidades Mais Populares</h4>
           <div className="space-y-5">
-            {universities.map((u) => (
+            {universities.map((u: any, i: number) => (
               <div key={u.name} className="space-y-2">
                 <div className="flex justify-between text-xs font-bold uppercase tracking-tight text-slate-700 dark:text-slate-300">
                   <span>{u.name}</span>
                   <span>{u.apps}</span>
                 </div>
                 <div className="w-full bg-slate-100 dark:bg-background-dark h-3 rounded-full overflow-hidden">
-                  <div className={`${u.opacity} h-full rounded-full transition-all`} style={{ width: u.width }} />
+                  <div className={`${getBarColor(i)} h-full rounded-full transition-all duration-700 ease-out`} style={{ width: u.width }} />
                 </div>
               </div>
             ))}

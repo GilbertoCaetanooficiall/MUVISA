@@ -1,6 +1,8 @@
+import type { University } from '@/app/admin/universities/UniversitiesClient';
+
 interface StatCardProps {
   label: string;
-  value: string;
+  value: string | number;
   valueClass?: string;
 }
 
@@ -13,13 +15,19 @@ function StatCard({ label, value, valueClass = 'text-slate-900 dark:text-slate-1
   );
 }
 
-export default function UniversitiesStats() {
+export default function UniversitiesStats({ universities }: { universities: University[] }) {
+  const totalUniversities = universities.length;
+  // Let's assume all are active in this mock, or we can consider "Fechadas" inactive
+  const activeUniversities = totalUniversities; 
+  const candidaturasAbertas = universities.filter(u => u.status === 'Candidaturas Abertas').length;
+  const prazosProximos = universities.filter(u => u.status === 'A terminar').length;
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <StatCard label="Total de Universidades"  value="120" />
-      <StatCard label="Universidades Ativas" value="112" />
-      <StatCard label="Candidaturas Abertas"  value="45"  />
-      <StatCard label="Prazos Próximos" value="8"   valueClass="text-primary" />
+      <StatCard label="Total de Universidades" value={totalUniversities} />
+      <StatCard label="Universidades Ativas" value={activeUniversities} />
+      <StatCard label="Candidaturas Abertas" value={candidaturasAbertas} />
+      <StatCard label="Prazos Próximos" value={prazosProximos} valueClass="text-primary" />
     </div>
   );
 }

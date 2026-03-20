@@ -5,7 +5,23 @@ import { Search, Filter } from 'lucide-react';
 const selectClass =
   'bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 text-slate-700 dark:text-slate-200 focus:ring-1 focus:ring-primary focus:outline-none';
 
-export default function DocumentsFilters() {
+interface Props {
+  searchQuery: string;
+  setSearchQuery: (val: string) => void;
+  filterDocType: string;
+  setFilterDocType: (val: string) => void;
+  filterStatus: string;
+  setFilterStatus: (val: string) => void;
+  filterStudent: string;
+  setFilterStudent: (val: string) => void;
+}
+
+export default function DocumentsFilters({
+  searchQuery, setSearchQuery,
+  filterDocType, setFilterDocType,
+  filterStatus, setFilterStatus,
+  filterStudent, setFilterStudent
+}: Props) {
   return (
     <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm mb-6 flex flex-wrap items-center gap-4">
       {/* Search */}
@@ -16,38 +32,62 @@ export default function DocumentsFilters() {
             className="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:ring-1 focus:ring-primary focus:outline-none"
             placeholder="Pesquisar documentos..."
             type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
 
       {/* Document Type */}
-      <select className={`${selectClass} min-w-[160px]`}>
+      <select 
+        className={`${selectClass} min-w-[160px]`}
+        value={filterDocType}
+        onChange={(e) => setFilterDocType(e.target.value)}
+      >
         <option value="">Tipo de Documento</option>
-        <option>Passaporte</option>
-        <option>Extrato Bancário</option>
-        <option>Certificados Académicos</option>
-        <option>Teste de Inglês</option>
-        <option>Carta de Recomendação</option>
+        <option value="Passaporte">Passaporte</option>
+        <option value="Extrato Bancário">Extrato Bancário</option>
+        <option value="Certificados Académicos">Certificados Académicos</option>
+        <option value="Teste de Inglês">Teste de Inglês</option>
+        <option value="Carta de Recomendação">Carta de Recomendação</option>
       </select>
 
       {/* Status */}
-      <select className={`${selectClass} min-w-[160px]`}>
+      <select 
+        className={`${selectClass} min-w-[160px]`}
+        value={filterStatus}
+        onChange={(e) => setFilterStatus(e.target.value)}
+      >
         <option value="">Estado</option>
-        <option>Pendente de Revisão</option>
-        <option>Aprovado</option>
-        <option>Rejeitado</option>
-        <option>Em Falta</option>
+        <option value="Pendente de Revisão">Pendente de Revisão</option>
+        <option value="Aprovado">Aprovado</option>
+        <option value="Rejeitado">Rejeitado</option>
+        <option value="Em Falta">Em Falta</option>
       </select>
 
-      {/* Filter by Student */}
-      <select className={`${selectClass} min-w-[160px]`}>
+      {/* Filter by Student (or extra options) */}
+      <select 
+        className={`${selectClass} min-w-[160px]`}
+        value={filterStudent}
+        onChange={(e) => setFilterStudent(e.target.value)}
+      >
         <option value="">Filtrar por Estudante</option>
-        <option>Carregamentos Recentes</option>
-        <option>Ação Urgente Necessária</option>
+        <option value="Carregamentos Recentes">Carregamentos Recentes</option>
+        <option value="Ação Urgente Necessária">Ação Urgente Necessária</option>
       </select>
 
       {/* Filter icon button */}
-      <button className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors">
+      <button 
+        type="button"
+        title="Limpar Filtros"
+        onClick={() => {
+          setSearchQuery('');
+          setFilterDocType('');
+          setFilterStatus('');
+          setFilterStudent('');
+        }}
+        className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 transition-colors"
+      >
         <Filter size={20} />
       </button>
     </div>

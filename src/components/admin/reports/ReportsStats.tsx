@@ -1,27 +1,39 @@
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
-// ─── Types────────────────────────────────────────────────────────────────────
-
-interface Metric {
-  label: string;
-  value: string;
-  trend: string;
-  trendClass: string;
-  trendIcon: React.ElementType;
-}
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const metrics: Metric[] = [
-  { label: 'Receita Total',          value: '350.000.000 Kz', trend: '+12.5%', trendClass: 'text-emerald-500', trendIcon: TrendingUp },
-  { label: 'Novos Estudantes (Mensal)', value: '124',      trend: '+8.2%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp },
-  { label: 'Taxa de Aprovação de Visto (%)', value: '92%',      trend: '+1.5%',  trendClass: 'text-emerald-500', trendIcon: TrendingUp },
-  { label: 'Candidaturas Ativas',    value: '1.840',    trend: '-2.1%',  trendClass: 'text-rose-500',    trendIcon: TrendingDown },
-];
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ReportsStats() {
+export default function ReportsStats({ data }: { data: any }) {
+  const metrics = [
+    { 
+      label: 'Receita Total', 
+      value: data.receita.value, 
+      trend: data.receita.trend, 
+      trendClass: data.receita.isUp ? 'text-emerald-500' : 'text-rose-500', 
+      trendIcon: data.receita.isUp ? TrendingUp : TrendingDown 
+    },
+    { 
+      label: 'Novos Estudantes (Mensal)', 
+      value: data.novosEstudantes.value, 
+      trend: data.novosEstudantes.trend, 
+      trendClass: data.novosEstudantes.isUp ? 'text-emerald-500' : 'text-rose-500', 
+      trendIcon: data.novosEstudantes.isUp ? TrendingUp : TrendingDown 
+    },
+    { 
+      label: 'Taxa de Aprovação de Visto (%)', 
+      value: data.taxaVisto.value, 
+      trend: data.taxaVisto.trend, 
+      trendClass: data.taxaVisto.isUp ? 'text-emerald-500' : 'text-rose-500', 
+      trendIcon: data.taxaVisto.isUp ? TrendingUp : TrendingDown 
+    },
+    { 
+      label: 'Candidaturas Ativas', 
+      value: data.candidaturasAtivas.value, 
+      trend: data.candidaturasAtivas.trend, 
+      trendClass: data.candidaturasAtivas.isUp ? 'text-emerald-500' : 'text-rose-500', 
+      trendIcon: data.candidaturasAtivas.isUp ? TrendingUp : TrendingDown 
+    },
+  ];
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {metrics.map((m) => (

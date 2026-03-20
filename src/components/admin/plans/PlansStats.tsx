@@ -1,44 +1,60 @@
-// ─── Types ────────────────────────────────────────────────────────────────────
+import type { Plan } from '@/app/admin/plans/PlansClient';
 
 interface MetricCard {
   label: string;
-  value: string;
+  value: string | number;
   badge: string;
   badgeClass: string;
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+export default function PlansStats({ plans }: { plans: Plan[] }) {
+  const totalPlanos = plans.length;
+  // Subscrições reais seriam puxadas do backend - aqui usamos mock estático
+  const subscricoesAtivas = '1.240'; 
+  
+  // Calcular preço médio dos publicados
+  const publicados = plans.filter(p => p.status === 'Publicado');
+  let avgPriceKz = 0;
+  if (publicados.length > 0) {
+    const totalSoma = publicados.reduce((acc, p) => {
+      // Simplificado: extrai números e converte. Assumimos Kz no formato 150.000 / 150000
+      const valor = parseInt(p.price.replace(/\D/g, '')) || 0;
+      return acc + valor;
+    }, 0);
+    avgPriceKz = Math.round(totalSoma / publicados.length);
+  }
+  
+  const formattedAvg = avgPriceKz.toLocaleString('pt-PT') + ' Kz';
 
-const metrics: MetricCard[] = [
-  {
-    label: 'Total de Planos',
-    value: '14',
-    badge: 'Toda as Categorias',
-    badgeClass: 'bg-primary/10 text-primary',
-  },
-  {
-    label: 'Subscrições Ativas',
-    value: '1.240',
-    badge: '+12% vs mês ant.',
-    badgeClass: 'bg-green-500/10 text-green-500',
-  },
-  {
-    label: 'Preço Médio do Plano',
-    value: '150.000 Kz',
-    badge: 'Mensal',
-    badgeClass: 'bg-blue-500/10 text-blue-500',
-  },
-  {
-    label: 'Planos em Rascunho',
-    value: '3',
-    badge: 'Em progresso',
-    badgeClass: 'bg-amber-500/10 text-amber-500',
-  },
-];
+  const rascunhos = plans.filter(p => p.status === 'Rascunho').length;
 
-// ─── Component ────────────────────────────────────────────────────────────────
+  const metrics: MetricCard[] = [
+    {
+      label: 'Total de Planos',
+      value: totalPlanos,
+      badge: 'Todas as Categorias',
+      badgeClass: 'bg-primary/10 text-primary',
+    },
+    {
+      label: 'Subscrições Ativas',
+      value: subscricoesAtivas,
+      badge: '+12% vs mês ant.',
+      badgeClass: 'bg-green-500/10 text-green-500',
+    },
+    {
+      label: 'Preço Médio do Plano',
+      value: formattedAvg,
+      badge: 'Publicados',
+      badgeClass: 'bg-blue-500/10 text-blue-500',
+    },
+    {
+      label: 'Planos em Rascunho',
+      value: rascunhos,
+      badge: 'Em progresso',
+      badgeClass: 'bg-amber-500/10 text-amber-500',
+    },
+  ];
 
-export default function PlansStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
       {metrics.map((m) => (

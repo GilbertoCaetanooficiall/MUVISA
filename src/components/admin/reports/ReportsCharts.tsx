@@ -27,11 +27,12 @@ const insights = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ReportsCharts({ data, timeframe, setTimeframe }: { data: Record<string, any>, timeframe: Timeframe, setTimeframe: (t: Timeframe) => void }) {
-  const barHeights = data.chart.barHeights;
-  const months = data.chart.months;
-  const plans = data.plans;
-  const universities = data.universities;
+export default function ReportsCharts({ data, timeframe, setTimeframe }: { data: Record<string, unknown>, timeframe: Timeframe, setTimeframe: (t: Timeframe) => void }) {
+  const chartData = data.chart as Record<string, string[]>;
+  const barHeights = chartData.barHeights;
+  const months = chartData.months;
+  const plans = data.plans as { label: string; pct: string }[];
+  const universities = data.universities as { name: string; apps: string; width: string }[];
 
   // Add dots mapping for donuts
   const getDotColors = (pctLabel: string) => {

@@ -2,7 +2,7 @@ import { TrendingUp, TrendingDown } from 'lucide-react';
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function ReportsStats({ data }: { data: Record<string, any> }) {
+export default function ReportsStats({ data }: { data: Record<string, { value: string; trend: string; isUp: boolean }> }) {
   const metrics = [
     { 
       label: 'Receita Total', 

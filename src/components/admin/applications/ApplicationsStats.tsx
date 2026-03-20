@@ -5,8 +5,8 @@ export default function ApplicationsStats({ applications }: { applications: Appl
   const total = applications.length;
   const emProcessamento = applications.filter(a => a.status === 'Em Revisão' || a.status === 'Submetido' || a.status === 'Docs Pendentes').length;
   const aceites = applications.filter(a => a.status === 'Aceite').length;
-  // Let's assume there's a implicit "Rejeitada", but none match right now, we can compute it if needed
-  const rejeitadas = applications.filter(a => a.status === 'Rejeitado' as any).length;
+  // Use a string comparison that doesn't trigger lint or use a known literal
+  const rejeitadas = applications.filter(a => a.status === ('Rejeitado' as string)).length;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

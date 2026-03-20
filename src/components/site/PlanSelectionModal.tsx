@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { X, CheckCircle2 } from 'lucide-react';
 
@@ -55,6 +56,11 @@ export default function PlanSelectionModal({ plan, onClose }: PlanSelectionModal
     setErrors({});
   }, [plan]);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // ESC key to close
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose();
@@ -69,7 +75,7 @@ export default function PlanSelectionModal({ plan, onClose }: PlanSelectionModal
     };
   }, [handleKeyDown]);
 
-  if (!plan) return null;
+  if (!plan || !mounted) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -112,7 +118,7 @@ export default function PlanSelectionModal({ plan, onClose }: PlanSelectionModal
   const loginUrl = `/login?plano=${plan.slug}`;
   const cadastroUrl = `/cadastro?plano=${plan.slug}`;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-md transition-opacity duration-300"
       aria-modal="true"
@@ -286,6 +292,7 @@ export default function PlanSelectionModal({ plan, onClose }: PlanSelectionModal
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

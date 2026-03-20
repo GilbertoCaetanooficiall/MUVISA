@@ -77,7 +77,7 @@ export default function CadastroPage() {
 
   const handleFinish = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push('/boas-vindas');
+    router.push('/escolha-plano');
   };
 
   return (

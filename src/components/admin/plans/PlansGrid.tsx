@@ -45,11 +45,17 @@ interface PlansGridProps {
   plans: Plan[];
   onDelete: (id: string) => void;
   onStatusChange: (id: string, nextStatus: PlanStatus) => void;
+  onEdit: (plan: Plan) => void;
 }
 
 // ─── Individual plan card ─────────────────────────────────────────────────────
 
-function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (id: string) => void; onStatusChange: (id: string, s: PlanStatus) => void; }) {
+function PlanCard({ plan, onDelete, onStatusChange, onEdit }: { 
+  plan: Plan; 
+  onDelete: (id: string) => void; 
+  onStatusChange: (id: string, s: PlanStatus) => void; 
+  onEdit: (plan: Plan) => void;
+}) {
   const footerBg = 'bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-800';
 
   const handleToggleStatus = () => {
@@ -65,6 +71,13 @@ function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (i
     <div className={cardClass[plan.status]}>
       {/* Top right quick actions */}
       <div className="absolute top-4 right-4 flex gap-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity md:opacity-100">
+        <button 
+          onClick={() => onEdit(plan)}
+          className="p-1.5 text-slate-400 hover:text-primary bg-white dark:bg-slate-800 rounded shadow-sm border border-slate-200 dark:border-slate-700 transition-colors" 
+          title="Editar Plano"
+        >
+          <FileEdit size={16} />
+        </button>
         <button onClick={handleToggleStatus} className="p-1.5 text-slate-400 hover:text-amber-500 bg-white dark:bg-slate-800 rounded shadow-sm border border-slate-200 dark:border-slate-700 transition-colors" title="Mudar Estado">
           <PowerOff size={16} />
         </button>
@@ -110,10 +123,10 @@ function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (i
       {/* Card footer / actions */}
       {plan.status === 'Publicado' && (
         <div className={`p-4 ${footerBg} flex gap-2`}>
-          <button onClick={() => alert('Abrir janela de edição de plano')} className="flex-1 flex justify-center items-center gap-2 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded transition-colors">
+          <button onClick={() => onEdit(plan)} className="flex-1 flex justify-center items-center gap-2 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded transition-colors">
             <Edit size={14} /> Editar
           </button>
-          <button onClick={() => alert('Abrir gestor de benefícios')} className="flex-1 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded transition-colors">
+          <button onClick={() => onEdit(plan)} className="flex-1 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded transition-colors">
             Benefícios
           </button>
           <button onClick={() => onDelete(plan.id)} className="p-2 text-slate-400 hover:text-red-500 bg-slate-200 dark:bg-slate-700 rounded transition-colors" title="Eliminar Plano">
@@ -124,7 +137,7 @@ function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (i
 
       {plan.status === 'Revisão Necessária' && (
         <div className={`p-4 ${footerBg} flex gap-2`}>
-          <button onClick={() => alert('Revisar plano')} className="flex-1 py-2 text-xs font-bold text-white bg-primary hover:bg-primary/90 rounded transition-colors">
+          <button onClick={() => onEdit(plan)} className="flex-1 py-2 text-xs font-bold text-white bg-primary hover:bg-primary/90 rounded transition-colors">
             Rever Alterações
           </button>
           <button onClick={() => onDelete(plan.id)} className="p-2 text-slate-400 hover:text-red-500 bg-slate-200 dark:bg-slate-700 rounded transition-colors" title="Eliminar Plano">
@@ -135,7 +148,7 @@ function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (i
 
       {plan.status === 'Rascunho' && (
         <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex gap-2">
-          <button onClick={() => alert('Continuar a editar plano ' + plan.name)} className="w-full py-2 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
+          <button onClick={() => onEdit(plan)} className="w-full py-2 text-xs font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded transition-colors">
             Continuar a Editar
           </button>
         </div>
@@ -146,7 +159,7 @@ function PlanCard({ plan, onDelete, onStatusChange }: { plan: Plan; onDelete: (i
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 
-export default function PlansGrid({ plans, onDelete, onStatusChange }: PlansGridProps) {
+export default function PlansGrid({ plans, onDelete, onStatusChange, onEdit }: PlansGridProps) {
   const publishedCount = plans.filter(p => p.status === 'Publicado').length;
 
   return (
@@ -171,6 +184,7 @@ export default function PlansGrid({ plans, onDelete, onStatusChange }: PlansGrid
               plan={plan} 
               onDelete={onDelete} 
               onStatusChange={onStatusChange} 
+              onEdit={onEdit}
             />
           ))}
         </div>

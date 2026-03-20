@@ -126,6 +126,24 @@ export default function UniversitiesClient() {
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Website</label>
                 <input name="website" type="text" placeholder="exemplo.pt" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Foto da Universidade</label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 dark:border-slate-700 border-dashed rounded-lg hover:border-primary dark:hover:border-primary transition-colors cursor-pointer group">
+                  <div className="space-y-1 text-center">
+                    <svg className="mx-auto h-12 w-12 text-slate-400 group-hover:text-primary transition-colors" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div className="flex text-sm text-slate-600 dark:text-slate-400">
+                      <label htmlFor="file-upload" className="relative cursor-pointer bg-transparent rounded-md font-medium text-primary hover:text-primary/80 focus-within:outline-none">
+                        <span>Anexar um ficheiro</span>
+                        <input id="file-upload" name="photo" type="file" className="sr-only" accept="image/*" />
+                      </label>
+                      <p className="pl-1 text-slate-500">ou arrasta e solta</p>
+                    </div>
+                    <p className="text-xs text-slate-500">PNG, JPG, GIF até 10MB</p>
+                  </div>
+                </div>
+              </div>
               <div className="pt-2 flex justify-end gap-2">
                 <button type="button" onClick={() => setIsAddModalOpen(false)} className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-medium">Cancelar</button>
                 <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90">Adicionar</button>

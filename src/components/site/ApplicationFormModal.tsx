@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useCallback, useState } from 'react';
-import { X, CheckCircle2, Info } from 'lucide-react';
+import { createPortal } from 'react-dom';
+import { X, CheckCircle2, Info, Check } from 'lucide-react';
 import Link from 'next/link';
 
 interface ApplicationFormModalProps {
@@ -19,10 +20,59 @@ const costData: Record<string, string> = {
   'Faro': '800 €/mês'
 };
 
+const assessmentPlans = [
+  {
+    name: 'Essencial',
+    price: '400.000',
+    slug: 'essencial',
+    featured: false,
+    buttonStrings: 'Selecionar',
+    features: [
+      { label: 'Checklist de documentos', included: true },
+      { label: 'Revisão de dossiê', included: true },
+      { label: 'Agendamento consular', included: true },
+      { label: 'Acesso ao Portal do Aluno', included: true },
+    ],
+  },
+  {
+    name: 'Académico',
+    price: '700.000',
+    slug: 'academico',
+    featured: false,
+    buttonStrings: 'Selecionar',
+    features: [
+      { label: 'Tudo do Essencial', included: true },
+      { label: 'Escolha de Universidade', included: true },
+      { label: 'Apoio na Matrícula/Admissão', included: true },
+      { label: 'Termo de Responsabilidade', included: true },
+    ],
+  },
+  {
+    name: 'Diamond',
+    price: '1.000.000',
+    slug: 'diamond',
+    featured: true,
+    buttonStrings: 'Começar Agora',
+    badge: 'RECOMENDADO',
+    features: [
+      { label: 'Tudo do Académico', included: true },
+      { label: 'Abertura de NIF e Conta', included: true },
+      { label: 'Busca de Moradia/Residência', included: true },
+      { label: 'Suporte Premium 24h', included: true },
+    ],
+  },
+];
+
 export default function ApplicationFormModal({ isOpen, onClose, universityName = 'Universidade de Lisboa' }: ApplicationFormModalProps) {
   const [selectedCity, setSelectedCity] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [step, setStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose();
@@ -43,7 +93,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
     };
   }, [isOpen, handleKeyDown]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +105,11 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
     }, 800);
   };
 
-  return (
+  const handleSelectPlan = (planSlug: string) => {
+    setStep(3);
+  };
+
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       aria-modal="true"
@@ -69,7 +123,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
       />
 
       {/* Modal Panel */}
-      <div className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 animate-fade-in duration-300 custom-scrollbar">
+      <div className={`relative z-10 w-full ${step === 2 ? 'max-w-5xl' : 'max-w-2xl'} max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 animate-fade-in duration-300 custom-scrollbar transition-all`}>
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -147,7 +201,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                 </div>
               </div>
 
-              {/* Row 3: Country and City */}
+              {/* Row 3: Country and Password */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="country">
@@ -162,6 +216,24 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                     type="text" 
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="password">
+                    Palavra-passe <span className="text-red-500">*</span>
+                  </label>
+                  <input 
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none transition-colors focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    id="password" 
+                    name="password" 
+                    placeholder="Mínimo 8 caracteres" 
+                    required 
+                    type="password"
+                    minLength={8}
+                  />
+                </div>
+              </div>
+
+              {/* Row 4: Study City and Target Course */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="studyCity">
                     Cidade de Estudo <span className="text-red-500">*</span>
@@ -183,6 +255,19 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                     <option value="Faro">Faro</option>
                   </select>
                 </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="targetCourse">
+                    Curso Pretendido <span className="text-red-500">*</span>
+                  </label>
+                  <input 
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none transition-colors focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    id="targetCourse" 
+                    name="targetCourse" 
+                    placeholder="Ex: Engenharia Informática" 
+                    required 
+                    type="text" 
+                  />
+                </div>
               </div>
 
               {/* Dynamic Cost Display */}
@@ -198,21 +283,8 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                 </div>
               )}
 
-              {/* Row 4: Course and Level */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="targetCourse">
-                    Curso Pretendido <span className="text-red-500">*</span>
-                  </label>
-                  <input 
-                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none transition-colors focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                    id="targetCourse" 
-                    name="targetCourse" 
-                    placeholder="Ex: Engenharia Informática" 
-                    required 
-                    type="text" 
-                  />
-                </div>
+              {/* Row 5: Level */}
+              <div className="grid grid-cols-1 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="studyLevel">
                     Nível de Estudo <span className="text-red-500">*</span>
@@ -265,8 +337,71 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
           </div>
         )}
 
-        {/* ── STEP 2: Success ── */}
+        {/* ── STEP 2: Plan Selection ── */}
         {step === 2 && (
+          <div className="p-8 md:p-10 bg-slate-50 dark:bg-slate-900/50 animate-fade-in duration-300">
+            <div className="text-center mb-10">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full mb-3">
+                Planos de Assessoria
+              </span>
+              <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-3 font-display">
+                Escolha o seu nível de acompanhamento
+              </h2>
+              <p className="text-slate-500 dark:text-slate-400 text-sm max-w-2xl mx-auto">
+                Para darmos seguimento ao seu processo, selecione um dos nossos planos de assessoria. Pode alterar esta escolha mais tarde.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {assessmentPlans.map((plan) => (
+                <div
+                  key={plan.slug}
+                  className={`rounded-2xl p-6 border flex flex-col relative transition-all duration-300 ${
+                    plan.featured
+                      ? 'bg-gradient-to-b from-primary/10 to-white dark:from-primary/20 dark:to-slate-800 border-primary shadow-xl shadow-primary/10 transform md:-translate-y-2'
+                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:shadow-lg'
+                  }`}
+                >
+                  {plan.badge && (
+                    <div className="absolute top-0 right-0 bg-primary text-white text-[10px] font-black px-3 py-1 rounded-bl-lg rounded-tr-lg tracking-widest uppercase">
+                      {plan.badge}
+                    </div>
+                  )}
+
+                  <h3 className={`text-xl font-black mb-1 tracking-tight ${plan.featured ? 'text-primary' : 'text-slate-900 dark:text-white'}`}>
+                    {plan.name}
+                  </h3>
+                  <div className="text-3xl font-black text-slate-900 dark:text-white mb-6 tracking-tight flex items-baseline gap-1">
+                    {plan.price} <span className="text-sm font-bold text-slate-400 pt-1">Kz</span>
+                  </div>
+
+                  <ul className="space-y-4 mb-8 flex-1 text-sm font-medium">
+                    {plan.features.map((feat) => (
+                      <li key={feat.label} className="flex items-start gap-3">
+                        <Check className={`shrink-0 mt-0.5 ${plan.featured ? 'text-primary' : 'text-green-500'}`} size={16} />
+                        <span className="text-slate-600 dark:text-slate-300">{feat.label}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    onClick={() => handleSelectPlan(plan.slug)}
+                    className={`w-full py-3 rounded-xl font-black tracking-wide transition-all ${
+                      plan.featured
+                        ? 'bg-primary text-white hover:bg-primary-hover shadow-[0_10px_20px_rgba(14,86,224,0.3)] active:scale-95'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-600 active:scale-95'
+                    }`}
+                  >
+                    {plan.buttonStrings}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── STEP 3: Success ── */}
+        {step === 3 && (
           <div className="p-10 text-center animate-fade-in duration-300">
             {/* Green check icon */}
             <div className="flex justify-center mb-6">
@@ -279,7 +414,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
               Conta criada com sucesso!
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-base max-w-sm mx-auto mb-8 leading-relaxed">
-              Os seus dados foram registados. Aceda ao portal para dar continuidade à sua candidatura para a <span className="font-semibold text-slate-700 dark:text-slate-300">{universityName}</span>.
+              O seu plano foi selecionado. Aceda ao portal para dar continuidade à sua candidatura para a <span className="font-semibold text-slate-700 dark:text-slate-300">{universityName}</span>.
             </p>
 
             <div className="flex flex-col gap-3 max-w-sm mx-auto">
@@ -298,6 +433,7 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

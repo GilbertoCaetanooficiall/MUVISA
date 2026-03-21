@@ -28,7 +28,7 @@ export default function NextSteps() {
                             <p className="text-xs text-green-600 dark:text-green-400 mt-1 font-medium">✓ Assinado com sucesso!</p>
                         ) : (
                             <>
-                                <p className="text-xs text-slate-500 mt-1">O formulário de aplicação precisa da sua assinatura digital.</p>
+                                <p className="text-xs text-slate-500 mt-1">O formulário de candidatura precisa da sua assinatura digital</p>
                                 <button
                                     onClick={() => setSigned(true)}
                                     className="mt-3 text-xs font-bold text-primary hover:text-primary-hover flex items-center gap-1 transition-colors"
@@ -46,7 +46,7 @@ export default function NextSteps() {
                     </div>
                     <div className="flex-1">
                         <h4 className="text-sm font-bold text-slate-900 dark:text-white">Agendar Biometria</h4>
-                        <p className="text-xs text-slate-500 mt-1">Disponível após aprovação dos documentos.</p>
+                        <p className="text-xs text-slate-500 mt-1">Disponível após aprovação dos documentos</p>
                     </div>
                 </div>
             </div>

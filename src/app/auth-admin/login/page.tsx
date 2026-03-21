@@ -118,12 +118,12 @@ export default function AdminLoginPage() {
                   />
                   <span className="text-sm text-slate-600 dark:text-slate-400">Lembrar-me</span>
                 </label>
-                <a
-                  href="#"
+                <Link
+                  href="/auth-admin/forgot-password"
                   className="text-sm font-medium text-[#1358b2] hover:text-blue-700 hover:underline transition-colors"
                 >
                   Esqueceu a senha?
-                </a>
+                </Link>
               </div>
 
               {/* Submit */}

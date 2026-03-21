@@ -38,6 +38,41 @@ const STEPS: StepConfig[] = [
   { icon: Lock, label: 'Segurança', title: 'Segurança da Conta' },
 ];
 
+const UNIVERSITIES_BY_CITY: Record<string, string[]> = {
+  'Lisboa': [
+    'Universidade de Lisboa',
+    'Universidade Nova de Lisboa',
+    'ISCTE - Instituto Universitário de Lisboa',
+    'Universidade Católica Portuguesa',
+    'Instituto Politécnico de Lisboa',
+    'Universidade Lusíada',
+    'Universidade Lusófona'
+  ],
+  'Porto': [
+    'Universidade do Porto',
+    'Instituto Politécnico do Porto',
+    'Universidade Fernando Pessoa',
+    'Universidade Portucalense',
+    'Universidade Católica Portuguesa (Porto)',
+    'Universidade Lusíada do Porto'
+  ],
+  'Coimbra': [
+    'Universidade de Coimbra',
+    'Instituto Politécnico de Coimbra'
+  ],
+  'Braga': [
+    'Universidade do Minho',
+    'Universidade Católica Portuguesa (Braga)',
+    'Instituto Politécnico do Cávado e do Ave'
+  ],
+  'Aveiro': [
+    'Universidade de Aveiro'
+  ],
+  'Faro (Algarve)': [
+    'Universidade do Algarve'
+  ]
+};
+
 export default function CadastroPage() {
   const router = useRouter();
   const [step, setStep] = useState<Step>(1);
@@ -46,7 +81,7 @@ export default function CadastroPage() {
   // Form data
   const [formData, setFormData] = useState({
     fullName: '', email: '', phone: '',
-    visaType: '', city: '', institution: '',
+    studyLevel: '', city: '', institution: '',
     password: '', confirmPassword: '', terms: false,
   });
 
@@ -199,24 +234,23 @@ export default function CadastroPage() {
             {step === 2 && (
               <form className="space-y-6" onSubmit={e => { e.preventDefault(); goNext(); }}>
                 <div className="space-y-5 animate-fade-in">
-                  {/* Tipo de Visto */}
+                  {/* Nível de Estudo */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-300" htmlFor="visaType">Tipo de Visto</label>
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="studyLevel">Nível de Estudo</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <IdCard className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
                       <select
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
-                        id="visaType" required value={formData.visaType}
-                        onChange={e => setFormData(prev => ({ ...prev, visaType: e.target.value }))}
+                        id="studyLevel" required value={formData.studyLevel}
+                        onChange={e => setFormData(prev => ({ ...prev, studyLevel: e.target.value }))}
                       >
-                        <option value="" disabled>Selecione o tipo de visto</option>
-                        <option value="D4">Visto de Estudo D4 (Ensino Superior)</option>
-                        <option value="D5">Visto de Estudo D5 (Mobilidade)</option>
-                        <option value="D2">Visto D2 (Empreendedor)</option>
-                        <option value="D7">Visto D7 (Rendimentos Próprios)</option>
-                        <option value="DR">Visto de Procura de Trabalho</option>
+                        <option value="" disabled>Selecione o nível de estudo</option>
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option value="Mestrado">Mestrado</option>
+                        <option value="Ctesp">Ctesp</option>
+                        <option value="Doutoramento">Doutoramento</option>
                       </select>
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <ChevronDown className="text-gray-500 w-5 h-5" />
@@ -234,7 +268,7 @@ export default function CadastroPage() {
                       <select
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
                         id="city" required value={formData.city}
-                        onChange={e => setFormData(prev => ({ ...prev, city: e.target.value }))}
+                        onChange={e => setFormData(prev => ({ ...prev, city: e.target.value, institution: '' }))}
                       >
                         <option value="" disabled>Selecione a cidade</option>
                         {['Lisboa', 'Porto', 'Coimbra', 'Braga', 'Aveiro', 'Faro (Algarve)', 'Outra'].map(c => (
@@ -250,17 +284,39 @@ export default function CadastroPage() {
                   {/* Instituição */}
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-300" htmlFor="institution">Instituição de Ensino / Universidade</label>
-                    <div className="relative group">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
+                    {formData.city && UNIVERSITIES_BY_CITY[formData.city] && UNIVERSITIES_BY_CITY[formData.city].length > 0 ? (
+                      <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
+                        </div>
+                        <select
+                          className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
+                          id="institution" required value={formData.institution}
+                          onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value }))}
+                        >
+                          <option value="" disabled>Selecione a instituição</option>
+                          {UNIVERSITIES_BY_CITY[formData.city].map(u => (
+                            <option key={u} value={u}>{u}</option>
+                          ))}
+                          <option value="Outra Instituição">Outra Instituição</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                          <ChevronDown className="text-gray-500 w-5 h-5" />
+                        </div>
                       </div>
-                      <input
-                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
-                        id="institution" placeholder="Ex: Universidade de Lisboa" type="text" required
-                        value={formData.institution}
-                        onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value }))}
-                      />
-                    </div>
+                    ) : (
+                      <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
+                        </div>
+                        <input
+                          className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+                          id="institution" placeholder="Ex: Universidade de Lisboa" type="text" required
+                          value={formData.institution}
+                          onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value }))}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
 

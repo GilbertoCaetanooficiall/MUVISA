@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useTheme } from 'next-themes';
-import { Search, Bell, Sun, Moon, LogOut, User, Settings } from 'lucide-react';
+import { Search, Bell, Sun, Moon, LogOut, User, Settings, Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import Link from 'next/link';
@@ -13,7 +13,11 @@ const initialNotifications = [
   { id: 3, title: 'Pagamento Confirmado', message: 'Fatura #1029 foi paga via Pix.', time: 'há 2 h', unread: false },
 ];
 
-export default function Topbar() {
+interface TopbarProps {
+  onMenuClick?: () => void;
+}
+
+export default function Topbar({ onMenuClick }: TopbarProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -63,21 +67,27 @@ export default function Topbar() {
   };
 
   return (
-    <header className="h-16 flex-shrink-0 flex items-center justify-between px-8 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 z-50">
-      {/* Search */}
-      <div className="flex-1 max-w-xl">
-        <div className="relative group">
+    <header className="h-16 flex-shrink-0 flex items-center justify-between px-4 md:px-8 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 z-40 gap-4">
+      {/* Mobile Menu Toggle & Search */}
+      <div className="flex flex-1 items-center gap-2 max-w-xl">
+        <button 
+          onClick={onMenuClick}
+          className="lg:hidden p-2 -ml-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+        >
+          <Menu size={20} />
+        </button>
+        <div className="relative group flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={20} />
           <input
             type="text"
-            placeholder="Pesquisar clientes, vistos, documentos..."
-            className="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary transition-all text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
+            placeholder="Pesquisar..."
+            className="w-full bg-slate-50 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary transition-all text-slate-900 dark:text-slate-100 placeholder:text-slate-400 md:placeholder:text-slate-400 placeholder:text-transparent md:placeholder:text-slate-400 focus:placeholder:text-slate-400"
           />
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
         
         {/* Notifications */}
         <div className="relative" ref={notificationRef}>
@@ -138,7 +148,7 @@ export default function Topbar() {
         {/* Dark mode toggle */}
         <button
           onClick={toggleTheme}
-          className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="hidden md:block p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           aria-label="Alternar modo escuro"
         >
           {mounted ? (

@@ -1,7 +1,7 @@
 import { Download, FileText, ShieldCheck, Map } from 'lucide-react';
 const agencyDocs = [
     { title: "Letter of Acceptance (LOA)", icon: FileText, date: "20 Out" },
-    { title: "Cópia da Aplicação de Visto", icon: ShieldCheck, date: "15 Out" },
+    { title: "Cópia da Candidatura de Visto", icon: ShieldCheck, date: "15 Out" },
     { title: "Guia de Chegada", icon: Map, date: "01 Out" },
 ];
 

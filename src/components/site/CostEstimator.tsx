@@ -1,6 +1,21 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const UNIVERSITY_TO_CITY: Record<string, string> = {
+    'Universidade de Lisboa': 'Lisboa',
+    'Universidade do Porto': 'Porto',
+    'Universidade de Coimbra': 'Coimbra',
+    'Universidade de Aveiro': 'Aveiro',
+    'Universidade do Minho': 'Braga',
+    'Universidade Nova de Lisboa': 'Lisboa',
+};
+
+const DEGREE_TO_DURATION: Record<string, string> = {
+    'Licenciatura': '3',
+    'Mestrado': '2',
+    'Ctesp': '2',
+};
 
 const TUITION_PER_YEAR = 3000;
 const LIVING_COST_PER_MONTH = 850;
@@ -12,6 +27,18 @@ export function CostEstimator() {
     const [academicYear, setAcademicYear] = useState('2025/2026');
     const [duration, setDuration] = useState('3');
     const [city, setCity] = useState('');
+
+    useEffect(() => {
+        if (university && UNIVERSITY_TO_CITY[university]) {
+            setCity(UNIVERSITY_TO_CITY[university]);
+        }
+    }, [university]);
+
+    useEffect(() => {
+        if (degree && DEGREE_TO_DURATION[degree]) {
+            setDuration(DEGREE_TO_DURATION[degree]);
+        }
+    }, [degree]);
 
     const [calculated, setCalculated] = useState(false);
     const [totalCost, setTotalCost] = useState(0);
@@ -65,6 +92,7 @@ export function CostEstimator() {
                             >
                                 <option value="Licenciatura">Licenciatura</option>
                                 <option value="Mestrado">Mestrado</option>
+                                <option value="Ctesp">Ctesp</option>
                             </select>
                         </div>
 
@@ -89,7 +117,8 @@ export function CostEstimator() {
                                 min="1" max="6"
                                 value={duration}
                                 onChange={(e) => setDuration(e.target.value)}
-                                className="w-full h-12 px-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none font-display"
+                                disabled
+                                className="w-full h-12 px-4 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 focus:outline-none focus:ring-0 cursor-not-allowed font-display"
                                 required
                             />
                         </div>
@@ -101,7 +130,8 @@ export function CostEstimator() {
                                 placeholder="Ex: Lisboa"
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
-                                className="w-full h-12 px-4 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none font-display"
+                                disabled
+                                className="w-full h-12 px-4 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 focus:outline-none focus:ring-0 cursor-not-allowed font-display"
                                 required
                             />
                         </div>

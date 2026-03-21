@@ -1,31 +1,46 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { Mail, Send, ArrowLeft, MailCheck, ShieldCheck, Building2, Loader2, AlertCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Lock, Eye, EyeOff, Save, ArrowLeft, CheckCircle2, ShieldCheck, Building2, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
-export default function RecuperarSenhaPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [email, setEmail] = useState('');
+export default function RedefinirSenhaPage() {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (password !== confirmPassword) {
+      setError('As senhas não coincidem.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('A senha deve ter pelo menos 6 caracteres.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/redefinir-senha`,
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: password
     });
 
     setLoading(false);
 
-    if (resetError) {
-      setError(resetError.message);
+    if (updateError) {
+      setError(updateError.message);
     } else {
-      setSubmitted(true);
+      setSuccess(true);
     }
   };
 
@@ -43,29 +58,53 @@ export default function RecuperarSenhaPage() {
           <h2 className="text-2xl font-bold tracking-tight text-white drop-shadow-sm">MUVISA</h2>
         </div>
         <h1 className="text-3xl font-bold tracking-tight mt-2 text-white">
-          {submitted ? 'Email enviado!' : 'Recuperar senha'}
+          {success ? 'Senha Redefinida!' : 'Nova Senha'}
         </h1>
         <p className="text-gray-300 mt-2 max-w-sm mx-auto">
-          {submitted
-            ? `Enviamos instruções para ${email}. Verifique sua caixa de entrada e pasta de spam.`
-            : 'Informe o email cadastrado e enviaremos um link seguro para redefinir sua senha.'}
+          {success
+            ? 'Sua senha foi alterada com sucesso. Agora você pode acessar sua conta.'
+            : 'Crie uma nova senha forte para proteger seu acesso ao portal.'}
         </p>
       </div>
 
       <div className="w-full max-w-md bg-slate-950/60 backdrop-blur-2xl rounded-[24px] shadow-2xl border border-white/10 p-8 sm:p-10 animate-fade-in">
-        {!submitted ? (
+        {!success ? (
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* New Password */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-200" htmlFor="email">Email</label>
+              <label className="block text-sm font-medium text-gray-200" htmlFor="password">Nova Senha</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="text-gray-400 group-focus-within:text-primary transition-colors w-5 h-5" />
+                  <Lock className="text-gray-400 group-focus-within:text-primary transition-colors w-5 h-5" />
                 </div>
                 <input
-                  className="appearance-none block w-full pl-10 pr-3 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm shadow-inner"
-                  id="email" placeholder="seu@email.com" type="email" required
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  className="appearance-none block w-full pl-10 pr-10 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm shadow-inner"
+                  id="password" placeholder="••••••••" type={showPassword ? 'text' : 'password'} required
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Confirm Password */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-200" htmlFor="confirmPassword">Confirmar Senha</label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="text-gray-400 group-focus-within:text-primary transition-colors w-5 h-5" />
+                </div>
+                <input
+                  className="appearance-none block w-full pl-10 pr-10 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm shadow-inner"
+                  id="confirmPassword" placeholder="••••••••" type={showPassword ? 'text' : 'password'} required
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
                 />
               </div>
             </div>
@@ -78,19 +117,19 @@ export default function RecuperarSenhaPage() {
             )}
 
             <button
-              className="w-full group relative flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02] mt-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full group relative flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200 shadow-sm transform hover:scale-[1.02] mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
               type="submit"
               disabled={loading}
             >
               {loading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Enviando...
+                  Salvando nova senha...
                 </>
               ) : (
                 <>
-                  Enviar link de recuperação
-                  <Send className="w-5 h-5 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  Redefinir Senha
+                  <Save className="w-5 h-5 opacity-80 group-hover:opacity-100 transition-all" />
                 </>
               )}
             </button>
@@ -107,19 +146,18 @@ export default function RecuperarSenhaPage() {
             <div className="relative mx-auto w-24 h-24">
               <div className="absolute inset-0 bg-green-500/20 rounded-full blur-xl animate-pulse" />
               <div className="relative z-10 w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center ring-4 ring-green-500/20 border border-green-500/30">
-                <MailCheck className="text-green-400 w-12 h-12" />
+                <CheckCircle2 className="text-green-400 w-12 h-12" />
               </div>
             </div>
             <p className="text-sm text-gray-300">
-              Não recebeu o email? Verifique a pasta de spam ou{' '}
-              <button className="text-primary hover:text-primary-hover font-medium underline transition-colors" onClick={() => setSubmitted(false)}>tente novamente</button>.
+              Sua senha foi redefinida. Agora você pode usar sua nova senha para entrar na sua conta.
             </p>
             <div className="pt-2">
                 <Link
-                className="w-full flex justify-center items-center py-3.5 px-4 border border-white/20 text-sm font-semibold rounded-xl text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-white/20 transition-all duration-200"
+                className="w-full flex justify-center items-center py-3.5 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-dark focus:ring-primary transition-all duration-200"
                 href="/login"
                 >
-                Voltar ao login
+                Entrar agora
                 </Link>
             </div>
           </div>
@@ -129,8 +167,8 @@ export default function RecuperarSenhaPage() {
       {/* Security badges */}
       <div className="mt-12 grid grid-cols-2 gap-8 md:gap-16 text-center max-w-xl w-full animate-fade-in px-4">
         {[
-          { icon: ShieldCheck, title: 'Segurança Garantida', text: 'Seus dados são criptografados militarmente.' },
-          { icon: Building2, title: 'Especialistas em Portugal', text: 'Orientação especializada em processos de visto.' },
+          { icon: ShieldCheck, title: 'Conexão Segura', text: 'Seus novos dados são protegidos por criptografia SSL.' },
+          { icon: Building2, title: 'Acesso Restrito', text: 'Apenas você tem controle sobre sua nova credencial.' },
         ].map(item => (
           <div key={item.title} className="flex flex-col items-center group cursor-default">
             <div className="h-14 w-14 rounded-full bg-black/40 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-300 shadow-lg">

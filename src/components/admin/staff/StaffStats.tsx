@@ -1,3 +1,6 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import type { StaffMember } from '@/app/admin/staff/StaffClient';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -11,12 +14,18 @@ interface StatCard {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function StaffStats({ staff }: { staff: StaffMember[] }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const total = staff.length;
   const ativos = staff.filter(s => s.status === 'Ativo').length;
   const adminRoles = staff.filter(s => s.role.includes('Administrador')).length;
   
-  // Fake "novos pedidos" number
-  const novosPedidos = Math.floor(Math.random() * 5) + 2; 
+  // Use a fixed value for SSR and a random one after mounting on client
+  const novosPedidos = mounted ? Math.floor(Math.random() * 5) + 2 : 3; 
 
   const stats: StatCard[] = [
     { label: 'Total de Funcionários', value: total },

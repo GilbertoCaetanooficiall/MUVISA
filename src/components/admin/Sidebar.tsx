@@ -12,11 +12,13 @@ import {
   GraduationCap, 
   ClipboardList, 
   Package, 
+  CreditCard,
   Mail, 
   UserCog, 
   BarChart3,
   Settings,
-  LogOut
+  LogOut,
+  Layout
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -24,16 +26,22 @@ const navItems = [
   { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Painel Central' },
   { href: '/admin/clients', icon: Users, label: 'Clientes' },
   { href: '/admin/visa-processes', icon: Globe, label: 'Processos de Visto' },
+  { href: '/admin/processo', icon: Layout, label: 'Config. Processo' },
   { href: '/admin/documents', icon: FileText, label: 'Documentos' },
   { href: '/admin/universities', icon: GraduationCap, label: 'Universidades' },
   { href: '/admin/applications', icon: ClipboardList, label: 'Candidaturas' },
+  { href: '/admin/payments', icon: CreditCard, label: 'Pagamentos' },
   { href: '/admin/plans', icon: Package, label: 'Planos/Pacotes' },
   { href: '/admin/messages', icon: Mail, label: 'Mensagens' },
   { href: '/admin/staff', icon: UserCog, label: 'Funcionários' },
   { href: '/admin/reports', icon: BarChart3, label: 'Relatórios' },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  onCloseMobile?: () => void;
+}
+
+export default function Sidebar({ onCloseMobile }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -42,7 +50,7 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 flex-shrink-0 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
+    <aside className="w-64 h-full flex-shrink-0 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark">
       {/* Logo */}
       <div className="p-6 flex flex-col items-start gap-2 border-b border-transparent dark:border-slate-800">
         <Image src="/logo-mobile.svg" alt="MUVISA Logo" width={150} height={30} className="h-[35px] w-auto object-contain block md:hidden" priority />
@@ -61,6 +69,7 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onCloseMobile}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                 isActive
                   ? 'bg-primary text-white'
@@ -77,6 +86,7 @@ export default function Sidebar() {
         <div className="pt-4 border-t border-slate-200 dark:border-slate-800">
           <Link
             href="/admin/settings"
+            onClick={onCloseMobile}
             className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
               pathname === '/admin/settings'
                 ? 'bg-primary text-white'

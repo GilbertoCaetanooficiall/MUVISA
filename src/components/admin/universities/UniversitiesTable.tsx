@@ -23,7 +23,7 @@ export default function UniversitiesTable({ universities, onDelete, onStatusChan
   const [searchQuery, setSearchQuery] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [courseFilter, setCourseFilter] = useState('');
+  const [studyLevelFilter, setStudyLevelFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -36,12 +36,14 @@ export default function UniversitiesTable({ universities, onDelete, onStatusChan
       else if (statusFilter === 'A terminar') matchStatus = u.status === 'A terminar';
       else if (statusFilter === 'Fechadas') matchStatus = u.status === 'Candidaturas Fechadas';
 
-      // courseFilter mock implementation
-      const matchCourse = courseFilter ? true : true; // In a real app, 'u' would have a 'courseTypes' array
+      // Study level filter
+      const matchStudyLevel = studyLevelFilter 
+        ? u.studyLevels && u.studyLevels.includes(studyLevelFilter)
+        : true;
 
-      return matchSearch && matchCity && matchStatus && matchCourse;
+      return matchSearch && matchCity && matchStatus && matchStudyLevel;
     });
-  }, [universities, searchQuery, cityFilter, statusFilter, courseFilter]);
+  }, [universities, searchQuery, cityFilter, statusFilter, studyLevelFilter]);
 
   const totalPages = Math.ceil(filteredUniversities.length / itemsPerPage) || 1;
   const currentDocs = filteredUniversities.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -99,19 +101,18 @@ export default function UniversitiesTable({ universities, onDelete, onStatusChan
             <option value="Fechadas">Fechadas</option>
           </select>
 
-          {/* Course availability */}
-          <select className={selectClass} value={courseFilter} onChange={(e) => setCourseFilter(e.target.value)}>
-            <option value="">Disponibilidade de cursos</option>
-            <option value="Engenharia">Engenharia</option>
-            <option value="Medicina">Medicina</option>
-            <option value="Artes">Artes</option>
-            <option value="Gestão">Gestão</option>
+          {/* Study Level */}
+          <select className={selectClass} value={studyLevelFilter} onChange={(e) => setStudyLevelFilter(e.target.value)}>
+            <option value="">Nível de Estudo</option>
+            <option value="Licenciatura">Licenciatura</option>
+            <option value="Mestrado">Mestrado</option>
+            <option value="Cetsp">Cetsp</option>
           </select>
 
           <button 
             type="button" 
             title="Limpar Filtros"
-            onClick={() => { setSearchQuery(''); setCityFilter(''); setStatusFilter(''); setCourseFilter(''); setCurrentPage(1); }}
+            onClick={() => { setSearchQuery(''); setCityFilter(''); setStatusFilter(''); setStudyLevelFilter(''); setCurrentPage(1); }}
             className="flex items-center justify-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 py-2 px-3 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm"
           >
             <Filter size={18} />

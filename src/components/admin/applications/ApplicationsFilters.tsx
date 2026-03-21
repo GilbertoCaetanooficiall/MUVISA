@@ -3,7 +3,7 @@
 import { Search, Filter } from 'lucide-react';
 
 const selectClass =
-  'bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm px-4 py-2 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-primary focus:outline-none';
+  'bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm px-4 py-2 text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-primary focus:outline-none w-full sm:w-auto flex-1 sm:flex-none';
 
 interface ApplicationsFiltersProps {
   searchQuery: string;

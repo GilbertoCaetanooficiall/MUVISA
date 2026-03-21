@@ -33,17 +33,17 @@ export default function SiteHomePage() {
           </p>
 
           {/* Botões interativos com efeitos de hover e sombras dinâmicas */}
-          <div className="flex flex-col sm:flex-row gap-5 justify-center mt-4">
-            <Link href="/site/contato">
-              <button className="h-14 px-8 rounded-xl bg-primary text-white text-lg font-bold hover:bg-primary-hover transform hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(19,37,236,0.25)] flex items-center justify-center gap-3 font-display">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center mt-4 w-full">
+            <Link href="/site/contato" className="w-full sm:w-auto flex justify-center">
+              <button className="h-14 px-8 rounded-xl bg-primary text-white text-lg font-bold hover:bg-primary-hover transform hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(19,37,236,0.25)] flex items-center justify-center gap-3 font-display w-full sm:w-auto max-w-[300px] sm:max-w-none">
                 Falar com Especialista
-                <MessageCircle />
+                <MessageCircle className="w-5 h-5" />
               </button>
             </Link>
-            <Link href="/site/servicos">
-              <button className="h-14 px-8 rounded-xl bg-slate-100/50 dark:bg-white/10 backdrop-blur-md text-slate-900 dark:text-white border border-slate-200 dark:border-white/20 font-bold hover:bg-slate-100 dark:hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 font-display flex items-center justify-center gap-3 shadow-sm dark:shadow-none">
+            <Link href="/site/servicos" className="w-full sm:w-auto flex justify-center">
+              <button className="h-14 px-8 rounded-xl bg-slate-100/50 dark:bg-white/10 backdrop-blur-md text-slate-900 dark:text-white border border-slate-200 dark:border-white/20 font-bold hover:bg-slate-100 dark:hover:bg-white/20 hover:-translate-y-1 transition-all duration-300 font-display flex items-center justify-center gap-3 shadow-sm dark:shadow-none w-full sm:w-auto max-w-[300px] sm:max-w-none">
                 Conhecer Serviços
-                <ArrowDown />
+                <ArrowDown className="w-5 h-5" />
               </button>
             </Link>
           </div>
@@ -61,8 +61,8 @@ export default function SiteHomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Cada card usa 'group' para poder disparar animações nos filhos (como o ícone) no hover do card pai */}
-            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="w-14 h-14 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary mb-6 mx-auto md:mx-0 group-hover:scale-110 transition-transform duration-300">
                 <Building className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Especialistas em Portugal</h3>
@@ -71,8 +71,8 @@ export default function SiteHomePage() {
               </p>
             </div>
             {/* Repetição de cards similares para outros diferenciais... */}
-            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
-              <div className="w-14 h-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="w-14 h-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 mb-6 mx-auto md:mx-0 group-hover:scale-110 transition-transform duration-300">
                 <TrendingUp className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Acompanhamento Ponta a Ponta</h3>
@@ -80,8 +80,8 @@ export default function SiteHomePage() {
                 Desde a escolha da universidade até a sua chegada em solo português e obtenção da residência.
               </p>
             </div>
-            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
-              <div className="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 mb-6 mx-auto md:mx-0 group-hover:scale-110 transition-transform duration-300">
                 <FolderSync className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">Suporte com a Documentação</h3>
@@ -89,8 +89,8 @@ export default function SiteHomePage() {
                 Revisão meticulosa de cada documento para garantir que seu processo esteja impecável para o consulado.
               </p>
             </div>
-            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group">
-              <div className="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="bg-white dark:bg-card-dark rounded-2xl p-8 border border-slate-200 dark:border-slate-700 hover:-translate-y-2 transition-transform duration-300 shadow-lg dark:shadow-none hover:shadow-xl group flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 mx-auto md:mx-0 group-hover:scale-110 transition-transform duration-300">
                 <ShieldCheck className="text-3xl" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 font-display">98% de Taxa de Aprovação</h3>

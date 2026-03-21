@@ -1,17 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, ClipboardList, Clock, ListChecks, Lock, Mail, Phone, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
+import { ArrowRight, Mail, CheckCircle, Loader2, AlertCircle, MessageSquare, User, Tag } from 'lucide-react';
 
 type FormData = {
   nome: string;
   email: string;
-  whatsapp: string;
-  tipoVisto: string;
-  nivelEnsino: string;
-  cidadeUniversidade: string;
-  data: string;
-  horario: string;
+  assunto: string;
+  mensagem: string;
 };
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
@@ -19,27 +15,20 @@ type FormErrors = Partial<Record<keyof FormData, string>>;
 const initialForm: FormData = {
   nome: '',
   email: '',
-  whatsapp: '',
-  tipoVisto: '',
-  nivelEnsino: '',
-  cidadeUniversidade: '',
-  data: '',
-  horario: 'Manhã (09:00 - 12:00)',
+  assunto: '',
+  mensagem: '',
 };
 
 function validate(form: FormData): FormErrors {
   const errors: FormErrors = {};
-  if (!form.nome.trim()) errors.nome = 'Nome é obrigatório.';
+  if (!form.nome.trim()) errors.nome = 'Por favor, indique o seu nome.';
   if (!form.email.trim()) {
-    errors.email = 'E-mail é obrigatório.';
+    errors.email = 'O e-mail é obrigatório.';
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     errors.email = 'Introduza um e-mail válido.';
   }
-  if (!form.whatsapp.trim()) errors.whatsapp = 'WhatsApp é obrigatório.';
-  if (!form.tipoVisto) errors.tipoVisto = 'Selecione o tipo de visto.';
-  if (!form.nivelEnsino) errors.nivelEnsino = 'Selecione o nível de ensino.';
-  if (!form.cidadeUniversidade.trim()) errors.cidadeUniversidade = 'Indique a cidade ou universidade.';
-  if (!form.data) errors.data = 'Selecione uma data.';
+  if (!form.assunto.trim()) errors.assunto = 'O assunto é obrigatório.';
+  if (!form.mensagem.trim()) errors.mensagem = 'A mensagem não pode estar vazia.';
   return errors;
 }
 
@@ -48,18 +37,21 @@ export default function SiteContatoPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-    // Clear error on change
     if (errors[name as keyof FormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError(null);
+
+    // 1. Valida os campos no cliente antes de enviar para o servidor
     const validationErrors = validate(form);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -67,222 +59,206 @@ export default function SiteContatoPage() {
     }
 
     setLoading(true);
-    // Simular envio (2s)
-    setTimeout(() => {
-      setLoading(false);
+
+    try {
+      // 2. Envia os dados para a API Route que usa o Resend para enviar o e-mail
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Se o servidor retornar erro, mostra a mensagem de erro
+        throw new Error(data.error || 'Ocorreu um erro ao enviar a sua mensagem.');
+      }
+
+      // 3. Sucesso: mostra o estado de confirmação
       setSubmitted(true);
-    }, 2000);
+
+    } catch (err: unknown) {
+      // Captura erros de rede ou da API e mostra ao utilizador
+      const message = err instanceof Error ? err.message : 'Erro desconhecido. Tente novamente.';
+      setServerError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputClass = (field: keyof FormData) =>
-    `w-full rounded-lg border ${errors[field] ? 'border-red-400 dark:border-red-500 focus:ring-red-300' : 'border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-primary'} bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm py-2.5 px-3 placeholder:text-slate-400 focus:outline-none focus:ring-1 transition-colors`;
-
-  const selectClass = (field: keyof FormData) =>
-    `w-full rounded-lg border ${errors[field] ? 'border-red-400 dark:border-red-500' : 'border-slate-300 dark:border-slate-600 focus:border-primary focus:ring-primary'} bg-slate-50 dark:bg-background-dark text-slate-900 dark:text-white shadow-sm py-2.5 px-3 focus:outline-none focus:ring-1 transition-colors`;
+    `w-full rounded-xl border ${errors[field] ? 'border-red-400 dark:border-red-500 focus:ring-red-300' : 'border-slate-200 dark:border-slate-700/50 focus:border-primary focus:ring-primary'} bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white shadow-sm py-3.5 px-4 placeholder:text-slate-500 focus:outline-none focus:ring-1 transition-all font-display text-sm`;
 
   return (
     <>
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[0%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]"></div>
       </div>
       
-      <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8 lg:gap-16 items-start mx-auto py-10 px-4 sm:px-6">
-        {/* ── Coluna Esquerda ── */}
-        <div className="flex-1 flex flex-col justify-center space-y-8 lg:sticky lg:top-24">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row gap-12 lg:gap-24 items-center mx-auto py-20 px-6">
+        
+        {/* Left Content */}
+        <div className="flex-1 space-y-8 animate-in fade-in slide-in-from-left-4 duration-700">
           <div className="space-y-4">
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 dark:border-primary/30 px-3 py-1 text-xs font-semibold text-primary dark:text-primary">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              Consultoria Gratuita
-            </span>
-            <h1 className="text-slate-900 dark:text-white text-4xl lg:text-5xl font-black leading-tight tracking-tight drop-shadow-sm">
-              Desbloqueie o Seu Futuro Académico Hoje
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
+               Central de Atendimento
+            </div>
+            <h1 className="text-4xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight font-serif tracking-tight">
+              Ficou com alguma dúvida?
             </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-xl">
-              Reserve a sua sessão estratégica gratuita de 30 minutos. Analisaremos o seu perfil e traçaremos a sua jornada para a universidade dos seus sonhos.
+            <p className="text-slate-500 dark:text-slate-400 text-lg leading-relaxed max-w-lg font-display">
+              Estamos aqui para simplificar a sua mobilidade acadêmica. Envie-nos o seu pedido e a nossa equipa entrará em contacto por e-mail rapidamente.
             </p>
           </div>
 
-          <div className="grid gap-6">
-            {[
-              { icon: ClipboardList, title: 'Avaliação de Perfil', desc: 'Analisamos o seu histórico, notas e interesses para encontrar a universidade ideal para si.' },
-              { icon: ListChecks, title: 'Checklist Personalizada', desc: 'Receba uma lista personalizada de todos os documentos necessários para a sua candidatura.' },
-              { icon: Clock, title: 'Cronograma de Visto', desc: 'Obtenha um roteiro claro com prazos para o seu processo de pedido de visto.' },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="flex items-start gap-4 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-all hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_10px_30px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_0_20px_rgba(25,120,229,0.15)] group">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 text-primary group-hover:scale-110 transition-transform">
-                  <Icon />
+          <div className="space-y-6 pt-4">
+             <div className="flex items-center gap-4 group">
+                <div className="size-12 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                   <Mail size={22} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 dark:text-white text-lg">{title}</h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">{desc}</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest font-display">E-mail Corporativo</p>
+                  <p className="text-slate-900 dark:text-white font-bold font-display">muvisaintercambio@gmail.com</p>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="hidden lg:flex items-center gap-4 pt-4">
-            <div className="flex -space-x-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Retrato de estudante" className="inline-block h-10 w-10 rounded-full ring-2 ring-white dark:ring-slate-900 object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbUZrUmxOtNmISLlRz7MdXzaeJg-QuC2ynRVeSSIH_Ck06ElvvEBHI2TTzND00rRsvCG_e6s4AKs9UhAU1rYdOp53JzAaOcOB7_4Te7u8Rn8eMhJI-bSgRYKd4H2IZQ9l8Y2Ix691IPwdz_eJFyb8ydotS0zxwjKmXwx_4ax-hmh0OeDSwHgSXacud7EUmNKLxqVDQ13-WxBSswGEEnjaIdfHN8v6kO5SZBsFKQmdrrFBstcNJQWqySQBtvnqlQMomX3qE8tvAqY6z" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Retrato de estudante" className="inline-block h-10 w-10 rounded-full ring-2 ring-white dark:ring-slate-900 object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCCQ_OKBreg1nmZkTsoTEk2sMSFO9ltriySan0HEAyt8ZAcEcKAZ_P7dV5KzjNCKB6NGdVob8nuTql53dK6uRc5uQZspeqfkbKNDSoPgvATzUCQBZvIejnaYAHzL_J2awoYeoBOX0V3mIfRe5MoMdbE7QnN3CRhHZVIFxWjQXO8FCEcsKN3f7QdwbX7crK3V6chpclezwXzT2Ae47WJU-CTIq5iPfLdjKbETrcgkLoqgaNsMYz87IrRuDSNYzyEq00v8ouPdBZnt8G" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Retrato de estudante" className="inline-block h-10 w-10 rounded-full ring-2 ring-white dark:ring-slate-900 object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALDDFEzt0Seur94GFLJtKfYzaNySAF3HNIJ_dFQjO0v_27eYsxZ169HlR_tRO_U6mmVMS0owGIw2QiTmOoMJqGYBRI851TFZ8ZMYDEObsIqcsxPMyYRvLQCo5cf4vtdzg8JiCvTdj1UY8AwxJRJkanEY8IjdEJE4iiBsijqMoYbL3XZs6KOj5ukuoGR3EXysyYyKLRrlYZEut1yRQEa9bOXtutTouUlBj3rzbJLKU4zxxCScFuxbyIY59luoVd1c2RFgr28iouG4XE" />
-            </div>
-            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Junte-se a mais de <span className="text-slate-900 dark:text-white font-bold">2.000</span> estudantes ajudados este ano.</p>
+             </div>
+             
+             <div className="flex items-center gap-4 group">
+                <div className="size-12 rounded-2xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                   <MessageSquare size={22} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest font-display">Suporte Directo</p>
+                  <p className="text-slate-900 dark:text-white font-bold font-display">9h - 18h (Dias Úteis)</p>
+                </div>
+             </div>
           </div>
         </div>
 
-        {/* ── Coluna Direita (Formulário) ── */}
-        <div className="flex-1 max-w-xl w-full mx-auto">
-          <div className="bg-white dark:bg-card-dark rounded-2xl shadow-xl dark:shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden relative">
-            <div className="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
-              <h2 className="font-bold text-slate-900 dark:text-white">Agende a sua sessão</h2>
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white shadow-[0_0_10px_rgba(25,120,229,0.5)]">1</span>
-                <span>Contacto</span>
-                <span className="h-px w-3 bg-slate-300 dark:bg-slate-600"></span>
-                <span className="flex h-5 w-5 items-center justify-center rounded-full border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">2</span>
-                <span>Detalhes</span>
-              </div>
-            </div>
-
-            {/* ── Estado de SUCESSO ── */}
+        {/* Right Content */}
+        <div className="flex-1 w-full max-w-lg animate-in fade-in slide-in-from-right-4 duration-1000">
+          <div className="bg-white dark:bg-[#12141C] rounded-[2.5rem] p-8 md:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] border border-slate-100 dark:border-slate-800/50 transition-all">
+            
             {submitted ? (
-              <div className="p-8 lg:p-12 flex flex-col items-center text-center gap-4 animate-fade-in">
-                <div className="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center mb-2">
-                  <CheckCircle className="text-emerald-600 dark:text-emerald-400 w-10 h-10" />
+              <div className="py-12 flex flex-col items-center text-center gap-6 animate-in zoom-in-95 duration-500">
+                <div className="size-20 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center">
+                  <CheckCircle className="text-green-600 dark:text-green-400 size-10" />
                 </div>
-                <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Agendamento Confirmado!</h3>
-                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
-                  Recebemos o seu pedido com sucesso, <strong className="text-slate-800 dark:text-white">{form.nome.split(' ')[0]}</strong>! Um dos nossos consultores irá contactá-lo brevemente pelo e-mail <strong className="text-primary">{form.email}</strong>.
-                </p>
+                <div>
+                  <h3 className="text-2xl font-black text-slate-900 dark:text-white">Mensagem Enviada!</h3>
+                  <p className="text-slate-500 dark:text-slate-400 text-sm mt-3 leading-relaxed font-display">
+                    Obrigado pelas suas palavras, <strong>{form.nome}</strong>. Verifique o seu e-mail <strong>{form.email}</strong> nas próximas horas para a nossa resposta.
+                  </p>
+                </div>
                 <button
                   onClick={() => { setSubmitted(false); setForm(initialForm); }}
-                  className="mt-4 px-6 py-2 text-sm font-semibold text-primary border border-primary/30 rounded-lg hover:bg-primary/5 transition-colors"
+                  className="px-8 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-sm"
                 >
-                  Submeter novo pedido
+                  Enviar outra mensagem
                 </button>
               </div>
             ) : (
-              /* ── Formulário ── */
-              <form className="p-6 lg:p-8 flex flex-col gap-6" onSubmit={handleSubmit} noValidate>
-                <div className="space-y-5">
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-2">
+                  <h2 className="text-2xl font-black text-slate-900 dark:text-white font-serif tracking-tight">Formulário de Contato</h2>
+                  <p className="text-xs text-slate-500 font-medium font-display uppercase tracking-widest">Resposta ágil em até 24h.</p>
+                </div>
 
-                  {/* Nome */}
-                  <div>
-                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Nome Completo</label>
-                    <input name="nome" value={form.nome} onChange={handleChange} className={inputClass('nome')} placeholder="Seu nome" type="text" />
-                    {errors.nome && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.nome}</p>}
-                  </div>
-
+                <div className="space-y-5 pt-2">
+                  {/* Nome e Email em Grid para ocupar menos espaço vertical */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     {/* Nome */}
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 pl-1 flex items-center gap-2">
+                         <User size={12} className="text-primary" /> Nome
+                      </label>
+                      <input 
+                        name="nome" 
+                        value={form.nome} 
+                        onChange={handleChange} 
+                        className={inputClass('nome')} 
+                        placeholder="Seu nome" 
+                        type="text" 
+                      />
+                      {errors.nome && <p className="flex items-center gap-1 text-[11px] font-bold text-red-500 mt-1 pl-1"><AlertCircle size={12}/> {errors.nome}</p>}
+                    </div>
+
                     {/* Email */}
-                    <div>
-                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Endereço de E-mail</label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400"><Mail size={18} /></div>
-                        <input name="email" value={form.email} onChange={handleChange} className={`${inputClass('email')} pl-10`} placeholder="exemplo@email.com" type="email" />
-                      </div>
-                      {errors.email && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.email}</p>}
-                    </div>
-
-                    {/* WhatsApp */}
-                    <div>
-                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">WhatsApp</label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400"><Phone size={18} /></div>
-                        <input name="whatsapp" value={form.whatsapp} onChange={handleChange} className={`${inputClass('whatsapp')} pl-10`} placeholder="+244 9xx xxx xxx" type="tel" />
-                      </div>
-                      {errors.whatsapp && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.whatsapp}</p>}
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 pl-1 flex items-center gap-2">
+                         <Mail size={12} className="text-primary" /> E-mail
+                      </label>
+                      <input 
+                        name="email" 
+                        value={form.email} 
+                        onChange={handleChange} 
+                        className={inputClass('email')} 
+                        placeholder="seu@e-mail.com" 
+                        type="email" 
+                      />
+                      {errors.email && <p className="flex items-center gap-1 text-[11px] font-bold text-red-500 mt-1 pl-1"><AlertCircle size={12}/> {errors.email}</p>}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Tipo de Visto */}
-                    <div>
-                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Tipo de Visto</label>
-                      <select name="tipoVisto" value={form.tipoVisto} onChange={handleChange} className={selectClass('tipoVisto')}>
-                        <option value="" disabled>Selecione o visto</option>
-                        <option value="d4">Visto de Estudante (D4)</option>
-                        <option value="d3">Investigação/Ensino (D3)</option>
-                        <option value="d4-sec">Ensino Secundário</option>
-                        <option value="d4-trainee">Estágio/Voluntariado</option>
-                      </select>
-                      {errors.tipoVisto && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.tipoVisto}</p>}
-                    </div>
-
-                    {/* Nível de Ensino */}
-                    <div>
-                      <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Nível de Ensino</label>
-                      <select name="nivelEnsino" value={form.nivelEnsino} onChange={handleChange} className={selectClass('nivelEnsino')}>
-                        <option value="" disabled>Selecione o nível</option>
-                        <option value="licenciatura">Licenciatura</option>
-                        <option value="mestrado">Mestrado</option>
-                        <option value="doutoramento">Doutoramento</option>
-                        <option value="ctesp">CTeSP</option>
-                      </select>
-                      {errors.nivelEnsino && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.nivelEnsino}</p>}
-                    </div>
+                  {/* Assunto */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 pl-1 flex items-center gap-2">
+                       <Tag size={12} className="text-primary" /> Assunto
+                    </label>
+                    <input 
+                      name="assunto" 
+                      value={form.assunto} 
+                      onChange={handleChange} 
+                      className={inputClass('assunto')} 
+                      placeholder="Ex: Informação sobre Vistos" 
+                      type="text" 
+                    />
+                    {errors.assunto && <p className="flex items-center gap-1 text-[11px] font-bold text-red-500 mt-1 pl-1"><AlertCircle size={12}/> {errors.assunto}</p>}
                   </div>
 
-                  {/* Cidade / Universidade */}
-                  <div>
-                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5 block">Cidade ou Universidade de Interesse</label>
-                    <input name="cidadeUniversidade" value={form.cidadeUniversidade} onChange={handleChange} className={inputClass('cidadeUniversidade')} placeholder="Ex: Porto, Coimbra, Aveiro..." type="text" />
-                    {errors.cidadeUniversidade && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.cidadeUniversidade}</p>}
-                  </div>
-
-                  {/* Data e Hora */}
-                  <div className="pt-1">
-                    <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 block mb-3">Data e Hora Sugerida</label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <input name="data" value={form.data} onChange={handleChange} className={inputClass('data')} type="date" min={new Date().toISOString().split('T')[0]} />
-                        {errors.data && <p className="flex items-center gap-1 text-xs text-red-500 mt-1"><AlertCircle size={12}/> {errors.data}</p>}
-                      </div>
-                      <select name="horario" value={form.horario} onChange={handleChange} className={selectClass('horario')}>
-                        <option>Manhã (09:00 - 12:00)</option>
-                        <option>Tarde (14:00 - 18:00)</option>
-                        <option>Noite (19:00 - 21:00)</option>
-                      </select>
-                    </div>
+                  {/* Mensagem */}
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-400 pl-1 flex items-center gap-2">
+                       <MessageSquare size={12} className="text-primary" /> Mensagem
+                    </label>
+                    <textarea 
+                      name="mensagem" 
+                      rows={4}
+                      value={form.mensagem} 
+                      onChange={handleChange} 
+                      className={`${inputClass('mensagem')} resize-none`} 
+                      placeholder="Escreva aqui as suas dúvidas..." 
+                    />
+                    {errors.mensagem && <p className="flex items-center gap-1 text-[11px] font-bold text-red-500 mt-1 pl-1"><AlertCircle size={12}/> {errors.mensagem}</p>}
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4 pt-6 border-t border-slate-200 dark:border-slate-700">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-primary-hover disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold h-12 transition-all shadow-[0_0_15px_rgba(25,120,229,0.4)] hover:shadow-[0_0_20px_rgba(25,120,229,0.6)] active:scale-[0.99]"
-                  >
-                    {loading ? (
-                      <><Loader2 className="animate-spin" size={20} /> A enviar...</>
-                    ) : (
-                      <>Confirmar Agendamento <ArrowRight size={18} /></>
-                    )}
-                  </button>
-                  <div className="flex items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-medium">
-                    <Lock className="text-green-500 dark:text-green-400" size={14} />
-                    <span>Os seus dados estão seguros e não serão partilhados.</span>
+                {/* Erro vindo do servidor (ex: falha no Resend ou falta de API key) */}
+                {serverError && (
+                  <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800/50 rounded-xl animate-in fade-in duration-300">
+                    <AlertCircle className="text-red-500 shrink-0 mt-0.5" size={16} />
+                    <p className="text-sm font-medium text-red-600 dark:text-red-400">{serverError}</p>
                   </div>
-                </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full h-14 bg-primary hover:bg-primary-hover text-white font-black rounded-2xl transition-all shadow-[0_10px_25px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_30px_rgba(37,99,235,0.5)] active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-3 group/btn"
+                >
+                  {loading ? (
+                    <Loader2 className="animate-spin" size={20} />
+                  ) : (
+                    <>
+                      Enviar agora
+                      <ArrowRight className="size-5 group-hover/btn:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </button>
               </form>
-            )}
-          </div>
 
-          <div className="lg:hidden flex items-center justify-center gap-3 mt-8">
-            <div className="flex -space-x-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Retrato de estudante" className="inline-block h-8 w-8 rounded-full ring-2 ring-slate-900 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk5yQvZ6x43JWfoAT074kvjQs_jeCINESPoXIpM6lvYHSzKdaNpmKpAJtheaAK18t1_QGe6ob1v-d4KjEsTiXgMkwp9fTbW05Jl3mbrCocBOSVlPsmvaEhJL1c5PJctNmON6ZU_GTn7NFBW6m6Qr3mM4o_ZchmCRzjR_tGjqGWwKh4QdfNDnPInaXIWUVZhTj_m1EmGu_fAUjPGI1AP-Am6KvGXNYK0V0sTYJk3X_QVXqT9hIxdniZBdv00wnaxRxXDKeNfm59iaUg" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img alt="Retrato de estudante" className="inline-block h-8 w-8 rounded-full ring-2 ring-slate-900 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWKsM2IDq7BIUsDGiONN83nqx_PyyFT46Rc8qKZ7ITY2JlWSZAFj7kXFKIzgV2UFCMWf61BCdO2MzXAyoATaIphWAlYcAchSoK-SIGvT9ZzjVUHOWY95utxjz0Dwy4fXcLcF96CiO7Lr6s1mXFnBiyGn9WwNN23wHnEdT9YNeUCarjfteN_fnoIcKD_KRBtaEvR5o_NCsDejryFv3KrR_GfQTpYpNUhTzILsfZjxajnhF-4STkDeOpzpWPurSMKeSnfGazi1o5UdG2" />
-            </div>
-            <p className="text-xs font-medium text-slate-400">Com a confiança de mais de <span className="text-white font-bold">2.000</span> estudantes</p>
+            )}
           </div>
         </div>
       </div>

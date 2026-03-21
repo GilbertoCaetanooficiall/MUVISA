@@ -73,7 +73,21 @@ export default function PlansClient() {
   const [plans, setPlans] = useState<Plan[]>(initialPlans);
   const [coupons, setCoupons] = useState<Coupon[]>(initialCoupons);
   const [isAddCouponModalOpen, setIsAddCouponModalOpen] = useState(false);
+  const [isAddPlanModalOpen, setIsAddPlanModalOpen] = useState(false);
   const [editingPlan, setEditingPlan] = useState<Plan | null>(null);
+  const [newPlan, setNewPlan] = useState<Plan>({
+    id: '',
+    name: '',
+    price: '',
+    priceLabel: 'por processo',
+    status: 'Rascunho',
+    features: [
+      { text: '', included: true },
+      { text: '', included: true },
+      { text: '', included: true },
+      { text: '', included: true },
+    ]
+  });
 
   const handleAddCouponSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,6 +103,30 @@ export default function PlansClient() {
     setCoupons([...coupons, newCoupon]);
     setIsAddCouponModalOpen(false);
     alert('Cupão de desconto ativado!');
+  };
+
+  const handleAddPlanSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const planToAdd = {
+      ...newPlan,
+      id: `PLAN-00${plans.length + 1}`
+    };
+    setPlans([...plans, planToAdd]);
+    setIsAddPlanModalOpen(false);
+    setNewPlan({
+      id: '',
+      name: '',
+      price: '',
+      priceLabel: 'por processo',
+      status: 'Rascunho',
+      features: [
+        { text: '', included: true },
+        { text: '', included: true },
+        { text: '', included: true },
+        { text: '', included: true },
+      ]
+    });
+    alert('Novo plano criado com sucesso!');
   };
 
   const handleEditPlanSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -138,6 +176,7 @@ export default function PlansClient() {
             onDelete={(id) => setPlans(plans.filter(p => p.id !== id))}
             onStatusChange={(id, s) => setPlans(plans.map(p => p.id === id ? {...p, status: s} : p))}
             onEdit={(plan) => setEditingPlan({...plan})}
+            onAddPlan={() => setIsAddPlanModalOpen(true)}
           />
         </>
       ) : (
@@ -254,17 +293,111 @@ export default function PlansClient() {
         </div>
       )}
 
-      {/* Edit Plan Modal e Add Plan Modal (Simplificados para foco no cupão) */}
-      {/* ... (Os modais de plano continuam aqui como implementados anteriormente) */}
-      
+      {/* Add Plan Modal */}
+      {isAddPlanModalOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-fade-in">
+           <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] max-w-xl w-full p-10 relative shadow-2xl border border-white/10 animate-scale-in overflow-y-auto max-h-[90vh]">
+              <button 
+                onClick={() => setIsAddPlanModalOpen(false)} 
+                className="absolute top-8 right-8 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all bg-slate-50 dark:bg-white/5 p-2 rounded-full"
+              >
+                <X size={20} />
+              </button>
+              
+              <div className="flex items-center gap-3 mb-10">
+                 <div className="bg-emerald-500/10 p-3 rounded-2xl">
+                    <Plus className="text-emerald-500" size={24} />
+                 </div>
+                 <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Novo Plano de Serviço</h3>
+              </div>
+
+              <form onSubmit={handleAddPlanSubmit} className="space-y-6">
+                 <div className="space-y-4">
+                    <div>
+                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Nome do Plano</label>
+                       <input 
+                         value={newPlan.name}
+                         onChange={e => setNewPlan({...newPlan, name: e.target.value})}
+                         className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-6 font-black focus:ring-2 focus:ring-primary outline-none transition-all" 
+                         placeholder="Ex: Diamond" 
+                         required 
+                       />
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                       <div>
+                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Preço (Kz)</label>
+                          <input 
+                            value={newPlan.price}
+                            onChange={e => setNewPlan({...newPlan, price: e.target.value})}
+                            className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-6 font-black" 
+                            placeholder="Ex: 1.000.000 Kz" 
+                            required 
+                          />
+                       </div>
+                       <div>
+                          <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Sufixo</label>
+                          <input 
+                            value={newPlan.priceLabel}
+                            onChange={e => setNewPlan({...newPlan, priceLabel: e.target.value})}
+                            className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-6 font-black" 
+                            placeholder="Ex: por processo" 
+                            required 
+                          />
+                       </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block">Benefícios do Plano</label>
+                      {newPlan.features.map((f, i) => (
+                        <div key={i} className="flex gap-2 items-center">
+                           <button 
+                             type="button" 
+                             onClick={() => {
+                               const nf = [...newPlan.features];
+                               nf[i].included = !nf[i].included;
+                               setNewPlan({...newPlan, features: nf});
+                             }} 
+                             className={`p-2.5 rounded-xl border transition-all ${f.included ? 'bg-green-500/10 border-green-500/20 text-green-500' : 'bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-400'}`}
+                           >
+                              <CheckCircle2 size={18} />
+                           </button>
+                           <input 
+                             value={f.text} 
+                             onChange={e => {
+                               const nf = [...newPlan.features];
+                               nf[i].text = e.target.value;
+                               setNewPlan({...newPlan, features: nf});
+                             }} 
+                             className="flex-1 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 text-xs font-bold" 
+                             placeholder={`Benefício ${i + 1}`}
+                             required 
+                           />
+                        </div>
+                      ))}
+                    </div>
+                 </div>
+
+                 <button 
+                   type="submit" 
+                   className="w-full py-5 bg-primary text-white font-black rounded-2xl shadow-[0_15px_30px_rgba(14,86,224,0.3)] hover:brightness-110 active:scale-[0.98] transition-all uppercase tracking-widest"
+                 >
+                   Criar Plano agora
+                 </button>
+              </form>
+           </div>
+        </div>
+      )}
+
+      {/* Edit Plan Modal */}
       {editingPlan && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md">
           <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] max-w-xl w-full p-8 relative shadow-2xl border border-white/10 overflow-y-auto max-h-[90vh]">
             {/* Reaproveita o modal anterior, mantendo a consistência */}
             <h2 className="font-serif text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-8">Editar {editingPlan.name}</h2>
             <form onSubmit={handleEditPlanSubmit} className="space-y-6">
-              <input value={editingPlan.name} onChange={e => setEditingPlan({...editingPlan, name: e.target.value})} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 font-bold" placeholder="Nome do plano" />
-              <input value={editingPlan.price} onChange={e => setEditingPlan({...editingPlan, price: e.target.value})} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 font-bold" placeholder="Preço" />
+              <input value={editingPlan.name} onChange={e => setEditingPlan(p => p ? {...p, name: e.target.value} : null)} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 font-bold" placeholder="Nome do plano" />
+              <input value={editingPlan.price} onChange={e => setEditingPlan(p => p ? {...p, price: e.target.value} : null)} className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 font-bold" placeholder="Preço" />
               
               <div className="space-y-3">
                 <label className="text-xs font-black uppercase tracking-widest text-slate-400">Vantagens</label>

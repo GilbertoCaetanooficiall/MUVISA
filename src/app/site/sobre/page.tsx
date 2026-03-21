@@ -146,7 +146,7 @@ export default function SiteSobrePage() {
                   </div>
                   <div>
                     <h4 className="text-slate-900 dark:text-white font-bold font-display">Contato</h4>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">contato@muvisa.pt<br />+244 942 279 906</p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 font-display">muvisaintercambio@gmail.com<br />+244 942 279 906</p>
                   </div>
                 </div>
               </div>

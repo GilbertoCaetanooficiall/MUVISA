@@ -1,11 +1,28 @@
+'use client';
+
 import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/portal-estudante/ThemeToggle';
+import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+// Use dynamic import for the modal to avoid SSR issues with createPortal
+const LegalModal = dynamic(() => import('./LegalModal'), { ssr: false });
 
 export default function SiteFooter() {
+  const [modalType, setModalType] = useState<'terms' | 'privacy' | null>(null);
+
+  const openModal = (type: 'terms' | 'privacy') => {
+    setModalType(type);
+  };
+
+  const closeModal = () => {
+    setModalType(null);
+  };
+
   return (
-    <footer className="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pt-16 pb-8 transition-colors duration-300">
+    <footer className="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pt-16 pb-8 transition-colors duration-300 relative group overflow-hidden">
       <div className="container mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
@@ -51,7 +68,7 @@ export default function SiteFooter() {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="text-base" />
-                <a className="hover:text-primary transition-colors" href="mailto:contato@muvisa.pt">contato@muvisa.pt</a>
+                <a className="hover:text-primary transition-colors" href="mailto:muvisaintercambio@gmail.com">muvisaintercambio@gmail.com</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="text-base" />
@@ -87,14 +104,30 @@ export default function SiteFooter() {
           </p>
           <div className="flex items-center gap-6">
             <div className="flex gap-6 text-xs text-slate-500 dark:text-slate-400 font-display">
-              <Link className="hover:text-slate-800 dark:hover:text-white transition-colors" href="#">Termos de Uso</Link>
-              <Link className="hover:text-slate-800 dark:hover:text-white transition-colors" href="#">Privacidade</Link>
+              <button 
+                onClick={() => openModal('terms')}
+                className="hover:text-slate-800 dark:hover:text-white transition-colors cursor-pointer outline-none font-medium"
+              >
+                Termos de Uso
+              </button>
+              <button 
+                onClick={() => openModal('privacy')}
+                className="hover:text-slate-800 dark:hover:text-white transition-colors cursor-pointer outline-none font-medium"
+              >
+                Privacidade
+              </button>
             </div>
             <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
             <ThemeToggle />
           </div>
         </div>
       </div>
+
+      <LegalModal 
+        isOpen={modalType !== null} 
+        onClose={closeModal} 
+        type={modalType || 'terms'} 
+      />
     </footer>
   );
 }

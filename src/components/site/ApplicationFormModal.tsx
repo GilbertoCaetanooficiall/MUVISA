@@ -63,8 +63,25 @@ const assessmentPlans = [
   },
 ];
 
+const UNIVERSITY_TO_CITY: Record<string, string> = {
+  'Universidade de Lisboa': 'Lisboa',
+  'Universidade do Porto': 'Porto',
+  'Universidade de Coimbra': 'Coimbra',
+  'Universidade de Aveiro': 'Aveiro',
+  'Universidade do Minho': 'Braga',
+  'Universidade Nova de Lisboa': 'Lisboa',
+};
+
+const DEGREE_TO_DURATION: Record<string, string> = {
+  'Licenciatura': '3',
+  'Mestrado': '2',
+  'Ctesp': '2',
+};
+
 export default function ApplicationFormModal({ isOpen, onClose, universityName = 'Universidade de Lisboa' }: ApplicationFormModalProps) {
   const [selectedCity, setSelectedCity] = useState('');
+  const [studyLevel, setStudyLevel] = useState('');
+  const [duration, setDuration] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [step, setStep] = useState<1 | 2 | 3>(1);
 
@@ -73,6 +90,18 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (universityName && UNIVERSITY_TO_CITY[universityName]) {
+      setSelectedCity(UNIVERSITY_TO_CITY[universityName]);
+    }
+  }, [universityName]);
+
+  useEffect(() => {
+    if (studyLevel && DEGREE_TO_DURATION[studyLevel]) {
+      setDuration(DEGREE_TO_DURATION[studyLevel]);
+    }
+  }, [studyLevel]);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose();
@@ -89,6 +118,8 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
       if (!isOpen) { // reset when closing
         setStep(1);
         setSelectedCity('');
+        setStudyLevel('');
+        setDuration('');
       }
     };
   }, [isOpen, handleKeyDown]);
@@ -239,12 +270,13 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                     Cidade de Estudo <span className="text-red-500">*</span>
                   </label>
                   <select 
-                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none transition-colors focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-800/50 text-sm text-slate-500 dark:text-slate-400 placeholder:text-slate-400 outline-none transition-colors cursor-not-allowed focus:ring-0"
                     id="studyCity" 
                     name="studyCity" 
                     required
                     value={selectedCity}
                     onChange={(e) => setSelectedCity(e.target.value)}
+                    disabled
                   >
                     <option disabled value="">Selecione a cidade</option>
                     <option value="Lisboa">Lisboa</option>
@@ -283,8 +315,8 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                 </div>
               )}
 
-              {/* Row 5: Level */}
-              <div className="grid grid-cols-1 gap-4">
+              {/* Row 5: Level and Duration */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="studyLevel">
                     Nível de Estudo <span className="text-red-500">*</span>
@@ -294,13 +326,32 @@ export default function ApplicationFormModal({ isOpen, onClose, universityName =
                     id="studyLevel" 
                     name="studyLevel" 
                     required
-                    defaultValue=""
+                    value={studyLevel}
+                    onChange={(e) => setStudyLevel(e.target.value)}
                   >
                     <option disabled value="">Selecione o nível</option>
                     <option value="Licenciatura">Licenciatura</option>
                     <option value="Mestrado">Mestrado</option>
+                    <option value="Ctesp">Ctesp</option>
                     <option value="Doutoramento">Doutoramento</option>
                   </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1" htmlFor="duration">
+                    Duração / Anos de Estudo <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-800/50 text-sm text-slate-500 dark:text-slate-400 placeholder:text-slate-400 outline-none transition-colors cursor-not-allowed focus:ring-0"
+                    id="duration"
+                    name="duration"
+                    type="number"
+                    min="1"
+                    max="6"
+                    required
+                    value={duration}
+                    onChange={(e) => setDuration(e.target.value)}
+                    disabled
+                  />
                 </div>
               </div>
 

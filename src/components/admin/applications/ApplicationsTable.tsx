@@ -173,9 +173,9 @@ export default function ApplicationsTable(props: ApplicationsTableProps) {
       </div>
 
       {/* Pagination */}
-      <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
         <p className="text-sm text-slate-500">A mostrar <span className="font-medium">{applications.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}</span> a <span className="font-medium">{Math.min(currentPage * itemsPerPage, applications.length)}</span> de <span className="font-medium">{applications.length}</span> resultados filtrados (Total Global: 1284)</p>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap justify-center items-center gap-2">
           <button 
             disabled={currentPage === 1}
             onClick={handlePrevPage}

@@ -7,16 +7,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Inicializa o cliente do Resend com a chave de API guardada
-// de forma segura nas variáveis de ambiente (.env.local).
-// NUNCA exponha esta chave no código ou no lado do cliente.
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Garante que esta rota nunca seja pré-renderizada no build
+export const dynamic = 'force-dynamic';
 
 // E-mail de destino onde todas as mensagens serão recebidas.
 const DESTINATION_EMAIL = 'muvisaintercambio@gmail.com';
 
 export async function POST(req: NextRequest) {
   try {
+    // Inicializa o cliente do Resend dentro do handler para evitar
+    // erros durante o build (a chave só está disponível em runtime).
+    const resend = new Resend(process.env.RESEND_API_KEY);
     // 1. Lê e valida o corpo da requisição
     const body = await req.json();
     const { nome, email, assunto, mensagem } = body;
@@ -40,7 +41,7 @@ export async function POST(req: NextRequest) {
       to: [DESTINATION_EMAIL],
 
       // O assunto digital inclui o assunto escrito pelo utilizador
-      subject: `[Site MUVISA] ${assunto}`,
+      subject: `${assunto}`,
 
       // "reply_to" aponta para o e-mail da pessoa que enviou o formulário,
       // assim quando clicar em "Responder" no Gmail, vai direto para o cliente.

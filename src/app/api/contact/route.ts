@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
       // "from" deve ser um domínio verificado no Resend.
       // Em modo de teste, pode usar: onboarding@resend.dev
       // Em produção, use: noreply@seudominio.com
-      from: 'MUVISA Intercâmbio <onboarding@resend.dev>',
+      from: 'MUVISA <onboarding@resend.dev>',
 
       // Envia para o e-mail oficial da MUVISA
       to: [DESTINATION_EMAIL],

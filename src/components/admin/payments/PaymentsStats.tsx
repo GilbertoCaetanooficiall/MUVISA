@@ -5,7 +5,7 @@ interface PaymentsStatsProps {
   payments: Payment[];
 }
 
-export default function PaymentsStats({ payments: _payments }: PaymentsStatsProps) {
+export default function PaymentsStats(_props: PaymentsStatsProps) {
   
   // This is a naive calculation just for visual purposes. In a real app we would sum the amounts properly.
   

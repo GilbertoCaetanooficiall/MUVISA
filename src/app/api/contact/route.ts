@@ -15,9 +15,18 @@ const DESTINATION_EMAIL = 'muvisaintercambio@gmail.com';
 
 export async function POST(req: NextRequest) {
   try {
-    // Inicializa o cliente do Resend dentro do handler para evitar
-    // erros durante o build (a chave só está disponível em runtime).
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    // Verifica se a chave da API está configurada
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error('[Resend] RESEND_API_KEY não está definida nas variáveis de ambiente.');
+      return NextResponse.json(
+        { error: 'Serviço de e-mail não configurado. Contacte o administrador.' },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
+
     // 1. Lê e valida o corpo da requisição
     const body = await req.json();
     const { nome, email, assunto, mensagem } = body;

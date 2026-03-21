@@ -5,35 +5,37 @@ interface PaymentsStatsProps {
   payments: Payment[];
 }
 
-export default function PaymentsStats(_props: PaymentsStatsProps) {
-  
-  // This is a naive calculation just for visual purposes. In a real app we would sum the amounts properly.
-  
+export default function PaymentsStats({ payments }: PaymentsStatsProps) {
+  // Calcular estatísticas com base nos pagamentos recebidos
+  const totalPagos = payments.filter(p => p.status === 'Pago').length;
+  const totalPendentes = payments.filter(p => p.status === 'Por pagar' || p.status === 'Aguardando Validação').length;
+  const totalAtrasados = payments.filter(p => p.status === 'Atrasado').length;
+  const totalReembolsados = payments.filter(p => p.status === 'Reembolsado').length;
   const stats = [
     {
-      title: 'Total Recebido (Mês)',
-      value: '2.400.000 Kz',
+      title: 'Pagos',
+      value: String(totalPagos),
       icon: TrendingUp,
       color: 'text-emerald-500',
       bgColor: 'bg-emerald-500/10'
     },
     {
-      title: 'Pagamentos Pendentes',
-      value: '700.000 Kz',
+      title: 'Pendentes',
+      value: String(totalPendentes),
       icon: CreditCard,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10'
     },
     {
       title: 'Atrasados',
-      value: '1.000.000 Kz',
+      value: String(totalAtrasados),
       icon: AlertCircle,
       color: 'text-orange-500',
       bgColor: 'bg-orange-500/10'
     },
     {
       title: 'Reembolsos',
-      value: '350.000 Kz',
+      value: String(totalReembolsados),
       icon: RefreshCw,
       color: 'text-slate-500',
       bgColor: 'bg-slate-500/10'

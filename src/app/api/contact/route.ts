@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       to: [DESTINATION_EMAIL],
 
       // O assunto digital inclui o assunto escrito pelo utilizador
-      subject: `[MUVISA SITE] ${assunto}`,
+      subject: `${assunto}`,
 
       // "reply_to" aponta para o e-mail da pessoa que enviou o formulário,
       // assim quando clicar em "Responder" no Gmail, vai direto para o cliente.

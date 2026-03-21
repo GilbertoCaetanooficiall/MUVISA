@@ -6,8 +6,7 @@ interface PaymentsStatsProps {
 }
 
 export default function PaymentsStats({ payments }: PaymentsStatsProps) {
-  // Mock logic to calculate stats based on the payments
-  const totalPagos = payments.filter(p => p.status === 'Pago').length;
+  
   // This is a naive calculation just for visual purposes. In a real app we would sum the amounts properly.
   
   const stats = [

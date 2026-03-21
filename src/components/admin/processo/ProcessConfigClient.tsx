@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { 
   Plus, 
   Trash2, 
-  Pencil, 
   Check, 
   X, 
   ChevronDown, 
@@ -69,8 +68,8 @@ export default function ProcessConfigClient() {
 
   const handleRemoveType = (typeId: string) => {
     if (confirm(`Tem certeza que deseja remover o processo "${typeLabels[typeId]}"?`)) {
-      const { [typeId]: removedLabel, ...remainingLabels } = typeLabels;
-      const { [typeId]: removedStages, ...remainingStages } = stagesByType;
+      const { [typeId]: _, ...remainingLabels } = typeLabels;
+      const { [typeId]: __, ...remainingStages } = stagesByType;
       
       setTypeLabels(remainingLabels);
       setStagesByType(remainingStages);
@@ -332,7 +331,7 @@ export default function ProcessConfigClient() {
                 {expandedStages.includes(stage.id) && (
                   <div className="mt-6 space-y-3 pl-4 border-l-2 border-slate-100 dark:border-slate-800 animate-in fade-in slide-in-from-top-2 duration-300">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Subetapas</h4>
-                    {stage.subSteps.map((subStep, ssIdx) => (
+                    {stage.subSteps.map((subStep) => (
                       <div key={subStep.id} className="flex items-center gap-3 group">
                         <div className="w-5 h-5 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0">
                           <div className="w-1.5 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full" />

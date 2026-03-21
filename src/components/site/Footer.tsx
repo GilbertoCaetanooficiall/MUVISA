@@ -4,7 +4,7 @@ import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ThemeToggle } from '@/components/portal-estudante/ThemeToggle';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 // Use dynamic import for the modal to avoid SSR issues with createPortal

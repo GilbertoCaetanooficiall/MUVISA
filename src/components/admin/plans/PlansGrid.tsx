@@ -1,4 +1,4 @@
-import { CheckCircle2, XCircle, FileEdit, Trash2, PowerOff, Edit, Plus } from 'lucide-react';
+import { CheckCircle2, XCircle, FileEdit, Trash2, Edit, Plus } from 'lucide-react';
 import type { Plan, PlanStatus, Feature } from '@/app/admin/plans/PlansClient';
 
 // ─── Status badge ─────────────────────────────────────────────────────────────

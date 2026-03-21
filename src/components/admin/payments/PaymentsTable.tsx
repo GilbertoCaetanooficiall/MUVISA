@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Payment, PaymentStatus } from '@/app/admin/payments/PaymentsClient';
-import { Search, Eye, Filter, MoreVertical, FileText, CheckCircle, Clock, AlertTriangle, XCircle, Receipt, ShieldCheck, X } from 'lucide-react';
+import { Search, Eye, MoreVertical, FileText, CheckCircle, Clock, AlertTriangle, XCircle, Receipt, ShieldCheck, X } from 'lucide-react';
 
 interface PaymentsTableProps {
   payments: Payment[];

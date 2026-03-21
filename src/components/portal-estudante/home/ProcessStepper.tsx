@@ -1,7 +1,7 @@
 'use client';
 
 import { Check } from 'lucide-react';
-import { defaultProcessStages, ProcessStep, ProcessType } from '@/lib/constants/visa-process';
+import { defaultProcessStages, ProcessType } from '@/lib/constants/visa-process';
 
 interface ProcessStepperProps {
     processType?: ProcessType;

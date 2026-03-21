@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Shield, Scale, Clock, CheckCircle, Info, Lock, Eye, Mail, ArrowRight } from 'lucide-react';
+import { X, Shield, Scale, CheckCircle, Lock, Mail, ArrowRight } from 'lucide-react';
 
 interface LegalModalProps {
   isOpen: boolean;

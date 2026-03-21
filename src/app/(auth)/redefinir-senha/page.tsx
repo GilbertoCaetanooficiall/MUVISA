@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Lock, Eye, EyeOff, Save, ArrowLeft, CheckCircle2, ShieldCheck, Building2, Loader2, AlertCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
-import { useRouter } from 'next/navigation';
 
 export default function RedefinirSenhaPage() {
   const [password, setPassword] = useState('');

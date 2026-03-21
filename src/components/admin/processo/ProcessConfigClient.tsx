@@ -68,14 +68,18 @@ export default function ProcessConfigClient() {
 
   const handleRemoveType = (typeId: string) => {
     if (confirm(`Tem certeza que deseja remover o processo "${typeLabels[typeId]}"?`)) {
-      const { [typeId]: _, ...remainingLabels } = typeLabels;
-      const { [typeId]: __, ...remainingStages } = stagesByType;
+      // Remover o tipo sem criar variáveis não utilizadas
+      const nextLabels = { ...typeLabels };
+      delete nextLabels[typeId];
       
-      setTypeLabels(remainingLabels);
-      setStagesByType(remainingStages);
+      const nextStages = { ...stagesByType };
+      delete nextStages[typeId];
+      
+      setTypeLabels(nextLabels);
+      setStagesByType(nextStages);
       
       if (activeType === typeId) {
-        setActiveType(Object.keys(remainingLabels)[0] || '');
+        setActiveType(Object.keys(nextLabels)[0] || '');
       }
     }
   };

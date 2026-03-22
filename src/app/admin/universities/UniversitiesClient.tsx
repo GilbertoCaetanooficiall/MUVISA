@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import UniversitiesStats from '@/components/admin/universities/UniversitiesStats';
 import UniversitiesTable from '@/components/admin/universities/UniversitiesTable';
-import { GraduationCap, Landmark, TowerControl, DraftingCompass, X, Calendar, ChevronDown, BookOpen, Plus, UploadCloud } from 'lucide-react';
+import { GraduationCap, Landmark, TowerControl, DraftingCompass, X, Calendar, Plus, UploadCloud } from 'lucide-react';
 import Modal from '@/components/ui/Modal';
 
 export type AppStatus = 'Candidaturas Abertas' | 'A terminar' | 'Candidaturas Fechadas';

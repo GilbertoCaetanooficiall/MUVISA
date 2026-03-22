@@ -32,15 +32,6 @@ export default function MyTickets() {
         setTimeout(() => setToast(null), 3000);
     };
 
-    const handleResolve = (id: string) => {
-        setTickets(prev => prev.map(t =>
-            t.id === id
-                ? { ...t, status: 'resolvido' as const, badge: 'RESOLVIDO', badgeStyle: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400', dotColor: 'bg-green-500' }
-                : t
-        ));
-        showToast('Ticket marcado como resolvido!');
-    };
-
     const handleNewTicket = () => {
         showToast('Funcionalidade de novo ticket disponível em breve.');
     };
@@ -71,24 +62,16 @@ export default function MyTickets() {
                 {tickets.map((ticket, i) => (
                     <div
                         key={ticket.id}
-                        className={`flex items-start gap-3 ${i < tickets.length - 1 ? "pb-4 border-b border-slate-100 dark:border-slate-700" : ""}`}
+                        className={`flex items-start gap-4 ${i < tickets.length - 1 ? "pb-4 border-b border-slate-100 dark:border-slate-700" : ""}`}
                     >
-                        <div className={`mt-1 min-w-[8px] h-2 w-2 rounded-full shrink-0 ${ticket.dotColor}`}></div>
+                        <div className={`mt-1.5 min-w-[8px] h-2 w-2 rounded-full shrink-0 ${ticket.dotColor}`}></div>
                         <div className="flex-1">
-                            <h4 className="text-sm font-medium text-slate-900 dark:text-white">{ticket.title}</h4>
+                            <h4 className="text-sm font-bold text-slate-900 dark:text-white">{ticket.title}</h4>
                             <p className="text-xs text-slate-500 mt-1">{ticket.info}</p>
                             <span className={`inline-block mt-2 px-2 py-0.5 text-[10px] font-bold rounded-full ${ticket.badgeStyle}`}>
                                 {ticket.badge}
                             </span>
                         </div>
-                        {ticket.status === 'aberto' && (
-                            <button
-                                onClick={() => handleResolve(ticket.id)}
-                                className="shrink-0 text-xs text-slate-400 hover:text-green-600 transition-colors border border-slate-200 dark:border-slate-700 rounded px-2 py-1 hover:border-green-400"
-                            >
-                                Resolver
-                            </button>
-                        )}
                     </div>
                 ))}
             </div>

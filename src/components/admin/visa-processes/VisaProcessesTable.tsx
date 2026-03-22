@@ -124,7 +124,7 @@ export default function VisaProcessesTable({
 
                   {/* Current Stage */}
                   <td className="px-6 py-4">
-                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50">
+                    <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/50 whitespace-nowrap inline-block">
                       {p.stage}
                     </span>
                   </td>

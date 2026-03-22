@@ -1,47 +1,57 @@
-import { Landmark, CreditCard, Clock, TrendingUp, LucideIcon } from 'lucide-react';
-
-type Stat = {
-    label: string;
-    value: string;
-    sub: string;
-    subColor: string;
-    icon: LucideIcon;
-    iconBg: string;
-    subIcon?: LucideIcon;
-};
-
-const stats: Stat[] = [
-    {
-        label: "Total do Plano",
-        value: "Kz 12.500.000,00",
-        sub: "Valor contratado",
-        subColor: "text-slate-400",
-        icon: Landmark,
-        iconBg: "bg-primary/10 dark:bg-primary/20 text-primary",
-    },
-    {
-        label: "Valor Pago",
-        value: "Kz 4.500.000,00",
-        sub: "36% quitado",
-        subColor: "text-green-500",
-        subIcon: TrendingUp,
-        icon: CreditCard,
-        iconBg: "bg-green-50 dark:bg-green-900/20 text-green-600",
-    },
-    {
-        label: "Saldo Devedor",
-        value: "Kz 8.000.000,00",
-        sub: "Restante a pagar",
-        subColor: "text-slate-400",
-        icon: Clock,
-        iconBg: "bg-orange-50 dark:bg-orange-900/20 text-orange-600",
-    },
-];
+'use client';
+import { useEffect, useState } from 'react';
+import { Landmark as LandmarkIcon, CreditCard as CreditCardIcon, Clock as ClockIcon, TrendingUp as TrendingUpIcon } from 'lucide-react';
 
 export default function FinancialSummary() {
+    const [stats, setStats] = useState({
+        total: "Kz 12.500.000,00",
+        pago: "Kz 4.500.000,00",
+        saldo: "Kz 8.000.000,00",
+        percent: "36% quitado"
+    });
+
+    useEffect(() => {
+        const handler = (e: Event) => {
+            const data = (e as CustomEvent).detail;
+            if (data) {
+                setStats(data);
+            }
+        };
+        window.addEventListener('atualizarResumoFinanceiro', handler);
+        return () => window.removeEventListener('atualizarResumoFinanceiro', handler);
+    }, []);
+
+    const cards = [
+        {
+            label: "Total do Plano",
+            value: stats.total,
+            sub: "Valor contratado",
+            subColor: "text-slate-400",
+            icon: LandmarkIcon,
+            iconBg: "bg-primary/10 dark:bg-primary/20 text-primary",
+        },
+        {
+            label: "Valor Pago",
+            value: stats.pago,
+            sub: stats.percent,
+            subColor: "text-green-500",
+            subIcon: TrendingUpIcon,
+            icon: CreditCardIcon,
+            iconBg: "bg-green-50 dark:bg-green-900/20 text-green-600",
+        },
+        {
+            label: "Saldo Devedor",
+            value: stats.saldo,
+            sub: "Restante a pagar",
+            subColor: "text-slate-400",
+            icon: ClockIcon,
+            iconBg: "bg-orange-50 dark:bg-orange-900/20 text-orange-600",
+        },
+    ];
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {stats.map((stat) => (
+            {cards.map((stat) => (
                 <div
                     key={stat.label}
                     className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"

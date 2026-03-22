@@ -1,6 +1,5 @@
 import FinancialSummary from "@/components/portal-estudante/pagamentos/FinancialSummary";
 import InvoicesTable from "@/components/portal-estudante/pagamentos/InvoicesTable";
-import PaymentMethods from "@/components/portal-estudante/pagamentos/PaymentMethods";
 import NextPayment from "@/components/portal-estudante/pagamentos/NextPayment";
 import FinancialHelpWidget from "@/components/portal-estudante/pagamentos/FinancialHelpWidget";
 import Footer from "@/components/portal-estudante/Footer";
@@ -19,7 +18,6 @@ export default function PagamentosPage() {
 
                 <FinancialSummary />
                 <InvoicesTable />
-                <PaymentMethods />
 
                 <Footer />
             </div>

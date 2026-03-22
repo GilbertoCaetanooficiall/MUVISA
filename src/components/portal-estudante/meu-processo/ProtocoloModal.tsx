@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useCallback } from 'react';
-import { X, Printer, Download, ShieldCheck, FileCheck, GraduationCap, Fingerprint, Wallet, ScrollText } from 'lucide-react';
+import { X, Printer, Download, ShieldCheck, MessageSquare, FileCheck, GraduationCap, Fingerprint, Wallet, ScrollText } from 'lucide-react';
 import Image from 'next/image';
+import { useChatPanel } from "@/components/portal-estudante/ChatPanel";
 
 interface ProtocoloModalProps {
   isOpen: boolean;
@@ -43,6 +44,7 @@ const documents = [
 ];
 
 export default function ProtocoloModal({ isOpen, onClose }: ProtocoloModalProps) {
+  const { open } = useChatPanel();
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose();
   }, [onClose]);
@@ -61,7 +63,7 @@ export default function ProtocoloModal({ isOpen, onClose }: ProtocoloModalProps)
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+    <div className="fixed inset-0 z-[100] flex items-start justify-center p-4 sm:p-6 pt-6 sm:pt-10 overflow-y-auto">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/80 backdrop-blur-md animate-fade-in"
@@ -69,7 +71,7 @@ export default function ProtocoloModal({ isOpen, onClose }: ProtocoloModalProps)
       />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-2xl bg-slate-900 rounded-xl shadow-2xl border border-slate-800 flex flex-col max-h-[90vh] overflow-hidden animate-fade-in">
+      <div className="relative z-10 w-full max-w-2xl bg-slate-900 rounded-xl shadow-2xl border border-slate-800 flex flex-col my-auto sm:my-0 sm:mt-0 animate-fade-in">
         {/* Header */}
         <div className="px-6 py-5 border-b border-slate-800 flex justify-between items-center bg-slate-900/50 shrink-0">
           <div className="flex flex-col gap-1">
@@ -199,10 +201,19 @@ export default function ProtocoloModal({ isOpen, onClose }: ProtocoloModalProps)
 
         {/* Footer */}
         <div className="px-6 py-5 border-t border-slate-800 bg-slate-900/80 backdrop-blur-sm flex flex-col sm:flex-row justify-between items-center gap-3 shrink-0">
-          <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg border border-slate-700 text-slate-300 font-bold text-sm hover:bg-slate-800 hover:text-white transition-all order-2 sm:order-1">
-            <Printer className="w-5 h-5" />
-            Imprimir
-          </button>
+          <div className="flex w-full sm:w-auto gap-2 order-2 sm:order-1">
+            <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-700 text-slate-300 font-bold text-sm hover:bg-slate-800 transition-all">
+              <Printer className="w-4 h-4" />
+              Imprimir
+            </button>
+            <button 
+              onClick={() => { onClose(); open(); }}
+              className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-primary/30 bg-primary/5 text-primary font-bold text-sm hover:bg-primary/10 transition-all"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Consultor
+            </button>
+          </div>
           <button className="w-full sm:flex-1 max-w-xs flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-white font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20 order-1 sm:order-2">
             <Download className="w-5 h-5" />
             Baixar Protocolo PDF

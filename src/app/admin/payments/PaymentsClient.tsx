@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import PaymentsStats from '@/components/admin/payments/PaymentsStats';
 import PaymentsTable from '@/components/admin/payments/PaymentsTable';
 import { Download, Plus, X } from 'lucide-react';
+import Modal from '@/components/ui/Modal';
 
 export type PaymentStatus = 'Pago' | 'Aguardando Validação' | 'Por pagar' | 'Atrasado' | 'Reembolsado';
 export type PaymentMethod = 'Multicaixa' | 'Transferência Bancária' | 'Cartão de Crédito' | 'Pix';
@@ -244,67 +245,64 @@ export default function PaymentsClient() {
         }}
       />
 
-      {/* Modal Novo Registo */}
-      {isCreateModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-            <button 
-              onClick={() => setIsCreateModalOpen(false)} 
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
-            >
-              <X size={20} />
-            </button>
-            
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
-              Novo Registo de Fatura/Pagamento
-            </h3>
+      <Modal open={isCreateModalOpen} onClose={() => setIsCreateModalOpen(false)}>
+        <div className="p-6 relative">
+          <button
+            onClick={() => setIsCreateModalOpen(false)}
+            className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors"
+          >
+            <X size={20} />
+          </button>
 
-            <form onSubmit={handleCreateRecord} className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Cliente</label>
-                <input 
-                  required
-                  placeholder="Nome do cliente (ex: João Silva)"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white"
-                  value={newRecord.clientName}
-                  onChange={e => setNewRecord({...newRecord, clientName: e.target.value})}
-                />
-              </div>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+            Novo Registo de Pagamento
+          </h2>
 
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Serviço/Taxa</label>
-                <input 
-                  required
-                  placeholder="O que está a ser cobrado? (ex: Assessoria Visto)"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white"
-                  value={newRecord.service}
-                  onChange={e => setNewRecord({...newRecord, service: e.target.value})}
-                />
-              </div>
+          <form onSubmit={handleCreateRecord} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Cliente</label>
+              <input
+                required
+                placeholder="Nome do cliente (ex: João Silva)"
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary transition-shadow"
+                value={newRecord.clientName}
+                onChange={e => setNewRecord({...newRecord, clientName: e.target.value})}
+              />
+            </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Valor a Cobrar</label>
-                <input 
-                  required
-                  placeholder="Ex: 500.000 Kz"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-white"
-                  value={newRecord.amount}
-                  onChange={e => setNewRecord({...newRecord, amount: e.target.value})}
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Serviço / Taxa</label>
+              <input
+                required
+                placeholder="O que está a ser cobrado? (ex: Assessoria Visto)"
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary transition-shadow"
+                value={newRecord.service}
+                onChange={e => setNewRecord({...newRecord, service: e.target.value})}
+              />
+            </div>
 
-              <div className="pt-4 flex gap-3">
-                <button type="button" onClick={() => setIsCreateModalOpen(false)} className="flex-1 py-2.5 font-bold rounded-xl text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700 transition-colors">
-                  Cancelar
-                </button>
-                <button type="submit" className="flex-1 py-2.5 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/30 hover:brightness-110 active:scale-95 transition-all">
-                  Gerar Fatura
-                </button>
-              </div>
-            </form>
-          </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Valor a Cobrar</label>
+              <input
+                required
+                placeholder="Ex: 500.000 Kz"
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary transition-shadow"
+                value={newRecord.amount}
+                onChange={e => setNewRecord({...newRecord, amount: e.target.value})}
+              />
+            </div>
+
+            <div className="pt-2 flex justify-end gap-2">
+              <button type="button" onClick={() => setIsCreateModalOpen(false)} className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-medium transition-colors">
+                Cancelar
+              </button>
+              <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 shadow-sm transition-colors">
+                Gerar Fatura
+              </button>
+            </div>
+          </form>
         </div>
-      )}
+      </Modal>
     </div>
   );
 }

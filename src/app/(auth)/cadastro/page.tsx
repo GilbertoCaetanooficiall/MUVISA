@@ -2,7 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import {
+  type StudyLevelKey,
+  getAvailableCities,
+  getInstitutionsByCityAndLevel,
+  getCourses,
+} from '@/data/portugal-institutions';
 import { useRouter } from 'next/navigation';
 import { 
   User, 
@@ -38,40 +44,8 @@ const STEPS: StepConfig[] = [
   { icon: Lock, label: 'Segurança', title: 'Segurança da Conta' },
 ];
 
-const UNIVERSITIES_BY_CITY: Record<string, string[]> = {
-  'Lisboa': [
-    'Universidade de Lisboa',
-    'Universidade Nova de Lisboa',
-    'ISCTE - Instituto Universitário de Lisboa',
-    'Universidade Católica Portuguesa',
-    'Instituto Politécnico de Lisboa',
-    'Universidade Lusíada',
-    'Universidade Lusófona'
-  ],
-  'Porto': [
-    'Universidade do Porto',
-    'Instituto Politécnico do Porto',
-    'Universidade Fernando Pessoa',
-    'Universidade Portucalense',
-    'Universidade Católica Portuguesa (Porto)',
-    'Universidade Lusíada do Porto'
-  ],
-  'Coimbra': [
-    'Universidade de Coimbra',
-    'Instituto Politécnico de Coimbra'
-  ],
-  'Braga': [
-    'Universidade do Minho',
-    'Universidade Católica Portuguesa (Braga)',
-    'Instituto Politécnico do Cávado e do Ave'
-  ],
-  'Aveiro': [
-    'Universidade de Aveiro'
-  ],
-  'Faro (Algarve)': [
-    'Universidade do Algarve'
-  ]
-};
+const ALL_CITIES = getAvailableCities();
+const STUDY_LEVELS: StudyLevelKey[] = ['Licenciatura', 'Mestrado', 'Ctesp', 'Formação Profissional'];
 
 export default function CadastroPage() {
   const router = useRouter();
@@ -81,9 +55,20 @@ export default function CadastroPage() {
   // Form data
   const [formData, setFormData] = useState({
     fullName: '', email: '', phone: '',
-    studyLevel: '', city: '', institution: '',
+    studyLevel: '' as StudyLevelKey | '', city: '', institution: '', course: '',
     password: '', confirmPassword: '', terms: false,
   });
+
+  // Derived dynamic lists
+  const availableInstitutions = useMemo(() => {
+    if (!formData.city || !formData.studyLevel) return [];
+    return getInstitutionsByCityAndLevel(formData.city, formData.studyLevel as StudyLevelKey);
+  }, [formData.city, formData.studyLevel]);
+
+  const availableCourses = useMemo(() => {
+    if (!formData.institution || !formData.studyLevel) return [];
+    return getCourses(formData.institution, formData.studyLevel as StudyLevelKey);
+  }, [formData.institution, formData.studyLevel]);
 
   const [passwordStrength, setPasswordStrength] = useState(0);
 
@@ -236,7 +221,7 @@ export default function CadastroPage() {
                 <div className="space-y-5 animate-fade-in">
                   {/* Nível de Estudo */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-300" htmlFor="studyLevel">Nível de Estudo</label>
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="studyLevel">Nível de Ensino</label>
                     <div className="relative group">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <IdCard className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
@@ -244,13 +229,12 @@ export default function CadastroPage() {
                       <select
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
                         id="studyLevel" required value={formData.studyLevel}
-                        onChange={e => setFormData(prev => ({ ...prev, studyLevel: e.target.value }))}
+                        onChange={e => setFormData(prev => ({ ...prev, studyLevel: e.target.value as StudyLevelKey, city: '', institution: '', course: '' }))}
                       >
-                        <option value="" disabled>Selecione o nível de estudo</option>
-                        <option value="Licenciatura">Licenciatura</option>
-                        <option value="Mestrado">Mestrado</option>
-                        <option value="Ctesp">Ctesp</option>
-                        <option value="Doutoramento">Doutoramento</option>
+                        <option value="" disabled>Selecione o nível de ensino</option>
+                        {STUDY_LEVELS.map(l => (
+                          <option key={l} value={l}>{l}</option>
+                        ))}
                       </select>
                       <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                         <ChevronDown className="text-gray-500 w-5 h-5" />
@@ -268,10 +252,11 @@ export default function CadastroPage() {
                       <select
                         className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
                         id="city" required value={formData.city}
-                        onChange={e => setFormData(prev => ({ ...prev, city: e.target.value, institution: '' }))}
+                        disabled={!formData.studyLevel}
+                        onChange={e => setFormData(prev => ({ ...prev, city: e.target.value, institution: '', course: '' }))}
                       >
-                        <option value="" disabled>Selecione a cidade</option>
-                        {['Lisboa', 'Porto', 'Coimbra', 'Braga', 'Aveiro', 'Faro (Algarve)', 'Outra'].map(c => (
+                        <option value="" disabled>{formData.studyLevel ? 'Selecione a cidade' : 'Escolha primeiro o nível de ensino'}</option>
+                        {ALL_CITIES.map(c => (
                           <option key={c} value={c}>{c}</option>
                         ))}
                       </select>
@@ -283,40 +268,58 @@ export default function CadastroPage() {
 
                   {/* Instituição */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-300" htmlFor="institution">Instituição de Ensino / Universidade</label>
-                    {formData.city && UNIVERSITIES_BY_CITY[formData.city] && UNIVERSITIES_BY_CITY[formData.city].length > 0 ? (
-                      <div className="relative group">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
-                        </div>
-                        <select
-                          className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
-                          id="institution" required value={formData.institution}
-                          onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value }))}
-                        >
-                          <option value="" disabled>Selecione a instituição</option>
-                          {UNIVERSITIES_BY_CITY[formData.city].map(u => (
-                            <option key={u} value={u}>{u}</option>
-                          ))}
-                          <option value="Outra Instituição">Outra Instituição</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                          <ChevronDown className="text-gray-500 w-5 h-5" />
-                        </div>
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="institution">Universidade / Instituição</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
                       </div>
-                    ) : (
-                      <div className="relative group">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
-                        </div>
-                        <input
-                          className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm"
-                          id="institution" placeholder="Ex: Universidade de Lisboa" type="text" required
-                          value={formData.institution}
-                          onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value }))}
-                        />
+                      <select
+                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
+                        id="institution" required value={formData.institution}
+                        disabled={!formData.city}
+                        onChange={e => setFormData(prev => ({ ...prev, institution: e.target.value, course: '' }))}
+                      >
+                        <option value="" disabled>
+                          {formData.city
+                            ? `${availableInstitutions.length} instituição(ões) disponível(eis)`
+                            : 'Escolha primeiro a cidade'}
+                        </option>
+                        {availableInstitutions.map(i => (
+                          <option key={i.name} value={i.name}>{i.name} ({i.type})</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <ChevronDown className="text-gray-500 w-5 h-5" />
                       </div>
-                    )}
+                    </div>
+                  </div>
+
+                  {/* Curso */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-300" htmlFor="course">Curso Pretendido</label>
+                    <div className="relative group">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <GraduationCap className="text-gray-500 group-focus-within:text-primary transition-colors w-5 h-5" />
+                      </div>
+                      <select
+                        className="appearance-none block w-full pl-10 px-4 py-3 border border-white/10 rounded-xl bg-black/40 text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all sm:text-sm [&>option]:bg-slate-900"
+                        id="course" required value={formData.course}
+                        disabled={!formData.institution}
+                        onChange={e => setFormData(prev => ({ ...prev, course: e.target.value }))}
+                      >
+                        <option value="" disabled>
+                          {formData.institution
+                            ? `${availableCourses.length} curso(s) disponível(eis)`
+                            : 'Escolha primeiro a instituição'}
+                        </option>
+                        {availableCourses.map(c => (
+                          <option key={c.name} value={c.name}>{c.name} ({c.duration} {c.duration === 1 ? 'ano' : 'anos'})</option>
+                        ))}
+                      </select>
+                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                        <ChevronDown className="text-gray-500 w-5 h-5" />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -330,7 +333,7 @@ export default function CadastroPage() {
 
                 <div className="mt-8 pt-6 border-t border-white/10 text-center">
                   <p className="text-sm text-gray-400">
-                    Não encontrou sua cidade?{' '}
+                    Não encontrou sua cidade ou curso?{' '}
                     <Link className="font-medium text-primary hover:text-primary-hover transition-colors" href="/site/contato">Fale com um consultor</Link>
                   </p>
                 </div>

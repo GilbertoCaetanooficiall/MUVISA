@@ -1,5 +1,5 @@
 import { FolderOpen, ClipboardList, CheckCircle2, XCircle } from 'lucide-react';
-import type { Document } from '@/app/admin/documents/DocumentsClient';
+import type { MuviDoc } from '@/app/admin/documents/DocumentsClient';
 
 interface StatCardProps {
   icon: React.ElementType;
@@ -29,7 +29,7 @@ function StatCard({ icon: Icon, iconClass, label, value, badge, badgeClass }: St
   );
 }
 
-export default function DocumentsStats({ documents }: { documents: Document[] }) {
+export default function DocumentsStats({ documents }: { documents: MuviDoc[] }) {
   const countTotal = documents.length;
   const countPendente = documents.filter(d => d.status === 'Pendente de Revisão').length;
   const countAprovado = documents.filter(d => d.status === 'Aprovado').length;

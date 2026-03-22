@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Upload, X } from 'lucide-react';
+import { Upload, X, Contact, Landmark, FileText, GraduationCap, BookOpen } from 'lucide-react';
+import Modal from '@/components/ui/Modal';
 import DocumentsStats from '@/components/admin/documents/DocumentsStats';
 import DocumentsFilters from '@/components/admin/documents/DocumentsFilters';
 import DocumentsTable from '@/components/admin/documents/DocumentsTable';
@@ -10,7 +11,7 @@ import DocumentsTable from '@/components/admin/documents/DocumentsTable';
 
 export type DocStatus = 'Pendente de Revisão' | 'Aprovado' | 'Rejeitado' | 'Em Falta';
 
-export interface Document {
+export interface MuviDoc {
   id: string;
   studentName: string;
   initials: string;
@@ -22,9 +23,8 @@ export interface Document {
   lastUpdate: string;
 }
 
-import { Contact, Landmark, FileText, GraduationCap, BookOpen } from 'lucide-react';
+const initialDocuments: MuviDoc[] = [
 
-const initialDocuments: Document[] = [
   {
     id: 'DOC-001', studentName: 'Sarah Jenkins', initials: 'SJ',
     docType: 'Cópia do Passaporte', docIcon: Contact,
@@ -58,7 +58,7 @@ const initialDocuments: Document[] = [
 ];
 
 export default function DocumentsClient() {
-  const [documents, setDocuments] = useState<Document[]>(initialDocuments);
+  const [documents, setDocuments] = useState<MuviDoc[]>(initialDocuments);
   
   // Filters State
   const [searchQuery, setSearchQuery] = useState('');
@@ -68,7 +68,7 @@ export default function DocumentsClient() {
   
   // Modal State
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-  const [selectedDoc, setSelectedDoc] = useState<Document | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<MuviDoc | null>(null);
 
   // Computed Filtered Documents
   const filteredDocuments = useMemo(() => {
@@ -95,11 +95,11 @@ export default function DocumentsClient() {
     alert('Pedido de documento enviado com sucesso.');
   };
 
-  const handleView = (doc: Document) => {
+  const handleView = (doc: MuviDoc) => {
     setSelectedDoc(doc);
   };
 
-  const handleDownload = (doc: Document) => {
+  const handleDownload = (doc: MuviDoc) => {
     alert(`A descarregar o documento ${doc.id} de ${doc.studentName}...`);
   };
 
@@ -150,48 +150,46 @@ export default function DocumentsClient() {
       />
 
       {/* Upload Modal */}
-      {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 rounded-xl max-w-md w-full p-6 relative">
-            <button onClick={() => setIsUploadModalOpen(false)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
-              <X size={20} />
-            </button>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Carregar Novo Documento</h2>
-            <form onSubmit={handleUploadSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Selecione o Estudante</label>
-                <select className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
-                  <option value="">Selecione...</option>
-                  <option>Sarah Jenkins</option>
-                  <option>Michael Chen</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tipo de Documento</label>
-                <select className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
-                  <option value="">Selecione...</option>
-                  <option>Passaporte</option>
-                  <option>Extrato Bancário</option>
-                  <option>Certificados Académicos</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Ficheiro</label>
-                <input type="file" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
-              </div>
-              <div className="pt-2 flex justify-end gap-2">
-                <button type="button" onClick={() => setIsUploadModalOpen(false)} className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-medium">Cancelar</button>
-                <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90">Carregar</button>
-              </div>
-            </form>
-          </div>
+      <Modal open={isUploadModalOpen} onClose={() => setIsUploadModalOpen(false)}>
+        <div className="p-6">
+          <button onClick={() => setIsUploadModalOpen(false)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
+            <X size={20} />
+          </button>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Carregar Novo Documento</h2>
+          <form onSubmit={handleUploadSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Selecione o Estudante</label>
+              <select className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
+                <option value="">Selecione...</option>
+                <option>Sarah Jenkins</option>
+                <option>Michael Chen</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tipo de Documento</label>
+              <select className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
+                <option value="">Selecione...</option>
+                <option>Passaporte</option>
+                <option>Extrato Bancário</option>
+                <option>Certificados Académicos</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Ficheiro</label>
+              <input type="file" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
+            </div>
+            <div className="pt-2 flex justify-end gap-2">
+              <button type="button" onClick={() => setIsUploadModalOpen(false)} className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-medium">Cancelar</button>
+              <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90">Carregar</button>
+            </div>
+          </form>
         </div>
-      )}
+      </Modal>
 
       {/* View Document Modal */}
-      {selectedDoc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 rounded-xl max-w-lg w-full p-6 relative shadow-xl">
+      <Modal open={!!selectedDoc} onClose={() => setSelectedDoc(null)} maxWidth="max-w-lg">
+        {selectedDoc && (
+          <div className="p-6">
             <button onClick={() => setSelectedDoc(null)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
               <X size={20} />
             </button>
@@ -221,8 +219,8 @@ export default function DocumentsClient() {
               )}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </Modal>
     </div>
   );
 }

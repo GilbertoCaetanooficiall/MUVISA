@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import StaffStats from '@/components/admin/staff/StaffStats';
 import StaffTable from '@/components/admin/staff/StaffTable';
 import { UserPlus, X } from 'lucide-react';
+import Modal from '@/components/ui/Modal';
 
 export type StaffStatus = 'Ativo' | 'De Licença' | 'Inativo';
 
@@ -123,53 +124,51 @@ export default function StaffClient() {
       />
 
       {/* Add Modal */}
-      {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 rounded-xl max-w-md w-full p-6 relative">
-            <button onClick={() => setIsAddModalOpen(false)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
-              <X size={20} />
-            </button>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Adicionar Novo Funcionário</h2>
-            <form onSubmit={handleAddSubmit} className="space-y-4">
+      <Modal open={isAddModalOpen} onClose={() => setIsAddModalOpen(false)}>
+        <div className="p-6">
+          <button onClick={() => setIsAddModalOpen(false)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200">
+            <X size={20} />
+          </button>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Adicionar Novo Funcionário</h2>
+          <form onSubmit={handleAddSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nome Completo</label>
+              <input name="name" type="text" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email Profissional</label>
+              <input name="email" type="email" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nome Completo</label>
-                <input name="name" type="text" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Cargo</label>
+                <input name="role" type="text" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email Profissional</label>
-                <input name="email" type="email" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Cargo</label>
-                  <input name="role" type="text" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Departamento</label>
-                  <select name="department" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
-                    <option value="Admissões">Admissões</option>
-                    <option value="Vistos">Vistos</option>
-                    <option value="Gestão">Gestão</option>
-                    <option value="Suporte">Suporte</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Estado</label>
-                <select name="status" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
-                  <option value="Ativo">Ativo</option>
-                  <option value="De Licença">De Licença</option>
-                  <option value="Inativo">Inativo</option>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Departamento</label>
+                <select name="department" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
+                  <option value="Admissões">Admissões</option>
+                  <option value="Vistos">Vistos</option>
+                  <option value="Gestão">Gestão</option>
+                  <option value="Suporte">Suporte</option>
                 </select>
               </div>
-              <div className="pt-2 flex justify-end gap-2">
-                <button type="button" onClick={() => setIsAddModalOpen(false)} className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-medium">Cancelar</button>
-                <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90">Adicionar</button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Estado</label>
+              <select name="status" className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-primary" required>
+                <option value="Ativo">Ativo</option>
+                <option value="De Licença">De Licença</option>
+                <option value="Inativo">Inativo</option>
+              </select>
+            </div>
+            <div className="pt-2 flex justify-end gap-2">
+              <button type="button" onClick={() => setIsAddModalOpen(false)} className="px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-medium">Cancelar</button>
+              <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90">Adicionar</button>
+            </div>
+          </form>
         </div>
-      )}
+      </Modal>
     </div>
   );
 }

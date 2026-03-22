@@ -1,4 +1,4 @@
-import { CheckCircle2, XCircle, FileEdit, Trash2, Edit, Plus } from 'lucide-react';
+import { CheckCircle2, XCircle, FileEdit, Trash2 } from 'lucide-react';
 import type { Plan, PlanStatus, Feature } from '@/app/admin/plans/PlansClient';
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
@@ -109,33 +109,33 @@ function PlanCard({ plan, onDelete, onStatusChange, onEdit }: {
 
       {/* Card footer / actions */}
       {plan.status === 'Publicado' && (
-        <div className={`p-5 ${footerBg} flex gap-3`}>
-          <button onClick={() => onEdit(plan)} className="flex-1 flex justify-center items-center gap-2 py-3.5 text-[11px] font-black uppercase tracking-widest text-white bg-primary hover:brightness-110 rounded-2xl transition-all shadow-[0_8px_20px_rgba(14,86,224,0.2)] active:scale-95">
-            <Edit size={14} /> Editar Plano
+        <div className={`p-4 ${footerBg} flex gap-2`}>
+          <button onClick={() => onEdit(plan)} className="flex-1 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors">
+            Editar Plano
           </button>
-          <button onClick={() => onDelete(plan.id)} className="p-3.5 text-slate-400 hover:text-red-500 bg-slate-100 dark:bg-slate-700/50 rounded-2xl transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" title="Eliminar Plano">
+          <button onClick={() => onDelete(plan.id)} className="px-3 text-slate-500 hover:text-red-500 bg-slate-100 dark:bg-slate-700/50 rounded-lg transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" title="Eliminar Plano">
             <Trash2 size={18} />
           </button>
         </div>
       )}
 
       {plan.status === 'Revisão Necessária' && (
-        <div className={`p-5 ${footerBg} flex gap-3`}>
-          <button onClick={() => onEdit(plan)} className="flex-1 py-3.5 text-[11px] font-black uppercase tracking-widest text-white bg-amber-500 hover:bg-amber-600 rounded-2xl transition-all shadow-[0_8px_20px_rgba(245,158,11,0.2)] active:scale-95 text-center">
+        <div className={`p-4 ${footerBg} flex gap-2`}>
+          <button onClick={() => onEdit(plan)} className="flex-1 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition-colors">
             Rever Alterações
           </button>
-          <button onClick={() => onDelete(plan.id)} className="p-3.5 text-slate-400 hover:text-red-500 bg-slate-100 dark:bg-slate-700/50 rounded-2xl transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" title="Eliminar Plano">
+          <button onClick={() => onDelete(plan.id)} className="px-3 text-slate-500 hover:text-red-500 bg-slate-100 dark:bg-slate-700/50 rounded-lg transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" title="Eliminar Plano">
             <Trash2 size={18} />
           </button>
         </div>
       )}
 
       {plan.status === 'Rascunho' && (
-        <div className={`p-5 ${footerBg} flex gap-3`}>
-          <button onClick={() => onEdit(plan)} className="flex-1 py-3.5 text-[11px] font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-2xl transition-all active:scale-95 text-center">
+        <div className={`p-4 ${footerBg} flex gap-2`}>
+          <button onClick={() => onEdit(plan)} className="flex-1 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg transition-colors">
             Continuar a Editar
           </button>
-          <button onClick={() => onDelete(plan.id)} className="p-3.5 text-slate-400 hover:text-red-500 bg-slate-100 dark:bg-slate-700/50 rounded-2xl transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" title="Eliminar Plano">
+          <button onClick={() => onDelete(plan.id)} className="px-3 text-slate-500 hover:text-red-500 bg-slate-100 dark:bg-slate-700/50 rounded-lg transition-colors hover:bg-red-50 dark:hover:bg-red-500/10" title="Eliminar Plano">
             <Trash2 size={18} />
           </button>
         </div>
@@ -163,12 +163,9 @@ export default function PlansGrid({ plans, onDelete, onStatusChange, onEdit, onA
         {onAddPlan && (
           <button 
             onClick={onAddPlan}
-            className="w-full sm:w-auto justify-center bg-primary hover:brightness-110 active:scale-95 text-white px-8 py-3.5 rounded-2xl font-sans font-black uppercase tracking-[0.2em] text-[11px] flex items-center gap-3 transition-all shadow-[0_20px_40px_rgba(14,86,224,0.25)] border border-white/10"
+            className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20 self-start sm:self-auto"
           >
-            <div className="bg-white/20 p-1.5 rounded-lg">
-              <Plus size={16} strokeWidth={3} />
-            </div>
-            Novo Plano
+            Adicionar Novo Plano
           </button>
         )}
       </div>

@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { Eye, CheckCircle2, XCircle, MoreVertical, Download, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
-import type { Document, DocStatus } from '@/app/admin/documents/DocumentsClient';
+import type { MuviDoc, DocStatus } from '@/app/admin/documents/DocumentsClient';
 
 interface DocumentsTableProps {
-  documents: Document[];
+  documents: MuviDoc[];
   onAprovar: (id: string) => void;
   onRejeitar: (id: string) => void;
-  onView: (doc: Document) => void;
-  onDownload: (doc: Document) => void;
+  onView: (doc: MuviDoc) => void;
+  onDownload: (doc: MuviDoc) => void;
   onSolicitar: (id: string) => void;
 }
 
@@ -25,11 +25,11 @@ const statusStyle: Record<DocStatus, string> = {
 // ─── Action buttons per status ────────────────────────────────────────────────
 
 interface RowActionsProps {
-  doc: Document;
+  doc: MuviDoc;
   onAprovar: (id: string) => void;
   onRejeitar: (id: string) => void;
-  onView: (doc: Document) => void;
-  onDownload: (doc: Document) => void;
+  onView: (doc: MuviDoc) => void;
+  onDownload: (doc: MuviDoc) => void;
   onSolicitar: (id: string) => void;
 }
 

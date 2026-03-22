@@ -24,7 +24,7 @@ const initialTickets = [
 ];
 
 export default function MyTickets() {
-    const [tickets, setTickets] = useState(initialTickets);
+    const [tickets] = useState(initialTickets);
     const [toast, setToast] = useState<string | null>(null);
 
     const showToast = (msg: string) => {

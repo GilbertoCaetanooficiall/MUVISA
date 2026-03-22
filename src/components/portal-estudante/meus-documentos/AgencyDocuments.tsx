@@ -12,7 +12,7 @@ export default function AgencyDocuments() {
     const [downloading, setDownloading] = useState<string | null>(null);
     const [downloaded, setDownloaded] = useState<string[]>([]);
 
-    const handleDownload = (id: string, title: string) => {
+    const handleDownload = (id: string) => {
         setDownloading(id);
         
         // Simulação de download
@@ -41,7 +41,7 @@ export default function AgencyDocuments() {
                     return (
                         <div
                             key={doc.id}
-                            onClick={() => !isDownloading && handleDownload(doc.id, doc.title)}
+                            onClick={() => !isDownloading && handleDownload(doc.id)}
                             className="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-4 hover:border-primary/50 hover:shadow-lg transition-all cursor-pointer group"
                         >
                             <div className="bg-primary/5 dark:bg-primary/10 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-colors shrink-0">

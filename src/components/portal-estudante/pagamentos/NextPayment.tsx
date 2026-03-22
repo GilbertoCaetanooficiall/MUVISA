@@ -13,7 +13,6 @@ export default function NextPayment() {
     const [isUploadDragging, setIsUploadDragging] = useState(false);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [toast, setToast] = useState<{message: string, success: boolean} | null>(null);
     const [nextPayment, setNextPayment] = useState<{id: string, description: string, amount: string, dueDate: string} | null>({
         id: '3',
         description: "Taxa Consular",
@@ -23,11 +22,6 @@ export default function NextPayment() {
     const [installments, setInstallments] = useState(nextInstallments);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    const showToast = (message: string, success = true) => {
-        setToast({ message, success });
-        setTimeout(() => setToast(null), 4000);
-    };
 
     // Escuta atualizações da tabela (quando uma fatura é paga, a próxima assume o topo)
     useEffect(() => {
@@ -74,15 +68,6 @@ export default function NextPayment() {
 
     return (
         <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 relative">
-            {/* Toast */}
-            {toast && (
-                <div className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-3 rounded-lg shadow-2xl text-sm font-medium animate-fade-in ${toast.success ? 'bg-green-600' : 'bg-red-500'} text-white`}>
-                    <CheckCircle size={18} />
-                    {toast.message}
-                    <button onClick={() => setToast(null)} className="ml-2 hover:bg-white/20 rounded p-1 transition-colors"><X size={14} /></button>
-                </div>
-            )}
-
             {/* Payment Modal */}
             {isModalOpen && nextPayment && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">

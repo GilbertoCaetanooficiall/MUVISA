@@ -168,6 +168,7 @@ export default function InvoicesTable() {
         };
         window.addEventListener('simularEnvioComprovativo', handler);
         return () => window.removeEventListener('simularEnvioComprovativo', handler);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleSubmitReceipt = () => {
